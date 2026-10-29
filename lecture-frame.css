@@ -1,7 +1,8 @@
 /* Dimensions, palette, spacing and navigation follow executives.html. */
-html body { margin:0; width:100vw; height:100vh; overflow:hidden; background:#09101D; color:#1E293B; font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif; user-select:text; display:flex; align-items:center; justify-content:center; }
+html body { margin:0; width:100vw; height:100vh; overflow:hidden; background:#09101D; color:#1E293B; font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif; user-select:text; display:flex!important; flex-direction:row!important; align-items:center!important; justify-content:center!important; }
 body #app-wrapper { width:100vw; height:100vh; min-height:0; padding:0; overflow:visible; display:flex; align-items:center; justify-content:center; }
 body .unified-stage { box-sizing:border-box; width:1600px!important; height:900px!important; min-height:900px!important; max-width:none!important; max-height:none!important; aspect-ratio:auto!important; flex:none; padding:0!important; margin:0!important; position:relative; overflow:hidden; border-radius:4px!important; background:white; box-shadow:0 25px 60px #000a; transform:scale(var(--stage-scale)); transform-origin:center; }
+body .unified-stage { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%) scale(var(--stage-scale)); }
 .unified-slide { width:100%; height:100%; display:flex; flex-direction:column; }
 .unified-header { height:76px; padding:0 60px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #E2E8F0; background:white; flex-shrink:0; }
 .unified-header[hidden] { display:none; }
