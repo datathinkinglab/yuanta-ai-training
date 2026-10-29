@@ -2,6 +2,7 @@
 (() => {
   const team = document.body.dataset.course === 'team';
   const stage = team ? document.getElementById('slide-stage') : document.getElementById('presentation-wrapper');
+  if (team) ['popup-overlay','toc-overlay','copy-toast'].forEach(id => { const el = document.getElementById(id); if(el) document.body.append(el); });
   if (!team) {
     document.querySelector('body > header')?.remove();
     document.getElementById('read-all-wrapper').style.display = 'none';

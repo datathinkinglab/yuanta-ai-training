@@ -41,6 +41,7 @@ body .unified-stage { box-sizing:border-box; width:1600px!important; height:900p
 .unified-read { display:block!important; overflow-y:auto!important; height:auto!important; }
 .unified-read #app-wrapper,.unified-read #presentation-wrapper { display:none!important; }
 .unified-read .unified-reading { display:block; max-width:1600px; margin:auto; }
+@media print { body > #read-all-wrapper,body > #presentation-wrapper,body > #app-wrapper { display:none!important; } }
 .reading-toolbar { position:sticky; top:0; padding:12px; background:#fff; z-index:40; }
 .reading-slide { margin:24px; background:white; min-height:900px; display:flex; flex-direction:column; }
 .reading-slide .unified-body { flex:1; overflow:visible; }
