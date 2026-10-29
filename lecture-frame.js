@@ -17,6 +17,8 @@
   const head = frame.querySelector('header'), body = frame.querySelector('main'), foot = frame.querySelector('footer');
   const reading = document.createElement('section');
   reading.className = 'unified-reading'; document.body.append(reading);
+  const toc = document.createElement('dialog'); toc.className = 'unified-toc'; document.body.append(toc);
+  toc.addEventListener('click', e => { if (e.target === toc) toc.close(); });
   let read = false;
   const index = () => team ? currentIndex : currentSlideIndex;
   const dark = s => team ? s.theme === 'navy' : ['cover','divider'].includes(s.type);
@@ -32,7 +34,8 @@
     if (dark(s) || s.type === 'break') {
       const temp = document.createElement('div'); temp.innerHTML = originalBuild(s);
       const root = temp.firstElementChild;
-      root.firstElementChild?.remove(); root.lastElementChild?.remove();
+      // Keep the course-specific labels, journey and notices; only remove repeated page counters.
+      root.querySelectorAll('.font-mono-code').forEach(el => { if (/^\d+\s*\/\s*52$/.test(el.textContent.trim())) el.remove(); });
       root.style.height = '100%';
       return root.outerHTML;
     }
@@ -56,7 +59,13 @@
   }
   window.lectureFrame = {
     move(delta) { team ? (delta < 0 ? prevSlide() : nextSlide()) : changeSlide(delta); },
-    toc() { team ? openToc() : (initTocGrid(), openModal('modal-toc',document.activeElement)); },
+    toc() {
+      const groups = new Map();
+      SLIDES.forEach((s,i) => { const key = team ? `${s.module} · ${s.moduleTitle}` : ((s.module.match(/(?:M|MODULE\s*)\d+/i)||[])[0] || s.module); if(!groups.has(key)) groups.set(key,[]); groups.get(key).push({s,i}); });
+      toc.innerHTML = '<div class="unified-toc-head"><h2>전체 목차 · 모듈 이동</h2><button onclick="this.closest(\'dialog\').close()">닫기 (ESC)</button></div><div class="unified-toc-grid">' + [...groups].map(([name,items]) => `<section><h3>${esc(name)}</h3>${items.map(({s,i}) => `<button onclick="lectureFrame.goto(${i})"><b>${String(i+1).padStart(2,'0')}p.</b> ${esc(title(s))}</button>`).join('')}</section>`).join('') + '</div>';
+      toc.showModal();
+    },
+    goto(i) { if(team) currentIndex = i; else currentSlideIndex = i; toc.close(); render(); },
     fullscreen() { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); },
     read() { if (read) { read = false; document.body.classList.remove('unified-read'); reading.replaceChildren(); render(); } else showReading(); },
     print() { showReading(true); window.print(); }
@@ -65,6 +74,7 @@
   window.addEventListener('resize', scale);
   document.addEventListener('fullscreenchange', () => { const b = foot.querySelector('.unified-fullscreen'); if(b) b.textContent = document.fullscreenElement ? '🗗 전체화면 종료' : '⛶ 전체화면 보기'; });
   window.addEventListener('keydown', e => {
+    if(toc.open) { if(e.key === 'Escape') toc.close(); e.stopImmediatePropagation(); return; }
     if (read && ['ArrowLeft','ArrowRight','PageUp','PageDown'].includes(e.key)) e.stopImmediatePropagation();
     if (read && e.key === 'Escape') { lectureFrame.read(); e.stopImmediatePropagation(); }
   }, true);
