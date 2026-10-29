@@ -1,0 +1,23 @@
+<svg width="245" height="42" viewBox="0 0 275 48" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="2" y="3" width="46" height="33" rx="5" fill="#1E293B"/>
+                      <polygon points="14,36 14,46 25,36" fill="#1E293B"/>
+                      <!-- Grid dots inside bubble -->
+                      <rect x="7" y="8" width="5.5" height="5.5" rx="1" fill="#F8FAFC"/>
+                      <rect x="15" y="8" width="5.5" height="5.5" rx="1" fill="#CBD5E1"/>
+                      <rect x="23" y="8" width="5.5" height="5.5" rx="1" fill="#94A3B8"/>
+                      <rect x="31" y="8" width="5.5" height="5.5" rx="1" fill="#64748B"/>
+                      <rect x="39" y="8" width="5.5" height="5.5" rx="1" fill="#475569"/>
+                      <rect x="7" y="16.5" width="5.5" height="5.5" rx="1" fill="#D97757"/>
+                      <rect x="15" y="16.5" width="5.5" height="5.5" rx="1" fill="#CBD5E1"/>
+                      <rect x="23" y="16.5" width="5.5" height="5.5" rx="1" fill="#94A3B8"/>
+                      <rect x="31" y="16.5" width="5.5" height="5.5" rx="1" fill="#64748B"/>
+                      <rect x="39" y="16.5" width="5.5" height="5.5" rx="1" fill="#475569"/>
+                      <rect x="7" y="25" width="5.5" height="5.5" rx="1" fill="#CBD5E1"/>
+                      <rect x="15" y="25" width="5.5" height="5.5" rx="1" fill="#94A3B8"/>
+                      <rect x="23" y="25" width="5.5" height="5.5" rx="1" fill="#64748B"/>
+                      <rect x="31" y="25" width="5.5" height="5.5" rx="1" fill="#475569"/>
+                      <rect x="39" y="25" width="5.5" height="5.5" rx="1" fill="#334155"/>
+                      <!-- Text -->
+                      <text x="56" y="25" font-family="'Pretendard', Arial, sans-serif" font-weight="900" font-size="23.5" fill="#0F172A" letter-spacing="-0.6">Data Thinking Lab</text>
+                      <text x="95" y="43" font-family="'Pretendard', Arial, sans-serif" font-weight="600" font-size="14.5" fill="#1E293B" letter-spacing="0.5">AI · Data Advisor</text>
+                    </svg>

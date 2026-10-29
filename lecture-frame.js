@@ -30,7 +30,20 @@
     return `<div class="unified-module"><b>${esc(team ? s.module : s.module.split('.')[0])}</b><span>${esc(team ? s.moduleTitle : s.module)}</span></div><div class="unified-journey">${steps.map(st => `<span class="${st === s.journey ? 'active' : ''}">${esc(st)}</span>`).join('<i>›</i>')}</div>`;
   }
   const originalBuild = !team && buildSlideHTML;
+  const logos = '<div class="unified-logos"><span><img src="expert-consulting.svg" alt="EXPERT CONSULTING"></span><span><img src="data-thinking-lab.svg" alt="Data Thinking Lab · AI · Data Advisor"></span></div>';
   function content(s) {
+    if ((team && s.page === 1) || (!team && s.type === 'cover')) {
+      const temp = document.createElement('div'); temp.innerHTML = team ? s.render() : originalBuild(s);
+      const left = temp.querySelector('[class*="col-span-7"]');
+      const right = temp.querySelector('[class*="col-span-5"]');
+      const root = temp.firstElementChild;
+      const meta = team ? root.firstElementChild.innerHTML : '';
+      const journey = root.lastElementChild.innerHTML;
+      return `<div class="unified-cover-layout"><div>${logos}${left.innerHTML}<div class="unified-cover-meta">${meta}</div></div><aside class="unified-cover-aside">${right.innerHTML}</aside></div><div class="unified-cover-journey">${journey}</div>`;
+    }
+    if (!team && s.type === 'divider') {
+      return `<div class="unified-divider-layout"><div><div class="unified-module-number">${esc(s.module)}</div><h1>${esc(s.title)}</h1><p>${esc(s.subtitle)}</p></div><div class="unified-divider-flow"><b>전체 교육 여정에서의 위치</b>${renderJourneyBar(s.journey, true)}</div><div class="unified-divider-steps">${(s.visualFlow || []).map((step,i) => `<span>${i+1}. ${esc(step)}</span>`).join('<i>➔</i>')}</div></div>`;
+    }
     if (team) return s.render();
     if (dark(s) || s.type === 'break') {
       const temp = document.createElement('div'); temp.innerHTML = originalBuild(s);
@@ -45,16 +58,18 @@
   function render() {
     const s = SLIDES[index()];
     stage.classList.toggle('unified-dark', dark(s));
+    stage.classList.toggle('unified-cover', (team && s.page === 1) || (!team && s.type === 'cover'));
     head.hidden = dark(s); head.innerHTML = header(s);
     body.innerHTML = content(s); body.scrollTop = 0;
     foot.innerHTML = `<div class="unified-left"><button onclick="lectureFrame.toc()">☰ 목차 · 모듈 이동</button><button onclick="lectureFrame.print()">🖨️ PDF 출력</button><button class="unified-fullscreen" onclick="lectureFrame.fullscreen()">${document.fullscreenElement ? '🗗 전체화면 종료' : '⛶ 전체화면 보기'}</button><button onclick="lectureFrame.read()">전체 읽기</button></div><div class="unified-copyright">© 2026 Data Thinking Lab. All rights reserved</div><div class="unified-right"><button id="btn-prev" onclick="lectureFrame.move(-1)" ${index() === 0 ? 'disabled' : ''}>◀ 이전</button><span id="page-indicator"><strong>${String(index()+1).padStart(2,'0')}</strong> / ${SLIDES.length}</span><button id="btn-next" onclick="lectureFrame.move(1)" ${index() === SLIDES.length-1 ? 'disabled' : ''}>다음 ▶</button></div>`;
     if (team) foot.querySelector('.unified-left').insertAdjacentHTML('beforeend','<button onclick="openPopup(\'commonData\')">공통 자료</button>');
+    foot.querySelector('.unified-left').insertAdjacentHTML('afterbegin','<a href="index.html">⌂ 메인 화면</a>');
   }
   function scale() {
     stage.style.setProperty('--stage-scale', Math.min(innerWidth / 1600, innerHeight / 900) * .98);
   }
   function showReading(printing = false) {
-    reading.innerHTML = `<div class="reading-toolbar"><button onclick="lectureFrame.read()">슬라이드로 돌아가기</button></div>` + SLIDES.map((s,i) => `<article class="reading-slide ${dark(s) ? 'unified-dark' : ''}" data-page="${i}">${dark(s) ? '' : `<header class="unified-header">${header(s)}</header>`}<main class="unified-body">${content(s)}</main><div class="reading-page">${i+1} / ${SLIDES.length}</div></article>`).join('');
+    reading.innerHTML = `<div class="reading-toolbar"><a href="index.html">⌂ 메인 화면</a><button onclick="lectureFrame.read()">슬라이드로 돌아가기</button></div>` + SLIDES.map((s,i) => `<article class="reading-slide ${dark(s) ? 'unified-dark' : ''}" data-page="${i}">${dark(s) ? '' : `<header class="unified-header">${header(s)}</header>`}<main class="unified-body">${content(s)}</main><div class="reading-page">${i+1} / ${SLIDES.length}</div></article>`).join('');
     document.body.classList.add('unified-read'); read = true;
     if (!printing) reading.querySelector(`[data-page="${index()}"]`).scrollIntoView();
   }
