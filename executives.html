@@ -1,0 +1,3956 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유안타증권 임원 교육 — AI로 읽는 경쟁환경, 경영 브리핑과 실행 리더십</title>
+  <style>
+    :root {
+      --navy: #101D35;
+      --navy-light: #1B2E52;
+      --teal: #39B8B2;
+      --teal-dark: #288f8a;
+      --teal-bg: #EAF8F7;
+      --white: #FFFFFF;
+      --gray-50: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-300: #CBD5E1;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1E293B;
+      --amber: #D97706;
+      --amber-bg: #FEF3C7;
+      --blue: #2563EB;
+      --blue-bg: #EFF6FF;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #09101D;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', sans-serif;
+      color: var(--gray-800);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: text;
+    }
+
+    /* 16:9 Presentation Stage */
+    #stage-wrapper {
+      width: 1600px;
+      height: 900px;
+      position: relative;
+      transform-origin: center center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+      background: var(--white);
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    /* Slide Base */
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .slide.theme-navy {
+      background-color: var(--navy);
+      color: var(--white);
+    }
+
+    .slide.theme-white {
+      background-color: var(--white);
+      color: var(--gray-800);
+    }
+
+    /* Top Header for Content Slides */
+    .slide-header {
+      height: 76px;
+      padding: 0 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--gray-200);
+      background: var(--white);
+      flex-shrink: 0;
+    }
+
+    .header-module-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .module-badge {
+      background-color: var(--navy);
+      color: var(--teal);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 5px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .module-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gray-600);
+    }
+
+    /* Journey Pill Bar in Header */
+    .journey-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .journey-step {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 20px;
+      color: var(--gray-600);
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .journey-step.active {
+      background: var(--teal);
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .journey-arrow {
+      color: var(--gray-300);
+      font-size: 12px;
+    }
+
+    /* Main Slide Content Area */
+    .slide-body {
+      flex: 1;
+      padding: 40px 60px 28px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .title-area {
+      margin-bottom: 24px;
+    }
+
+    .slide-title {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .slide-lead {
+      font-size: 21px;
+      color: var(--gray-600);
+      margin-top: 10px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      min-height: 0;
+    }
+
+    /* Bottom Notice / Key Takeaway Bar */
+    .bottom-message {
+      margin-top: 18px;
+      background: var(--gray-50);
+      border-left: 5px solid var(--teal);
+      padding: 14px 22px;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--navy);
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    /* Slide Footer / Controls */
+    .slide-footer {
+      height: 62px;
+      padding: 0 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
+      font-size: 15px;
+      flex-shrink: 0;
+      z-index: 20;
+    }
+
+    .theme-navy .slide-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .footer-left, .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-copyright {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-600);
+      letter-spacing: 0.2px;
+    }
+
+    .theme-navy .footer-copyright {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid var(--gray-300);
+      color: var(--gray-700);
+      padding: 7px 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--gray-100);
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+
+    .theme-navy .nav-btn {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: var(--white);
+    }
+
+    .theme-navy .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--teal);
+    }
+
+    .page-indicator {
+      font-size: 16px;
+      font-weight: 800;
+      padding: 0 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .page-indicator .current {
+      color: var(--teal-dark);
+    }
+
+    .theme-navy .page-indicator .current {
+      color: var(--teal);
+    }
+
+    /* Grid & Cards */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; height: 100%; align-items: stretch; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; height: 100%; align-items: stretch; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; height: 100%; align-items: stretch; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; height: 100%; align-items: stretch; }
+    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 100%; }
+
+    .card {
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(16, 29, 53, 0.04);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .card:hover {
+      border-color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(16, 29, 53, 0.09);
+    }
+
+    .card.highlight,
+    .card.active-box {
+      border: 2.5px solid var(--teal) !important;
+      background: linear-gradient(180deg, var(--teal-bg) 0%, #FFFFFF 100%);
+      box-shadow: 0 12px 28px rgba(57, 184, 178, 0.22);
+      transform: translateY(-3px);
+    }
+
+    .card.navy-card {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    .card.navy-card:hover {
+      border-color: var(--teal);
+    }
+
+    .card.navy-card.active-box {
+      background: var(--navy-light) !important;
+      border: 2.5px solid var(--teal) !important;
+      box-shadow: 0 12px 28px rgba(57, 184, 178, 0.3);
+    }
+
+    /* Cover workflow interactive boxes */
+    .cover-flow-box {
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      border-left: 5px solid var(--teal);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cover-flow-box:hover {
+      background: rgba(57, 184, 178, 0.12);
+      border-color: var(--teal);
+      transform: translateX(4px);
+    }
+
+    .cover-flow-box.active-box {
+      background: rgba(57, 184, 178, 0.22);
+      border: 2px solid var(--teal);
+      border-left: 6px solid var(--teal);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      transform: translateX(6px);
+    }
+
+    .cover-flow-box.active-box .flow-title {
+      color: var(--teal);
+    }
+
+    /* Cover Partner Logo Bar */
+    .cover-logo-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .logo-badge-card {
+      background: var(--white);
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 58px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+    }
+
+    /* Interactive Table Rows & Requirement Boxes */
+    .slide-table tbody tr {
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .slide-table tbody tr:hover td {
+      background-color: var(--gray-50);
+    }
+
+    .slide-table tbody tr.active-box td {
+      background-color: var(--teal-bg) !important;
+      border-top: 2px solid var(--teal);
+      border-bottom: 2px solid var(--teal);
+    }
+
+    .req-box {
+      padding: 18px;
+      background: var(--gray-50);
+      border-radius: 10px;
+      border: 2px solid var(--gray-200);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .req-box:hover {
+      border-color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .req-box.active-box {
+      background: var(--teal-bg);
+      border: 2.5px solid var(--teal);
+      box-shadow: 0 8px 20px rgba(57, 184, 178, 0.18);
+    }
+
+    .card-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--navy);
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 23px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .navy-card .card-title {
+      color: var(--teal);
+    }
+
+    .card-desc {
+      font-size: 18px;
+      color: var(--gray-700);
+      line-height: 1.55;
+    }
+
+    .navy-card .card-desc {
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .tag-tbd {
+      display: inline-block;
+      background: var(--amber-bg);
+      color: var(--amber);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 3px 9px;
+      border-radius: 4px;
+      border: 1px solid #FCD34D;
+      vertical-align: middle;
+    }
+
+    .tag-virtual {
+      display: inline-block;
+      background: var(--blue-bg);
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid #BFDBFE;
+    }
+
+    /* Tables */
+    .slide-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 19px;
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+
+    .slide-table th {
+      background: var(--navy);
+      color: var(--white);
+      padding: 16px 22px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .slide-table th.teal-col {
+      background: #163C45;
+      color: var(--teal);
+    }
+
+    .slide-table td {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--gray-200);
+      color: var(--gray-800);
+      line-height: 1.45;
+    }
+
+    .slide-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .slide-table td.row-label {
+      font-weight: 800;
+      color: var(--navy);
+      background: var(--gray-50);
+      width: 18%;
+    }
+
+    /* Prompt Copy Box */
+    .prompt-container {
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 12px;
+      padding: 22px 26px;
+      border: 2px solid var(--teal);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .prompt-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 10px;
+    }
+
+    .prompt-label {
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copy-btn {
+      background: var(--teal);
+      color: var(--navy);
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: #4CE0DA;
+    }
+
+    .copy-btn.copied {
+      background: #10B981;
+      color: var(--white);
+    }
+
+    .prompt-text {
+      font-family: 'Consolas', 'Monaco', 'Pretendard', monospace;
+      font-size: 19px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      user-select: all;
+      color: #E2E8F0;
+    }
+
+    /* Popup Trigger Buttons */
+    .popup-trigger-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .popup-btn {
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 2px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s;
+    }
+
+    .popup-btn.type-check {
+      background: var(--teal-bg);
+      color: #0F766E;
+      border-color: var(--teal);
+    }
+
+    .popup-btn.type-ref {
+      background: var(--blue-bg);
+      color: #1D4ED8;
+      border-color: #93C5FD;
+    }
+
+    .popup-btn.type-ex {
+      background: var(--amber-bg);
+      color: #B45309;
+      border-color: #FCD34D;
+    }
+
+    .popup-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Interactive Checklist & Inputs */
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .check-item:hover {
+      border-color: var(--teal);
+      background: var(--teal-bg);
+    }
+
+    .check-item input[type="checkbox"] {
+      width: 24px;
+      height: 24px;
+      accent-color: var(--teal-dark);
+      cursor: pointer;
+    }
+
+    .input-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-field-group label {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .slide-input, .slide-textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--gray-300);
+      border-radius: 8px;
+      font-size: 17px;
+      font-family: inherit;
+      background: var(--white);
+      color: var(--gray-800);
+    }
+
+    .slide-input:focus, .slide-textarea:focus {
+      outline: 2px solid var(--teal);
+      border-color: transparent;
+    }
+
+    /* QR & Poll Box */
+    .qr-placeholder-box {
+      background: var(--gray-50);
+      border: 2px dashed var(--gray-300);
+      border-radius: 14px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 14px;
+      height: 100%;
+    }
+
+    .qr-frame {
+      width: 200px;
+      height: 200px;
+      background: var(--white);
+      border: 2px solid var(--navy);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .poll-option {
+      padding: 18px 22px;
+      border: 2px solid var(--gray-200);
+      border-radius: 10px;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s;
+    }
+
+    .poll-option:hover, .poll-option.selected {
+      border-color: var(--teal);
+      background: var(--teal-bg);
+    }
+
+    /* Cover & Divider Specifics */
+    .cover-layout {
+      flex: 1;
+      padding: 80px 80px 40px 80px;
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      align-items: center;
+      gap: 50px;
+      position: relative;
+    }
+
+    .divider-layout {
+      flex: 1;
+      padding: 90px 80px 50px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .module-big-num {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--teal);
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+      display: inline-block;
+      border-bottom: 3px solid var(--teal);
+      padding-bottom: 6px;
+    }
+
+    .divider-title {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--white);
+      margin-bottom: 28px;
+      max-width: 1100px;
+    }
+
+    .divider-question {
+      font-size: 26px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+      max-width: 980px;
+      font-weight: 500;
+      border-left: 4px solid var(--teal);
+      padding-left: 22px;
+    }
+
+    /* Modal / Popup */
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(16, 29, 53, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 60px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-window {
+      background: var(--white);
+      width: 100%;
+      max-width: 920px;
+      max-height: 720px;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-top: 8px solid var(--teal);
+    }
+
+    .modal-header {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .modal-badge {
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .modal-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .modal-close-btn {
+      background: var(--gray-100);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--gray-700);
+      cursor: pointer;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--gray-200);
+      color: var(--navy);
+    }
+
+    .modal-body {
+      padding: 32px;
+      overflow-y: auto;
+      font-size: 21px;
+      line-height: 1.65;
+      color: var(--gray-800);
+    }
+
+    /* TOC Drawer */
+    .toc-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(16, 29, 53, 0.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 110;
+      padding: 50px;
+    }
+
+    .toc-backdrop.open {
+      display: flex;
+    }
+
+    .toc-window {
+      background: var(--white);
+      width: 100%;
+      max-width: 1320px;
+      height: 760px;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .toc-grid {
+      padding: 28px 32px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .toc-module-box {
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 18px;
+      background: var(--gray-50);
+    }
+
+    .toc-module-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--teal);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .toc-slide-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .toc-slide-btn {
+      text-align: left;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-700);
+      cursor: pointer;
+      display: flex;
+      gap: 8px;
+    }
+
+    .toc-slide-btn:hover, .toc-slide-btn.current-slide {
+      border-color: var(--teal);
+      background: var(--teal-bg);
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    /* Print Container (Hidden on screen, used for 53-page PDF export) */
+    #print-all-container {
+      display: none;
+    }
+
+    @media print {
+      @page {
+        size: 1600px 900px;
+        margin: 0;
+      }
+
+      html, body {
+        width: 1600px !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #FFFFFF !important;
+        overflow: visible !important;
+        display: block !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      #stage-wrapper {
+        display: none !important;
+      }
+
+      #print-all-container {
+        display: block !important;
+        width: 1600px !important;
+      }
+
+      .print-slide-page {
+        width: 1600px !important;
+        height: 900px !important;
+        page-break-after: always;
+        break-after: page;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .print-slide-page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="stage-wrapper">
+    <div id="slide-container" style="width:100%; height:100%;"></div>
+
+    <!-- Accessible Popup Modal -->
+    <div id="info-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
+      <div class="modal-window" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span id="modal-badge-el" class="modal-badge">구분</span>
+            <h2 id="modal-title-text" class="modal-title">팝업 제목</h2>
+          </div>
+          <button id="modal-close-button" class="modal-close-btn" onclick="closePopup()">닫기 (ESC)</button>
+        </div>
+        <div id="modal-body-content" class="modal-body"></div>
+      </div>
+    </div>
+
+    <!-- Table of Contents Modal -->
+    <div id="toc-modal" class="toc-backdrop" role="dialog" aria-modal="true" aria-label="전체 목차 및 모듈 이동">
+      <div class="toc-window" onclick="event.stopPropagation()">
+        <div class="modal-header" style="background: var(--navy); color: var(--white);">
+          <div class="modal-title-group">
+            <span class="module-badge" style="background:var(--teal); color:var(--navy);">전체 53페이지 · 240분</span>
+            <h2 class="modal-title" style="color:var(--white);">유안타증권 임원 AI 교육 — 모듈별 목차 이동</h2>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <button class="modal-close-btn" style="background:var(--teal); color:var(--navy);" onclick="exportToPDF()">🖨️ PDF 출력 (전체 53p)</button>
+            <button class="modal-close-btn" onclick="toggleFullscreen()">⛶ 전체화면 전환</button>
+            <button class="modal-close-btn" onclick="toggleTOC(false)">닫기 (ESC)</button>
+          </div>
+        </div>
+        <div id="toc-content" class="toc-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden container for printing all 53 slides to PDF -->
+  <div id="print-all-container"></div>
+
+  <script>
+    // Journey steps definition
+    const JOURNEY_STEPS = [
+      { id: 'q', label: '질문 설정' },
+      { id: 'd', label: '공시 확인' },
+      { id: 'a', label: 'AI 분석' },
+      { id: 'b', label: '보드 제작' },
+      { id: 't', label: '부서 과제' },
+      { id: 'e', label: '실행 점검' }
+    ];
+
+    // Timer state for break slides (26, 46)
+    let breakTimerInterval = null;
+    let breakRemainingSeconds = 600;
+
+    // Complete 53 Slides Data Specification
+    const SLIDES = [
+      // 01. 표지
+      {
+        page: 1,
+        theme: 'navy',
+        type: 'cover',
+        moduleCode: 'OPENING',
+        moduleName: '오프닝 및 모듈 1',
+        title: 'AI로 읽는 경쟁환경',
+        subtitle: '경영 브리핑과 실행 리더십',
+        org: '유안타증권 임원 교육',
+        meta: '[교육일 확정 필요] · [강사명 확정 필요] · 총 4시간 (240분, 휴식 20분 포함)'
+      },
+      // 02. 모듈 1 간지
+      {
+        page: 2,
+        theme: 'navy',
+        type: 'divider',
+        moduleCode: 'MODULE 01',
+        moduleName: 'AI 시대의 임원 업무 (30분)',
+        title: 'AI 시대, 임원의 일은 어떻게 달라지는가',
+        question: '자료를 빠르게 읽는 것에서 더 나아가, 어떤 질문과 판단이 달라질 수 있을까요?',
+        activeCoverFlow: 0
+      },
+      // 03. 오늘 마주할 경영 장면
+      {
+        page: 3,
+        theme: 'white',
+        moduleCode: 'MODULE 01',
+        moduleName: 'AI 시대의 임원 업무',
+        journeyActive: ['q'],
+        title: '중요한 경영 질문에 답하기까지',
+        lead: '자료는 여러 문서에 흩어져 있고, 숫자를 비교하려면 기간과 범위를 다시 맞춰야 합니다. 보고의 근거를 확인한 뒤에도 누가 무엇을 추가로 확인할지 정리해야 합니다.',
+        bottomMsg: 'AI는 이 과정을 지원할 수 있습니다. 리더는 질문과 판단 기준을 정합니다.',
+        render: () => `
+          <div class="grid-4">
+            <div class="card">
+              <div>
+                <div class="card-step-num">01</div>
+                <div class="card-title">자료 찾기</div>
+                <div class="card-desc">여러 보고서와 문서에 필요한 수치와 설명이 흩어져 있어 탐색에 많은 시간이 소요됩니다.</div>
+              </div>
+              <div class="tag-virtual" style="align-self:flex-start;">핵심 병목: 흩어진 문서</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">02</div>
+                <div class="card-title">비교하기</div>
+                <div class="card-desc">타사와 비교할 때 보고기간, 연결·별도 범위, 단위를 일일이 대조하고 맞춰야 합니다.</div>
+              </div>
+              <div class="tag-virtual" style="align-self:flex-start;">핵심 병목: 서로 다른 기준</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">03</div>
+                <div class="card-title">근거 확인</div>
+                <div class="card-desc">요약된 보고 문장이 실제 원문 수치에 기반한 사실인지 추측인지 재확인이 필요합니다.</div>
+              </div>
+              <div class="tag-virtual" style="align-self:flex-start;">핵심 병목: 원문 확인</div>
+            </div>
+            <div class="card highlight">
+              <div>
+                <div class="card-step-num">04</div>
+                <div class="card-title">후속조치</div>
+                <div class="card-desc">브리핑 이후 어느 부서가 무엇을 언제까지 추가 확인하고 개선할지 명확히 지정해야 합니다.</div>
+              </div>
+              <div class="tag-virtual" style="align-self:flex-start; background:var(--navy); color:var(--teal);">핵심 병목: 담당·기한</div>
+            </div>
+          </div>
+        `
+      },
+      // 04. 참여 설문: 가장 큰 어려움
+      {
+        page: 4,
+        theme: 'white',
+        moduleCode: 'MODULE 01',
+        moduleName: 'AI 시대의 임원 업무',
+        journeyActive: ['q'],
+        title: '어떤 과정에서 가장 많은 시간이 들고 있습니까?',
+        lead: '평소 보고를 받거나 경영 판단을 준비하실 때 가장 번거롭거나 시간이 걸리는 과정을 선택해 주세요.',
+        bottomMsg: '접속이 어려우면 해당 번호를 손으로 표시해 주세요. (개인 식별 정보 미수집)',
+        render: () => `
+          <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;">
+            <div style="display:flex; flex-direction:column; justify-content:space-between; gap:14px;">
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>① 필요한 자료 찾기 (흩어진 문서 탐색)</span>
+                <span style="color:var(--teal-dark); font-size:16px;">클릭하여 표시</span>
+              </div>
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>② 자료 간 비교 (기간·범위·단위 기준 맞추기)</span>
+                <span style="color:var(--teal-dark); font-size:16px;">클릭하여 표시</span>
+              </div>
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>③ 보고 내용의 근거 확인 (원문 대조 및 팩트 체크)</span>
+                <span style="color:var(--teal-dark); font-size:16px;">클릭하여 표시</span>
+              </div>
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>④ 회의 후 진행 상황 점검 (부서별 후속 과제 연결)</span>
+                <span style="color:var(--teal-dark); font-size:16px;">클릭하여 표시</span>
+              </div>
+            </div>
+            <div class="qr-placeholder-box">
+              <div class="qr-frame">설문 링크 확정 후<br>QR 삽입 영역<br><span class="tag-tbd" style="margin-top:8px;">[확정 필요]</span></div>
+              <div style="font-size:17px; font-weight:700; color:var(--navy);">단축 링크: <span class="tag-tbd">[설문 URL 확정 필요]</span></div>
+              <div style="font-size:15px; color:var(--gray-600); line-height:1.45;">
+                승인된 설문 도구 확정 후 QR과 집계 화면을 연결합니다.<br>링크 미준비 시 거수 또는 구두 답변으로 진행합니다.
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 05. 오늘의 결과물
+      {
+        page: 5,
+        theme: 'white',
+        moduleCode: 'MODULE 01',
+        moduleName: 'AI 시대의 임원 업무',
+        journeyActive: ['q', 'a', 'b', 't'],
+        title: '오늘 한 가지 질문을 끝까지 따라갑니다',
+        lead: '공시자료에서 확인한 내용을 AI로 비교하고, 근거를 살펴본 뒤 브리핑 보드로 구현합니다. 마지막으로 조직에서 확인할 질문과 실행 과제를 정리합니다.',
+        bottomMsg: '공시자료 분석 → 브리핑 보드 제작 → 본사 팀장 실행 과제를 하나의 이야기로 연결합니다.',
+        render: () => `
+          <div class="grid-3">
+            <div class="card">
+              <div>
+                <div class="card-step-num">산출물 ①</div>
+                <div class="card-title">비교 브리핑 초안</div>
+                <div class="card-desc" style="margin-top:14px;">
+                  • 공개 공시 기반 핵심 수치 추출<br>
+                  • 비교 기준(기간·범위·단위) 검증<br>
+                  • 확인된 사실과 해석·가설의 엄격한 분리
+                </div>
+              </div>
+              <div class="tag-virtual">핵심: 사실 · 해석 · 근거</div>
+            </div>
+            <div class="card highlight">
+              <div>
+                <div class="card-step-num">산출물 ②</div>
+                <div class="card-title">경영 브리핑 보드 (HTML)</div>
+                <div class="card-desc" style="margin-top:14px;">
+                  • 브라우저에서 즉시 여는 단일 화면<br>
+                  • 큰 글씨로 핵심 비교와 출처 위치 표시<br>
+                  • 자연어 지시로 원하는 화면 구성 즉시 수정
+                </div>
+              </div>
+              <div class="tag-virtual" style="background:var(--navy); color:var(--teal);">핵심: 확인·수정 가능한 화면</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">산출물 ③</div>
+                <div class="card-title">부서 실행 과제 카드</div>
+                <div class="card-desc" style="margin-top:14px;">
+                  • 외부 비교에서 도출한 내부 점검 질문<br>
+                  • 본사 팀장 교육과 이어지는 5대 공통 질문<br>
+                  • 임원의 지원 사항 및 성과 점검 기준 명시
+                </div>
+              </div>
+              <div class="tag-virtual">핵심: 확인할 내용 · 담당 · 점검 기준</div>
+            </div>
+          </div>
+        `
+      },
+      // 06. 경영 업무와 AI
+      {
+        page: 6,
+        theme: 'white',
+        moduleCode: 'MODULE 01',
+        moduleName: 'AI 시대의 임원 업무',
+        journeyActive: ['q', 'a'],
+        title: 'AI가 돕는 일과 리더가 정하는 일',
+        lead: 'AI는 방대한 문서 정리와 초안 작성을 가속화하지만, 비교 기준과 우선순위 판단은 리더의 몫입니다.',
+        bottomMsg: 'AI 결과의 속도와 함께 검토 가능성을 확보해야 합니다.',
+        render: () => `
+          <table class="slide-table">
+            <thead>
+              <tr>
+                <th style="width:20%;">업무 단계</th>
+                <th style="width:40%;">AI가 지원하는 일 (속도와 초안)</th>
+                <th class="teal-col" style="width:40%;">리더가 정하는 일 (기준과 책임)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">01. 자료 확인</td>
+                <td>방대한 문서에서 필요한 정보와 수치 빠르게 추출</td>
+                <td><strong>분석 목적과 확인할 자료의 범위 결정</strong></td>
+              </tr>
+              <tr>
+                <td class="row-label">02. 비교</td>
+                <td>회사별·기간별 비교표 및 요약 차트 초안 작성</td>
+                <td><strong>비교 기준(기간·연결/별도·정의) 적절성 확인</strong></td>
+              </tr>
+              <tr>
+                <td class="row-label">03. 해석</td>
+                <td>수치 차이에 대한 추가 질문과 다양한 가설 제안</td>
+                <td><strong>제시된 근거의 타당성과 해석의 한계 판단</strong></td>
+              </tr>
+              <tr>
+                <td class="row-label">04. 실행</td>
+                <td>부서별 후속 확인 과제 및 점검 항목 초안 정리</td>
+                <td><strong>조직 우선순위 부여, 자원 지원 및 책임 결정</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        `
+      },
+      // 07. 같은 자료, 다른 질문
+      {
+        page: 7,
+        theme: 'white',
+        moduleCode: 'MODULE 01',
+        moduleName: 'AI 시대의 임원 업무',
+        journeyActive: ['q'],
+        title: '좋은 브리핑은 좋은 질문에서 시작합니다',
+        lead: '같은 자료도 무엇을 알고 싶은지에 따라 추출할 항목과 보고 방식이 달라집니다.',
+        bottomMsg: '단순 현황 요약을 넘어, 내부 점검과 실행으로 이어지는 경영 질문을 던져야 합니다.',
+        render: () => `
+          <div style="display:grid; grid-template-columns: 0.8fr 0.2fr 2fr; align-items:center; gap:20px; height:100%;">
+            <div class="card navy-card" style="height:85%; justify-content:center; text-align:center;">
+              <div style="font-size:48px; margin-bottom:14px;">📄</div>
+              <div class="card-title" style="font-size:26px;">동일한 공개 공시자료</div>
+              <div class="card-desc">사업보고서 · 분기보고서<br>재무제표 및 주석 사항</div>
+            </div>
+            <div style="text-align:center; font-size:38px; color:var(--teal); font-weight:900;">➔</div>
+            <div class="grid-3" style="height:85%;">
+              <div class="card">
+                <div>
+                  <div class="card-step-num">관점 1 · 현황</div>
+                  <div class="card-title">어떤 변화가 확인되는가?</div>
+                  <div class="card-desc" style="margin-top:12px;">특정 시점의 수치 증감과 주요 항목의 변동 폭을 사실 그대로 파악합니다.</div>
+                </div>
+                <div class="tag-virtual">추출 방식: 시계열 요약표</div>
+              </div>
+              <div class="card">
+                <div>
+                  <div class="card-step-num">관점 2 · 비교</div>
+                  <div class="card-title">같은 기준에서 어떤 차이가 있는가?</div>
+                  <div class="card-desc" style="margin-top:12px;">동일 보고기간·기준 아래 경쟁사와 우리의 구조적 차이를 대조합니다.</div>
+                </div>
+                <div class="tag-virtual">추출 방식: 기준 검증 비교표</div>
+              </div>
+              <div class="card highlight">
+                <div>
+                  <div class="card-step-num">관점 3 · 경영</div>
+                  <div class="card-title">차이를 이해하려면 무엇을 더 확인해야 하는가?</div>
+                  <div class="card-desc" style="margin-top:12px;">공시만으로 알 수 없는 원인을 파악하기 위해 내부 부서에 물을 질문을 도출합니다.</div>
+                </div>
+                <div class="tag-virtual" style="background:var(--navy); color:var(--teal);">추출 방식: 핵심 확인 질문 3선</div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 08. 사실과 해석
+      {
+        page: 8,
+        theme: 'white',
+        moduleCode: 'MODULE 01',
+        moduleName: 'AI 시대의 임원 업무',
+        journeyActive: ['q', 'a'],
+        title: '그럴듯한 설명을 검토 가능한 정보로 바꾸기',
+        lead: 'AI는 사실과 추측을 자연스러운 한 문장으로 섞어 답하기 쉽습니다. 브리핑에서는 이를 명확히 분리합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 판단 전에 확인할 질문',
+          title: '판단 전에 확인할 4가지 질문',
+          html: `
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:16px;">
+              <li><strong>1. 직접성 확인:</strong> 자료에서 직접 확인되는 문장과 수치인가?</li>
+              <li><strong>2. 대안 가설:</strong> 동일한 수치를 두고 다른 설명 가능성이 있는가?</li>
+              <li><strong>3. 출처 명시:</strong> 보고서 원문 위치와 기준일이 명확히 명시되어 있는가?</li>
+              <li><strong>4. 추가 자료:</strong> 최종 경영 판단을 위해 내부에서 어떤 자료가 더 필요한가?</li>
+            </ul>
+          `
+        },
+        render: () => `
+          <div style="display:flex; flex-direction:column; gap:20px; height:100%;">
+            <div class="grid-2" style="flex:1;">
+              <div class="card" style="border-top: 6px solid var(--navy);">
+                <div>
+                  <div class="card-title" style="font-size:26px;">✅ 확인된 사실 (Fact)</div>
+                  <div class="card-desc" style="font-size:20px; margin-top:12px;">
+                    <strong>자료에 명시된 항목과 수치</strong><br><br>
+                    • 보고서 원문 페이지와 표에서 1:1로 확인 가능한 값<br>
+                    • 보고기간, 단위, 연결·별도 기준이 명확히 기재된 정보<br>
+                    • 누가 읽어도 동일하게 확인되는 객관적 기록
+                  </div>
+                </div>
+                <div class="tag-virtual">표기 원칙: 수치 + 단위 + 원문 위치 필수 기재</div>
+              </div>
+              <div class="card" style="border-top: 6px solid var(--teal);">
+                <div>
+                  <div class="card-title" style="font-size:26px;">💡 해석과 가설 (Hypothesis)</div>
+                  <div class="card-desc" style="font-size:20px; margin-top:12px;">
+                    <strong>그 사실이 의미할 수 있는 설명</strong><br><br>
+                    • 수치 변동의 배경이나 원인에 대한 가능한 추론<br>
+                    • 시장 환경이나 영업 방향에 대한 개연성 있는 해석<br>
+                    • 단정적 결론이 아닌 ‘검토 대상 가설’로 다뤄야 할 영역
+                  </div>
+                </div>
+                <div class="tag-virtual">표기 원칙: 단정 금지 · 대안 가능성 병기</div>
+              </div>
+            </div>
+            <div class="card highlight" style="padding:20px 28px; flex-direction:row; align-items:center; justify-content:space-between;">
+              <div>
+                <span style="font-size:22px; font-weight:800; color:var(--navy);">🔍 추가 확인 (To-Be Verified): 현재 공개자료만으로 알 수 없는 사항</span>
+                <p style="font-size:18px; color:var(--gray-700); margin-top:4px;">공시자료에 없는 내부 세부 내역이나 원인은 추정하지 않고 <strong>‘확인 필요’</strong>로 남겨 부서 확인 질문으로 전환합니다.</p>
+              </div>
+              <span class="tag-virtual" style="background:var(--navy); color:var(--teal); white-space:nowrap;">다음 단계 질문의 출발점</span>
+            </div>
+          </div>
+        `
+      },
+      // 09. 전체 여정
+      {
+        page: 9,
+        theme: 'white',
+        moduleCode: 'MODULE 01',
+        moduleName: 'AI 시대의 임원 업무',
+        journeyActive: ['q', 'd', 'a', 'b', 't', 'e'],
+        title: '경영 질문에서 조직의 실행까지',
+        lead: '오늘 4시간 동안 한 가지 질문을 중심으로 6단계의 전체 흐름을 직접 경험합니다.',
+        bottomMsg: '외부 분석 결과를 내부 확인 질문으로 연결하고, 팀장 교육에서 업무 개선으로 이어갑니다.',
+        render: () => `
+          <div style="display:grid; grid-template-columns: repeat(6, 1fr); gap:14px; height:100%; align-items:center;">
+            <div class="card" style="height:88%;">
+              <div>
+                <div class="card-step-num">STEP 1</div>
+                <div class="card-title" style="font-size:21px;">질문 설정</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">무엇을 알고 싶은지 경영 질문을 먼저 정의합니다.</div>
+              </div>
+              <div class="tag-virtual">오늘의 질문</div>
+            </div>
+            <div class="card" style="height:88%;">
+              <div>
+                <div class="card-step-num">STEP 2</div>
+                <div class="card-title" style="font-size:21px;">공시 확인</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">기간·범위·단위·정의 4대 비교 기준을 점검합니다.</div>
+              </div>
+              <div class="tag-virtual">비교 기준</div>
+            </div>
+            <div class="card" style="height:88%;">
+              <div>
+                <div class="card-step-num">STEP 3</div>
+                <div class="card-title" style="font-size:21px;">AI 분석</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">비교표 초안을 만들고 원문과 대조해 검증합니다.</div>
+              </div>
+              <div class="tag-virtual">근거 확인</div>
+            </div>
+            <div class="card highlight" style="height:88%;">
+              <div>
+                <div class="card-step-num">STEP 4</div>
+                <div class="card-title" style="font-size:21px;">보드 제작</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">자연어로 단일 HTML 경영 브리핑 화면을 구현합니다.</div>
+              </div>
+              <div class="tag-virtual" style="background:var(--navy); color:var(--teal);">화면 구현</div>
+            </div>
+            <div class="card" style="height:88%;">
+              <div>
+                <div class="card-step-num">STEP 5</div>
+                <div class="card-title" style="font-size:21px;">부서 과제</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">본사 팀장에게 전달할 확인·개선 과제를 정리합니다.</div>
+              </div>
+              <div class="tag-virtual">팀장에게 요청</div>
+            </div>
+            <div class="card" style="height:88%;">
+              <div>
+                <div class="card-step-num">STEP 6</div>
+                <div class="card-title" style="font-size:21px;">실행 점검</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">임원·AX조직·팀장의 역할과 점검 체계를 연결합니다.</div>
+              </div>
+              <div class="tag-virtual">역할과 성과</div>
+            </div>
+          </div>
+        `
+      },
+      // 10. 모듈 2 간지
+      {
+        page: 10,
+        theme: 'navy',
+        type: 'divider',
+        moduleCode: 'MODULE 02',
+        moduleName: '공시자료와 경영 질문 (25분)',
+        title: '공시자료를 경영 질문으로 읽기',
+        question: '어떤 자료를 볼지 정하기 전에, 무엇을 알고 싶은지 정합니다.',
+        activeCoverFlow: 1
+      },
+      // 11. 하나의 공통 사례
+      {
+        page: 11,
+        theme: 'white',
+        moduleCode: 'MODULE 02',
+        moduleName: '공시자료와 경영 질문',
+        journeyActive: ['q', 'd'],
+        title: '실습 상황: 경쟁환경 브리핑 준비',
+        lead: '유안타증권과 비교 대상 회사의 공개 공시를 확인하여, 경영진이 살펴볼 사실과 추가 질문을 정리합니다.',
+        bottomMsg: '실제 회사·자료·기간은 공시 확인 후 입력합니다. (사전 검증된 공개 공시 발췌본 활용)',
+        render: () => `
+          <div class="grid-2">
+            <div class="card">
+              <div>
+                <div class="card-title">📋 실습 대상 공시 데이터 명세</div>
+                <div style="display:flex; flex-direction:column; gap:16px; margin-top:20px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding:14px; background:var(--gray-50); border-radius:8px;">
+                    <span style="font-weight:800; font-size:19px;">우리 회사</span>
+                    <span><strong>유안타증권</strong> <span class="tag-tbd">[공시 보고서명 확정 필요]</span></span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding:14px; background:var(--gray-50); border-radius:8px;">
+                    <span style="font-weight:800; font-size:19px;">비교 회사 (1~2곳)</span>
+                    <span class="tag-tbd">[비교 대상 증권사 확정 필요]</span>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding:14px; background:var(--gray-50); border-radius:8px;">
+                    <span style="font-weight:800; font-size:19px;">동일 보고기간</span>
+                    <span class="tag-tbd">[보고기간 및 기준일 확정 필요]</span>
+                  </div>
+                </div>
+              </div>
+              <div style="font-size:16px; color:var(--gray-600);">* 모든 참가자는 사전 검증된 동일한 공개 공시 발췌본으로 실습을 진행합니다.</div>
+            </div>
+            <div class="card highlight">
+              <div>
+                <div class="card-title">🎯 결과물 미리보기 흐름</div>
+                <div style="display:flex; flex-direction:column; gap:14px; margin-top:18px;">
+                  <div style="background:var(--white); padding:16px; border-radius:8px; border:1px solid var(--gray-200);">
+                    <strong style="color:var(--navy); font-size:19px;">1단계: 기준이 통일된 비교표</strong>
+                    <p style="font-size:16px; color:var(--gray-600); margin-top:4px;">항목별 수치·단위·원문 위치 및 비교 가능 여부 명시</p>
+                  </div>
+                  <div style="background:var(--white); padding:16px; border-radius:8px; border:1px solid var(--gray-200);">
+                    <strong style="color:var(--navy); font-size:19px;">2단계: 경영진 추가 확인 질문</strong>
+                    <p style="font-size:16px; color:var(--gray-600); margin-top:4px;">사실과 가설을 분리하고 내부 확인이 필요한 질문 3개 도출</p>
+                  </div>
+                  <div style="background:var(--navy); color:var(--white); padding:16px; border-radius:8px;">
+                    <strong style="color:var(--teal); font-size:19px;">3단계: 단일 HTML 경영 브리핑 보드</strong>
+                    <p style="font-size:16px; color:rgba(255,255,255,0.85); margin-top:4px;">한 화면에서 질문·근거·다음 행동을 확인하는 브리핑 보드</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 12. 공시자료에서 찾을 수 있는 것
+      {
+        page: 12,
+        theme: 'white',
+        moduleCode: 'MODULE 02',
+        moduleName: '공시자료와 경영 질문',
+        journeyActive: ['d'],
+        title: '공개자료를 경영 질문과 연결하기',
+        lead: '공시자료에는 경영 현황을 살펴볼 수 있는 정보가 포함됩니다. 교육에서는 미리 검토한 자료 중 비교 가능한 소수의 항목을 선택합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: DART 자료 찾기',
+          title: 'DART 전자공시 자료 확인 절차',
+          html: `
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              <p><strong>1단계:</strong> 회사명 및 정기공시(사업보고서/분기보고서) 검색</p>
+              <p><strong>2단계:</strong> 대상 보고기간(당기/전기) 및 연결·별도 기준 확인</p>
+              <p><strong>3단계:</strong> 원문 목차에서 필요한 항목(요약재무정보, 부문별 현황 등) 확인</p>
+              <p><strong>4단계:</strong> 문서명·보고기간·원문 목차 위치를 정확히 기록</p>
+              <div style="padding:14px; background:var(--amber-bg); border-radius:8px; font-size:17px; color:var(--amber);">
+                * 실제 DART 화면 캡처와 출처는 수업 전 대상 보고서 확정 후 삽입합니다. 기본 실습은 사전 배포된 발췌본을 사용합니다.
+              </div>
+            </div>
+          `
+        },
+        render: () => `
+          <div class="grid-4">
+            <div class="card">
+              <div>
+                <div class="card-step-num">항목 01</div>
+                <div class="card-title">자료와 기간</div>
+                <div class="card-desc">비교 대상 회사의 동일한 정기보고서 및 기준 시점</div>
+              </div>
+              <div class="tag-tbd">[확정 필요: 보고서명·기준일]</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">항목 02</div>
+                <div class="card-title">항목과 단위</div>
+                <div class="card-desc">비교 가능한 소수의 핵심 재무·영업 지표와 표시 단위(원/백만원/억원, %)</div>
+              </div>
+              <div class="tag-tbd">[확정 필요: 비교 항목·단위]</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">항목 03</div>
+                <div class="card-title">원문 위치</div>
+                <div class="card-desc">수치가 발췌된 보고서 내 정확한 목차 번호 및 표 제목</div>
+              </div>
+              <div class="tag-tbd">[확정 필요: 목차·페이지 위치]</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">항목 04</div>
+                <div class="card-title">추가 확인사항</div>
+                <div class="card-desc">주석 사항이나 부문 구분 차이 등 해석 시 유의해야 할 조건</div>
+              </div>
+              <div class="tag-tbd">[확정 필요: 주석·비교 유의사항]</div>
+            </div>
+          </div>
+        `
+      },
+      // 13. 비교 기준 네 가지
+      {
+        page: 13,
+        theme: 'white',
+        moduleCode: 'MODULE 02',
+        moduleName: '공시자료와 경영 질문',
+        journeyActive: ['d'],
+        title: '숫자를 비교하기 전에 먼저 확인합니다',
+        lead: '표에 적힌 숫자를 바로 나란히 놓기 전에, 아래 네 가지 기준이 일치하는지 반드시 먼저 점검합니다.',
+        bottomMsg: '하나라도 다르면 차이를 표시하고 직접 비교의 적절성을 다시 확인합니다.',
+        render: () => `
+          <div class="grid-2x2">
+            <div class="card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-title">① 기간 (Period)</span>
+                <span class="tag-virtual">시점 일치 여부</span>
+              </div>
+              <div class="card-desc"><strong>같은 기간 또는 시점인가?</strong><br>누적 기간(3개월 vs 누적 9개월)이나 결산 기준일이 서로 같은지 확인합니다.</div>
+            </div>
+            <div class="card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-title">② 범위 (Scope)</span>
+                <span class="tag-virtual">연결 vs 별도</span>
+              </div>
+              <div class="card-desc"><strong>연결과 별도 중 어느 기준인가?</strong><br>종속기업 포함 여부에 따라 수치가 크게 달라지므로 동일 기준인지 확인합니다.</div>
+            </div>
+            <div class="card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-title">③ 단위 (Unit)</span>
+                <span class="tag-virtual">금액·비율 단위</span>
+              </div>
+              <div class="card-desc"><strong>금액·비율의 단위가 같은가?</strong><br>백만원, 억원, 원 등 보고서 표마다 다른 단위를 통일하거나 명시합니다.</div>
+            </div>
+            <div class="card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-title">④ 정의 (Definition)</span>
+                <span class="tag-virtual">항목 구성 내용</span>
+              </div>
+              <div class="card-desc"><strong>항목이 같은 뜻으로 작성되었는가?</strong><br>부문 명칭이 비슷해도 포함되는 세부 수익·비용 항목이 같은지 확인합니다.</div>
+            </div>
+          </div>
+        `
+      },
+      // 14. 비교할 수 없는 경우
+      {
+        page: 14,
+        theme: 'white',
+        moduleCode: 'MODULE 02',
+        moduleName: '공시자료와 경영 질문',
+        journeyActive: ['d'],
+        title: '차이를 발견하는 것과 차이를 설명하는 것은 다릅니다',
+        lead: '항목 정의나 보고기간이 서로 다르면 수치를 나란히 놓아도 의미 있는 비교가 어려울 수 있습니다. 비교가 가능한 범위와 확인이 필요한 부분을 함께 표시합니다.',
+        popup: {
+          type: 'ex',
+          label: '예시: 비교 보류 상황',
+          title: '교육용 가상 예시 — 기준 불일치 시 처리 원칙',
+          html: `
+            <div style="padding:18px; background:var(--blue-bg); border-radius:10px; margin-bottom:16px;">
+              <span class="tag-virtual">교육용 가상 예시</span>
+              <p style="margin-top:10px; font-weight:700;">“한 회사는 연결 재무제표 기준, 다른 회사는 별도 재무제표 기준 수치만 발췌된 경우라면 범위를 통일하거나 직접 비교를 보류합니다. 보고서 원문에서 동일 기준 수치를 재확인합니다.”</p>
+            </div>
+            <p>AI에게 프롬프트를 입력할 때도 <strong>‘억지로 숫자를 맞추지 말고 비교 불가능 사유를 적으라’</strong>고 지시하는 것이 핵심입니다.</p>
+          `
+        },
+        render: () => `
+          <div class="grid-3">
+            <div class="card" style="border-top: 5px solid #10B981;">
+              <div>
+                <div class="card-title" style="color:#047857;">🟢 확인 가능 (직접 비교)</div>
+                <div class="card-desc" style="margin-top:12px;">기간·범위·단위·항목 정의가 모두 일치하여 직접 수치 비교가 가능한 항목</div>
+              </div>
+              <div class="tag-tbd">[실제 자료 검토 후 사례 입력]</div>
+            </div>
+            <div class="card" style="border-top: 5px solid var(--amber);">
+              <div>
+                <div class="card-title" style="color:var(--amber);">🟡 조건 확인 후 비교</div>
+                <div class="card-desc" style="margin-top:12px;">단위 환산이 필요하거나 부문 구분 기준에 주석 설명을 덧붙여야 비교 가능한 항목</div>
+              </div>
+              <div class="tag-tbd">[실제 자료 검토 후 사례 입력]</div>
+            </div>
+            <div class="card" style="border-top: 5px solid #EF4444;">
+              <div>
+                <div class="card-title" style="color:#B91C1C;">🔴 비교 보류 (확인 필요)</div>
+                <div class="card-desc" style="margin-top:12px;">산출 기준이나 포함 범위가 달라 단순 나열 시 오해를 부를 수 있어 보류하는 항목</div>
+              </div>
+              <div class="tag-tbd">[실제 자료 검토 후 사례 입력]</div>
+            </div>
+          </div>
+        `
+      },
+      // 15. 참여: 경영 질문 선정
+      {
+        page: 15,
+        theme: 'white',
+        moduleCode: 'MODULE 02',
+        moduleName: '공시자료와 경영 질문',
+        journeyActive: ['q', 'd'],
+        title: '오늘 어떤 질문을 가장 먼저 확인하시겠습니까?',
+        lead: '최종 실습 질문은 준비된 공시자료에서 답할 수 있는 범위로 선정합니다.',
+        bottomMsg: '접속이 어려우면 번호를 선택하거나 직접 질문을 적어주세요.',
+        render: () => `
+          <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;">
+            <div style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>① 주요 항목은 기간에 따라 어떻게 변했는가?</span>
+              </div>
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>② 같은 기준에서 회사별 차이는 무엇인가?</span>
+              </div>
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>③ 이 차이를 이해하기 위해 무엇을 더 확인해야 하는가?</span>
+              </div>
+              <div class="input-field-group" style="margin-top:4px;">
+                <label>직접 질문 적어보기 (선택사항)</label>
+                <input type="text" class="slide-input" placeholder="여기에 확인하고 싶은 경영 질문을 직접 입력해 보세요...">
+              </div>
+            </div>
+            <div class="qr-placeholder-box">
+              <div class="qr-frame">설문 링크 확정 후<br>QR 삽입 영역<br><span class="tag-tbd" style="margin-top:8px;">[확정 필요]</span></div>
+              <div style="font-size:17px; font-weight:700; color:var(--navy);">단축 링크: <span class="tag-tbd">[응답 URL 확정 필요]</span></div>
+              <div style="font-size:15px; color:var(--gray-600);">시간 및 운영 환경에 따라 구두 응답 또는 화면 직접 입력으로 진행할 수 있습니다.</div>
+            </div>
+          </div>
+        `
+      },
+      // 16. 실습 질문과 자료 묶음
+      {
+        page: 16,
+        theme: 'white',
+        moduleCode: 'MODULE 02',
+        moduleName: '공시자료와 경영 질문',
+        journeyActive: ['q', 'd'],
+        title: '하나의 질문과 필요한 자료를 준비합니다',
+        lead: '모듈 3에서 AI에게 전달할 공통 실습 질문과 검증된 자료 묶음을 최종 확인합니다.',
+        bottomMsg: '완료: 질문과 자료를 확인했다면 AI에게 정보 정리를 요청합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 원문 자료 목록 및 위치',
+          title: '실습용 공개 공시 자료명 · 원문 위치 참고표',
+          html: `
+            <table class="slide-table" style="font-size:16px;">
+              <thead>
+                <tr>
+                  <th>구분</th>
+                  <th>문서명</th>
+                  <th>항목 위치</th>
+                  <th>원문 URL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>유안타증권</td>
+                  <td><span class="tag-tbd">[보고서명 확정 필요]</span></td>
+                  <td><span class="tag-tbd">[목차·페이지 확정 필요]</span></td>
+                  <td><button class="nav-btn" disabled style="opacity:0.5; cursor:not-allowed;">링크 비활성 (사전 확정 전)</button></td>
+                </tr>
+                <tr>
+                  <td>비교 증권사</td>
+                  <td><span class="tag-tbd">[보고서명 확정 필요]</span></td>
+                  <td><span class="tag-tbd">[목차·페이지 확정 필요]</span></td>
+                  <td><button class="nav-btn" disabled style="opacity:0.5; cursor:not-allowed;">링크 비활성 (사전 확정 전)</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="margin-top:14px; font-size:16px; color:var(--gray-600);">* 실제 원문 링크가 확정되기 전에는 링크 버튼을 비활성 상태로 유지하며, 교육 시 검증된 로컬 발췌본 파일을 사용합니다.</p>
+          `
+        },
+        render: () => `
+          <div class="grid-2">
+            <div class="card navy-card">
+              <div>
+                <span class="module-badge" style="background:var(--teal); color:var(--navy);">공통 실습 질문</span>
+                <div class="card-title" style="font-size:28px; margin-top:18px; color:var(--white);">
+                  실습 질문: <span class="tag-tbd">[자료 확인 후 확정]</span>
+                </div>
+                <div class="card-desc" style="margin-top:16px;">
+                  두 회사의 공개 공시자료에서 동일 기준으로 확인되는 핵심 차이는 무엇이며, 경영진이 내부에 추가로 물어봐야 할 질문은 무엇인가?
+                </div>
+              </div>
+              <div style="font-size:16px; color:var(--teal);">✓ 준비된 공시 발췌본 내에서 사실 확인이 가능한 질문</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-title">📦 실습 자료 묶음 및 비교 기준</div>
+                <div style="display:flex; flex-direction:column; gap:14px; margin-top:16px; font-size:18px;">
+                  <div style="padding:14px; background:var(--gray-50); border-radius:8px;">
+                    <strong>제공 자료:</strong> <span class="tag-tbd">[회사별 보고서·발췌본 확정 필요]</span>
+                  </div>
+                  <div style="padding:14px; background:var(--gray-50); border-radius:8px;">
+                    <strong>비교 기준:</strong> <span class="tag-tbd">[기간·범위·단위 확정 필요]</span>
+                  </div>
+                </div>
+              </div>
+              <label class="check-item" style="margin-top:14px;">
+                <input type="checkbox">
+                <span>질문과 자료 범위를 확인했습니다 (모듈 3 준비 완료)</span>
+              </label>
+            </div>
+          </div>
+        `
+      },
+      // 17. 모듈 3 간지
+      {
+        page: 17,
+        theme: 'navy',
+        type: 'divider',
+        moduleCode: 'MODULE 03',
+        moduleName: 'AI 비교 브리핑 초안 (40분)',
+        title: 'AI로 비교 브리핑 초안 만들기',
+        question: '자료를 정리하고, 비교 기준을 확인하고, 근거를 다시 살펴봅니다.',
+        activeCoverFlow: 2
+      },
+      // 18. 실습 전체 지도
+      {
+        page: 18,
+        theme: 'white',
+        moduleCode: 'MODULE 03',
+        moduleName: 'AI 비교 브리핑 초안',
+        journeyActive: ['d', 'a'],
+        title: '비교 브리핑은 다섯 단계로 만듭니다',
+        lead: '한 번의 질문으로 끝내지 않고, 단계별로 근거를 점검하며 브리핑 초안의 완성도를 높입니다.',
+        popup: {
+          type: 'check',
+          label: '실습 준비 확인',
+          title: '실습 시작 전 환경 점검 체크리스트',
+          html: `
+            <div style="display:flex; flex-direction:column; gap:14px;">
+              <label class="check-item"><input type="checkbox"> 1. AI 도구(Gemini / ChatGPT 등)에 정상 로그인했나요?</label>
+              <label class="check-item"><input type="checkbox"> 2. 배포된 공개 공시자료 발췌본 파일을 열 수 있나요?</label>
+              <label class="check-item"><input type="checkbox"> 3. 오늘의 실습 질문과 자료 기준을 확인했나요?</label>
+              <label class="check-item"><input type="checkbox"> 4. 파일 업로드가 제한될 경우 발췌문 텍스트를 복사해 붙여넣을 수 있나요?</label>
+            </div>
+          `
+        },
+        render: () => `
+          <div class="grid-5">
+            <div class="card">
+              <div>
+                <div class="card-step-num">1단계</div>
+                <div class="card-title" style="font-size:21px;">자료 준비</div>
+                <div class="card-desc" style="font-size:16px;">회사별 공시 발췌본 확인 및 AI 입력</div>
+              </div>
+              <div class="tag-virtual">산출: 자료 묶음</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">2단계</div>
+                <div class="card-title" style="font-size:21px;">사실 추출</div>
+                <div class="card-desc" style="font-size:16px;">수치·단위·원문 근거 위치만 정확히 추출</div>
+              </div>
+              <div class="tag-virtual">산출: 출처가 있는 표</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">3단계</div>
+                <div class="card-title" style="font-size:21px;">비교표 작성</div>
+                <div class="card-desc" style="font-size:16px;">기준 차이 표시 및 사실·해석 분리</div>
+              </div>
+              <div class="tag-virtual">산출: 비교 가능성 표시</div>
+            </div>
+            <div class="card highlight">
+              <div>
+                <div class="card-step-num">4단계</div>
+                <div class="card-title" style="font-size:21px;">원문 대조</div>
+                <div class="card-desc" style="font-size:16px;">핵심 수치 2개를 골라 원문과 직접 대조</div>
+              </div>
+              <div class="tag-virtual" style="background:var(--navy); color:var(--teal);">산출: 수정된 결과</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">5단계</div>
+                <div class="card-title" style="font-size:21px;">경영 질문</div>
+                <div class="card-desc" style="font-size:16px;">추가 확인이 필요한 핵심 경영 질문 도출</div>
+              </div>
+              <div class="tag-virtual">산출: 질문 3개</div>
+            </div>
+          </div>
+        `
+      },
+      // 19. 1단계: 자료 준비
+      {
+        page: 19,
+        theme: 'white',
+        moduleCode: 'MODULE 03',
+        moduleName: 'AI 비교 브리핑 초안',
+        journeyActive: ['d', 'a'],
+        title: '1단계: AI에 전달할 자료를 준비합니다',
+        lead: '검증된 공개 공시 발췌본을 열고 회사명과 보고기간을 먼저 확인합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 업로드 불가 시 대안',
+          title: '파일 업로드가 불가능할 때의 입력 방법',
+          html: `
+            <p>사내 네트워크나 계정 정책상 파일 첨부가 제한되는 경우:</p>
+            <div style="margin-top:16px; padding:18px; background:var(--gray-50); border-left:4px solid var(--teal); border-radius:6px;">
+              강사가 제공한 <strong>공개 발췌문을 회사별로 나누어 복사·붙여넣기</strong> 하고, 상단에 <strong>[자료명 · 회사명 · 보고기간]</strong>을 함께 적어 입력합니다.<br><br>
+              입력 가능한 텍스트 분량과 화면 구성은 사용하시는 AI 도구의 안내를 따릅니다.
+            </div>
+          `
+        },
+        render: () => `
+          <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; gap:20px;">
+            <div class="grid-4" style="flex:1;">
+              <div class="card">
+                <div class="card-step-num">① 열기</div>
+                <div class="card-title">공시 발췌본 열기</div>
+                <div class="card-desc">제공된 회사별 공개 공시 발췌본 파일을 엽니다.</div>
+              </div>
+              <div class="card">
+                <div class="card-step-num">② 확인</div>
+                <div class="card-title">회사명·기간 확인</div>
+                <div class="card-desc">상단에 기재된 회사명과 대상 보고기간을 눈으로 확인합니다.</div>
+              </div>
+              <div class="card">
+                <div class="card-step-num">③ 입력</div>
+                <div class="card-title">자료 첨부 또는 입력</div>
+                <div class="card-desc">자료를 AI 대화창에 첨부하거나 안내된 발췌문을 붙여넣습니다.</div>
+              </div>
+              <div class="card highlight">
+                <div class="card-step-num">④ 준비</div>
+                <div class="card-title">질문 입력 준비</div>
+                <div class="card-desc">다음 화면(20p)의 프롬프트를 복사해 실습 질문을 넣습니다.</div>
+              </div>
+            </div>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>완료 표시: 회사명 · 보고기간 · 자료 위치를 모두 확인했습니다.</span>
+            </label>
+          </div>
+        `
+      },
+      // 20. 2단계: 사실 추출
+      {
+        page: 20,
+        theme: 'white',
+        moduleCode: 'MODULE 03',
+        moduleName: 'AI 비교 브리핑 초안',
+        journeyActive: ['a'],
+        title: '2단계: 자료에서 질문에 필요한 사실만 찾습니다',
+        lead: 'AI가 회사명, 기간, 항목, 수치, 단위와 근거 위치를 함께 정리하도록 요청합니다. 없는 내용은 추정하지 않도록 조건을 넣습니다.',
+        popup: {
+          type: 'check',
+          label: '실습 확인',
+          title: '2단계 결과 점검 포인트',
+          html: `
+            <p>AI가 출력한 표에 다음 항목이 모두 포함되어 있는지 확인하세요:</p>
+            <ul style="margin-top:14px; margin-left:24px; display:flex; flex-direction:column; gap:10px;">
+              <li><strong>회사명, 보고기간, 단위</strong>가 누락 없이 적혀 있는가?</li>
+              <li>각 수치마다 <strong>문서명과 원문 근거 위치(목차/표 제목)</strong>가 적혀 있는가?</li>
+              <li>자료에 없는 내용을 임의로 추정하지 않고 <strong>‘확인 필요’</strong>로 표시했는가?</li>
+            </ul>
+            <p style="margin-top:16px; color:var(--teal-dark); font-weight:700;">👉 출처가 빠져 있다면 “각 수치의 원문 위치를 다시 표시해 주세요”라고 추가 요청합니다.</p>
+          `
+        },
+        render: () => `
+          <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; gap:20px;">
+            <div class="prompt-container">
+              <div class="prompt-header">
+                <span class="prompt-label">📋 실습 프롬프트 — 사실 및 출처 추출</span>
+                <button class="copy-btn" onclick="copyPromptText(this, '제공된 공시자료만 사용해 [경영 질문]에 필요한 정보를 추출해 주세요. 회사명, 보고기간, 항목명, 수치, 단위, 문서명과 근거 위치를 표로 제시해 주세요. 확인되지 않는 내용은 추정하지 말고 \\'확인 필요\\'라고 표시해 주세요.')">프롬프트 복사</button>
+              </div>
+              <div class="prompt-text">제공된 공시자료만 사용해 [경영 질문]에 필요한 정보를 추출해 주세요. 회사명, 보고기간, 항목명, 수치, 단위, 문서명과 근거 위치를 표로 제시해 주세요. 확인되지 않는 내용은 추정하지 말고 '확인 필요'라고 표시해 주세요.</div>
+            </div>
+            <div class="grid-3">
+              <div class="card" style="padding:18px;">
+                <div class="card-title" style="font-size:19px;">핵심 조건 1: 제공 자료 한정</div>
+                <div class="card-desc" style="font-size:16px;">외부 인터넷의 부정확한 기억이 섞이지 않도록 ‘제공된 공시자료만 사용’하도록 제한합니다.</div>
+              </div>
+              <div class="card" style="padding:18px;">
+                <div class="card-title" style="font-size:19px;">핵심 조건 2: 근거 위치 강제</div>
+                <div class="card-desc" style="font-size:16px;">나중에 원문 대조를 빠르게 수행할 수 있도록 문서명과 위치를 표에 함께 요구합니다.</div>
+              </div>
+              <div class="card" style="padding:18px;">
+                <div class="card-title" style="font-size:19px;">핵심 조건 3: 추정 금지</div>
+                <div class="card-desc" style="font-size:16px;">자료에 없는 항목을 그럴듯하게 계산하거나 추측하지 않고 ‘확인 필요’로 남기게 합니다.</div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 21. 3단계: 비교표 만들기
+      {
+        page: 21,
+        theme: 'white',
+        moduleCode: 'MODULE 03',
+        moduleName: 'AI 비교 브리핑 초안',
+        journeyActive: ['a'],
+        title: '3단계: 회사별 내용을 같은 기준으로 정리합니다',
+        lead: '앞서 추출한 사실을 바탕으로 회사 간 비교표를 만들고, 기준 차이나 비교 불가 사유를 명시하게 합니다.',
+        popup: {
+          type: 'check',
+          label: '실습 확인',
+          title: '3단계 비교표 점검 포인트',
+          html: `
+            <ul style="margin-left:24px; display:flex; flex-direction:column; gap:12px;">
+              <li>비교표의 같은 행(Row)에 놓인 수치가 실제로 <strong>동일한 정의의 항목</strong>을 뜻하는지 확인합니다.</li>
+              <li>두 회사의 <strong>단위(억원/백만원 등)와 연결·별도 기준</strong>이 통일되었는지 확인합니다.</li>
+              <li>직접 비교가 보류된 항목에 <strong>구체적인 이유</strong>가 적혀 있는지 확인합니다.</li>
+            </ul>
+          `
+        },
+        render: () => `
+          <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; gap:20px;">
+            <div class="grid-3">
+              <div class="card" style="padding:18px;">
+                <div class="card-title" style="font-size:19px;">① 추출표 확인</div>
+                <div class="card-desc" style="font-size:16px;">2단계에서 나온 회사별 추출 결과와 출처 표기를 먼저 살펴봅니다.</div>
+              </div>
+              <div class="card" style="padding:18px;">
+                <div class="card-title" style="font-size:19px;">② 같은 대화창에 입력</div>
+                <div class="card-desc" style="font-size:16px;">새 창을 열지 않고 이어서 아래 비교표 요청 프롬프트를 입력합니다.</div>
+              </div>
+              <div class="card highlight" style="padding:18px;">
+                <div class="card-title" style="font-size:19px;">③ 비교 가능 여부 확인</div>
+                <div class="card-desc" style="font-size:16px;">억지로 맞춘 항목이 없는지 기준 차이와 출처를 점검합니다.</div>
+              </div>
+            </div>
+            <div class="prompt-container">
+              <div class="prompt-header">
+                <span class="prompt-label">📋 실습 프롬프트 — 기준 검증 비교표 작성</span>
+                <button class="copy-btn" onclick="copyPromptText(this, '앞서 추출한 항목을 회사별 비교표로 정리해 주세요. 보고기간, 연결·별도, 단위와 항목 정의가 다르면 차이를 표시해 주세요. 직접 비교하기 어려운 항목은 이유를 적고 억지로 맞추지 마세요. 각 수치의 출처도 함께 제시해 주세요.')">프롬프트 복사</button>
+              </div>
+              <div class="prompt-text">앞서 추출한 항목을 회사별 비교표로 정리해 주세요. 보고기간, 연결·별도, 단위와 항목 정의가 다르면 차이를 표시해 주세요. 직접 비교하기 어려운 항목은 이유를 적고 억지로 맞추지 마세요. 각 수치의 출처도 함께 제시해 주세요.</div>
+            </div>
+          </div>
+        `
+      },
+      // 22. 4단계: 사실과 해석 나누기
+      {
+        page: 22,
+        theme: 'white',
+        moduleCode: 'MODULE 03',
+        moduleName: 'AI 비교 브리핑 초안',
+        journeyActive: ['a'],
+        title: '4단계: 무엇을 확인했고, 무엇을 더 알아야 할까요?',
+        lead: '비교 결과를 ① 확인된 사실 ② 가능한 해석·가설 ③ 추가 확인 사항의 세 가지 범주로 분리합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 해석 문장 검토 유의사항',
+          title: '해석과 가설을 검토할 때 유의할 점',
+          html: `
+            <p>AI가 제시하는 해석 예시에는 <strong>‘~할 가능성이 있다’</strong>라는 표현과 함께 <strong>‘이를 확인하기 위해 필요한 자료’</strong>를 반드시 짝지어 제시하도록 합니다.</p>
+            <div style="margin-top:16px; padding:16px; background:var(--amber-bg); border-radius:8px; color:var(--amber); font-weight:700;">
+              ⚠️ 주의: 문장 끝에 ‘가능성이 있다’라는 표현을 붙였다고 해서 근거가 자동으로 검증되는 것은 아닙니다. 실제 내부 자료로 확인하기 전까지는 가설로만 다룹니다.
+            </div>
+          `
+        },
+        render: () => `
+          <div class="grid-2" style="grid-template-columns: 1.15fr 1fr;">
+            <div class="prompt-container" style="justify-content:center;">
+              <div class="prompt-header">
+                <span class="prompt-label">📋 실습 프롬프트 — 사실 · 해석 · 확인 필요 분리</span>
+                <button class="copy-btn" onclick="copyPromptText(this, '비교 결과를 ① 자료에서 확인된 사실 ② 가능한 해석 또는 가설 ③ 추가 확인이 필요한 사항으로 나누어 주세요. 원인을 자료만으로 확정할 수 없는 경우 그렇게 명시하고, 확인을 위해 필요한 자료를 제안해 주세요.')">프롬프트 복사</button>
+              </div>
+              <div class="prompt-text">비교 결과를 ① 자료에서 확인된 사실 ② 가능한 해석 또는 가설 ③ 추가 확인이 필요한 사항으로 나누어 주세요. 원인을 자료만으로 확정할 수 없는 경우 그렇게 명시하고, 확인을 위해 필요한 자료를 제안해 주세요.</div>
+            </div>
+            <div class="card">
+              <div class="card-title">📐 결과 출력 형태 구조 예시 (내용 무관)</div>
+              <div style="display:flex; flex-direction:column; gap:12px; margin-top:10px; font-size:17px;">
+                <div style="padding:12px; background:var(--gray-50); border-left:4px solid var(--navy); border-radius:4px;">
+                  <strong>① 확인된 사실 (Fact)</strong><br>
+                  “[문서명·위치] 기준 A항목은 당사 OO단위, 비교사 OO단위로 확인됨.”
+                </div>
+                <div style="padding:12px; background:var(--gray-50); border-left:4px solid var(--teal); border-radius:4px;">
+                  <strong>② 가능한 해석·가설 (Hypothesis)</strong><br>
+                  “부문 구성 비중에 따른 차이일 가능성이 있으나, 공개 공시만으로는 원인을 확정할 수 없음.”
+                </div>
+                <div style="padding:12px; background:var(--teal-bg); border-left:4px solid var(--teal-dark); border-radius:4px;">
+                  <strong>③ 추가 확인 필요 (To Verify)</strong><br>
+                  “세부 항목 분류 기준과 관련하여 내부 [OO자료] 추가 확인 필요.”
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 23. 5단계: 원문과 대조
+      {
+        page: 23,
+        theme: 'white',
+        moduleCode: 'MODULE 03',
+        moduleName: 'AI 비교 브리핑 초안',
+        journeyActive: ['d', 'a'],
+        title: '5단계: AI 결과에서 두 개의 수치와 출처를 확인합니다',
+        lead: '모든 숫자를 다 볼 수는 없어도, 가장 핵심이 되는 수치 2개는 반드시 원문 발췌본과 직접 대조합니다.',
+        popup: {
+          type: 'check',
+          label: '실습 확인',
+          title: '원문 대조 시 주의사항',
+          html: `
+            <p>AI가 표에 그럴듯하게 적어준 페이지 번호나 표 제목도 실제 원문과 다를 수 있습니다.</p>
+            <p style="margin-top:12px;">반드시 <strong>제공된 원문 발췌본을 직접 열어 숫자·단위·기간이 일치하는지 눈으로 확인</strong>합니다. 시간 내에 확인이 끝나지 않은 항목은 보드에 <strong>‘확인 필요’</strong> 상태로 유지합니다.</p>
+          `
+        },
+        render: () => `
+          <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; gap:20px;">
+            <div class="grid-4">
+              <div class="card" style="padding:18px;">
+                <div class="card-step-num">① 선택</div>
+                <div class="card-title" style="font-size:20px;">두 항목 고르기</div>
+                <div class="card-desc" style="font-size:16px;">비교표에서 가장 중요하게 다룰 핵심 수치 두 항목을 고릅니다.</div>
+              </div>
+              <div class="card" style="padding:18px;">
+                <div class="card-step-num">② 열기</div>
+                <div class="card-title" style="font-size:20px;">원문 위치 열기</div>
+                <div class="card-desc" style="font-size:16px;">표시된 보고서 발췌본의 해당 목차와 표 위치를 직접 엽니다.</div>
+              </div>
+              <div class="card" style="padding:18px;">
+                <div class="card-step-num">③ 대조</div>
+                <div class="card-title" style="font-size:20px;">숫자·단위·기간 대조</div>
+                <div class="card-desc" style="font-size:16px;">원문의 숫자, 단위, 당기/전기 기간이 일치하는지 비교합니다.</div>
+              </div>
+              <div class="card highlight" style="padding:18px;">
+                <div class="card-step-num">④ 정정</div>
+                <div class="card-title" style="font-size:20px;">재검토 요청</div>
+                <div class="card-desc" style="font-size:16px;">다르거나 위치가 불명확하면 아래 프롬프트로 정정을 요청합니다.</div>
+              </div>
+            </div>
+            <div class="prompt-container">
+              <div class="prompt-header">
+                <span class="prompt-label">📋 실습 프롬프트 — 원문 위치 및 수치 재확인 요청</span>
+                <button class="copy-btn" onclick="copyPromptText(this, '다음 항목의 원문 위치, 보고기간과 단위를 다시 확인해 주세요. [확인할 항목] 제공 자료에서 위치를 찾지 못하면 찾지 못했다고 표시해 주세요.')">프롬프트 복사</button>
+              </div>
+              <div class="prompt-text">다음 항목의 원문 위치, 보고기간과 단위를 다시 확인해 주세요. [확인할 항목] 제공 자료에서 위치를 찾지 못하면 찾지 못했다고 표시해 주세요.</div>
+            </div>
+          </div>
+        `
+      },
+      // 24. 6단계: 경영 질문 도출
+      {
+        page: 24,
+        theme: 'white',
+        moduleCode: 'MODULE 03',
+        moduleName: 'AI 비교 브리핑 초안',
+        journeyActive: ['a', 't'],
+        title: '6단계: 비교 결과를 다음 질문으로 연결합니다',
+        lead: '공개자료 비교로 확인된 사실과 한계를 바탕으로, 내부 부서에 추가로 물어볼 경영 질문 3개를 도출합니다.',
+        bottomMsg: '완료 표시: 검토한 비교표, 확인 필요 항목, 경영 질문을 모듈 4 보드 제작에 사용합니다.',
+        render: () => `
+          <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; gap:20px;">
+            <div class="grid-3">
+              <div class="card" style="padding:18px;">
+                <div class="card-step-num">① 사실 선택</div>
+                <div class="card-title" style="font-size:20px;">확인된 사실 선택</div>
+                <div class="card-desc" style="font-size:16px;">원문 대조를 마친 가장 의미 있는 비교 사실을 선택합니다.</div>
+              </div>
+              <div class="card" style="padding:18px;">
+                <div class="card-step-num">② 공백 파악</div>
+                <div class="card-title" style="font-size:20px;">추가 필요 자료 구상</div>
+                <div class="card-desc" style="font-size:16px;">공시만으로는 알 수 없는 내부 기준이나 세부 데이터를 생각합니다.</div>
+              </div>
+              <div class="card highlight" style="padding:18px;">
+                <div class="card-step-num">③ 질문 생성</div>
+                <div class="card-title" style="font-size:20px;">내부 확인 질문 도출</div>
+                <div class="card-desc" style="font-size:16px;">원인을 성급히 단정하지 않고 현업에 확인을 요청할 질문을 만듭니다.</div>
+              </div>
+            </div>
+            <div class="prompt-container">
+              <div class="prompt-header">
+                <span class="prompt-label">📋 실습 프롬프트 — 경영진 추가 확인 질문 3개 도출</span>
+                <button class="copy-btn" onclick="copyPromptText(this, '확인된 사실과 비교의 한계를 바탕으로 경영진이 물어볼 추가 확인 질문 3개를 제안해 주세요. 각 질문이 필요한 이유와 필요한 추가 자료를 함께 제시하되, 내부 상황이나 원인을 단정하지 마세요.')">프롬프트 복사</button>
+              </div>
+              <div class="prompt-text">확인된 사실과 비교의 한계를 바탕으로 경영진이 물어볼 추가 확인 질문 3개를 제안해 주세요. 각 질문이 필요한 이유와 필요한 추가 자료를 함께 제시하되, 내부 상황이나 원인을 단정하지 마세요.</div>
+            </div>
+          </div>
+        `
+      },
+      // 25. 실습 후 점검
+      {
+        page: 25,
+        theme: 'white',
+        moduleCode: 'MODULE 03',
+        moduleName: 'AI 비교 브리핑 초안',
+        journeyActive: ['a'],
+        title: '브리핑 초안을 만들었습니다',
+        lead: '휴식 전, 내 대화창에 정리된 브리핑 초안이 네 가지 기준을 충족하는지 체크해 보세요.',
+        popup: {
+          type: 'check',
+          label: '실습 확인',
+          title: '미비 항목 보완 안내',
+          html: `
+            <p>체크되지 않은 빠진 항목이 있으면 같은 대화창에서 AI에게 수정을 요청합니다.</p>
+            <p style="margin-top:12px;">시간 내에 원문 확인이 어려운 수치가 있다면 삭제하거나 억지로 확정하지 말고 <strong>‘확인 필요’</strong>로 남겨둡니다. 휴식 후 이어지는 모듈 4에서는 이 결과를 한눈에 보는 브리핑 보드 화면으로 구성합니다.</p>
+          `
+        },
+        render: () => `
+          <div class="grid-2x2">
+            <label class="check-item" style="font-size:23px; padding:26px;">
+              <input type="checkbox">
+              <div>
+                <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 01</div>
+                질문과 사용한 자료 범위가 명확히 보인다
+              </div>
+            </label>
+            <label class="check-item" style="font-size:23px; padding:26px;">
+              <input type="checkbox">
+              <div>
+                <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 02</div>
+                주요 수치마다 문서명과 근거 위치가 있다
+              </div>
+            </label>
+            <label class="check-item" style="font-size:23px; padding:26px;">
+              <input type="checkbox">
+              <div>
+                <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 03</div>
+                확인된 사실과 가능한 해석이 명확히 분리된다
+              </div>
+            </label>
+            <label class="check-item" style="font-size:23px; padding:26px;">
+              <input type="checkbox">
+              <div>
+                <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 04</div>
+                내부에 물어볼 추가 확인 질문 3개가 있다
+              </div>
+            </label>
+          </div>
+        `
+      },
+      // 26. 휴식 (1)
+      {
+        page: 26,
+        theme: 'white',
+        type: 'break',
+        moduleCode: 'BREAK TIME',
+        moduleName: '휴식 (10분)',
+        title: '10분 휴식',
+        nextInfo: '다음: 모듈 4 — 검토한 비교 내용을 경영 브리핑 보드로 만들기 (60분)'
+      },
+      // 27. 모듈 4 간지
+      {
+        page: 27,
+        theme: 'navy',
+        type: 'divider',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작 (60분)',
+        title: '경영 브리핑 보드 만들기',
+        question: '내가 확인할 정보와 필요한 기능을 자연어로 설명합니다.',
+        activeCoverFlow: 3
+      },
+      // 28. 보드는 무엇을 보여주는가
+      {
+        page: 28,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b'],
+        title: '한 화면에서 질문, 근거, 다음 행동을 봅니다',
+        lead: '앞에서 검토한 공시 비교 결과를 경영진이 다시 확인하고 논의할 수 있는 화면으로 구성합니다.',
+        bottomMsg: '모형 데이터는 교육용 가상 구조 표시입니다. 추후 검증된 자료로 만든 실제 완성 화면을 활용합니다.',
+        render: () => `
+          <div style="border:3px solid var(--navy); border-radius:14px; padding:20px; background:var(--gray-50); height:100%; display:flex; flex-direction:column; justify-content:space-between; gap:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:var(--navy); color:var(--white); padding:14px 20px; border-radius:8px;">
+              <div>
+                <span class="module-badge" style="background:var(--teal); color:var(--navy); margin-right:10px;">① 질문 · 기준일</span>
+                <strong style="font-size:19px;">[경영 질문 제목 영역] · 기준일: [확정 필요]</strong>
+              </div>
+              <span class="tag-virtual">교육용 가상 화면 구조 모형</span>
+            </div>
+            <div class="grid-3" style="flex:1;">
+              <div class="card" style="padding:16px;">
+                <div>
+                  <span class="card-step-num" style="width:auto; padding:0 10px;">② 핵심 비교표</span>
+                  <div class="card-title" style="font-size:18px;">회사별 기준 검증 비교</div>
+                  <div class="card-desc" style="font-size:15px;">당사 vs 비교사 수치, 단위, 연결·별도 기준 및 비교 보류 사유 표시 영역</div>
+                </div>
+                <div class="tag-tbd">[데이터 빈 영역 / 교육용 모형]</div>
+              </div>
+              <div class="card" style="padding:16px;">
+                <div>
+                  <span class="card-step-num" style="width:auto; padding:0 10px;">③ 확인된 사실 & ④ 해석·확인 필요</span>
+                  <div class="card-title" style="font-size:18px;">사실과 가설의 시각적 분리</div>
+                  <div class="card-desc" style="font-size:15px;">• 확인된 사실 (원문 근거)<br>• 가능한 해석 (단정 금지)<br>• <strong style="color:var(--amber);">확인 필요 항목 강조 표시</strong></div>
+                </div>
+                <div class="tag-tbd">[사실/해석 분리 표시 영역]</div>
+              </div>
+              <div class="card highlight" style="padding:16px;">
+                <div>
+                  <span class="card-step-num" style="width:auto; padding:0 10px;">⑤ 경영 질문 (Next Action)</span>
+                  <div class="card-title" style="font-size:18px;">내부 부서 추가 확인 질문 3선</div>
+                  <div class="card-desc" style="font-size:15px;">질문 이유와 추가로 확인해야 할 내부 자료 목록을 카드 형태로 배치</div>
+                </div>
+                <div class="tag-virtual">부서 실행 과제로 연결</div>
+              </div>
+            </div>
+            <div style="background:var(--white); border:1px solid var(--gray-300); padding:10px 18px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:15px;">
+              <span><strong>⑥ 출처 (Source):</strong> [공시 문서명 · 보고기간 · 원문 목차 및 표 위치 명시 영역]</span>
+              <span style="color:var(--gray-600);">단일 로컬 HTML 파일</span>
+            </div>
+          </div>
+        `
+      },
+      // 29. 제작 전 이해하기
+      {
+        page: 29,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b'],
+        title: 'HTML 파일은 브라우저에서 여는 하나의 화면입니다',
+        lead: 'AI가 화면을 구성하는 내용을 작성하면, 이를 HTML 파일로 저장해 브라우저에서 확인할 수 있습니다. 오늘은 자료를 검토하고 원하는 화면을 설명하는 데 집중합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 로컬 실행 및 보안 환경',
+          title: '교육용 HTML 보드의 실행 원리와 주의사항',
+          html: `
+            <p>오늘 만드는 교육용 브리핑 보드는 <strong>내 PC(로컬 브라우저)에서 단독으로 열리는 파일</strong>입니다.</p>
+            <ul style="margin-top:14px; margin-left:24px; display:flex; flex-direction:column; gap:10px;">
+              <li>AI에게 자료를 입력해 코드를 생성하는 단계와, 저장된 HTML 파일을 브라우저로 여는 단계는 별개입니다.</li>
+              <li>외부 인터넷 라이브러리나 API 호출 없이 동작하도록 제작합니다.</li>
+              <li>실제 현업에서 민감 데이터를 다루거나 전사 공동 저장소로 운영할 때는 사내 보안 및 IT 환경 검토가 별도로 필요합니다.</li>
+            </ul>
+          `
+        },
+        render: () => `
+          <div class="grid-4" style="align-items:center;">
+            <div class="card" style="height:85%;">
+              <div>
+                <div class="card-step-num">STEP 1</div>
+                <div class="card-title">요청하기</div>
+                <div class="card-desc" style="margin-top:10px;">검토한 비교 내용과 원하는 화면 구성을 자연어로 AI에게 요청합니다.</div>
+              </div>
+              <div style="font-size:32px; text-align:right;">💬</div>
+            </div>
+            <div class="card" style="height:85%;">
+              <div>
+                <div class="card-step-num">STEP 2</div>
+                <div class="card-title">결과 복사</div>
+                <div class="card-desc" style="margin-top:10px;">AI가 작성한 단일 HTML 코드 블록 전체를 복사합니다.</div>
+              </div>
+              <div style="font-size:32px; text-align:right;">📋</div>
+            </div>
+            <div class="card" style="height:85%;">
+              <div>
+                <div class="card-step-num">STEP 3</div>
+                <div class="card-title">파일 저장</div>
+                <div class="card-desc" style="margin-top:10px;">텍스트 편집기에 붙여넣고 <strong>브리핑보드.html</strong>로 저장합니다.</div>
+              </div>
+              <div style="font-size:32px; text-align:right;">💾</div>
+            </div>
+            <div class="card highlight" style="height:85%;">
+              <div>
+                <div class="card-step-num">STEP 4</div>
+                <div class="card-title">브라우저에서 열기</div>
+                <div class="card-desc" style="margin-top:10px;">저장한 파일을 더블클릭하여 크롬/엣지 브라우저 화면으로 확인합니다.</div>
+              </div>
+              <div style="font-size:32px; text-align:right;">🖥️</div>
+            </div>
+          </div>
+        `
+      },
+      // 30. 1단계: 보드에 넣을 내용 고르기
+      {
+        page: 30,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b'],
+        title: '1단계: 무엇을 가장 먼저 볼 수 있어야 할까요?',
+        lead: '화면을 복잡하게 채우지 않고, 경영진이 가장 먼저 봐야 할 핵심 사실 1~2개와 질문을 고릅니다.',
+        bottomMsg: '모르는 값은 채우지 않고 ‘확인 필요’로 남깁니다.',
+        popup: {
+          type: 'ex',
+          label: '작성 예시 (가상 구조)',
+          title: '교육용 가상 구조 작성 예시 (특정 공시 수치 무관)',
+          html: `
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <div><span class="tag-virtual">교육용 가상 구조 예시</span></div>
+              <p><strong>• 핵심 질문:</strong> 특정 영업 부문의 당사·비교사 차이는 무엇이며, 산출 기준은 동일한가?</p>
+              <p><strong>• 꼭 보여줄 사실:</strong> 원자료에서 직접 확인한 두 회사의 당기 수치 및 단위</p>
+              <p><strong>• 추가 확인:</strong> 양사 부문 분류 시 포함되는 세부 항목 정의 차이 (확인 필요)</p>
+              <p><strong>• 출처:</strong> 각 사 정기보고서 문서명, 기준일, 원문 목차 번호</p>
+            </div>
+          `
+        },
+        render: () => `
+          <div class="grid-2" style="grid-template-columns: 0.9fr 1.3fr;">
+            <div class="card">
+              <div>
+                <div class="card-title">진행 순서</div>
+                <div style="display:flex; flex-direction:column; gap:16px; margin-top:16px; font-size:18px;">
+                  <div><strong>① 비교표 확인:</strong> 모듈 3에서 검토한 비교표를 다시 확인합니다.</div>
+                  <div><strong>② 핵심 사실 선택:</strong> 가장 중요한 사실 1~2개만 고릅니다.</div>
+                  <div><strong>③ 질문과 출처 선택:</strong> 추가 확인 질문과 원문 출처를 선택합니다.</div>
+                </div>
+              </div>
+              <div class="tag-virtual">핵심에 집중할수록 브리핑이 명확해집니다</div>
+            </div>
+            <div class="card" style="gap:12px;">
+              <div class="input-field-group">
+                <label>① 핵심 질문</label>
+                <input type="text" class="slide-input" placeholder="보드 상단에 표시할 핵심 경영 질문">
+              </div>
+              <div class="input-field-group">
+                <label>② 꼭 보여줄 사실 (1~2개)</label>
+                <input type="text" class="slide-input" placeholder="원문에서 확인한 핵심 비교 사실">
+              </div>
+              <div class="input-field-group">
+                <label>③ 추가 확인 사항 (모르는 값은 '확인 필요'로 유지)</label>
+                <input type="text" class="slide-input" placeholder="내부 자료로 추가 확인해야 할 질문">
+              </div>
+              <div class="input-field-group">
+                <label>④ 출처 (문서명과 원문 위치)</label>
+                <input type="text" class="slide-input" placeholder="예: OO보고서, 기준일, 목차 위치">
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 31. 2단계: 화면 요구사항 정리
+      {
+        page: 31,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b'],
+        title: '2단계: AI에게 화면의 목적과 구성을 알려줍니다',
+        lead: '먼저 필요한 내용을 정하고, 이후 보기 편한 구성과 기능을 요청합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 기능 예시 및 한계',
+          title: '요청 가능한 화면 기능 예시와 유의사항',
+          html: `
+            <p><strong>요청 가능한 화면 기능 예시:</strong></p>
+            <ul style="margin-top:10px; margin-left:24px; display:flex; flex-direction:column; gap:8px;">
+              <li>회사별 탭 전환 보기 또는 나란히 비교 보기</li>
+              <li>‘확인 필요’ 항목만 노란색 배지로 눈에 띄게 강조 표시</li>
+              <li>각 수치 옆에 원문 출처 위치 툴팁 또는 하단 출처표 고정</li>
+            </ul>
+            <div style="margin-top:16px; padding:14px; background:var(--gray-100); border-radius:8px; font-size:17px;">
+              * 안내: 로컬 HTML 파일에서 체크박스를 클릭한 상태가 사내 공동 업무 시스템에 자동 저장되는 것은 아닙니다.
+            </div>
+          `
+        },
+        render: () => `
+          <div class="card" style="height:100%; justify-content:space-around;">
+            <div class="card-title">🛠️ 브리핑 보드 화면 요구사항 설계 템플릿 (항목을 클릭해 강조해 보세요)</div>
+            <div class="grid-5" style="height:auto; gap:14px;">
+              <div class="req-box">
+                <div style="font-size:15px; font-weight:800; color:var(--teal-dark);">01. 사용자</div>
+                <div style="font-size:21px; font-weight:800; color:var(--navy); margin-top:8px;">경영진</div>
+                <p style="font-size:15px; color:var(--gray-600); margin-top:6px;">빠른 핵심 파악과 의사결정 질문 도출</p>
+              </div>
+              <div class="req-box">
+                <div style="font-size:15px; font-weight:800; color:var(--teal-dark);">02. 목적</div>
+                <div style="font-size:21px; font-weight:800; color:var(--navy); margin-top:8px;">[질문 확인]</div>
+                <p style="font-size:15px; color:var(--gray-600); margin-top:6px;">경쟁사 비교 사실 확인 및 후속 질문 점검</p>
+              </div>
+              <div class="req-box">
+                <div style="font-size:15px; font-weight:800; color:var(--teal-dark);">03. 필수 영역</div>
+                <div style="font-size:20px; font-weight:800; color:var(--navy); margin-top:8px;">비교표·사실·질문·출처</div>
+                <p style="font-size:15px; color:var(--gray-600); margin-top:6px;">4대 핵심 영역을 한 화면에 구분 배치</p>
+              </div>
+              <div class="req-box active-box">
+                <div style="font-size:15px; font-weight:800; color:var(--teal-dark);">04. 원하는 기능 1개</div>
+                <input type="text" class="slide-input" style="margin-top:8px; font-size:15px;" value="확인 필요 항목 강조 표시">
+                <p style="font-size:14px; color:var(--gray-600); margin-top:6px;">원하는 편의 기능 1개 선택</p>
+              </div>
+              <div class="req-box">
+                <div style="font-size:15px; font-weight:800; color:var(--teal-dark);">05. 표시 조건</div>
+                <div style="font-size:21px; font-weight:800; color:var(--navy); margin-top:8px;">큰 글씨 · 기준일 명시</div>
+                <p style="font-size:15px; color:var(--gray-600); margin-top:6px;">가독성 높은 레이아웃과 기준일 상단 고정</p>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 32. 3단계: HTML 생성 요청
+      {
+        page: 32,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b'],
+        title: '3단계: 검토한 브리핑으로 화면을 만듭니다',
+        lead: '모듈 3을 진행한 같은 대화창에 아래 프롬프트를 입력해 단일 HTML 코드 생성을 요청합니다.',
+        popup: {
+          type: 'check',
+          label: '실습 확인',
+          title: 'HTML 코드 생성 확인',
+          html: `
+            <ul style="margin-left:24px; display:flex; flex-direction:column; gap:12px;">
+              <li>AI의 답변이 일반 텍스트가 아니라 <strong>HTML 코드 블록(<code>&lt;!DOCTYPE html&gt;</code>로 시작)</strong>인지 확인합니다.</li>
+              <li>출력 도중 답변이 중간에 끊기면 <strong>“이어서 끝까지 작성해 주세요”</strong>라고 요청합니다.</li>
+              <li>시작 태그(<code>&lt;!DOCTYPE html&gt;</code>)부터 끝 태그(<code>&lt;/html&gt;</code>)까지 온전히 생성되었는지 확인합니다.</li>
+            </ul>
+          `
+        },
+        render: () => `
+          <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; gap:18px;">
+            <div class="prompt-container">
+              <div class="prompt-header">
+                <span class="prompt-label">📋 실습 프롬프트 — 경영진용 단일 HTML 브리핑 보드 생성</span>
+                <button class="copy-btn" onclick="copyPromptText(this, '앞서 검토한 공시 비교 내용을 바탕으로 경영진용 브리핑 보드를 만들어 주세요. 브라우저에서 열 수 있는 단일 HTML 파일로 작성하고 외부 라이브러리·폰트·API 호출 없이 동작하게 해 주세요. 분석 질문과 기준일, 비교표, 확인된 사실, 해석과 확인 필요 사항, 경영 질문, 출처를 구분해 주세요. 자료에 없는 수치나 원인을 만들지 말고 확인 필요로 표시해 주세요. 큰 글씨와 간결한 화면으로 구성해 주세요.')">프롬프트 복사</button>
+              </div>
+              <div class="prompt-text">앞서 검토한 공시 비교 내용을 바탕으로 경영진용 브리핑 보드를 만들어 주세요. 브라우저에서 열 수 있는 단일 HTML 파일로 작성하고 외부 라이브러리·폰트·API 호출 없이 동작하게 해 주세요. 분석 질문과 기준일, 비교표, 확인된 사실, 해석과 확인 필요 사항, 경영 질문, 출처를 구분해 주세요. 자료에 없는 수치나 원인을 만들지 말고 확인 필요로 표시해 주세요. 큰 글씨와 간결한 화면으로 구성해 주세요.</div>
+            </div>
+            <div class="grid-3">
+              <div class="card" style="padding:16px;">
+                <div class="card-title" style="font-size:19px;">① 같은 대화에 요청문 입력</div>
+                <div class="card-desc" style="font-size:16px;">앞서 검토한 공시 비교 맥락이 유지되도록 동일한 채팅창에 입력합니다.</div>
+              </div>
+              <div class="card" style="padding:16px;">
+                <div class="card-title" style="font-size:19px;">② 생성 완료까지 기다리기</div>
+                <div class="card-desc" style="font-size:16px;">코드가 끝까지 작성될 때까지 약 20~40초간 기다립니다.</div>
+              </div>
+              <div class="card highlight" style="padding:16px;">
+                <div class="card-title" style="font-size:19px;">③ HTML 코드 전체 확인</div>
+                <div class="card-desc" style="font-size:16px;">마지막 <code>&lt;/html&gt;</code>까지 정상 출력되었는지 확인합니다.</div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 33. 4단계: 코드 복사
+      {
+        page: 33,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b'],
+        title: '4단계: 생성된 HTML 코드를 복사합니다',
+        lead: '코드 블록 우측 상단의 복사 버튼을 클릭하거나 코드 영역 전체를 선택해 복사합니다.',
+        popup: {
+          type: 'check',
+          label: '실습 확인',
+          title: '코드 복사 시 주의사항',
+          html: `
+            <p><strong>코드 블록 바깥에 AI가 덧붙인 인사말이나 설명 문장은 제외</strong>하고 순수 HTML 코드만 복사합니다.</p>
+            <p style="margin-top:12px;">첫 줄의 <code>&lt;!DOCTYPE html&gt;</code>부터 마지막 줄의 <code>&lt;/html&gt;</code>까지 빠짐없이 복사되었는지 확인합니다.</p>
+          `
+        },
+        render: () => `
+          <div class="grid-2">
+            <div class="card">
+              <div>
+                <div class="card-title">화면 지시 (3단계)</div>
+                <div style="display:flex; flex-direction:column; gap:18px; margin-top:20px; font-size:20px;">
+                  <div><strong>① 코드 영역 찾기:</strong> AI 답변 중 어두운 배경의 코드 상자(<code>html</code>)를 찾습니다.</div>
+                  <div><strong>② 코드 복사 버튼 클릭:</strong> 코드 상자 우측 상단에 있는 <strong>[복사(Copy)]</strong> 아이콘을 클릭합니다.</div>
+                  <div><strong>③ 수동 선택 대안:</strong> 복사 버튼이 보이지 않으면 코드 시작부터 끝까지 마우스로 드래그하여 <code>Ctrl + C</code>를 누릅니다.</div>
+                </div>
+              </div>
+              <div class="tag-virtual">설명 문장은 빼고 코드만 복사합니다</div>
+            </div>
+            <div class="qr-placeholder-box" style="background:#0F172A; color:var(--white); border-color:var(--teal); align-items:stretch; text-align:left; justify-content:space-between;">
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px;">
+                <span style="color:var(--teal); font-family:monospace; font-weight:700;">html</span>
+                <span style="background:var(--teal); color:var(--navy); padding:6px 14px; border-radius:6px; font-weight:800; font-size:15px;">📋 코드 복사 버튼 위치</span>
+              </div>
+              <div style="font-family:monospace; font-size:16px; color:#CBD5E1; line-height:1.6;">
+                &lt;!DOCTYPE html&gt;<br>
+                &lt;html lang="ko"&gt;<br>
+                &lt;head&gt;<br>
+                &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+                &nbsp;&nbsp;&lt;title&gt;경영 브리핑 보드&lt;/title&gt;<br>
+                &nbsp;&nbsp;... (중략) ...<br>
+                &lt;/html&gt;
+              </div>
+              <div style="text-align:center;">
+                <span class="tag-tbd">[실제 교육용 AI 도구 확정 후 코드 영역 캡처 삽입 예정]</span>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 34. 5단계: 파일 저장
+      {
+        page: 34,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b'],
+        title: '5단계: 복사한 내용을 HTML 파일로 저장합니다',
+        lead: '교육용 텍스트 편집기(메모장 등)에 코드를 붙여넣고 확장자를 .html로 저장합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 편집기 저장 설정',
+          title: '교육 PC 환경별 저장 방법 안내',
+          html: `
+            <p>메모장(Notepad) 저장 시 <strong>[파일 형식]을 ‘모든 파일(*.*)’로 변경</strong>한 뒤 파일명을 <code>브리핑보드.html</code>로 입력해야 텍스트 문서(.txt)가 아닌 웹 문서(.html)로 저장됩니다.</p>
+            <p style="margin-top:12px; color:var(--amber); font-weight:700;">* 실제 저장 화면과 파일 형식 선택 방법은 교육장 PC에서 사전 확인한 캡처로 교체합니다.</p>
+          `
+        },
+        render: () => `
+          <div class="grid-4">
+            <div class="card">
+              <div class="card-step-num">① 열기</div>
+              <div class="card-title">텍스트 편집기 열기</div>
+              <div class="card-desc">바탕화면 또는 안내된 교육용 텍스트 편집기(메모장)를 엽니다.</div>
+            </div>
+            <div class="card">
+              <div class="card-step-num">② 붙여넣기</div>
+              <div class="card-title">코드 붙여넣기</div>
+              <div class="card-desc">빈 화면에 복사한 HTML 코드를 붙여넣습니다 (<code>Ctrl + V</code>).</div>
+            </div>
+            <div class="card highlight">
+              <div class="card-step-num">③ 저장하기</div>
+              <div class="card-title">'브리핑보드.html' 저장</div>
+              <div class="card-desc">안내된 교육 폴더에 파일 이름을 <strong>브리핑보드.html</strong>로 입력해 저장합니다.</div>
+            </div>
+            <div class="card">
+              <div class="card-step-num">④ 확장자 확인</div>
+              <div class="card-title">.html 끝자리 확인</div>
+              <div class="card-desc">파일 이름 끝이 <code>.html.txt</code>가 아닌 <strong><code>.html</code></strong>인지 확인합니다.</div>
+            </div>
+          </div>
+        `
+      },
+      // 35. 6단계: 브라우저에서 열기
+      {
+        page: 35,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b'],
+        title: '6단계: 내가 요청한 브리핑 화면을 확인합니다',
+        lead: '저장한 파일을 브라우저로 열어 질문, 비교표, 출처가 한눈에 들어오는지 확인합니다.',
+        popup: {
+          type: 'check',
+          label: '실습 확인 및 예비 자료 안내',
+          title: '화면이 정상적으로 보이지 않을 때의 해결책',
+          html: `
+            <ul style="margin-left:24px; display:flex; flex-direction:column; gap:12px;">
+              <li><strong>화면이 외계어 같은 코드로 그대로 보이면:</strong> 파일 확장자가 <code>.txt</code>로 저장된 것입니다. 이름 바꾸기로 끝을 <code>.html</code>로 변경합니다.</li>
+              <li><strong>빈 화면이거나 표가 깨져 보이면:</strong> 코드가 끝까지 복사·저장되었는지 확인합니다.</li>
+              <li><strong>즉시 해결이 어려우면:</strong> 지체하지 말고 교육 폴더에 사전 준비된 <strong>‘중간 결과물(예비 HTML 파일)’</strong>을 열어 다음 수정·검증 단계를 이어갑니다.</li>
+            </ul>
+          `
+        },
+        render: () => `
+          <div class="grid-4">
+            <div class="card">
+              <div class="card-step-num">① 파일 찾기</div>
+              <div class="card-title">저장한 파일 찾기</div>
+              <div class="card-desc">교육 폴더에 저장된 <code>브리핑보드.html</code> 아이콘(크롬/엣지 모양)을 찾습니다.</div>
+            </div>
+            <div class="card highlight">
+              <div class="card-step-num">② 열기</div>
+              <div class="card-title">브라우저로 열기</div>
+              <div class="card-desc">파일을 더블클릭하여 웹 브라우저 화면으로 엽니다.</div>
+            </div>
+            <div class="card">
+              <div class="card-step-num">③ 구성 확인</div>
+              <div class="card-title">질문·비교표·출처 확인</div>
+              <div class="card-desc">요청한 분석 질문, 비교표, 사실/해석, 출처가 모두 표시되는지 봅니다.</div>
+            </div>
+            <div class="card">
+              <div class="card-step-num">④ 오류 피드백</div>
+              <div class="card-title">문제 발생 시 전달</div>
+              <div class="card-desc">화면이 깨지거나 누락된 부분이 있으면 그 증상을 AI에게 말합니다.</div>
+            </div>
+          </div>
+        `
+      },
+      // 36. 7단계: 자연어로 수정
+      {
+        page: 36,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b'],
+        title: '7단계: 보고 싶은 방식으로 화면을 바꿉니다',
+        lead: '화면에서 확인하기 어려운 부분 하나를 고르고, 무엇을 어떻게 바꾸고 싶은지 구체적으로 요청합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 다른 수정 요청 예시',
+          title: '자연어로 요청할 수 있는 다양한 화면 수정 예시',
+          html: `
+            <ul style="margin-left:24px; display:flex; flex-direction:column; gap:12px;">
+              <li><strong>가독성 개선:</strong> “표의 본문 글씨 크기를 더 키우고 행 간격을 넓혀 주세요.”</li>
+              <li><strong>회사별 구분:</strong> “당사와 비교사 열의 배경색을 다르게 구분해 주세요.”</li>
+              <li><strong>기준일 강조:</strong> “보고기간과 연결·별도 기준을 화면 최상단 배너에 크게 표시해 주세요.”</li>
+            </ul>
+            <p style="margin-top:14px;">* 결과를 저장하기 전에 내가 원한 수정이 코드에 반영되었는지 확인합니다.</p>
+          `
+        },
+        render: () => `
+          <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; gap:18px;">
+            <div class="prompt-container">
+              <div class="prompt-header">
+                <span class="prompt-label">📋 실습 프롬프트 — 화면 레이아웃 및 강조 방식 자연어 수정</span>
+                <button class="copy-btn" onclick="copyPromptText(this, '현재 내용과 출처는 유지하고, 확인 필요 항목을 화면 상단에서 먼저 볼 수 있도록 수정해 주세요. 수정된 전체 HTML을 다시 제공해 주세요.')">프롬프트 복사</button>
+              </div>
+              <div class="prompt-text">현재 내용과 출처는 유지하고, 확인 필요 항목을 화면 상단에서 먼저 볼 수 있도록 수정해 주세요. 수정된 전체 HTML을 다시 제공해 주세요.</div>
+            </div>
+            <div class="grid-4">
+              <div class="card" style="padding:16px;">
+                <div class="card-title" style="font-size:18px;">① 수정 요청 입력</div>
+                <div class="card-desc" style="font-size:15px;">바꾸고 싶은 조건과 함께 ‘수정된 전체 HTML’을 요청합니다.</div>
+              </div>
+              <div class="card" style="padding:16px;">
+                <div class="card-title" style="font-size:18px;">② 전체 코드 복사</div>
+                <div class="card-desc" style="font-size:15px;">새로 생성된 HTML 코드 전체를 다시 복사합니다.</div>
+              </div>
+              <div class="card" style="padding:16px;">
+                <div class="card-title" style="font-size:18px;">③ 덮어쓰기 저장</div>
+                <div class="card-desc" style="font-size:15px;">기존 편집기 파일에 붙여넣고 저장(<code>Ctrl + S</code>)합니다.</div>
+              </div>
+              <div class="card highlight" style="padding:16px;">
+                <div class="card-title" style="font-size:18px;">④ 브라우저 새로고침</div>
+                <div class="card-desc" style="font-size:15px;">열려 있는 브라우저에서 <code>F5</code>(새로고침)를 눌러 변화를 확인합니다.</div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 37. 8단계: 보드 검증
+      {
+        page: 37,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b'],
+        title: '8단계: 화면의 내용과 기능을 함께 확인합니다',
+        lead: '화면을 수정하는 과정에서 기존 수치나 출처가 바뀌지 않았는지 다섯 가지 항목을 최종 검증합니다.',
+        popup: {
+          type: 'check',
+          label: '실습 확인',
+          title: '시각적 완성도와 내용 정확성의 분리',
+          html: `
+            <p><strong>보드가 브라우저에서 멋지게 열리는 것만으로 내용의 정확성이 보장되지는 않습니다.</strong></p>
+            <p style="margin-top:12px;">화면을 수정하는 도중 AI가 임의로 수치를 요약하거나 출처를 생략하는 경우가 있습니다. 오류를 발견하면 원문을 근거로 다시 수정 요청하고, 확정할 수 없는 내용은 <strong>‘확인 필요’</strong>로 표시합니다.</p>
+          `
+        },
+        render: () => `
+          <div style="display:flex; flex-direction:column; gap:12px; justify-content:center; height:100%;">
+            <label class="check-item"><input type="checkbox"> <span>1. 보드에 표시된 핵심 수치 2개와 원문 발췌본을 대조했다</span></label>
+            <label class="check-item"><input type="checkbox"> <span>2. 회사명 · 보고기간 · 연결/별도 · 단위가 정확히 표시되었는지 확인했다</span></label>
+            <label class="check-item"><input type="checkbox"> <span>3. 확인된 사실과 가능한 해석(가설)이 화면에서 명확히 구분되었다</span></label>
+            <label class="check-item"><input type="checkbox"> <span>4. 각 정보의 문서명과 원문 위치 출처를 확인했다</span></label>
+            <label class="check-item"><input type="checkbox"> <span>5. 7단계에서 자연어로 수정 요청한 화면 구성·기능을 직접 실행해 보았다</span></label>
+          </div>
+        `
+      },
+      // 38. 실습 결과와 다음 질문
+      {
+        page: 38,
+        theme: 'white',
+        moduleCode: 'MODULE 04',
+        moduleName: '브리핑 보드 제작',
+        journeyActive: ['b', 't'],
+        title: '보드에서 조직이 확인할 질문을 찾습니다',
+        lead: '보드는 공개자료에서 확인한 사실과 해석의 한계를 보여줍니다. 이제 내부 자료와 업무 흐름을 확인해야 할 질문을 선택합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 실습 결과 공유 유의사항',
+          title: '브리핑 보드 결과 공유 시 원칙',
+          html: `
+            <p>실습 결과를 동료 임원이나 부서와 공유할 때는 <strong>실제 공개 공시에서 확인한 사실과 교육용 가상 내용을 명확히 구분</strong>합니다.</p>
+            <p style="margin-top:12px;">특히 공시만으로 알 수 없는 미확인 정보를 확정된 결론처럼 표현하지 않도록 주의합니다.</p>
+          `
+        },
+        render: () => `
+          <div class="grid-3">
+            <div class="card">
+              <div>
+                <div class="card-step-num">01 · Fact</div>
+                <div class="card-title">보드에서 확인한 사실</div>
+                <div class="card-desc" style="margin-top:10px;">공개 공시 비교표를 통해 객관적으로 확인된 당사와 비교사의 수치 및 기준 차이</div>
+              </div>
+              <textarea class="slide-textarea" rows="4" placeholder="확인된 핵심 사실을 요약해 적어보세요..."></textarea>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">02 · Gap</div>
+                <div class="card-title">추가로 필요한 정보</div>
+                <div class="card-desc" style="margin-top:10px;">공시 보고서에는 나와 있지 않아 우리 부서 내부 데이터로 확인해야만 알 수 있는 정보</div>
+              </div>
+              <textarea class="slide-textarea" rows="4" placeholder="추가로 필요한 내부 자료를 적어보세요..."></textarea>
+            </div>
+            <div class="card highlight">
+              <div>
+                <div class="card-step-num">03 · Question</div>
+                <div class="card-title">내부에서 확인할 질문</div>
+                <div class="card-desc" style="margin-top:10px;">모듈 5에서 본사 팀장에게 전달할 핵심 확인 및 업무 점검 질문</div>
+              </div>
+              <textarea class="slide-textarea" rows="4" placeholder="팀장에게 물어볼 내부 확인 질문을 작성하세요..."></textarea>
+            </div>
+          </div>
+        `
+      },
+      // 39. 모듈 5 간지
+      {
+        page: 39,
+        theme: 'navy',
+        type: 'divider',
+        moduleCode: 'MODULE 05',
+        moduleName: '부서 실행 과제로 연결 (35분)',
+        title: '브리핑에서 부서의 실행 과제로',
+        question: '외부 비교에서 나온 질문을 내부 확인과 업무 개선으로 연결합니다.',
+        activeCoverFlow: 3
+      },
+      // 40. 참여: 보드에서 다음 행동으로
+      {
+        page: 40,
+        theme: 'white',
+        moduleCode: 'MODULE 05',
+        moduleName: '부서 실행 과제로 연결',
+        journeyActive: ['t'],
+        title: '이 브리핑을 본 뒤 무엇을 먼저 요청하시겠습니까?',
+        lead: '선택 이유를 한 문장으로 생각해 주세요. 접속이 어려우면 번호로 답할 수 있습니다.',
+        render: () => `
+          <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;">
+            <div style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>① 수치와 비교 기준 재확인 (정의·범위 일치 여부 점검)</span>
+              </div>
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>② 추가 공시·시장 자료 확인 (경쟁사 주석 및 시장 동향 보완)</span>
+              </div>
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>③ 관련 부서의 업무 현황 확인 (데이터 취합 및 보고 프로세스 점검)</span>
+              </div>
+              <div class="poll-option" onclick="this.classList.toggle('selected')">
+                <span>④ 개선 가능성과 실행 조건 검토 (구체적 실행 대안 및 필요 자원 파악)</span>
+              </div>
+            </div>
+            <div class="qr-placeholder-box">
+              <div class="qr-frame">설문 링크 확정 후<br>QR 삽입 영역<br><span class="tag-tbd" style="margin-top:8px;">[확정 필요]</span></div>
+              <div style="font-size:17px; font-weight:700; color:var(--navy);">단축 링크: <span class="tag-tbd">[설문 URL 확정 필요]</span></div>
+              <div style="font-size:15px; color:var(--gray-600);">선택하신 번호와 그 이유를 한 문장으로 공유해 주세요.</div>
+            </div>
+          </div>
+        `
+      },
+      // 41. 외부 사실에서 내부 질문으로
+      {
+        page: 41,
+        theme: 'white',
+        moduleCode: 'MODULE 05',
+        moduleName: '부서 실행 과제로 연결',
+        journeyActive: ['t'],
+        title: '외부에서 본 차이는 내부 점검의 출발점입니다',
+        lead: '공개자료에서 발견한 차이를 곧바로 내부의 문제로 단정하지 않고, 4단계의 논리적 점검으로 연결합니다.',
+        bottomMsg: '※ 본 흐름은 교육용 가상 상황이며 특정 회사의 실제 문제를 뜻하지 않습니다.',
+        render: () => `
+          <div class="grid-4">
+            <div class="card">
+              <div>
+                <div class="card-step-num">1단계</div>
+                <div class="card-title">외부 관찰</div>
+                <div class="card-desc" style="margin-top:12px;">공개자료 비교표에서 특정 항목의 수치나 비중 차이가 관찰된다.</div>
+              </div>
+              <div class="tag-virtual">출발: 공시 비교 결과</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">2단계</div>
+                <div class="card-title">비교 조건 확인</div>
+                <div class="card-desc" style="margin-top:12px;">보고기간, 연결·별도 범위, 사업 구성이 실제로 같은지 먼저 확인한다.</div>
+              </div>
+              <div class="tag-virtual">검증: 기준 차이 여부</div>
+            </div>
+            <div class="card highlight">
+              <div>
+                <div class="card-step-num">3단계</div>
+                <div class="card-title">내부 질문</div>
+                <div class="card-desc" style="margin-top:12px;">관련 경영 정보가 우리 조직 내부에서 어떻게 만들어지고 활용되는가?</div>
+              </div>
+              <div class="tag-virtual" style="background:var(--navy); color:var(--teal);">전환: 현업 확인 질문</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">4단계</div>
+                <div class="card-title">관련 업무 검토</div>
+                <div class="card-desc" style="margin-top:12px;">본사 팀장과 함께 실제 업무 흐름과 취합·검토 과정의 병목을 살펴본다.</div>
+              </div>
+              <div class="tag-virtual">연결: 팀장 교육 과정</div>
+            </div>
+          </div>
+        `
+      },
+      // 42. 팀장 교육에서 이어지는 과정
+      {
+        page: 42,
+        theme: 'white',
+        moduleCode: 'MODULE 05',
+        moduleName: '부서 실행 과제로 연결',
+        journeyActive: ['t'],
+        title: '본사 팀장은 업무 흐름을 분석하고 개선안을 만듭니다',
+        lead: '임원 교육에서 도출한 질문은 본사 팀장 교육의 5단계 업무 재설계 과정과 직접 맞물려 돌아갑니다.',
+        bottomMsg: '임원의 질문과 팀장의 현장 검토가 연결될 때 개선 과제가 구체화됩니다.',
+        render: () => `
+          <div class="grid-5">
+            <div class="card">
+              <div>
+                <div class="card-step-num">01 · AS-IS</div>
+                <div class="card-title" style="font-size:20px;">현재 업무 파악</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">현재 업무의 세부 단계와 담당자, 소요 시간을 분해하여 파악합니다.</div>
+              </div>
+              <div class="tag-virtual">현행 프로세스 시각화</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">02 · AI 분석</div>
+                <div class="card-title" style="font-size:20px;">병목 후보 도출</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">AI를 활용해 지연·대기·수작업 반복·재작업 구간 후보를 도출합니다.</div>
+              </div>
+              <div class="tag-virtual">비효율 구간 탐색</div>
+            </div>
+            <div class="card highlight">
+              <div>
+                <div class="card-step-num">03 · 팀장 검토</div>
+                <div class="card-title" style="font-size:20px;">현장과 제약 확인</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">법규·내부통제 제약과 실제 현장 상황을 반영해 실현 가능성을 검토합니다.</div>
+              </div>
+              <div class="tag-virtual" style="background:var(--navy); color:var(--teal);">팀장의 핵심 역할</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">04 · TO-BE</div>
+                <div class="card-title" style="font-size:20px;">개선 흐름 설계</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">AI 적용 구간과 사람의 검토 지점을 구분한 개선 업무 흐름을 설계합니다.</div>
+              </div>
+              <div class="tag-virtual">개선 프로세스 확정</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">05 · 점검</div>
+                <div class="card-title" style="font-size:20px;">변화와 후속 조치</div>
+                <div class="card-desc" style="font-size:16px; margin-top:10px;">적용 전후의 변화를 측정하고 임원에게 결과와 후속 조치를 보고합니다.</div>
+              </div>
+              <div class="tag-virtual">성과 확인 및 피드백</div>
+            </div>
+          </div>
+        `
+      },
+      // 43. 공통으로 사용하는 다섯 질문
+      {
+        page: 43,
+        theme: 'white',
+        moduleCode: 'MODULE 05',
+        moduleName: '부서 실행 과제로 연결',
+        journeyActive: ['t', 'e'],
+        title: '임원과 팀장이 같은 기준으로 이야기합니다',
+        lead: '임원 과정과 본사 팀장 과정에서 동일한 다섯 가지 질문 프레임워크로 소통의 언어를 맞춥니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 임원-팀장 과정 연계',
+          title: '공통 5대 질문의 운영 방식',
+          html: `
+            <p>이 다섯 가지 질문은 <strong>유안타증권 본사 팀장 AI 교육 과정에서도 토씨 하나 다르지 않게 동일한 표현으로 사용</strong>합니다.</p>
+            <p style="margin-top:12px;">임원 교육과 팀장 교육의 실시 순서에 관계없이, 두 리더십 계층이 상대 과정의 학습 흐름과 기대 산출물을 명확히 이해하고 동일한 기준으로 업무 개선을 논의하도록 설계되었습니다.</p>
+          `
+        },
+        render: () => `
+          <table class="slide-table">
+            <thead>
+              <tr>
+                <th style="width:24%;">공통 5대 질문</th>
+                <th class="teal-col" style="width:38%;">임원 관점 (방향 · 지원 · 점검)</th>
+                <th style="width:38%;">본사 팀장 관점 (현장 · 설계 · 실행)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">1. 무엇이 문제인가</td>
+                <td><strong>경영 목표와의 관련성</strong> 및 확인 필요성</td>
+                <td>실제 <strong>발생하는 업무 구간과 범위</strong> 정의</td>
+              </tr>
+              <tr>
+                <td class="row-label">2. 근거는 무엇인가</td>
+                <td>의사결정 <strong>판단 자료의 충분성</strong>과 출처</td>
+                <td><strong>현장 데이터·소요시간</strong> 및 실무 경험</td>
+              </tr>
+              <tr>
+                <td class="row-label">3. 무엇을 바꿀 것인가</td>
+                <td>조직 <strong>우선순위 부여와 개선 방향</strong> 결정</td>
+                <td>현실적 제약 속에서의 <strong>실행 가능성</strong> 설계</td>
+              </tr>
+              <tr>
+                <td class="row-label">4. 누가 실행하는가</td>
+                <td>명확한 <strong>권한 위임과 부서 간 자원 지원</strong></td>
+                <td>구체적 <strong>담당자 지정과 타 부서 협업</strong> 조율</td>
+              </tr>
+              <tr>
+                <td class="row-label">5. 어떻게 점검하는가</td>
+                <td>최종 <strong>보고받을 핵심 결과와 점검 시기</strong></td>
+                <td>적용 전후 <strong>측정 지표 관리와 지속 개선</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        `
+      },
+      // 44. 실행 과제 카드 작성
+      {
+        page: 44,
+        theme: 'white',
+        moduleCode: 'MODULE 05',
+        moduleName: '부서 실행 과제로 연결',
+        journeyActive: ['t'],
+        title: '팀장에게 전달할 확인·개선 과제를 정리합니다',
+        lead: '① 확인한 사실 → ② 내부 질문 → ③ 검토 업무와 기대 결과 → ④ 임원의 지원과 점검 기준 순으로 작성합니다.',
+        popup: {
+          type: 'ex',
+          label: '예시: 실행 과제 카드',
+          title: '교육용 가상 예시 — 실행 과제 카드 작성 샘플',
+          html: `
+            <div style="padding:20px; background:var(--blue-bg); border-radius:10px; display:flex; flex-direction:column; gap:10px;">
+              <div><span class="tag-virtual">교육용 가상 예시</span></div>
+              <p><strong>• 확인된 사실:</strong> 공개자료에서 당사와 비교사 간 특정 보고 항목의 분류 기준 차이를 확인함.</p>
+              <p><strong>• 내부 질문:</strong> 우리 부서의 해당 경영 정보 취합 및 검증 과정은 현재 어떠한가?</p>
+              <p><strong>• 검토할 업무·부서:</strong> 정기 경영브리핑 기초자료 취합 프로세스 (관련 기획/관리팀)</p>
+              <p><strong>• 기대할 결과:</strong> ① 현행 업무 흐름(AS-IS), ② 확인된 병목 구간, ③ AI 활용 개선 대안(TO-BE)</p>
+              <p><strong>• 임원의 지원:</strong> 유관 부서 간 기준 통일 협의 지원 및 시범 적용 기간 부여</p>
+              <p><strong>• 점검 기준:</strong> 2주 뒤 현행 흐름 분석 및 개선 초안 1차 보고</p>
+            </div>
+          `
+        },
+        render: () => `
+          <div class="grid-3" style="gap:16px;">
+            <div class="card" style="padding:18px;">
+              <div class="input-field-group">
+                <label>① 확인된 사실 (보드 기반)</label>
+                <textarea class="slide-textarea" rows="3" placeholder="공개자료 비교에서 확인된 객관적 사실"></textarea>
+              </div>
+              <div class="input-field-group" style="margin-top:10px;">
+                <label>② 내부에서 더 확인할 질문</label>
+                <textarea class="slide-textarea" rows="3" placeholder="원인을 단정하지 않고 현업에 물어볼 질문"></textarea>
+              </div>
+            </div>
+            <div class="card" style="padding:18px;">
+              <div class="input-field-group">
+                <label>③ 검토할 업무 · 부서</label>
+                <textarea class="slide-textarea" rows="3" placeholder="점검 대상이 되는 구체적 업무와 담당 팀"></textarea>
+              </div>
+              <div class="input-field-group" style="margin-top:10px;">
+                <label>④ 기대할 결과 (산출물)</label>
+                <textarea class="slide-textarea" rows="3" placeholder="예: 현행 흐름, 병목 확인, 개선 대안"></textarea>
+              </div>
+            </div>
+            <div class="card highlight" style="padding:18px;">
+              <div class="input-field-group">
+                <label>⑤ 임원의 지원 사항</label>
+                <textarea class="slide-textarea" rows="3" placeholder="타 부서 협의, 자료 접근, 의사결정 지원 등"></textarea>
+              </div>
+              <div class="input-field-group" style="margin-top:10px;">
+                <label>⑥ 점검 기준 및 일정</label>
+                <textarea class="slide-textarea" rows="3" placeholder="언제, 어떤 기준으로 진행 상황을 확인할지 명시"></textarea>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      // 45. 과제 카드 점검
+      {
+        page: 45,
+        theme: 'white',
+        moduleCode: 'MODULE 05',
+        moduleName: '부서 실행 과제로 연결',
+        journeyActive: ['t'],
+        title: '확인 질문과 실행 요청을 구분했습니까?',
+        lead: '작성한 실행 과제 카드가 팀장의 현장 검토를 이끌어낼 수 있도록 구성되었는지 점검합니다.',
+        popup: {
+          type: 'check',
+          label: '실습 확인',
+          title: '과제 카드 작성 시 핵심 유의사항',
+          html: `
+            <p><strong>외부 공시 수치만으로 내부 업무의 원인을 성급히 단정하지 않았는지 확인합니다.</strong></p>
+            <p style="margin-top:12px;">팀장에게 요구할 결과는 “즉시 OO을 도입하라”는 식의 결론 지시가 아니라, <strong>“현황과 근거를 먼저 확인하고 개선안을 검토해 보고하라”</strong>는 형태로 작성해야 현장의 정확한 진단을 얻을 수 있습니다.</p>
+          `
+        },
+        render: () => `
+          <div class="grid-2x2">
+            <label class="check-item" style="font-size:22px; padding:26px;">
+              <input type="checkbox">
+              <div>
+                <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 01</div>
+                확인된 사실과 가설을 명확히 구분했는가?
+              </div>
+            </label>
+            <label class="check-item" style="font-size:22px; padding:26px;">
+              <input type="checkbox">
+              <div>
+                <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 02</div>
+                검토할 대상 업무와 범위가 구체적인가?
+              </div>
+            </label>
+            <label class="check-item" style="font-size:22px; padding:26px;">
+              <input type="checkbox">
+              <div>
+                <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 03</div>
+                현장을 아는 팀장의 판단 여지를 남겼는가?
+              </div>
+            </label>
+            <label class="check-item" style="font-size:22px; padding:26px;">
+              <input type="checkbox">
+              <div>
+                <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 04</div>
+                임원의 지원 사항과 점검 기준이 있는가?
+              </div>
+            </label>
+          </div>
+        `
+      },
+      // 46. 휴식 (2)
+      {
+        page: 46,
+        theme: 'white',
+        type: 'break',
+        moduleCode: 'BREAK TIME',
+        moduleName: '휴식 (10분)',
+        title: '10분 휴식',
+        nextInfo: '다음: 모듈 6 — 임원과 AX 조직, 팀장의 실행 역할 정리 (30분)'
+      },
+      // 47. 모듈 6 간지
+      {
+        page: 47,
+        theme: 'navy',
+        type: 'divider',
+        moduleCode: 'MODULE 06',
+        moduleName: 'AI 리더십과 조직 실행 (30분)',
+        title: 'AI 리더십과 조직의 실행 체계',
+        question: '우선순위와 지원, 책임과 점검을 연결합니다.',
+        activeCoverFlow: 3
+      },
+      // 48. 역할 연결
+      {
+        page: 48,
+        theme: 'white',
+        moduleCode: 'MODULE 06',
+        moduleName: 'AI 리더십과 조직 실행',
+        journeyActive: ['e'],
+        title: '임원 · AX 조직 · 팀장 · 실무자의 역할',
+        lead: '네 주체의 역할이 맞물릴 때 일회성 도구 체험을 넘어 조직의 업무 변화가 일어납니다.',
+        bottomMsg: '실제 역할과 명칭은 유안타증권의 운영 체계에 맞게 조정합니다.',
+        render: () => `
+          <div class="grid-4">
+            <div class="card highlight">
+              <div>
+                <div class="card-step-num">01 · Executive</div>
+                <div class="card-title">임원</div>
+                <div class="card-desc" style="margin-top:14px;">
+                  • 핵심 경영 질문 및 <strong>우선순위 결정</strong><br>
+                  • 근거 기반 의사결정 <strong>판단</strong><br>
+                  • 부서 간 <strong>자원 지원 및 권한 부여</strong>
+                </div>
+              </div>
+              <div class="tag-virtual" style="background:var(--navy); color:var(--teal);">우선순위 · 판단 · 지원</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">02 · AX Team</div>
+                <div class="card-title">AX 조직</div>
+                <div class="card-desc" style="margin-top:14px;">
+                  • 안전한 <strong>공통 AI 활용 환경</strong> 및 가이드 수립<br>
+                  • 전사 <strong>핵심 과제 관리</strong> 및 기술 지원<br>
+                  • 우수 검증 사례 발굴 및 <strong>수평 확산</strong>
+                </div>
+              </div>
+              <div class="tag-virtual">공통 환경 · 과제 관리 · 확산</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">03 · Team Lead</div>
+                <div class="card-title">본사 팀장</div>
+                <div class="card-desc" style="margin-top:14px;">
+                  • 부서 <strong>현행 업무 흐름(AS-IS) 분석</strong><br>
+                  • 법규·내부통제 등 <strong>현장 제약 검토</strong><br>
+                  • AI 결합 <strong>개선 프로세스(TO-BE) 설계</strong>
+                </div>
+              </div>
+              <div class="tag-virtual">업무 분석 · 현장 검토 · 개선 설계</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">04 · Staff</div>
+                <div class="card-title">실무자</div>
+                <div class="card-desc" style="margin-top:14px;">
+                  • 일상 업무에서 AI <strong>결과물 활용</strong><br>
+                  • 원문 대조 및 팩트 체크 <strong>1차 검증</strong><br>
+                  • 실무 프롬프트 및 <strong>개선 경험 축적</strong>
+                </div>
+              </div>
+              <div class="tag-virtual">결과 활용 · 검증 · 경험 축적</div>
+            </div>
+          </div>
+        `
+      },
+      // 49. AX 추진 흐름
+      {
+        page: 49,
+        theme: 'white',
+        moduleCode: 'MODULE 06',
+        moduleName: 'AI 리더십과 조직 실행',
+        journeyActive: ['e'],
+        title: '개별 체험을 조직의 실행으로 연결하기',
+        lead: 'AX 조직은 공통 환경과 지원 기준을 정하고, 현업은 업무의 실제 적용 가능성을 확인합니다. 임원은 우선순위와 필요한 자원을 결정합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 확산 시 확인할 내용',
+          title: '성공 사례를 타 부서로 확산할 때의 5대 점검 사항',
+          html: `
+            <ul style="margin-left:24px; display:flex; flex-direction:column; gap:12px;">
+              <li><strong>1. 자료와 도구:</strong> 사내에서 안전하게 활용 가능한 자료 범위와 승인된 도구인가?</li>
+              <li><strong>2. 검토 책임:</strong> AI 산출물의 최종 사실 확인과 검증 책임자가 지정되어 있는가?</li>
+              <li><strong>3. 지원 담당:</strong> 오류나 기준 변경 시 기술·운영 지원을 맡을 담당이 있는가?</li>
+              <li><strong>4. 측정 기준:</strong> 적용 전후의 변화를 객관적으로 확인할 측정 기준이 있는가?</li>
+              <li><strong>5. 학습 내용:</strong> 다른 부서가 그대로 참고할 수 있는 입력 기준과 주의사항이 정리되었는가?</li>
+            </ul>
+          `
+        },
+        render: () => `
+          <div class="grid-5">
+            <div class="card">
+              <div class="card-step-num">STEP 1</div>
+              <div class="card-title" style="font-size:21px;">과제 선정</div>
+              <div class="card-desc" style="font-size:16px;">경영 필요성과 자료 준비도가 높은 구체적 업무 과제를 선정합니다.</div>
+            </div>
+            <div class="card">
+              <div class="card-step-num">STEP 2</div>
+              <div class="card-title" style="font-size:21px;">작은 범위 시도</div>
+              <div class="card-desc" style="font-size:16px;">전체 시스템을 바꾸기 전에 단일 보고서·특정 단계에서 먼저 시도합니다.</div>
+            </div>
+            <div class="card highlight">
+              <div class="card-step-num">STEP 3</div>
+              <div class="card-title" style="font-size:21px;">현업 검토</div>
+              <div class="card-desc" style="font-size:16px;">팀장과 실무자가 정확성, 검증 소요시간, 실무 제약을 엄격히 검토합니다.</div>
+            </div>
+            <div class="card">
+              <div class="card-step-num">STEP 4</div>
+              <div class="card-title" style="font-size:21px;">성과 확인</div>
+              <div class="card-desc" style="font-size:16px;">시간 단축, 재작업 감소, 근거 명확화 등 전후 변화를 측정합니다.</div>
+            </div>
+            <div class="card">
+              <div class="card-step-num">STEP 5</div>
+              <div class="card-title" style="font-size:21px;">경험 공유·확산</div>
+              <div class="card-desc" style="font-size:16px;">검증된 템플릿과 점검 기준을 AX 조직과 함께 타 부서로 확산합니다.</div>
+            </div>
+          </div>
+        `
+      },
+      // 50. 첫 과제 선택 기준
+      {
+        page: 50,
+        theme: 'white',
+        moduleCode: 'MODULE 06',
+        moduleName: 'AI 리더십과 조직 실행',
+        journeyActive: ['e'],
+        title: '무엇부터 시작할 것인가?',
+        lead: '앞에서 작성한 실행 과제 카드에 아래 네 가지 질문을 적용해 첫 시작 과제를 점검해 보세요.',
+        render: () => `
+          <div class="grid-2x2">
+            <div class="card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-title">① 업무 필요성 (Need)</span>
+                <input type="checkbox" style="width:24px; height:24px; accent-color:var(--teal-dark);">
+              </div>
+              <div class="card-desc"><strong>해결할 문제가 분명한가?</strong><br>단순 호기심이 아니라 반복되는 병목이나 의사결정 지연 등 해결할 실익이 분명한 과제인지 확인합니다.</div>
+            </div>
+            <div class="card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-title">② 자료 준비도 (Data)</span>
+                <input type="checkbox" style="width:24px; height:24px; accent-color:var(--teal-dark);">
+              </div>
+              <div class="card-desc"><strong>사용할 자료가 있는가?</strong><br>보안 규정을 준수하면서 즉시 활용할 수 있는 문서나 정형·비정형 자료가 준비되어 있는지 확인합니다.</div>
+            </div>
+            <div class="card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-title">③ 실행 범위 (Scope)</span>
+                <input type="checkbox" style="width:24px; height:24px; accent-color:var(--teal-dark);">
+              </div>
+              <div class="card-desc"><strong>작게 시작할 수 있는가?</strong><br>거대한 개발 없이 한 부서나 하나의 브리핑 단위에서 2~4주 내에 시범 적용해 볼 수 있는지 확인합니다.</div>
+            </div>
+            <div class="card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-title">④ 검증 가능성 (Verification)</span>
+                <input type="checkbox" style="width:24px; height:24px; accent-color:var(--teal-dark);">
+              </div>
+              <div class="card-desc"><strong>결과를 비교할 수 있는가?</strong><br>AI 결과물의 맞고 틀림을 원문으로 대조할 수 있고, 적용 전후의 업무 변화를 비교할 수 있는지 확인합니다.</div>
+            </div>
+          </div>
+        `
+      },
+      // 51. 성과 점검
+      {
+        page: 51,
+        theme: 'white',
+        moduleCode: 'MODULE 06',
+        moduleName: 'AI 리더십과 조직 실행',
+        journeyActive: ['e'],
+        title: 'AI 사용과 업무 변화를 함께 확인합니다',
+        lead: '업무 목적에 맞춰 적용 전후를 비교할 수 있는 기준을 정합니다. 개선 정도는 측정 후 판단합니다.',
+        popup: {
+          type: 'ref',
+          label: '참고: 성과 측정 유의사항',
+          title: 'AI 도입 효과를 측정할 때 유의할 점',
+          html: `
+            <p><strong>단순히 AI 프롬프트 사용 횟수나 로그인 빈도만으로 업무 효과를 확정하지 않습니다.</strong></p>
+            <p style="margin-top:12px;">업무 처리 시간이나 품질 측정값은 분기 결산기, 시장 이슈 등 업무 상황의 영향을 크게 받으므로 반드시 <strong>측정 기간과 비교 기준을 함께 기록</strong>하여 판단합니다.</p>
+          `
+        },
+        render: () => `
+          <div class="grid-4">
+            <div class="card">
+              <div>
+                <div class="card-step-num">관점 01</div>
+                <div class="card-title">시간 (Time)</div>
+                <div class="card-desc" style="margin-top:12px;">기초 자료 탐색, 비교표 초안 작성 등 <strong>보고 준비 및 처리 소요 시간</strong>의 전후 변화</div>
+              </div>
+              <div class="tag-virtual">보고 준비 · 처리 시간</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">관점 02</div>
+                <div class="card-title">흐름 (Flow)</div>
+                <div class="card-desc" style="margin-top:12px;">부서 간 자료 재요청, 양식 변환 등 불필요한 <strong>대기 시간과 재작업 반복</strong> 감소 여부</div>
+              </div>
+              <div class="tag-virtual">대기 · 재작업</div>
+            </div>
+            <div class="card highlight">
+              <div>
+                <div class="card-step-num">관점 03</div>
+                <div class="card-title">품질 (Quality)</div>
+                <div class="card-desc" style="margin-top:12px;">원문 출처 누락 방지, 비교 기준 명시, 사실과 가설 분리 등 <strong>보고 근거의 완결성</strong></div>
+              </div>
+              <div class="tag-virtual" style="background:var(--navy); color:var(--teal);">누락 · 수정</div>
+            </div>
+            <div class="card">
+              <div>
+                <div class="card-step-num">관점 04</div>
+                <div class="card-title">실행 (Action)</div>
+                <div class="card-desc" style="margin-top:12px;">브리핑 이후 도출된 확인 질문이 실제 <strong>부서 후속조치와 개선 과제</strong>로 이어지는지 확인</div>
+              </div>
+              <div class="tag-virtual">후속조치 확인</div>
+            </div>
+          </div>
+        `
+      },
+      // 52. 임원의 실행 질문
+      {
+        page: 52,
+        theme: 'white',
+        moduleCode: 'MODULE 06',
+        moduleName: 'AI 리더십과 조직 실행',
+        journeyActive: ['e'],
+        title: '부서의 제안을 받을 때 무엇을 물을 것인가?',
+        lead: '팀장은 같은 질문을 이용해 현장 상황과 개선안을 설명합니다. 임원은 우선순위를 결정하고 필요한 지원을 연결합니다.',
+        render: () => `
+          <div style="display:flex; flex-direction:column; gap:12px; justify-content:center; height:100%;">
+            <div class="card" style="padding:16px 24px; flex-direction:row; align-items:center; justify-content:space-between;">
+              <div>
+                <span class="module-badge" style="margin-right:12px;">질문 1</span>
+                <strong style="font-size:22px; color:var(--navy);">무엇이 문제인가?</strong>
+                <span style="font-size:18px; color:var(--gray-600); margin-left:14px;">— 해결하려는 업무 구간의 현재 상태와 경영 목표 연관성</span>
+              </div>
+              <span class="tag-virtual" style="min-width:150px; text-align:center;">현재 상태</span>
+            </div>
+            <div class="card" style="padding:16px 24px; flex-direction:row; align-items:center; justify-content:space-between;">
+              <div>
+                <span class="module-badge" style="margin-right:12px;">질문 2</span>
+                <strong style="font-size:22px; color:var(--navy);">근거는 무엇인가?</strong>
+                <span style="font-size:18px; color:var(--gray-600); margin-left:14px;">— 확인된 사실과 가설의 구분, 원문 출처와 현장 데이터</span>
+              </div>
+              <span class="tag-virtual" style="min-width:150px; text-align:center;">판단에 필요한 근거</span>
+            </div>
+            <div class="card" style="padding:16px 24px; flex-direction:row; align-items:center; justify-content:space-between;">
+              <div>
+                <span class="module-badge" style="margin-right:12px;">질문 3</span>
+                <strong style="font-size:22px; color:var(--navy);">무엇을 바꿀 것인가?</strong>
+                <span style="font-size:18px; color:var(--gray-600); margin-left:14px;">— 현행(AS-IS) 대비 개선 흐름(TO-BE)과 우선순위</span>
+              </div>
+              <span class="tag-virtual" style="min-width:150px; text-align:center;">개선안</span>
+            </div>
+            <div class="card highlight" style="padding:16px 24px; flex-direction:row; align-items:center; justify-content:space-between;">
+              <div>
+                <span class="module-badge" style="margin-right:12px;">질문 4</span>
+                <strong style="font-size:22px; color:var(--navy);">누가 실행하는가?</strong>
+                <span style="font-size:18px; color:var(--gray-600); margin-left:14px;">— 담당 팀·검토 책임자 지정 및 임원이 연결할 지원 사항</span>
+              </div>
+              <span class="tag-virtual" style="min-width:150px; text-align:center; background:var(--navy); color:var(--teal);">책임과 지원</span>
+            </div>
+            <div class="card" style="padding:16px 24px; flex-direction:row; align-items:center; justify-content:space-between;">
+              <div>
+                <span class="module-badge" style="margin-right:12px;">질문 5</span>
+                <strong style="font-size:22px; color:var(--navy);">어떻게 점검하는가?</strong>
+                <span style="font-size:18px; color:var(--gray-600); margin-left:14px;">— 적용 전후 비교 기준과 다음 보고 시점</span>
+              </div>
+              <span class="tag-virtual" style="min-width:150px; text-align:center;">점검 결과</span>
+            </div>
+          </div>
+        `
+      },
+      // 53. 마무리 참여
+      {
+        page: 53,
+        theme: 'white',
+        moduleCode: 'MODULE 06',
+        moduleName: 'AI 리더십과 조직 실행',
+        journeyActive: ['q', 'd', 'a', 'b', 't', 'e'],
+        title: '다음 경영 대화에서 무엇을 다르게 질문하시겠습니까?',
+        lead: '현업에 돌아가 가장 먼저 확인해 볼 업무와 팀장에게 던질 첫 질문을 정리하며 교육을 마무리합니다.',
+        bottomMsg: 'AI는 정보를 정리하고 질문을 넓혀줍니다. 리더는 판단 기준을 정하고 조직의 실행을 연결합니다.',
+        render: () => `
+          <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;">
+            <div class="card" style="justify-content:space-around;">
+              <div class="input-field-group">
+                <label style="font-size:20px;">① 우리 조직에서 우선 확인할 업무는 무엇입니까?</label>
+                <textarea class="slide-textarea" rows="3" placeholder="돌아가서 가장 먼저 살펴볼 브리핑이나 보고·취합 업무를 적어보세요..."></textarea>
+              </div>
+              <div class="input-field-group">
+                <label style="font-size:20px;">② 본사 팀장에게 요청할 첫 번째 질문은 무엇입니까?</label>
+                <textarea class="slide-textarea" rows="3" placeholder="사실·근거 확인 또는 업무 흐름 점검을 위해 팀장에게 던질 질문을 적어보세요..."></textarea>
+              </div>
+            </div>
+            <div class="qr-placeholder-box">
+              <div class="qr-frame">응답 링크 확정 후<br>QR 삽입 영역<br><span class="tag-tbd" style="margin-top:8px;">[확정 필요]</span></div>
+              <div style="font-size:17px; font-weight:700; color:var(--navy);">단축 링크: <span class="tag-tbd">[응답 URL 확정 필요]</span></div>
+              <div style="font-size:15px; color:var(--gray-600);">접속이 어렵거나 링크 확정 전인 경우 좌측 입력란에 개인 메모로 작성해 주세요.</div>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    let currentSlideIndex = 0;
+    let lastFocusedElement = null;
+
+    function scaleStage() {
+      const stage = document.getElementById('stage-wrapper');
+      const scaleX = window.innerWidth / 1600;
+      const scaleY = window.innerHeight / 900;
+      const scale = Math.min(scaleX, scaleY) * 0.98;
+      stage.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('resize', scaleStage);
+
+    function getSlideHTML(index) {
+      const slide = SLIDES[index];
+      let innerHTML = '';
+
+      if (slide.type === 'cover') {
+        innerHTML = `
+          <div class="slide theme-navy">
+            <div class="cover-layout">
+              <div>
+                <!-- Partner Logos Header -->
+                <div class="cover-logo-bar">
+                  <!-- EXPERT CONSULTING Logo -->
+                  <div class="logo-badge-card" title="EXPERT CONSULTING">
+                    <svg width="205" height="42" viewBox="0 0 230 48" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M74 23 C88 8, 108 3, 132 3 C112 8, 95 14, 83 23 Z" fill="#009A44"/>
+                      <text x="122" y="14" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="11.5" fill="#222" letter-spacing="1.2">CONSULTING</text>
+                      <text x="4" y="36" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-style="italic" font-size="30" fill="#1E1E1E" letter-spacing="-1">EXPERT</text>
+                      <line x1="2" y1="24.5" x2="215" y2="24.5" stroke="#FFFFFF" stroke-width="2.4"/>
+                      <text x="4" y="46" font-family="Arial, sans-serif" font-style="italic" font-weight="700" font-size="7.3" fill="#333" letter-spacing="0.4">EXCELLENCE &amp; PERFORMANCE TRANSFORMATION</text>
+                    </svg>
+                  </div>
+                  <!-- Data Thinking Lab Logo -->
+                  <div class="logo-badge-card" title="Data Thinking Lab - AI · Data Advisor">
+                    <svg width="245" height="42" viewBox="0 0 275 48" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="2" y="3" width="46" height="33" rx="5" fill="#1E293B"/>
+                      <polygon points="14,36 14,46 25,36" fill="#1E293B"/>
+                      <!-- Grid dots inside bubble -->
+                      <rect x="7" y="8" width="5.5" height="5.5" rx="1" fill="#F8FAFC"/>
+                      <rect x="15" y="8" width="5.5" height="5.5" rx="1" fill="#CBD5E1"/>
+                      <rect x="23" y="8" width="5.5" height="5.5" rx="1" fill="#94A3B8"/>
+                      <rect x="31" y="8" width="5.5" height="5.5" rx="1" fill="#64748B"/>
+                      <rect x="39" y="8" width="5.5" height="5.5" rx="1" fill="#475569"/>
+                      <rect x="7" y="16.5" width="5.5" height="5.5" rx="1" fill="#D97757"/>
+                      <rect x="15" y="16.5" width="5.5" height="5.5" rx="1" fill="#CBD5E1"/>
+                      <rect x="23" y="16.5" width="5.5" height="5.5" rx="1" fill="#94A3B8"/>
+                      <rect x="31" y="16.5" width="5.5" height="5.5" rx="1" fill="#64748B"/>
+                      <rect x="39" y="16.5" width="5.5" height="5.5" rx="1" fill="#475569"/>
+                      <rect x="7" y="25" width="5.5" height="5.5" rx="1" fill="#CBD5E1"/>
+                      <rect x="15" y="25" width="5.5" height="5.5" rx="1" fill="#94A3B8"/>
+                      <rect x="23" y="25" width="5.5" height="5.5" rx="1" fill="#64748B"/>
+                      <rect x="31" y="25" width="5.5" height="5.5" rx="1" fill="#475569"/>
+                      <rect x="39" y="25" width="5.5" height="5.5" rx="1" fill="#334155"/>
+                      <!-- Text -->
+                      <text x="56" y="25" font-family="'Pretendard', Arial, sans-serif" font-weight="900" font-size="23.5" fill="#0F172A" letter-spacing="-0.6">Data Thinking Lab</text>
+                      <text x="95" y="43" font-family="'Pretendard', Arial, sans-serif" font-weight="600" font-size="14.5" fill="#1E293B" letter-spacing="0.5">AI · Data Advisor</text>
+                    </svg>
+                  </div>
+                </div>
+
+                <div style="display:inline-block; background:rgba(57,184,178,0.15); border:1px solid var(--teal); color:var(--teal); font-weight:800; padding:8px 18px; border-radius:30px; font-size:18px; margin-bottom:20px;">
+                  ${slide.org}
+                </div>
+                <h1 style="font-size:64px; font-weight:900; line-height:1.18; letter-spacing:-1px; color:var(--white);">
+                  ${slide.title}
+                </h1>
+                <h2 style="font-size:42px; font-weight:800; color:var(--teal); margin-top:10px; margin-bottom:32px;">
+                  ${slide.subtitle}
+                </h2>
+                <div style="font-size:19px; color:rgba(255,255,255,0.75); border-top:1px solid rgba(255,255,255,0.2); padding-top:20px;">
+                  ${slide.meta}
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(57,184,178,0.35); border-radius:20px; padding:32px; display:flex; flex-direction:column; gap:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:16px; color:var(--teal); font-weight:800; letter-spacing:1px;">EXECUTIVE AI WORKFLOW</span>
+                  <span style="font-size:13px; color:rgba(255,255,255,0.6);">상자를 클릭해 강조 표시</span>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:14px;">
+                  <div class="cover-flow-box">
+                    <div class="flow-title" style="font-weight:800; font-size:20px;">01. 공시자료와 경영 질문</div>
+                    <div style="font-size:15px; color:rgba(255,255,255,0.75); margin-top:4px;">비교 기준(기간·범위·단위·정의) 점검과 질문 설정</div>
+                  </div>
+                  <div class="cover-flow-box">
+                    <div class="flow-title" style="font-weight:800; font-size:20px;">02. 근거를 확인한 AI 비교 분석</div>
+                    <div style="font-size:15px; color:rgba(255,255,255,0.75); margin-top:4px;">사실·해석 분리 및 원문 위치 1:1 대조</div>
+                  </div>
+                  <div class="cover-flow-box active-box">
+                    <div class="flow-title" style="font-weight:800; font-size:20px;">03. 단일 HTML 경영 브리핑 보드</div>
+                    <div style="font-size:15px; color:rgba(255,255,255,0.88); margin-top:4px;">자연어로 만들고 즉시 열어 확인하는 브리핑 화면</div>
+                  </div>
+                  <div class="cover-flow-box">
+                    <div class="flow-title" style="font-weight:800; font-size:20px;">04. 본사 팀장 실행 과제로 연결</div>
+                    <div style="font-size:15px; color:rgba(255,255,255,0.75); margin-top:4px;">5대 공통 질문 기반 부서 확인·개선 과제 전달</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding:0 80px 20px 80px; display:flex; align-items:center; gap:16px;">
+              <span style="font-size:16px; color:rgba(255,255,255,0.65); font-weight:700;">핵심 흐름:</span>
+              <span style="background:var(--teal); color:var(--navy); padding:6px 18px; border-radius:20px; font-weight:800;">질문</span>
+              <span style="color:var(--teal);">➔</span>
+              <span style="background:rgba(255,255,255,0.12); color:var(--white); padding:6px 18px; border-radius:20px; font-weight:700;">분석</span>
+              <span style="color:var(--teal);">➔</span>
+              <span style="background:rgba(255,255,255,0.12); color:var(--white); padding:6px 18px; border-radius:20px; font-weight:700;">브리핑</span>
+              <span style="color:var(--teal);">➔</span>
+              <span style="background:rgba(255,255,255,0.12); color:var(--white); padding:6px 18px; border-radius:20px; font-weight:700;">실행</span>
+            </div>
+            ${renderFooter(slide)}
+          </div>
+        `;
+      } else if (slide.type === 'divider') {
+        const flowItems = ['질문 설정', '공시 확인 · AI 분석', '브리핑 보드 제작', '부서 과제 · 실행 점검'];
+        innerHTML = `
+          <div class="slide theme-navy">
+            <div class="divider-layout">
+              <div>
+                <div class="module-big-num">${slide.moduleCode} · ${slide.moduleName}</div>
+                <h1 class="divider-title">${slide.title}</h1>
+                <div class="divider-question">${slide.question}</div>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); padding:22px 32px; border-radius:14px; border:1px solid rgba(255,255,255,0.12);">
+                <span style="font-size:16px; font-weight:800; color:var(--teal);">전체 교육 여정에서의 위치</span>
+                <div style="display:flex; align-items:center; gap:12px;">
+                  ${flowItems.map((item, idx) => `
+                    <div style="padding:10px 22px; border-radius:30px; font-weight:800; font-size:17px; ${idx === slide.activeCoverFlow ? 'background:var(--teal); color:var(--navy);' : 'background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.65);'}">
+                      ${idx + 1}. ${item}
+                    </div>
+                    ${idx < flowItems.length - 1 ? '<span style="color:rgba(255,255,255,0.35);">➔</span>' : ''}
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+            ${renderFooter(slide)}
+          </div>
+        `;
+      } else if (slide.type === 'break') {
+        innerHTML = `
+          <div class="slide theme-white">
+            <div class="slide-header">
+              <div class="header-module-info">
+                <span class="module-badge">${slide.moduleCode}</span>
+                <span class="module-name">${slide.moduleName}</span>
+              </div>
+              <div style="font-size:15px; color:var(--gray-600); font-weight:700;">전체 240분 과정 중 휴식 시간</div>
+            </div>
+            <div class="slide-body" style="align-items:center; justify-content:center; text-align:center; gap:28px;">
+              <div style="font-size:72px; font-weight:900; color:var(--navy);">${slide.title}</div>
+              <div style="font-size:26px; font-weight:700; color:var(--teal-dark); background:var(--teal-bg); padding:14px 32px; border-radius:40px;">
+                ${slide.nextInfo}
+              </div>
+              <div style="display:flex; align-items:center; gap:24px; margin-top:10px;">
+                <div class="card" style="padding:20px 36px; align-items:center;">
+                  <div style="font-size:15px; font-weight:800; color:var(--gray-600);">휴식 종료 시각 입력</div>
+                  <input type="text" class="slide-input" style="margin-top:8px; text-align:center; font-size:22px; font-weight:800; width:220px;" placeholder="[휴식 종료 시각]">
+                </div>
+                <div class="card" style="padding:20px 36px; align-items:center;">
+                  <div style="font-size:15px; font-weight:800; color:var(--gray-600);">조작 가능한 10분 타이머</div>
+                  <div id="break-timer-display" style="font-size:36px; font-weight:900; color:var(--navy); margin:6px 0; font-variant-numeric:tabular-nums;">10:00</div>
+                  <div style="display:flex; gap:8px;">
+                    <button class="nav-btn" onclick="toggleBreakTimer()">시작 / 일시정지</button>
+                    <button class="nav-btn" onclick="resetBreakTimer()">10분 초기화</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            ${renderFooter(slide)}
+          </div>
+        `;
+      } else {
+        innerHTML = `
+          <div class="slide theme-white">
+            <div class="slide-header">
+              <div class="header-module-info">
+                <span class="module-badge">${slide.moduleCode}</span>
+                <span class="module-name">${slide.moduleName}</span>
+              </div>
+              <div class="journey-bar">
+                ${JOURNEY_STEPS.map((st, i) => `
+                  <span class="journey-step ${slide.journeyActive && slide.journeyActive.includes(st.id) ? 'active' : ''}">
+                    ${st.label}
+                  </span>
+                  ${i < JOURNEY_STEPS.length - 1 ? '<span class="journey-arrow">›</span>' : ''}
+                `).join('')}
+              </div>
+            </div>
+            <div class="slide-body">
+              <div class="title-area">
+                <div class="slide-title">
+                  <span>${slide.title}</span>
+                  ${slide.popup ? renderPopupButton(slide.popup) : ''}
+                </div>
+                ${slide.lead ? `<p class="slide-lead">${slide.lead}</p>` : ''}
+              </div>
+              <div class="content-area">
+                ${slide.render ? slide.render() : ''}
+              </div>
+              ${slide.bottomMsg ? `<div class="bottom-message"><span>💡 ${slide.bottomMsg}</span></div>` : ''}
+            </div>
+            ${renderFooter(slide)}
+          </div>
+        `;
+      }
+
+      return innerHTML;
+    }
+
+    function renderSlide(index) {
+      if (breakTimerInterval) {
+        clearInterval(breakTimerInterval);
+        breakTimerInterval = null;
+      }
+
+      if (SLIDES[index] && SLIDES[index].type === 'break') {
+        breakRemainingSeconds = 600;
+      }
+
+      const container = document.getElementById('slide-container');
+      container.innerHTML = getSlideHTML(index);
+      updateFullscreenButtonLabel();
+    }
+
+    function renderPopupButton(popup) {
+      const typeClass = popup.type === 'check' ? 'type-check' : (popup.type === 'ref' ? 'type-ref' : 'type-ex');
+      const icon = popup.type === 'check' ? '✅' : (popup.type === 'ref' ? '📌' : '💡');
+      return `
+        <div class="popup-trigger-group">
+          <button class="popup-btn ${typeClass}" onclick="openPopup(this)">
+            <span>${icon}</span>
+            <span>${popup.label}</span>
+          </button>
+        </div>
+      `;
+    }
+
+    function renderFooter(slide) {
+      const pageNumStr = String(slide.page).padStart(2, '0');
+      const isFs = !!document.fullscreenElement;
+      return `
+        <div class="slide-footer">
+          <div class="footer-left">
+            <button class="nav-btn" onclick="toggleTOC(true)" title="전체 목차 및 모듈 이동">
+              ☰ 목차 · 모듈 이동
+            </button>
+            <button class="nav-btn" onclick="exportToPDF()" title="전체 53페이지 슬라이드를 PDF로 인쇄/저장합니다">
+              🖨️ PDF 출력
+            </button>
+            <button class="nav-btn fs-toggle-btn" onclick="toggleFullscreen()" title="전체화면 보기 전환 (F)">
+              ${isFs ? '🗗 전체화면 종료' : '⛶ 전체화면 보기'}
+            </button>
+          </div>
+          <div class="footer-copyright">
+            © 2026 Data Thinking Lab. All rights reserved
+          </div>
+          <div class="footer-right">
+            <button class="nav-btn" onclick="prevSlide()" ${slide.page === 1 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+              ◀ 이전
+            </button>
+            <span class="page-indicator">
+              <span class="current">${pageNumStr}</span> / 53
+            </span>
+            <button class="nav-btn" onclick="nextSlide()" ${slide.page === 53 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+              다음 ▶
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Fullscreen Toggle Logic
+    function toggleFullscreen() {
+      const docEl = document.documentElement;
+      if (!document.fullscreenElement) {
+        if (docEl.requestFullscreen) {
+          docEl.requestFullscreen().catch(() => {});
+        } else if (docEl.webkitRequestFullscreen) {
+          docEl.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    }
+
+    function updateFullscreenButtonLabel() {
+      const isFs = !!document.fullscreenElement;
+      document.querySelectorAll('.fs-toggle-btn').forEach(btn => {
+        btn.innerHTML = isFs ? '🗗 전체화면 종료' : '⛶ 전체화면 보기';
+      });
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      scaleStage();
+      updateFullscreenButtonLabel();
+    });
+
+    // Export All 53 Slides to PDF
+    function exportToPDF() {
+      closePopup();
+      toggleTOC(false);
+
+      const printContainer = document.getElementById('print-all-container');
+      printContainer.innerHTML = SLIDES.map((_, idx) => `
+        <div class="print-slide-page">
+          ${getSlideHTML(idx)}
+        </div>
+      `).join('');
+
+      setTimeout(() => {
+        window.print();
+      }, 150);
+    }
+
+    window.addEventListener('afterprint', () => {
+      const printContainer = document.getElementById('print-all-container');
+      if (printContainer) {
+        printContainer.innerHTML = '';
+      }
+    });
+
+    // Interactive Card / Box Click Delegation
+    document.getElementById('slide-container').addEventListener('click', (e) => {
+      // Ignore clicks directly on interactive form controls or buttons
+      const ignoreTag = e.target.closest('button, input, textarea, a, label.check-item');
+      if (ignoreTag) return;
+
+      // 1. Cover workflow box click
+      const coverBox = e.target.closest('.cover-flow-box');
+      if (coverBox) {
+        const parent = coverBox.parentElement;
+        parent.querySelectorAll('.cover-flow-box').forEach(el => {
+          if (el !== coverBox) el.classList.remove('active-box');
+        });
+        coverBox.classList.toggle('active-box');
+        return;
+      }
+
+      // 2. Requirement template inner box click (Slide 31)
+      const reqBox = e.target.closest('.req-box');
+      if (reqBox) {
+        const parent = reqBox.parentElement;
+        parent.querySelectorAll('.req-box').forEach(el => {
+          if (el !== reqBox) el.classList.remove('active-box');
+        });
+        reqBox.classList.toggle('active-box');
+        return;
+      }
+
+      // 3. Table row click
+      const tableRow = e.target.closest('.slide-table tbody tr');
+      if (tableRow) {
+        const tbody = tableRow.parentElement;
+        tbody.querySelectorAll('tr').forEach(tr => {
+          if (tr !== tableRow) tr.classList.remove('active-box');
+        });
+        tableRow.classList.toggle('active-box');
+        return;
+      }
+
+      // 4. General .card click across all slides
+      const card = e.target.closest('.card');
+      if (card) {
+        const parent = card.parentElement;
+        if (parent) {
+          parent.querySelectorAll(':scope > .card').forEach(sibling => {
+            if (sibling !== card) {
+              sibling.classList.remove('highlight', 'active-box');
+            }
+          });
+        }
+        if (card.classList.contains('highlight') || card.classList.contains('active-box')) {
+          card.classList.remove('highlight', 'active-box');
+        } else {
+          card.classList.add('active-box');
+        }
+      }
+    });
+
+    function prevSlide() {
+      if (currentSlideIndex > 0) {
+        currentSlideIndex--;
+        renderSlide(currentSlideIndex);
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlideIndex < SLIDES.length - 1) {
+        currentSlideIndex++;
+        renderSlide(currentSlideIndex);
+      }
+    }
+
+    function goToSlide(pageNumber) {
+      const idx = pageNumber - 1;
+      if (idx >= 0 && idx < SLIDES.length) {
+        currentSlideIndex = idx;
+        renderSlide(currentSlideIndex);
+        toggleTOC(false);
+      }
+    }
+
+    // Popup Modal Logic with Focus Restoration
+    function openPopup(triggerBtn) {
+      lastFocusedElement = triggerBtn;
+      const slide = SLIDES[currentSlideIndex];
+      if (!slide.popup) return;
+
+      const modal = document.getElementById('info-modal');
+      const badge = document.getElementById('modal-badge-el');
+      const title = document.getElementById('modal-title-text');
+      const body = document.getElementById('modal-body-content');
+
+      if (slide.popup.type === 'check') {
+        badge.textContent = '실습 확인';
+        badge.style.background = 'var(--teal-bg)';
+        badge.style.color = '#0F766E';
+      } else if (slide.popup.type === 'ref') {
+        badge.textContent = '참고';
+        badge.style.background = 'var(--blue-bg)';
+        badge.style.color = '#1D4ED8';
+      } else {
+        badge.textContent = '예시';
+        badge.style.background = 'var(--amber-bg)';
+        badge.style.color = '#B45309';
+      }
+
+      title.textContent = slide.popup.title;
+      body.innerHTML = slide.popup.html;
+      modal.classList.add('open');
+      document.getElementById('modal-close-button').focus();
+    }
+
+    function closePopup() {
+      const modal = document.getElementById('info-modal');
+      if (modal.classList.contains('open')) {
+        modal.classList.remove('open');
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+      }
+    }
+
+    document.getElementById('info-modal').addEventListener('click', closePopup);
+    document.getElementById('toc-modal').addEventListener('click', () => toggleTOC(false));
+
+    // Copy Prompt with Fallback Selection
+    function copyPromptText(btnEl, text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showCopySuccess(btnEl);
+        }).catch(() => {
+          fallbackCopyText(btnEl);
+        });
+      } else {
+        fallbackCopyText(btnEl);
+      }
+    }
+
+    function fallbackCopyText(btnEl) {
+      try {
+        const promptBox = btnEl.closest('.prompt-container').querySelector('.prompt-text');
+        const range = document.createRange();
+        range.selectNodeContents(promptBox);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand('copy');
+        showCopySuccess(btnEl);
+      } catch (e) {
+        btnEl.textContent = '아래 텍스트를 직접 드래그해 복사하세요';
+      }
+    }
+
+    function showCopySuccess(btnEl) {
+      const orig = btnEl.textContent;
+      btnEl.classList.add('copied');
+      btnEl.textContent = '✓ 복사 완료!';
+      setTimeout(() => {
+        btnEl.classList.remove('copied');
+        btnEl.textContent = orig;
+      }, 2000);
+    }
+
+    // Break Timer Controls
+    function toggleBreakTimer() {
+      const disp = document.getElementById('break-timer-display');
+      if (!disp) return;
+      if (breakTimerInterval) {
+        clearInterval(breakTimerInterval);
+        breakTimerInterval = null;
+      } else {
+        breakTimerInterval = setInterval(() => {
+          if (breakRemainingSeconds > 0) {
+            breakRemainingSeconds--;
+            const m = String(Math.floor(breakRemainingSeconds / 60)).padStart(2, '0');
+            const s = String(breakRemainingSeconds % 60).padStart(2, '0');
+            const el = document.getElementById('break-timer-display');
+            if (el) el.textContent = `${m}:${s}`;
+          } else {
+            clearInterval(breakTimerInterval);
+            breakTimerInterval = null;
+          }
+        }, 1000);
+      }
+    }
+
+    function resetBreakTimer() {
+      if (breakTimerInterval) {
+        clearInterval(breakTimerInterval);
+        breakTimerInterval = null;
+      }
+      breakRemainingSeconds = 600;
+      const el = document.getElementById('break-timer-display');
+      if (el) el.textContent = '10:00';
+    }
+
+    // TOC Drawer Generation
+    function buildTOC() {
+      const groups = [
+        { title: '오프닝 및 모듈 1. AI 시대의 임원 업무', time: '30분 (01~09p)', range: [1, 9] },
+        { title: '모듈 2. 공시자료와 경영 질문', time: '25분 (10~16p)', range: [10, 16] },
+        { title: '모듈 3. AI 비교 브리핑 초안 + 휴식', time: '50분 (17~26p)', range: [17, 26] },
+        { title: '모듈 4. 브리핑 보드 제작', time: '60분 (27~38p)', range: [27, 38] },
+        { title: '모듈 5. 부서 실행 과제로 연결 + 휴식', time: '45분 (39~46p)', range: [39, 46] },
+        { title: '모듈 6. AI 리더십과 조직 실행', time: '30분 (47~53p)', range: [47, 53] }
+      ];
+
+      const tocContent = document.getElementById('toc-content');
+      tocContent.innerHTML = groups.map(g => {
+        const slidesInGroup = SLIDES.filter(s => s.page >= g.range[0] && s.page <= g.range[1]);
+        return `
+          <div class="toc-module-box">
+            <div class="toc-module-title">
+              <span>${g.title}</span>
+              <span style="color:var(--teal-dark); font-size:14px;">${g.time}</span>
+            </div>
+            <div class="toc-slide-list">
+              ${slidesInGroup.map(s => `
+                <button class="toc-slide-btn ${s.page === currentSlideIndex + 1 ? 'current-slide' : ''}" onclick="goToSlide(${s.page})">
+                  <span style="color:var(--teal-dark); font-weight:800;">${String(s.page).padStart(2, '0')}</span>
+                  <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${s.title}</span>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleTOC(open) {
+      const toc = document.getElementById('toc-modal');
+      if (open) {
+        buildTOC();
+        toc.classList.add('open');
+      } else {
+        toc.classList.remove('open');
+      }
+    }
+
+    // Keyboard Navigation Support
+    window.addEventListener('keydown', (e) => {
+      const tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+      const isInputFocused = (tag === 'input' || tag === 'textarea');
+
+      if (e.key === 'Escape') {
+        closePopup();
+        toggleTOC(false);
+        return;
+      }
+
+      if (isInputFocused) return;
+
+      const infoOpen = document.getElementById('info-modal').classList.contains('open');
+      const tocOpen = document.getElementById('toc-modal').classList.contains('open');
+      if (infoOpen || tocOpen) return;
+
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+
+    // Initialize
+    scaleStage();
+    renderSlide(0);
+  </script>
+</body>
+</html>

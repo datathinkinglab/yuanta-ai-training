@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유안타증권 지점장 교육 — AI와 함께 만드는 영업직원 코칭 대시보드</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Noto Sans KR & JetBrains Mono -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --yuanta-navy: #101D35;
+      --yuanta-teal: #39B8B2;
+      --yuanta-teal-dark: #0D9488;
+    }
+    * {
+      box-sizing: border-box;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    body {
+      background-color: #0B1324;
+      color: #101D35;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    /* 16:9 Slide Aspect Ratio Container */
+    .slide-viewport {
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+    }
+    @media (max-width: 1024px) {
+      .slide-viewport {
+        aspect-ratio: auto;
+        min-height: 640px;
+      }
+    }
+    /* Read-All Mode Styling */
+    body.read-all-mode {
+      background-color: #F1F5F9;
+      overflow-y: auto !important;
+    }
+    body.read-all-mode .slide-viewport {
+      margin-bottom: 32px;
+      box-shadow: 0 10px 25px -5px rgba(16, 29, 53, 0.12);
+    }
+    /* Print Friendly */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      #presentation-wrapper {
+        display: none !important;
+      }
+      #read-all-wrapper {
+        display: block !important;
+        padding: 0 !important;
+      }
+      .slide-viewport {
+        page-break-after: always;
+        break-after: page;
+        box-shadow: none !important;
+        border: 1px solid #CBD5E1;
+        border-radius: 0 !important;
+        margin: 0 auto 16px auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #94A3B8;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #64748B;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between select-text">
+
+  <!-- 상단 컨트롤 네비게이션 바 (교육생 화면 기준: 시간표/타이머 배제) -->
+  <header class="no-print w-full bg-[#101D35] border-b border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 z-30 sticky top-0">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-[#39B8B2]/20 text-[#39B8B2] border border-[#39B8B2]/40">
+        유안타증권 지점장 교육
+      </span>
+      <h1 class="text-white text-sm md:text-base font-bold truncate">
+        AI와 함께 만드는 영업직원 코칭 대시보드
+      </h1>
+    </div>
+
+    <!-- 기능 버튼 그룹 -->
+    <div class="flex items-center flex-wrap gap-2">
+      <button id="btn-toc" onclick="openModal('modal-toc', this)" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-100 text-xs md:text-sm font-medium flex items-center gap-1.5 transition" title="목차 이동">
+        <i class="fa-solid fa-list-ul text-[#39B8B2]"></i>
+        <span>목차 이동</span>
+      </button>
+
+      <button id="btn-read-all" onclick="toggleReadAllMode()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-100 text-xs md:text-sm font-medium flex items-center gap-1.5 transition" title="전체 읽기 모드 전환">
+        <i class="fa-solid fa-book-open text-[#39B8B2]"></i>
+        <span id="read-all-label">전체 읽기</span>
+      </button>
+
+      <button id="btn-fullscreen" onclick="toggleFullScreen()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-100 text-xs md:text-sm font-medium flex items-center gap-1.5 transition" title="전체 화면 전환">
+        <i class="fa-solid fa-expand text-[#39B8B2]"></i>
+        <span>전체 화면</span>
+      </button>
+
+      <button onclick="window.print()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-100 text-xs md:text-sm font-medium flex items-center gap-1.5 transition" title="인쇄하기">
+        <i class="fa-solid fa-print text-[#39B8B2]"></i>
+        <span class="hidden sm:inline">인쇄</span>
+      </button>
+
+      <button onclick="downloadThisHtml()" class="px-3.5 py-1.5 rounded-lg bg-[#39B8B2] hover:bg-[#2da39d] text-[#101D35] text-xs md:text-sm font-extrabold flex items-center gap-1.5 shadow-md transition" title="현재 슬라이드 HTML 파일 다운로드">
+        <i class="fa-solid fa-download"></i>
+        <span>HTML 다운로드</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 단일 슬라이드 프레젠테이션 영역 -->
+  <main id="presentation-wrapper" class="flex-1 flex flex-col items-center justify-center p-3 md:p-6 w-full">
+    <div id="active-slide-Host" class="slide-viewport bg-white flex flex-col justify-between">
+      <!-- 자바스크립트에 의해 현재 슬라이드가 렌더링됩니다 -->
+    </div>
+
+    <!-- 하단 슬라이드 조작 컨트롤 바 -->
+    <div class="no-print w-full max-w-[1280px] mt-3 flex items-center justify-between px-2">
+      <div class="flex items-center gap-2">
+        <button id="btn-prev" onclick="changeSlide(-1)" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-white text-sm font-semibold flex items-center gap-2 transition">
+          <i class="fa-solid fa-chevron-left text-xs"></i>
+          <span>이전</span>
+        </button>
+        <button id="btn-next" onclick="changeSlide(1)" class="px-4 py-2 rounded-lg bg-[#39B8B2] hover:bg-[#2da39d] disabled:opacity-40 text-[#101D35] text-sm font-extrabold flex items-center gap-2 transition">
+          <span>다음</span>
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+      </div>
+
+      <!-- 빠른 페이지 이동 및 표시 -->
+      <div class="flex items-center gap-3 text-slate-300 text-sm">
+        <span class="hidden md:inline text-xs text-slate-400">좌우 방향키(←/→) 이동 지원</span>
+        <div class="flex items-center gap-1.5 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+          <span id="page-indicator" class="font-mono-code font-bold text-[#39B8B2]">01</span>
+          <span class="text-slate-500">/</span>
+          <span class="font-mono-code text-slate-300">52</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 전체 읽기(연속 스크롤 및 인쇄) 영역 -->
+  <section id="read-all-wrapper" class="hidden w-full max-w-[1280px] mx-auto p-4 md:p-8">
+    <div class="no-print mb-6 bg-[#101D35] text-white p-4 rounded-xl flex items-center justify-between">
+      <div>
+        <h2 class="text-lg font-bold text-[#39B8B2]">전체 읽기 모드 (총 52페이지)</h2>
+        <p class="text-xs text-slate-300 mt-0.5">모든 슬라이드를 스크롤하며 한눈에 읽거나 인쇄할 수 있습니다.</p>
+      </div>
+      <button onclick="toggleReadAllMode()" class="px-4 py-2 rounded-lg bg-[#39B8B2] text-[#101D35] font-bold text-sm">
+        슬라이드 보기로 돌아가기
+      </button>
+    </div>
+    <div id="read-all-container" class="flex flex-col gap-8"></div>
+  </section>
+
+  <!-- 모달 1: 목차 이동 (Table of Contents) -->
+  <div id="modal-toc" class="fixed inset-0 bg-black/70 backdrop-blur-xs z-50 hidden items-center justify-center p-4" onclick="handleBackdropClick(event, 'modal-toc')">
+    <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden border border-slate-200" role="dialog" aria-modal="true" aria-labelledby="modal-toc-title">
+      <div class="bg-[#101D35] text-white px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-map text-[#39B8B2]"></i>
+          <h3 id="modal-toc-title" class="text-lg font-bold">전체 슬라이드 목차 (01 ~ 52)</h3>
+        </div>
+        <button onclick="closeModal('modal-toc')" class="text-slate-300 hover:text-white w-8 h-8 rounded-lg flex items-center justify-center" aria-label="닫기">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+      <div id="toc-grid" class="p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 bg-slate-50">
+        <!-- JS로 생성 -->
+      </div>
+      <div class="px-6 py-3 bg-white border-t border-slate-200 flex justify-between items-center text-xs text-slate-500">
+        <span>여정: 질문 → 사례 이해 → 데이터 확인 → 제작 → 검증·수정 → 코칭 → 나의 적용</span>
+        <button onclick="closeModal('modal-toc')" class="px-4 py-1.5 rounded-lg bg-slate-800 text-white font-semibold">닫기 (Esc)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모달 2: 프롬프트 및 참고사항 범용 팝업 -->
+  <div id="modal-popup" class="fixed inset-0 bg-black/70 backdrop-blur-xs z-50 hidden items-center justify-center p-4" onclick="handleBackdropClick(event, 'modal-popup')">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden border border-slate-200" role="dialog" aria-modal="true" aria-labelledby="modal-popup-title">
+      <div class="bg-[#101D35] text-white px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-terminal text-[#39B8B2]"></i>
+          <h3 id="modal-popup-title" class="text-lg font-bold">상세 내용</h3>
+        </div>
+        <button onclick="closeModal('modal-popup')" class="text-slate-300 hover:text-white w-8 h-8 rounded-lg flex items-center justify-center" aria-label="닫기">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+      <div class="p-6 overflow-y-auto space-y-4">
+        <p id="modal-popup-desc" class="text-sm text-slate-600 font-medium"></p>
+        <div class="relative">
+          <pre id="modal-popup-content" class="bg-slate-900 text-slate-100 p-5 rounded-xl text-sm leading-relaxed whitespace-pre-wrap break-words font-mono-code border border-slate-700"></pre>
+        </div>
+      </div>
+      <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-wrap justify-between items-center gap-2">
+        <span class="text-xs text-slate-500">팝업이 열려 있을 때는 좌우 방향키 슬라이드 이동이 일시 중지됩니다. (Esc로 닫기)</span>
+        <div class="flex items-center gap-2">
+          <button id="modal-copy-btn" onclick="copyPopupText()" class="px-4 py-2 rounded-lg bg-[#0D9488] hover:bg-[#0f766e] text-white font-bold text-sm flex items-center gap-2 transition">
+            <i class="fa-regular fa-copy"></i>
+            <span>전문 복사하기</span>
+          </button>
+          <button onclick="closeModal('modal-popup')" class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-sm transition">
+            닫기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 복사 및 동작 알림 토스트 -->
+  <div id="toast-box" class="fixed bottom-6 right-6 z-50 hidden items-center gap-3 px-5 py-3.5 rounded-xl bg-[#101D35] text-white shadow-2xl border border-[#39B8B2]">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-[#39B8B2] text-lg"></i>
+    <span id="toast-msg" class="text-sm font-semibold">복사되었습니다.</span>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. 프롬프트 및 팝업 전문 데이터
+    // =========================================================================
+    const POPUP_DATA = {
+      slide8_ref: {
+        title: "참고: 고객사 원본 대시보드 부가 기능 안내",
+        desc: "고객사 원본(지점_영업직원_코칭대시보드.html)에 포함된 출력·저장 보조 기능입니다.",
+        content: `1. 전체 복사 기능: 선택한 직원의 요약 수치와 코칭 스크립트 초안을 클립보드로 일괄 복사합니다.\n2. 텍스트(.txt) 저장: 면담 준비 내용을 메모장 파일로 내려받습니다.\n3. 인쇄(Print) 지원: 브라우저 인쇄 기능을 통해 A4 규격 면담 시트로 출력합니다.\n\n※ 주의사항: 원본 HTML은 CSV·TXT 불러오기와 엑셀 표 붙여넣기를 지원하며, .xlsx(엑셀 원본) 파일을 직접 파싱하지는 않습니다.`,
+        hideCopy: true
+      },
+      prompt_20: {
+        title: "공통 생성 프롬프트 전문 (20페이지)",
+        desc: "아래 프롬프트를 복사하여 생성형 AI 대화창에 가상 CSV 파일과 함께 전달하세요.",
+        content: `당신은 지점장이 직원 면담을 준비하도록 돕는 대시보드 제작 도우미입니다. 첨부한 CSV는 가상 영업직원 실적입니다. CSV를 불러와 브라우저에서 실행하는 단일 HTML 파일을 만들어 주세요. 직원 목록과 직위·직무 필터를 제공하고, 직원을 선택하면 기준월 약정, 제공된 6개월평균약정, 2025.10~2026.09 월별 약정 추이, 제공된 기준월 순위를 보여주세요. 기준월은 인식된 월 중 최신 월로 표시하세요. (기준월 약정−제공된 6개월 평균)÷제공된 6개월 평균의 변화율을 보여주되, 값이 없거나 분모가 0이면 ‘비교 불가’라고 표시하세요. 수치의 출처·기준월·단위를 표시하고, 교육용 가상 데이터라는 안내를 넣으세요. 실행에 필요한 외부 라이브러리 여부를 명시하고 가능하면 외부 연결 없이 동작하게 해 주세요. 파일 저장과 실행 방법도 설명해 주세요.`
+      },
+      sample_csv_21: {
+        title: "대체용 가상 CSV 샘플 데이터 (파일 첨부 불가 시 복사)",
+        desc: "AI 대화창에 파일 첨부가 제한될 경우 아래 가상 CSV 텍스트를 복사하여 붙여넣으세요.",
+        content: `사번,성명,직위,직무,근속개월,2025.10,2025.11,2025.12,2026.01,2026.02,2026.03,2026.04,2026.05,2026.06,2026.07,2026.08,2026.09,6개월평균약정,기준월전체순위,기준월직무순위,기준월직위순위\n1001,김도윤,차장,PB,96,16200,16800,17100,16900,17500,17200,17400,17800,18100,17650,17775,19181,17984,2,2,1\n1002,이서연,과장,PB,72,14500,14900,15200,14800,15100,15300,15600,15900,16200,16000,15800,14200,15617,5,4,2\n1003,박지훈,대리,리테일,48,9800,10200,10500,10100,10400,10800,11000,11200,11500,11800,12100,12900,11750,8,3,1\n1004,최수아,차장,PB,108,21000,20500,21800,22100,21500,22400,22800,23100,22900,23400,23800,24500,23417,1,1,1\n1005,정우진,과장,법인,84,18500,18200,17900,18100,17600,17400,17200,16900,16500,16800,16400,15900,16617,4,1,1\n1006,강하은,주임,리테일,18,6200,6500,6800,7100,7400,7600,7900,8200,8500,8800,9100,9600,8683,11,5,2`
+      },
+      prompt_25: {
+        title: "화면 오류 및 개선 수정 요청 프롬프트 (25페이지)",
+        desc: "대괄호 [ ] 부분을 내 화면에서 발견한 현상으로 바꾸어 AI에게 전달하세요.",
+        content: `현재 [현상]이 발생합니다. [행동]을 했을 때 [기대 결과]가 나오도록 수정해 주세요. 기존 [유지할 기능]은 유지하고 전체 HTML과 확인 방법을 제공해 주세요.`
+      },
+      prompt_34: {
+        title: "검증을 위한 계산 기준 및 예외 처리 프롬프트 (34페이지)",
+        desc: "결측치 0 처리 방지 및 평균 산출 기간 명시를 위한 검증 프롬프트 전문입니다.",
+        content: `대시보드의 계산을 검토해 주세요. 기준월 값이 없으면 0이 아니라 ‘데이터 없음’, 제공된 6개월 평균이 없거나 0이면 변화율은 ‘비교 불가’로 표시해 주세요. 6개월 평균의 제공값과 월별 값으로 계산한 평균을 구분하고 사용 기간과 월 수를 표시해 주세요. 회기 시작 기준을 알 수 없다면 누계나 회기 평균을 임의로 새로 계산하지 말고 제공된 값만 표시하세요. 수정 후 확인할 사례도 알려주세요.`
+      },
+      prompt_42: {
+        title: "직원 면담 준비 카드 생성 프롬프트 (42페이지)",
+        desc: "선택한 가상 직원의 수치 데이터만을 기반으로 열린 질문과 면담 초안을 요청합니다.",
+        content: `선택한 가상 직원의 실적 데이터만을 바탕으로 지점장의 면담 준비 카드를 작성해 주세요. ① 기준월·수치·비교 기준을 포함한 관찰 사실, ② 데이터가 뒷받침하는 인정할 점, ③ 원인을 단정하지 않는 열린 질문 세 가지, ④ 직원과 함께 논의할 다음 행동 한 가지, ⑤ 추가 확인할 사항을 제시해 주세요. 데이터에 없는 직원의 노력·성격·역량·고객 상황은 추측하지 말고, 지점장이 검토할 초안이라는 안내를 넣어 주세요.`
+      },
+      prompt_50: {
+        title: "나의 관리 관점 최종 확장 프롬프트 틀 (50페이지)",
+        desc: "내가 선택한 기능이나 추가 가상 데이터를 반영할 때 사용하는 요청 틀입니다.",
+        content: `제가 확인할 질문은 [ ]입니다. 사용할 가상 데이터는 [ ]입니다. 화면에 [ ]를 추가해 주세요. 비교 기준·단위와 데이터가 없을 때의 표시를 알려주고 기존 [ ] 기능은 유지해 주세요.`
+      }
+    };
+
+    // =========================================================================
+    // 2. 사용자 입력 상태 보존 객체 (슬라이드 이동 시 메모 유지)
+    // =========================================================================
+    const USER_STATE = {
+      s4_choice: null,
+      s4_memo: "",
+      s7_good: "",
+      s7_fix: "",
+      s11_checks: [false, false, false, false, false],
+      s14_q1: "",
+      s14_q2: "",
+      s14_q3: "",
+      s14_q4: "",
+      s16_first: "",
+      s16_after: "",
+      s16_action: "",
+      s19_prompt: "",
+      s23_checks: [false, false, false, false],
+      s23_issue: "",
+      s29_val1: "",
+      s29_val2: "",
+      s29_val3: "",
+      s33_choice: "빠진 값 안내",
+      s33_sentence: "",
+      s35_view: "최근 변화 중심",
+      s36_change: "",
+      s36_reason: "",
+      s38_choice: null,
+      s41_fact: "",
+      s41_praise: "",
+      s41_questions: "",
+      s41_action: "",
+      s41_extra: "",
+      s43_msg: "",
+      s50_q: "직무 내 평균 대비 최근 3개월 추세 비교",
+      s50_data: "샘플_지점영업직원_실적.csv",
+      s50_ui: "변화율 상·하위 정렬 버튼과 면담 메모란",
+      s50_keep: "직원 선택, 12개월 추이 그래프, 결측치 예외 표시",
+      s52_q: "",
+      s52_data: "",
+      s52_action: ""
+    };
+
+    // =========================================================================
+    // 3. 여정(Journey) 단계 정의
+    // =========================================================================
+    const JOURNEY_STEPS = ["질문", "사례 이해", "데이터 확인", "제작", "검증·수정", "코칭", "나의 적용"];
+
+    // =========================================================================
+    // 4. 52개 슬라이드 전체 설계 데이터
+    // =========================================================================
+    const SLIDES = [
+      // ---------------- M1. 질문과 고객사 사례 (01~09) ----------------
+      {
+        id: 1,
+        type: "cover",
+        module: "M1. 질문과 고객사 사례",
+        journey: "질문",
+        title: "AI와 함께 만드는 영업직원 코칭 대시보드",
+        subtitle: "데이터를 읽고, 질문을 만들고, 나의 관리 화면으로"
+      },
+      {
+        id: 2,
+        type: "divider",
+        module: "MODULE 01",
+        journey: "질문",
+        title: "지점장의 질문에서 시작합니다",
+        subtitle: "직원 면담 전에 무엇을 알고 싶으신가요?",
+        visualFlow: ["질문 정의", "실적 데이터 확인", "코칭 대화 연결"]
+      },
+      {
+        id: 3,
+        type: "normal",
+        module: "M1. 질문과 고객사 사례",
+        journey: "질문",
+        badge: "면담 전의 장면",
+        title: "직원과 이야기하기 전, 어떤 자료부터 보시나요?",
+        body: "월별 실적, 순위, 영업 구성은 각각 의미가 다릅니다. 여러 정보를 살펴보더라도 면담에 필요한 질문까지 연결하려면 정리할 시간이 필요합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:border-[#39B8B2] transition">
+              <div class="w-11 h-11 rounded-lg bg-[#101D35] text-[#39B8B2] flex items-center justify-center text-lg mb-4">
+                <i class="fa-solid fa-table-list"></i>
+              </div>
+              <div>
+                <span class="text-xs font-bold text-[#0D9488]">STEP 01</span>
+                <h3 class="text-lg font-extrabold text-[#101D35] mt-1">자료 확인</h3>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">월별 약정 실적, 순위, 영업 구성 등 흩어진 수치 자료 열람</p>
+              </div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:border-[#39B8B2] transition">
+              <div class="w-11 h-11 rounded-lg bg-[#101D35] text-[#39B8B2] flex items-center justify-center text-lg mb-4">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <div>
+                <span class="text-xs font-bold text-[#0D9488]">STEP 02</span>
+                <h3 class="text-lg font-extrabold text-[#101D35] mt-1">변화 파악</h3>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">본인의 평소 평균 대비 최근 상승·하락 흐름과 특이점 포착</p>
+              </div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:border-[#39B8B2] transition">
+              <div class="w-11 h-11 rounded-lg bg-[#101D35] text-[#39B8B2] flex items-center justify-center text-lg mb-4">
+                <i class="fa-solid fa-circle-question"></i>
+              </div>
+              <div>
+                <span class="text-xs font-bold text-[#0D9488]">STEP 03</span>
+                <h3 class="text-lg font-extrabold text-[#101D35] mt-1">맥락 질문</h3>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">숫자만으로는 알 수 없는 시장 상황과 고객 변화 질문 준비</p>
+              </div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:border-[#39B8B2] transition">
+              <div class="w-11 h-11 rounded-lg bg-[#101D35] text-[#39B8B2] flex items-center justify-center text-lg mb-4">
+                <i class="fa-solid fa-comments"></i>
+              </div>
+              <div>
+                <span class="text-xs font-bold text-[#0D9488]">STEP 04</span>
+                <h3 class="text-lg font-extrabold text-[#101D35] mt-1">지원 논의</h3>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">직원의 이야기를 경청하고 다음 달 필요한 지원 방향 합의</p>
+              </div>
+            </div>
+          </div>
+        `,
+        footerNote: "오늘은 이 과정을 가상의 지점 데이터로 연습합니다."
+      },
+      {
+        id: 4,
+        type: "normal",
+        module: "M1. 질문과 고객사 사례",
+        journey: "질문",
+        badge: "참여",
+        title: "직원 면담 준비에서 가장 먼저 확인하고 싶은 것은?",
+        body: "아래 네 가지 선택지 중 한 가지를 선택한 뒤, 그 이유를 메모하거나 옆 자리 지점장님과 공유해 보세요.",
+        renderContent: () => {
+          const opts = [
+            { id: 1, title: "① 최근 실적 변화", desc: "기준월 약정과 최근 월별 추세 변동" },
+            { id: 2, title: "② 영업 구성의 차이", desc: "주식·금융상품·이자수익 등 포트폴리오" },
+            { id: 3, title: "③ 비교 집단에서의 위치", desc: "전체·직무·직위 내에서의 상대 순위" },
+            { id: 4, title: "④ 면담 질문과 지원 방향", desc: "대화를 여는 질문과 코칭 포인트" }
+          ];
+          return `
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3 my-auto">
+              ${opts.map(o => `
+                <button onclick="USER_STATE.s4_choice=${o.id}; renderCurrentSlide();" class="text-left p-4 rounded-xl border-2 transition ${USER_STATE.s4_choice === o.id ? 'border-[#0D9488] bg-teal-50/60 shadow-xs' : 'border-slate-200 bg-slate-50 hover:border-slate-300'}">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-base font-extrabold text-[#101D35]">${o.title}</span>
+                    <i class="fa-solid ${USER_STATE.s4_choice === o.id ? 'fa-circle-check text-[#0D9488]' : 'fa-circle text-slate-300'}"></i>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">${o.desc}</p>
+                </button>
+              `).join('')}
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mt-2">
+              <label class="block text-xs font-bold text-[#101D35] mb-1.5">
+                <i class="fa-solid fa-pen-to-square text-[#0D9488] mr-1"></i>개인 메모: 선택한 이유를 간단히 적어보세요 (예시 답은 미리 제시하지 않습니다)
+              </label>
+              <input type="text" value="${escapeHtml(USER_STATE.s4_memo)}" oninput="USER_STATE.s4_memo = this.value" placeholder="예: 평소 본인 평균 대비 최근 흐름이 바뀌었는지 먼저 봐야 면담 주제를 잡을 수 있기 때문..." class="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-[#0D9488] bg-white">
+            </div>
+          `;
+        },
+        footerNote: "활동: 한 가지 선택 후 그 이유를 메모하거나 옆 사람과 공유합니다."
+      },
+      {
+        id: 5,
+        type: "normal",
+        module: "M1. 질문과 고객사 사례",
+        journey: "질문",
+        badge: "오늘의 목표",
+        title: "오늘은 나만의 코칭 화면을 만들어 봅니다",
+        body: "가상 데이터를 읽고 AI에게 요구사항을 전달하여 대시보드를 생성·검증한 뒤 면담 준비로 연결합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 relative">
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#101D35] text-white">단계 1</span>
+                <i class="fa-solid fa-file-csv text-2xl text-[#0D9488]"></i>
+              </div>
+              <h3 class="text-lg font-extrabold text-[#101D35]">가상 데이터 이해</h3>
+              <p class="text-xs text-slate-600 mt-1.5">열 구조와 답할 수 있는 질문 구분</p>
+              <div class="mt-4 pt-3 border-t border-slate-200 text-xs font-bold text-[#0D9488]">결과: 첫 요청 구상</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 relative">
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#101D35] text-white">단계 2</span>
+                <i class="fa-solid fa-code text-2xl text-[#0D9488]"></i>
+              </div>
+              <h3 class="text-lg font-extrabold text-[#101D35]">대시보드 생성</h3>
+              <p class="text-xs text-slate-600 mt-1.5">AI에 요구사항을 설명하고 HTML 생성</p>
+              <div class="mt-4 pt-3 border-t border-slate-200 text-xs font-bold text-[#0D9488]">결과: 실행한 기본 HTML</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 relative">
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#101D35] text-white">단계 3</span>
+                <i class="fa-solid fa-magnifying-glass-chart text-2xl text-[#0D9488]"></i>
+              </div>
+              <h3 class="text-lg font-extrabold text-[#101D35]">수치 검증과 수정</h3>
+              <p class="text-xs text-slate-600 mt-1.5">원본 CSV 대조 검산 및 예외 처리 반영</p>
+              <div class="mt-4 pt-3 border-t border-slate-200 text-xs font-bold text-[#0D9488]">결과: 검증된 개인화 화면</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 relative">
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#101D35] text-white">단계 4</span>
+                <i class="fa-solid fa-user-check text-2xl text-[#0D9488]"></i>
+              </div>
+              <h3 class="text-lg font-extrabold text-[#101D35]">면담 준비</h3>
+              <p class="text-xs text-slate-600 mt-1.5">사실과 맥락을 구분해 코칭 질문 작성</p>
+              <div class="mt-4 pt-3 border-t border-slate-200 text-xs font-bold text-[#0D9488]">결과: 면담 카드와 메시지</div>
+            </div>
+          </div>
+        `,
+        footerNote: "완성된 화면은 서로 달라도 좋습니다. 중요한 것은 원하는 기준을 설명하고 확인하는 과정입니다."
+      },
+      {
+        id: 6,
+        type: "normal",
+        module: "M1. 질문과 고객사 사례",
+        journey: "질문",
+        badge: "AI로 도구를 만드는 방식",
+        title: "요청하고, 실행하고, 확인하고, 다시 요청합니다",
+        body: "복잡한 코딩 용어를 외울 필요 없이, 업무 질문과 화면 기준을 설명하고 브라우저에서 결과를 직접 검증합니다.",
+        renderContent: () => `
+          <div class="flex flex-col md:flex-row items-stretch justify-between gap-2.5 my-auto">
+            <div class="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-4 text-center flex flex-col justify-center">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 1</span>
+              <h4 class="text-base font-bold text-[#101D35] mt-1">업무 질문</h4>
+              <p class="text-xs text-slate-600 mt-1">면담 전 무엇을 볼지 결정</p>
+            </div>
+            <div class="hidden md:flex items-center text-slate-400"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-4 text-center flex flex-col justify-center">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 2</span>
+              <h4 class="text-base font-bold text-[#101D35] mt-1">데이터·화면 설명</h4>
+              <p class="text-xs text-slate-600 mt-1">필요한 열과 계산식 전달</p>
+            </div>
+            <div class="hidden md:flex items-center text-slate-400"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-4 text-center flex flex-col justify-center">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 3</span>
+              <h4 class="text-base font-bold text-[#101D35] mt-1">HTML 초안 생성</h4>
+              <p class="text-xs text-slate-600 mt-1">AI가 단일 파일 작성</p>
+            </div>
+            <div class="hidden md:flex items-center text-slate-400"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="flex-1 bg-teal-50/70 border-2 border-[#0D9488] rounded-xl p-4 text-center flex flex-col justify-center">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 4</span>
+              <h4 class="text-base font-bold text-[#101D35] mt-1">브라우저에서 실행</h4>
+              <p class="text-xs text-slate-700 mt-1 font-medium">동작과 숫자를 직접 대조</p>
+            </div>
+            <div class="hidden md:flex items-center text-slate-400"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-4 text-center flex flex-col justify-center">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 5</span>
+              <h4 class="text-base font-bold text-[#101D35] mt-1">오류·개선점 전달</h4>
+              <p class="text-xs text-slate-600 mt-1">구체적 현상과 기대 결과 요청</p>
+            </div>
+          </div>
+        `,
+        footerNote: "핵심 강조: AI가 만든 화면은 실행 결과와 숫자를 지점장이 직접 확인합니다."
+      },
+      {
+        id: 7,
+        type: "normal",
+        module: "M1. 질문과 고객사 사례",
+        journey: "사례 이해",
+        badge: "고객사 사례 살펴보기 · 실습",
+        title: "고객사가 만든 코칭 대시보드를 열어봅니다",
+        body: "제공된 참고 사례(지점_영업직원_코칭대시보드.html)를 실행해 보고 좋은 점과 아쉬운 점을 살펴봅니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 my-auto">
+            <div class="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5">
+              <h3 class="text-sm font-extrabold text-[#101D35] flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-[#0D9488]"></i>실습 절차
+              </h3>
+              <div class="text-xs space-y-2 text-slate-700">
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200"><b>① 파일 열기:</b> 제공된 <code class="text-[#0D9488] font-bold">지점_영업직원_코칭대시보드.html</code>을 브라우저에서 열기</div>
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200"><b>② 샘플 시작:</b> 화면의 <b>‘가상 샘플 데이터로 체험하기’</b> 선택</div>
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200"><b>③ 전체 파악:</b> 지점 요약 지표와 좌측 직원 목록 살펴보기</div>
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200"><b>④ 상세 확인:</b> 직원 한 명을 클릭해 상세 차트와 코칭 문구 확인</div>
+              </div>
+            </div>
+            <div class="lg:col-span-7 flex flex-col justify-between bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-extrabold text-[#101D35]">고객사 원본 사례 화면 구성 (시안 표시)</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] bg-amber-100 text-amber-800 font-bold">사례 참고용 시안</span>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-3 grid grid-cols-3 gap-2 text-xs mb-3">
+                  <div class="col-span-1 bg-slate-100 p-2 rounded">
+                    <div class="font-bold text-[#101D35] mb-1">직원 목록 / 필터</div>
+                    <div class="text-[11px] text-slate-500">직무·직위 선택<br>김도윤 / 이서연 ...</div>
+                  </div>
+                  <div class="col-span-2 bg-slate-100 p-2 rounded">
+                    <div class="font-bold text-[#101D35] mb-1">월별 추이 & 규칙 기반 코칭 문구</div>
+                    <div class="text-[11px] text-slate-500">기준월 약정 / 6개월 평균 / 면담 스크립트 및 메신저 초안</div>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label class="block text-xs font-bold text-[#0D9488] mb-1">활동 1: 면담에 도움이 되는 화면 한 가지</label>
+                  <input type="text" value="${escapeHtml(USER_STATE.s7_good)}" oninput="USER_STATE.s7_good=this.value" placeholder="예: 한눈에 보이는 12개월 추이와 순위..." class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-rose-700 mb-1">활동 2: 내 관점에서 수정하고 싶은 점 한 가지</label>
+                  <input type="text" value="${escapeHtml(USER_STATE.s7_fix)}" oninput="USER_STATE.s7_fix=this.value" placeholder="예: 결측치 표시나 내가 원하는 비교 기준..." class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+        footerNote: "고객사 원본 대시보드는 실습 참고자료이며 완성 화면의 정답이나 실제 업무 시스템이 아닙니다."
+      },
+      {
+        id: 8,
+        type: "normal",
+        module: "M1. 질문과 고객사 사례",
+        journey: "사례 이해",
+        badge: "사례가 보여주는 것",
+        title: "한 화면에서 실적과 면담 초안을 연결합니다",
+        body: "고객사 원본 사례는 지점 요약부터 개별 직원의 면담 스크립트까지 한 화면에서 이어지도록 구성되어 있습니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-3.5 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <span class="text-xs font-bold text-[#0D9488]">구성 01</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">지점 요약과 월별 추이</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">지점 전체의 기준월 약정 합계와 12개월 추이 흐름을 상단에 요약합니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <span class="text-xs font-bold text-[#0D9488]">구성 02</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">직무·직위 필터</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">PB·리테일·법인 등 직무와 직위 그룹별로 직원을 좁혀서 살펴봅니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <span class="text-xs font-bold text-[#0D9488]">구성 03</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">직원별 상세와 순위</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">선택한 직원의 기준월 실적, 6개월 평균 대비 증감, 기준월 순위를 표시합니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <span class="text-xs font-bold text-[#0D9488]">구성 04</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">면담 스크립트와 메시지</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">실적 구간에 따라 미리 준비된 면담 질문과 메신저 발송 문구를 제시합니다.</p>
+            </div>
+          </div>
+          <div class="bg-slate-100 border border-slate-200 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-2">
+            <p class="text-xs text-slate-700 font-medium">
+              <i class="fa-solid fa-circle-info text-[#0D9488] mr-1.5"></i><b>데이터 입력 참고:</b> CSV나 텍스트(.txt)를 불러오거나 엑셀 표를 복사해 붙여넣을 수 있습니다. <b>XLSX 파일을 직접 열지는 않습니다.</b>
+            </p>
+            <button onclick="openPopup('slide8_ref', this)" class="px-3 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1.5">
+              <i class="fa-solid fa-up-right-from-square text-[#39B8B2]"></i>
+              <span>참고: 복사·저장·인쇄 기능 안내</span>
+            </button>
+          </div>
+        `,
+        footerNote: "원본은 CSV·TXT·붙여넣기·내장 샘플을 지원하며, 오늘 실습에서는 우리가 직접 새 HTML을 생성해 비교합니다."
+      },
+      {
+        id: 9,
+        type: "normal",
+        module: "M1. 질문과 고객사 사례",
+        journey: "사례 이해",
+        badge: "사례를 읽는 질문",
+        title: "화면에 나온 판단은 어떻게 만들어졌을까요?",
+        body: "원본의 코칭 문구는 정해진 조건과 문장을 조합해 표시합니다. ‘다른 표현으로’ 버튼도 실시간 AI 호출이 아닙니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto">
+            <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-5">
+              <div class="flex items-center gap-2 text-amber-900 font-extrabold text-base mb-2">
+                <i class="fa-solid fa-gears"></i>
+                <h3>고객사 원본 HTML의 동작 원리</h3>
+              </div>
+              <ul class="text-xs text-amber-950 space-y-2 leading-relaxed list-disc pl-4">
+                <li><b>규칙과 내장 문장의 조합:</b> 코드 안에 미리 작성된 조건문(예: 평균 대비 ±10% 등)에 따라 정해진 문구를 꺼내 보여줍니다.</li>
+                <li><b>사례용 분류 기준:</b> 원본의 유형 분류, ±10% 표시, 상·하위 분류는 교육 사례용 규칙이며 <b>유안타증권의 공식 인사·평가 기준이 아닙니다.</b></li>
+                <li><b>개선 대상 로직 존재:</b> 기준월 결측을 0으로 다루거나 비교 불가를 0으로 처리하는 등 교육 중 우리가 개선할 부분이 포함되어 있습니다.</li>
+              </ul>
+            </div>
+            <div class="bg-teal-50/70 border border-teal-200 rounded-xl p-5">
+              <div class="flex items-center gap-2 text-[#101D35] font-extrabold text-base mb-2">
+                <i class="fa-solid fa-user-tie text-[#0D9488]"></i>
+                <h3>지점장이 확인해야 할 핵심 관점</h3>
+              </div>
+              <ul class="text-xs text-slate-700 space-y-2 leading-relaxed list-disc pl-4">
+                <li><b>숫자의 계산 기준 점검:</b> 어떤 기간의 평균인지, 빠진 달은 없는지 지점장이 기준을 알고 있어야 합니다.</li>
+                <li><b>사실과 맥락의 구분:</b> 대시보드 수치는 대화의 출발점일 뿐, 실제 원인과 직원의 상황은 면담에서 직접 확인합니다.</li>
+                <li><b>나만의 관리 화면으로 확장:</b> 지점마다 중요하게 보는 질문에 맞춰 화면 구성을 다르게 설계할 수 있습니다.</li>
+              </ul>
+            </div>
+          </div>
+        `,
+        footerNote: "유형과 우선순위는 교육용 규칙입니다. 숫자의 의미와 직원의 상황은 지점장이 확인합니다."
+      },
+
+      // ---------------- M2. 데이터 읽기와 요구사항 (10~16) ----------------
+      {
+        id: 10,
+        type: "divider",
+        module: "MODULE 02",
+        journey: "데이터 확인",
+        title: "데이터를 읽고 질문을 구체화합니다",
+        subtitle: "어떤 질문에, 어떤 열이 필요할까요?",
+        visualFlow: ["CSV 열 구조 확인", "질문과 데이터 연결", "첫 요구사항 작성"]
+      },
+      {
+        id: 11,
+        type: "normal",
+        module: "M2. 데이터 읽기와 요구사항",
+        journey: "데이터 확인",
+        badge: "파일 열어보기 · 실습",
+        title: "한 행은 가상의 영업직원 한 명입니다",
+        body: "공통 실습 파일(샘플_지점영업직원_실적.csv)은 가상 직원 12명의 기본 정보와 순위, 2025.10~2026.09 월별 약정을 담고 있습니다.",
+        renderContent: () => {
+          const items = ["① 사번·성명·직위·직무·근속개월", "② 2025.10 ~ 2026.08 월별 약정", "③ 마지막 월 (2026.09 기준월)", "④ 제공된 6개월평균약정", "⑤ 기준월 전체·직무·직위 순위"];
+          return `
+            <div class="space-y-3 my-auto">
+              <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                <table class="w-full text-left text-xs">
+                  <thead class="bg-[#101D35] text-white">
+                    <tr>
+                      <th class="p-2.5">사번</th>
+                      <th class="p-2.5">성명</th>
+                      <th class="p-2.5">직위</th>
+                      <th class="p-2.5">직무</th>
+                      <th class="p-2.5">근속개월</th>
+                      <th class="p-2.5 bg-slate-800">2025.10 ~ 2026.08</th>
+                      <th class="p-2.5 bg-[#0D9488]">2026.09 (기준월)</th>
+                      <th class="p-2.5 bg-[#0D9488]">6개월평균약정</th>
+                      <th class="p-2.5">기준월순위(전체/직무/직위)</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200 bg-white">
+                    <tr>
+                      <td class="p-2.5 font-mono-code">1001</td>
+                      <td class="p-2.5 font-bold">김도윤</td>
+                      <td class="p-2.5">차장</td>
+                      <td class="p-2.5">PB</td>
+                      <td class="p-2.5">96</td>
+                      <td class="p-2.5 text-slate-500">16,200 … 17,775</td>
+                      <td class="p-2.5 font-bold text-[#0D9488]">19,181</td>
+                      <td class="p-2.5 font-bold text-[#101D35]">17,984</td>
+                      <td class="p-2.5">2위 / 2위 / 1위</td>
+                    </tr>
+                    <tr class="bg-slate-50">
+                      <td class="p-2.5 font-mono-code">1002</td>
+                      <td class="p-2.5 font-bold">이서연</td>
+                      <td class="p-2.5">과장</td>
+                      <td class="p-2.5">PB</td>
+                      <td class="p-2.5">72</td>
+                      <td class="p-2.5 text-slate-500">14,500 … 15,800</td>
+                      <td class="p-2.5 font-bold text-[#0D9488]">14,200</td>
+                      <td class="p-2.5 font-bold text-[#101D35]">15,617</td>
+                      <td class="p-2.5">5위 / 4위 / 2위</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+                <div class="text-xs font-bold text-[#101D35] mb-2">활동: 원본 파일을 변경하지 않고 열어 아래 열들을 찾아 체크해 보세요 (샘플에는 팀점명, 상품·종목 상세가 없습니다)</div>
+                <div class="flex flex-wrap gap-2">
+                  ${items.map((label, idx) => `
+                    <button onclick="USER_STATE.s11_checks[${idx}] = !USER_STATE.s11_checks[${idx}]; renderCurrentSlide();" class="px-3 py-1.5 rounded-lg text-xs font-bold border transition flex items-center gap-1.5 ${USER_STATE.s11_checks[idx] ? 'bg-[#0D9488] text-white border-[#0D9488]' : 'bg-white text-slate-700 border-slate-300'}">
+                      <i class="fa-solid ${USER_STATE.s11_checks[idx] ? 'fa-square-check' : 'fa-square text-slate-300'}"></i>
+                      <span>${label}</span>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          `;
+        },
+        footerNote: "활동: 사번·성명·직위·직무·근속개월, 6개월 평균, 마지막 월(2026.09)을 찾아 표시해 보세요."
+      },
+      {
+        id: 12,
+        type: "normal",
+        module: "M2. 데이터 읽기와 요구사항",
+        journey: "데이터 확인",
+        badge: "열과 질문 연결",
+        title: "데이터가 답할 수 있는 질문을 구분합니다",
+        body: "CSV의 각 열이 어떤 업무 질문에 답할 수 있는지 연결하고, 데이터만으로 알 수 없는 영역을 구분합니다.",
+        renderContent: () => `
+          <div class="overflow-hidden border border-slate-200 rounded-xl my-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-[#101D35] text-white">
+                <tr>
+                  <th class="py-3 px-4 w-1/3">CSV 데이터 열</th>
+                  <th class="py-3 px-4 w-1/3">연결되는 지점장의 질문</th>
+                  <th class="py-3 px-4 w-1/3">화면에서의 활용</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 bg-white text-xs md:text-sm">
+                <tr>
+                  <td class="py-3 px-4 font-bold text-[#101D35]">월별 약정 (2025.10~2026.09)</td>
+                  <td class="py-3 px-4 font-semibold text-[#0D9488]">→ 최근 12개월 흐름은 어떠한가?</td>
+                  <td class="py-3 px-4 text-slate-600">직원별 12개월 추이 차트 및 최고·최저월 파악</td>
+                </tr>
+                <tr class="bg-slate-50">
+                  <td class="py-3 px-4 font-bold text-[#101D35]">6개월평균약정</td>
+                  <td class="py-3 px-4 font-semibold text-[#0D9488]">→ 본인 평균 대비 이번 달은 어떠한가?</td>
+                  <td class="py-3 px-4 text-slate-600">(기준월 약정 − 6개월 평균) ÷ 6개월 평균 변화율</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 font-bold text-[#101D35]">기준월 순위 (전체/직무/직위)</td>
+                  <td class="py-3 px-4 font-semibold text-[#0D9488]">→ 제공된 비교 집단 내 위치는?</td>
+                  <td class="py-3 px-4 text-slate-600">전체·직무·직위별 제공 순위 및 회기 평균 순위 대조</td>
+                </tr>
+                <tr class="bg-slate-50">
+                  <td class="py-3 px-4 font-bold text-[#101D35]">직무 · 직위</td>
+                  <td class="py-3 px-4 font-semibold text-[#0D9488]">→ 해당 그룹만 모아서 보려면?</td>
+                  <td class="py-3 px-4 text-slate-600">대시보드 상단 직무·직위 필터링 조건</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `,
+        footerNote: "중요: 원인, 개인의 노력, 고객 상황은 이 열만으로 알 수 없습니다."
+      },
+      {
+        id: 13,
+        type: "normal",
+        module: "M2. 데이터 읽기와 요구사항",
+        journey: "데이터 확인",
+        badge: "다른 자료의 구조",
+        title: "참고 엑셀은 어떤 분류를 제시하나요?",
+        body: "고객사가 함께 제공한 『가상 실습 데이터 구성 참고자료.xlsx』의 두 가지 표 구조를 비교해 봅니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-[#101D35] text-white">첫 번째 표</span>
+              <h3 class="text-lg font-extrabold text-[#101D35] mt-2">직원별 월별 실적 형식</h3>
+              <ul class="text-xs text-slate-700 space-y-2 mt-3 list-disc pl-4 leading-relaxed">
+                <li><b>포함 항목:</b> 팀점명, 직원 기본 정보, 기준월 순위, 약정 집계</li>
+                <li><b>월별 열 기간:</b> <code class="font-bold text-rose-700">2025.11 ~ 2026.10</code> 월별 열 제시</li>
+                <li><b>비교:</b> 샘플 CSV(<code class="font-bold text-[#0D9488]">2025.10 ~ 2026.09</code>)와 기간이 한 달 다르며, 팀점명 유무에 차이가 있습니다.</li>
+              </ul>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-[#0D9488] text-white">두 번째 표</span>
+              <h3 class="text-lg font-extrabold text-[#101D35] mt-2">영업 구성 및 수익 분류 표</h3>
+              <ul class="text-xs text-slate-700 space-y-2 mt-3 list-disc pl-4 leading-relaxed">
+                <li><b>자산·수익 분류:</b> 주식(온라인·오프라인), 금융상품(펀드·Wrap·신탁·채권·파생결합상품), 이자수익(신용·대출), 기타(선물옵션 등)</li>
+                <li><b>측정 지표:</b> 약정 · 수익 · 순수익 구조 제시 (실습용으로 일부 변경된 분류)</li>
+                <li><b>주의:</b> 두 표는 양식 참고자료이며 <b>실제 직원별 값이 채워진 실습 데이터가 아닙니다.</b></li>
+              </ul>
+            </div>
+          </div>
+        `,
+        footerNote: "참고: 엑셀의 월별 형식은 2025.11~2026.10이고 CSV는 2025.10~2026.09입니다. 공통 실습은 CSV를 따릅니다."
+      },
+      {
+        id: 14,
+        type: "normal",
+        module: "M2. 데이터 읽기와 요구사항",
+        journey: "데이터 확인",
+        badge: "필요한 데이터가 있는가 · 참여",
+        title: "이 질문에 지금 가진 데이터로 답할 수 있을까요?",
+        body: "현재 우리가 가진 『샘플_지점영업직원_실적.csv』를 기준으로 각 질문에 어떻게 답할 수 있을지 골라보세요.",
+        renderContent: () => {
+          const cards = [
+            { key: "s14_q1", q: "① 9월 실적은 얼마인가?", hint: "2026.09 열 확인" },
+            { key: "s14_q2", q: "② 12개월 추이는 어떠한가?", hint: "2025.10~2026.09 열 확인" },
+            { key: "s14_q3", q: "③ 직원별 상위 5개 종목은?", hint: "종목명·금액 열 유무" },
+            { key: "s14_q4", q: "④ 실적이 변한 이유는 무엇인가?", hint: "데이터 vs 대화 맥락" }
+          ];
+          const choices = ["가능", "추가 자료 필요", "면담에서 확인"];
+          return `
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 my-auto">
+              ${cards.map(c => `
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                  <div>
+                    <h3 class="text-base font-extrabold text-[#101D35]">${c.q}</h3>
+                    <p class="text-xs text-slate-500 mt-1">점검 포인트: ${c.hint}</p>
+                  </div>
+                  <div class="space-y-1.5 mt-4">
+                    ${choices.map(ch => `
+                      <button onclick="USER_STATE['${c.key}']='${ch}'; renderCurrentSlide();" class="w-full py-1.5 px-3 rounded-lg text-xs font-bold border text-left flex items-center justify-between transition ${USER_STATE[c.key] === ch ? 'bg-[#101D35] text-[#39B8B2] border-[#101D35]' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'}">
+                        <span>${ch}</span>
+                        <i class="fa-solid ${USER_STATE[c.key] === ch ? 'fa-circle-check text-[#39B8B2]' : 'fa-circle text-slate-200'}"></i>
+                      </button>
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        },
+        footerNote: "활동: 각 질문에 [가능 / 추가 자료 필요 / 면담에서 확인]을 표시해 보세요. 해설은 다음 장에서 확인합니다."
+      },
+      {
+        id: 15,
+        type: "normal",
+        module: "M2. 데이터 읽기와 요구사항",
+        journey: "데이터 확인",
+        badge: "질문과 데이터 해설",
+        title: "가능한 분석과 추가 자료가 필요한 분석",
+        body: "보유한 데이터로 즉시 확인 가능한 것과 추가 가상 데이터가 필요한 것, 그리고 면담에서 물어봐야 할 것을 명확히 구분합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
+            <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-700 text-white">① · ② CSV로 확인 가능</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-2.5">9월 실적 & 12개월 추이</h3>
+              <p class="text-xs text-slate-700 mt-2 leading-relaxed">
+                샘플 CSV에 2025.10~2026.09 월별 약정 열이 모두 존재하므로 기본 대시보드에서 즉시 표와 차트로 구현할 수 있습니다.
+              </p>
+            </div>
+            <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-amber-700 text-white">③ 추가 자료가 필요</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-2.5">직원별 상위 5개 종목</h3>
+              <p class="text-xs text-slate-700 mt-2 leading-relaxed">
+                현재 CSV에는 종목명·상품명 상세 열이 없습니다. <b>직원별 종목명·금액·기준일</b>이 담긴 별도 가상 데이터가 추가로 필요합니다.
+              </p>
+            </div>
+            <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-sky-800 text-white">④ 면담에서 맥락 확인</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-2.5">실적이 변한 이유</h3>
+              <p class="text-xs text-slate-700 mt-2 leading-relaxed">
+                데이터만으로는 실적 증감의 원인을 확정할 수 없습니다. 수치를 근거로 직원의 경험과 시장 맥락을 <b>면담에서 직접 확인</b>해야 합니다.
+              </p>
+            </div>
+          </div>
+        `,
+        footerNote: "상품·종목 Top 5와 영업 구성은 별도 가상 데이터를 준비한 경우에만 선택 확장합니다."
+      },
+      {
+        id: 16,
+        type: "normal",
+        module: "M2. 데이터 읽기와 요구사항",
+        journey: "데이터 확인",
+        badge: "첫 요구사항 정리 · 활동",
+        title: "내가 만들 화면의 목적을 적어봅니다",
+        body: "AI에게 첫 대시보드를 요청하기 전에, 지점장으로서 내가 화면에서 무엇을 보고 어떤 행동을 할지 정리합니다.",
+        renderContent: () => `
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 my-auto space-y-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="bg-white p-3 rounded-lg border border-slate-200 flex items-center gap-3">
+                <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-[#101D35] text-white shrink-0">사용자</span>
+                <span class="text-sm font-bold text-[#101D35]">지점장</span>
+              </div>
+              <div class="bg-white p-3 rounded-lg border border-slate-200 flex items-center gap-3">
+                <span class="text-xs font-extrabold px-2.5 py-1 rounded bg-[#101D35] text-white shrink-0">상황</span>
+                <span class="text-sm font-bold text-[#101D35]">직원 면담 전</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-[#101D35] mb-1">1. 화면을 열었을 때 먼저 볼 것</label>
+                <input type="text" value="${escapeHtml(USER_STATE.s16_first)}" oninput="USER_STATE.s16_first=this.value" placeholder="예: 직무·직위 필터와 전체 직원 목록" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs bg-white">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-[#101D35] mb-1">2. 직원 선택 후 볼 것</label>
+                <input type="text" value="${escapeHtml(USER_STATE.s16_after)}" oninput="USER_STATE.s16_after=this.value" placeholder="예: 기준월 실적, 6개월 평균 대비 변화율, 12개월 추이" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs bg-white">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-[#101D35] mb-1">3. 화면을 보고 할 행동</label>
+                <input type="text" value="${escapeHtml(USER_STATE.s16_action)}" oninput="USER_STATE.s16_action=this.value" placeholder="예: 면담에서 물어볼 열린 질문 2가지 선정" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs bg-white">
+              </div>
+            </div>
+          </div>
+        `,
+        footerNote: "안내: 정답을 먼저 제시하지 않고 각자 작성합니다. 화면 입력은 개인 메모이며 새로고침 시 초기화될 수 있습니다."
+      },
+
+      // ---------------- M3. 대시보드 만들기 (17~26) ----------------
+      {
+        id: 17,
+        type: "divider",
+        module: "MODULE 03",
+        journey: "제작",
+        title: "AI에게 설명하고 화면을 만듭니다",
+        subtitle: "내 질문이 작동하는 화면이 되려면?",
+        visualFlow: ["최소 기능 정의", "프롬프트 전달·생성", "브라우저 실행·수정"]
+      },
+      {
+        id: 18,
+        type: "normal",
+        module: "M3. 대시보드 만들기",
+        journey: "제작",
+        badge: "만들 화면의 최소 기능",
+        title: "첫 번째 목표는 작동하는 기본 화면입니다",
+        body: "처음부터 복잡한 기능을 한꺼번에 넣지 않고, 핵심 흐름이 정확히 작동하는 첫 화면을 먼저 완성합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
+              <div class="w-9 h-9 rounded-full bg-[#101D35] text-[#39B8B2] font-bold text-sm flex items-center justify-center mx-auto mb-2">1</div>
+              <h3 class="text-sm font-extrabold text-[#101D35]">CSV 읽기</h3>
+              <p class="text-xs text-slate-600 mt-1">가상 실적 CSV 파일 불러오기</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
+              <div class="w-9 h-9 rounded-full bg-[#101D35] text-[#39B8B2] font-bold text-sm flex items-center justify-center mx-auto mb-2">2</div>
+              <h3 class="text-sm font-extrabold text-[#101D35]">직원 목록</h3>
+              <p class="text-xs text-slate-600 mt-1">12명 명단 및 직위·직무 필터</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
+              <div class="w-9 h-9 rounded-full bg-[#101D35] text-[#39B8B2] font-bold text-sm flex items-center justify-center mx-auto mb-2">3</div>
+              <h3 class="text-sm font-extrabold text-[#101D35]">직원 선택</h3>
+              <p class="text-xs text-slate-600 mt-1">클릭 시 해당 직원 데이터 연동</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
+              <div class="w-9 h-9 rounded-full bg-[#101D35] text-[#39B8B2] font-bold text-sm flex items-center justify-center mx-auto mb-2">4</div>
+              <h3 class="text-sm font-extrabold text-[#101D35]">기준월·6개월 평균</h3>
+              <p class="text-xs text-slate-600 mt-1">핵심 수치 및 평균 대비 변화율</p>
+            </div>
+            <div class="bg-teal-50/70 border-2 border-[#0D9488] rounded-xl p-4 text-center">
+              <div class="w-9 h-9 rounded-full bg-[#0D9488] text-white font-bold text-sm flex items-center justify-center mx-auto mb-2">5</div>
+              <h3 class="text-sm font-extrabold text-[#101D35]">12개월 추이</h3>
+              <p class="text-xs text-slate-700 mt-1">2025.10~2026.09 월별 흐름</p>
+            </div>
+          </div>
+        `,
+        footerNote: "첫 화면을 실행한 뒤 필터, 코칭 문구, 디자인을 차례로 개선합니다."
+      },
+      {
+        id: 19,
+        type: "normal",
+        module: "M3. 대시보드 만들기",
+        journey: "제작",
+        badge: "활동: 첫 요청 직접 쓰기 · 참여",
+        title: "내가 원하는 화면을 AI에게 설명해 보세요",
+        body: "16페이지에서 정리한 내용을 바탕으로 네 가지 기준을 포함해 나만의 첫 요청문을 작성해 봅니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 my-auto">
+            <div class="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 text-xs">
+              <div class="font-extrabold text-[#101D35] text-sm mb-1">요청문 작성 틀 (4가지 질문)</div>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>1. 누가 사용하나요?</b> (지점장, 면담 준비용)</div>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>2. 어떤 파일을 사용하나요?</b> (첨부한 가상 영업직원 CSV)</div>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>3. 무엇을 볼 수 있어야 하나요?</b> (기준월 약정, 6개월 평균, 12개월 추이, 순위)</div>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>4. 데이터가 없으면 어떻게 표시하나요?</b> (0이 아니라 ‘비교 불가’ 표시)</div>
+            </div>
+            <div class="lg:col-span-7 bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col">
+              <label class="text-xs font-bold text-[#101D35] mb-1.5">나의 첫 AI 요청문 초안 작성해보기</label>
+              <textarea rows="5" oninput="USER_STATE.s19_prompt=this.value" placeholder="예: 지점장이 직원 면담을 준비할 때 보는 단일 HTML 대시보드를 만들어 주세요. 첨부한 CSV 파일을 불러와서 직원 목록과 직무·직위 필터를 보여주고..." class="w-full flex-1 p-3 rounded-lg border border-slate-300 text-xs bg-white focus:outline-none focus:border-[#0D9488]">${escapeHtml(USER_STATE.s19_prompt)}</textarea>
+            </div>
+          </div>
+        `,
+        footerNote: "활동: 개인별 요청문을 먼저 작성해 본 뒤, 다음 페이지에서 공통 예시 프롬프트와 비교합니다."
+      },
+      {
+        id: 20,
+        type: "normal",
+        module: "M3. 대시보드 만들기",
+        journey: "제작",
+        badge: "공통 생성 프롬프트 · 복사",
+        title: "요청 예시: 직원별 실적 대시보드",
+        body: "핵심 조건(가상 CSV 기반 · 단일 HTML · 직원 선택 · 12개월 추이 · 수치 검증)이 모두 담긴 공통 프롬프트입니다.",
+        renderContent: () => `
+          <div class="bg-slate-900 text-slate-100 rounded-xl p-4 my-auto border border-slate-700 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-2.5">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-[#39B8B2] text-[#101D35]">PROMPT 01</span>
+                <span class="text-xs text-slate-300 font-semibold">가상 CSV 기반 · 단일 HTML · 직원 선택 · 12개월 추이 · 수치 검증</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="copyTextDirect(POPUP_DATA.prompt_20.content)" class="px-3 py-1 rounded-lg bg-[#0D9488] hover:bg-[#0f766e] text-white text-xs font-bold flex items-center gap-1.5 transition">
+                  <i class="fa-regular fa-copy"></i><span>전체 복사</span>
+                </button>
+                <button onclick="openPopup('prompt_20', this)" class="px-3 py-1 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold flex items-center gap-1.5 transition">
+                  <i class="fa-solid fa-expand"></i><span>팝업으로 크게 보기</span>
+                </button>
+              </div>
+            </div>
+            <p class="text-xs leading-relaxed font-mono-code text-slate-200 select-all">${escapeHtml(POPUP_DATA.prompt_20.content)}</p>
+          </div>
+        `,
+        footerNote: "주의: 생성한 파일의 독립 실행·외부 연결 여부는 브라우저 실행 및 코드 확인을 통해 직접 검증합니다."
+      },
+      {
+        id: 21,
+        type: "normal",
+        module: "M3. 대시보드 만들기",
+        journey: "제작",
+        badge: "파일 전달과 생성 · 실습",
+        title: "가상 CSV를 제공하고 HTML을 요청합니다",
+        body: "생성형 AI 대화창을 열고 샘플 CSV와 요청문을 전달하여 나만의 대시보드 HTML 코드를 생성합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-3.5 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 01</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">① 새 대화 열기</h3>
+              <p class="text-xs text-slate-600 mt-2">당일 제공된 AI 환경에서 이전 맥락이 섞이지 않도록 새 채팅을 시작합니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 02</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">② 샘플 CSV 첨부</h3>
+              <p class="text-xs text-slate-600 mt-2">제공된 <code class="font-bold text-[#101D35]">샘플_지점영업직원_실적.csv</code>(가상 데이터)를 첨부합니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 03</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">③ 요청문 붙여넣기</h3>
+              <p class="text-xs text-slate-600 mt-2">20페이지 공통 프롬프트를 붙여넣고 내가 원하는 개인 요구사항을 덧붙입니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 04</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">④ 생성 결과 확인</h3>
+              <p class="text-xs text-slate-600 mt-2">단일 HTML 코드가 끝까지 생성되었는지 확인하고 다운로드 또는 복사합니다.</p>
+            </div>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-2">
+            <p class="text-xs text-amber-900">
+              <b>대체 방법 안내:</b> 파일 첨부가 되지 않으면 가상 CSV 내용을 텍스트로 복사해 전달합니다. 계정 한도·접속 오류 시 강사가 제공하는 중간 결과 파일로 이어갑니다.
+            </p>
+            <button onclick="openPopup('sample_csv_21', this)" class="px-3 py-1.5 rounded-lg bg-amber-800 hover:bg-amber-900 text-white text-xs font-bold">
+              대체용 가상 CSV 텍스트 보기·복사
+            </button>
+          </div>
+        `,
+        footerNote: "외부 AI에는 제공된 가상 자료만 사용하며 실제 직원·고객 정보는 입력하지 않습니다."
+      },
+      {
+        id: 22,
+        type: "normal",
+        module: "M3. 대시보드 만들기",
+        journey: "제작",
+        badge: "저장하고 실행하기 · 실습",
+        title: "만든 파일을 브라우저에서 열어봅니다",
+        body: "AI가 생성한 HTML을 내 PC에 저장하고 웹 브라우저에서 직접 실행하여 화면이 정상적으로 열리는지 확인합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-3.5 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div class="text-xs font-extrabold text-[#0D9488]">절차 ①</div>
+              <h3 class="text-base font-bold text-[#101D35] mt-1">HTML 저장</h3>
+              <p class="text-xs text-slate-600 mt-2">AI가 제공한 다운로드 링크를 누르거나, 전체 HTML 코드를 복사해 메모장에 붙여넣고 저장합니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div class="text-xs font-extrabold text-[#0D9488]">절차 ②</div>
+              <h3 class="text-base font-bold text-[#101D35] mt-1">확장자 .html 확인</h3>
+              <p class="text-xs text-slate-600 mt-2">파일명 끝이 <code class="font-bold text-rose-700">.html.txt</code>가 아닌 <code class="font-bold text-[#0D9488]">my_dashboard.html</code>인지 확인합니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div class="text-xs font-extrabold text-[#0D9488]">절차 ③</div>
+              <h3 class="text-base font-bold text-[#101D35] mt-1">브라우저에서 열기</h3>
+              <p class="text-xs text-slate-600 mt-2">저장한 파일을 더블클릭하여 Chrome 또는 Edge 브라우저로 실행합니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div class="text-xs font-extrabold text-[#0D9488]">절차 ④</div>
+              <h3 class="text-base font-bold text-[#101D35] mt-1">가상 CSV 불러오기</h3>
+              <p class="text-xs text-slate-600 mt-2">화면에 있는 파일 업로드 버튼으로 <code class="font-bold">샘플_지점영업직원_실적.csv</code>를 선택합니다.</p>
+            </div>
+          </div>
+        `,
+        footerNote: "참고: 제공 화면과 운영체제에 따라 저장 절차가 다를 수 있습니다. 파일이 열리지 않으면 확장자와 전체 코드 누락을 확인합니다."
+      },
+      {
+        id: 23,
+        type: "normal",
+        module: "M3. 대시보드 만들기",
+        journey: "제작",
+        badge: "첫 실행 확인 · 활동",
+        title: "내 화면에서 확인할 네 가지",
+        body: "생성된 첫 번째 대시보드가 기본 요구사항대로 작동하는지 4가지를 점검하고, 이상이 있다면 기록합니다.",
+        renderContent: () => {
+          const checks = [
+            "① 직원 12명이 모두 목록에 보이는가?",
+            "② 기준월이 최신 월인 2026.09로 표시되는가?",
+            "③ 직원을 클릭해 선택할 수 있는가?",
+            "④ 직원을 바꿀 때 월별 추이 값이 함께 바뀌는가?"
+          ];
+          return `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                <h3 class="text-sm font-extrabold text-[#101D35] mb-2">동작 확인 체크리스트 (클릭하여 체크)</h3>
+                ${checks.map((c, i) => `
+                  <button onclick="USER_STATE.s23_checks[${i}]=!USER_STATE.s23_checks[${i}]; renderCurrentSlide();" class="w-full p-2.5 rounded-lg border text-left text-xs font-bold flex items-center justify-between transition ${USER_STATE.s23_checks[i] ? 'bg-teal-50 border-[#0D9488] text-[#101D35]' : 'bg-white border-slate-200 text-slate-700'}">
+                    <span>${c}</span>
+                    <i class="fa-solid ${USER_STATE.s23_checks[i] ? 'fa-circle-check text-[#0D9488]' : 'fa-circle text-slate-300'}"></i>
+                  </button>
+                `).join('')}
+              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col">
+                <label class="text-sm font-extrabold text-[#101D35] mb-1.5">발견한 문제 증상과 재현 순서 기록</label>
+                <p class="text-xs text-slate-500 mb-2">어떤 행동을 했을 때 어떤 문제가 나타나는지 적어두면 바로 다음 수정 요청에 쓸 수 있습니다.</p>
+                <textarea rows="4" oninput="USER_STATE.s23_issue=this.value" placeholder="예: CSV 파일을 선택해도 직원 목록이 안 뜨거나, 다른 직원을 눌러도 그래프가 그대로 남음..." class="w-full flex-1 p-3 rounded-lg border border-slate-300 text-xs bg-white">${escapeHtml(USER_STATE.s23_issue)}</textarea>
+              </div>
+            </div>
+          `;
+        },
+        footerNote: "활동: 문제가 있으면 증상과 재현 순서를 기록합니다. 숫자의 정확성은 뒤(M4)에서 원본과 비교합니다."
+      },
+      {
+        id: 24,
+        type: "normal",
+        module: "M3. 대시보드 만들기",
+        journey: "제작",
+        badge: "오류를 설명하는 방법",
+        title: "‘안 돼요’ 대신 현상과 기대 결과를 말합니다",
+        body: "AI에게 수정을 요청할 때는 현재 상태와 기대하는 동작을 구체적으로 알려주어야 기존 기능을 망가뜨리지 않고 고칠 수 있습니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto">
+            <div class="bg-rose-50/70 border border-rose-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-rose-700 text-white">모호한 요청</span>
+              <h3 class="text-lg font-extrabold text-rose-950 mt-3">“화면이 이상해요. 다시 만들어 주세요.”</h3>
+              <p class="text-xs text-rose-900 mt-2 leading-relaxed">
+                무엇이 문제인지 알 수 없어 AI가 전체 구조를 임의로 바꾸거나, 잘 작동하던 기존 필터·목록 기능까지 삭제할 위험이 있습니다.
+              </p>
+            </div>
+            <div class="bg-teal-50/70 border-2 border-[#0D9488] rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-[#0D9488] text-white">구체적 요청</span>
+              <h3 class="text-lg font-extrabold text-[#101D35] mt-3">“직원을 바꿔도 그래프가 이전 직원으로 남습니다. 선택한 직원의 12개월 값이 표시되도록 수정해 주세요.”</h3>
+              <p class="text-xs text-slate-700 mt-2 leading-relaxed">
+                문제가 발생한 위치와 원하는 결과를 정확히 짚어주어 해당 이벤트 로직만 안전하게 수정합니다.
+              </p>
+            </div>
+          </div>
+          <div class="bg-[#101D35] text-white rounded-xl p-3.5 text-center text-xs md:text-sm font-bold tracking-wide">
+            수정 요청 공식: <span class="text-[#39B8B2]">현재 상태(현상)</span> + <span class="text-[#39B8B2]">시도한 행동</span> + <span class="text-[#39B8B2]">기대 결과</span> + <span class="text-[#39B8B2]">유지할 기능</span>
+          </div>
+        `,
+        footerNote: "잘 되던 기능이 사라지지 않도록 ‘기존 기능은 유지해 달라’는 문장을 함께 넣습니다."
+      },
+      {
+        id: 25,
+        type: "normal",
+        module: "M3. 대시보드 만들기",
+        journey: "제작",
+        badge: "활동: 내 화면 수정 · 실습",
+        title: "한 가지 문제를 골라 수정 요청합니다",
+        body: "내 화면에서 발견한 오류나 아쉬운 점 한 가지를 골라 아래 템플릿으로 수정 요청하고 다시 실행해 봅니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 my-auto">
+            <div class="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 text-xs">
+              <h3 class="text-sm font-extrabold text-[#101D35] mb-1">실습 4단계</h3>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>① 문제 기록:</b> 화면에서 발견한 문제 한 가지 선택</div>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>② 수정 요청:</b> 우측 템플릿에 현상·행동·기대 결과를 넣어 AI에 전달</div>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>③ 수정 파일 저장:</b> 새로 생성된 전체 HTML 저장</div>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>④ 재확인:</b> 고친 기능뿐 아니라 <b>이전 기능도 다시 확인</b></div>
+            </div>
+            <div class="lg:col-span-7 bg-slate-900 text-white rounded-xl p-4 flex flex-col justify-between border border-slate-700">
+              <div class="flex items-center justify-between border-b border-slate-700 pb-2 mb-2">
+                <span class="text-xs font-bold text-[#39B8B2]">수정 요청 프롬프트 템플릿</span>
+                <div class="flex gap-2">
+                  <button onclick="copyTextDirect(POPUP_DATA.prompt_25.content)" class="px-2.5 py-1 rounded bg-[#0D9488] text-white text-xs font-bold">복사</button>
+                  <button onclick="openPopup('prompt_25', this)" class="px-2.5 py-1 rounded bg-slate-700 text-white text-xs font-bold">팝업 보기</button>
+                </div>
+              </div>
+              <p class="font-mono-code text-xs leading-relaxed text-slate-200 select-all my-auto">${escapeHtml(POPUP_DATA.prompt_25.content)}</p>
+              <div class="text-[11px] text-slate-400 mt-2">* 오류가 없다면 직무 필터 색상이나 글자 크기 등 개선하고 싶은 한 가지를 요청해 보세요.</div>
+            </div>
+          </div>
+        `,
+        footerNote: "수정 후에는 반드시 기존 기능(직원 선택, CSV 로드 등)이 그대로 잘 작동하는지 함께 점검합니다."
+      },
+      {
+        id: 26,
+        type: "normal",
+        module: "M3. 대시보드 만들기",
+        journey: "제작",
+        badge: "중간 점검",
+        title: "여기까지 만든 것은 첫 번째 버전입니다",
+        body: "브라우저에서 실행 가능한 기본 대시보드(v1)가 준비되었습니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 text-center">
+              <i class="fa-solid fa-circle-check text-2xl text-[#0D9488] mb-2"></i>
+              <h3 class="text-base font-extrabold text-[#101D35]">실행 가능</h3>
+              <p class="text-xs text-slate-600 mt-1">브라우저에서 단일 HTML 구동</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 text-center">
+              <i class="fa-solid fa-circle-check text-2xl text-[#0D9488] mb-2"></i>
+              <h3 class="text-base font-extrabold text-[#101D35]">가상 직원 선택</h3>
+              <p class="text-xs text-slate-600 mt-1">12명 직원 목록 및 필터 동작</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 text-center">
+              <i class="fa-solid fa-circle-check text-2xl text-[#0D9488] mb-2"></i>
+              <h3 class="text-base font-extrabold text-[#101D35]">12개월 추이</h3>
+              <p class="text-xs text-slate-600 mt-1">2025.10~2026.09 월별 차트</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 text-center">
+              <i class="fa-solid fa-circle-check text-2xl text-[#0D9488] mb-2"></i>
+              <h3 class="text-base font-extrabold text-[#101D35]">기준월 표시</h3>
+              <p class="text-xs text-slate-600 mt-1">2026.09 약정 및 순위 표시</p>
+            </div>
+          </div>
+          <div class="bg-slate-100 rounded-xl p-3.5 text-xs text-slate-700">
+            <b>안내:</b> 계정 한도 등으로 아직 생성을 완료하지 못한 학습자는 강사가 제공하는 기본 예시 HTML 파일로 다음 실습에 동일하게 참여하실 수 있습니다.
+          </div>
+        `,
+        footerNote: "다음 단계에서는 화면에 표시된 숫자와 계산 기준이 정확한지 검증합니다."
+      },
+
+      // ---------------- 휴식 (27) ----------------
+      {
+        id: 27,
+        type: "break",
+        module: "휴식",
+        journey: "제작",
+        title: "잠시 쉬어갑니다",
+        subtitle: "다음: 숫자를 확인하고 나에게 맞게 개선하기"
+      },
+
+      // ---------------- M4. 검증하고 개선하기 (28~36) ----------------
+      {
+        id: 28,
+        type: "divider",
+        module: "MODULE 04",
+        journey: "검증·수정",
+        title: "숫자를 확인하고 화면을 개선합니다",
+        subtitle: "보기 좋은 화면이 믿을 수 있는 화면일까요?",
+        visualFlow: ["원본 CSV 대조 검산", "결측·비교 기준 정의", "나의 관리 관점 반영"]
+      },
+      {
+        id: 29,
+        type: "normal",
+        module: "M4. 검증하고 개선하기",
+        journey: "검증·수정",
+        badge: "검산하기 · 활동",
+        title: "화면의 숫자를 원본과 대조해 보세요",
+        body: "가상 직원 ‘김도윤’을 선택하고 2026.09 약정, 제공 6개월 평균, 평균 대비 변화율을 기록하며 원본 CSV·계산기와 직접 비교합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
+            <div class="bg-slate-50 border-2 border-slate-300 rounded-xl p-5">
+              <span class="text-xs font-bold text-[#0D9488]">검산 항목 ①</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">김도윤 2026.09 약정</h3>
+              <p class="text-xs text-slate-500 mt-1 mb-3">원본 CSV의 2026.09 열 값 확인</p>
+              <input type="text" value="${escapeHtml(USER_STATE.s29_val1)}" oninput="USER_STATE.s29_val1=this.value" placeholder="숫자 입력 (예: 19,181)" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm font-mono-code font-bold bg-white">
+            </div>
+            <div class="bg-slate-50 border-2 border-slate-300 rounded-xl p-5">
+              <span class="text-xs font-bold text-[#0D9488]">검산 항목 ②</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">제공된 6개월 평균</h3>
+              <p class="text-xs text-slate-500 mt-1 mb-3">원본 CSV의 6개월평균약정 열 값</p>
+              <input type="text" value="${escapeHtml(USER_STATE.s29_val2)}" oninput="USER_STATE.s29_val2=this.value" placeholder="숫자 입력 (예: 17,984)" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm font-mono-code font-bold bg-white">
+            </div>
+            <div class="bg-slate-50 border-2 border-slate-300 rounded-xl p-5">
+              <span class="text-xs font-bold text-[#0D9488]">검산 항목 ③</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">평균 대비 변화율 (%)</h3>
+              <p class="text-xs text-slate-500 mt-1 mb-3">(기준월 − 평균) ÷ 평균 × 100</p>
+              <input type="text" value="${escapeHtml(USER_STATE.s29_val3)}" oninput="USER_STATE.s29_val3=this.value" placeholder="계산 결과 (예: +6.7%)" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm font-mono-code font-bold bg-white">
+            </div>
+          </div>
+        `,
+        footerNote: "활동: 내 대시보드 화면에 나온 세 값과 직접 검산한 값을 대조해 보세요. 답과 해설은 다음 장에 있습니다."
+      },
+      {
+        id: 30,
+        type: "normal",
+        module: "M4. 검증하고 개선하기",
+        journey: "검증·수정",
+        badge: "검산 해설",
+        title: "기준월 19,181 · 제공 평균 17,984",
+        body: "가상 직원 김도윤의 검산 결과와 6개월 평균 산출 기준을 확인합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5 my-auto">
+            <div class="md:col-span-6 bg-[#101D35] text-white rounded-xl p-6 flex flex-col justify-center">
+              <span class="text-xs font-bold text-[#39B8B2]">공통 검산 수식</span>
+              <div class="font-mono-code text-base md:text-lg font-bold mt-2 text-slate-200">
+                (19,181 − 17,984) ÷ 17,984 × 100
+              </div>
+              <div class="text-4xl font-extrabold text-[#39B8B2] mt-3 font-mono-code">
+                ≈ +6.7% <span class="text-sm font-normal text-slate-300">(+6.6559%)</span>
+              </div>
+            </div>
+            <div class="md:col-span-6 bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col justify-center space-y-2.5 text-xs md:text-sm text-slate-700">
+              <div><b class="text-[#101D35]">• 원자료 평균과의 비교:</b> 2026.04~09(6개월) 월별 값의 실제 산술평균은 <code class="font-bold text-[#0D9488]">약 17,984.33</code>입니다.</div>
+              <div><b class="text-[#101D35]">• 반올림 일치 확인:</b> CSV에 제공된 6개월평균약정(<code class="font-bold">17,984</code>)과 반올림 수준에서 일치합니다.</div>
+              <div><b class="text-[#101D35]">• 표시 단위 기준:</b> 표시 단위는 실습용으로 확정해 명시하며, 원본 HTML 기본값 ‘백만원’을 실제 자료의 확정 단위로 간주하지 않습니다.</div>
+            </div>
+          </div>
+        `,
+        footerNote: "참고: 이 예는 교육용 가상 데이터이며 수치에 적용할 단위는 수업 기준에 맞춰 화면에 명시합니다."
+      },
+      {
+        id: 31,
+        type: "normal",
+        module: "M4. 검증하고 개선하기",
+        journey: "검증·수정",
+        badge: "평균과 비교 기준",
+        title: "무엇을 기준으로 비교했는지 함께 봅니다",
+        body: "기간과 비교 집단이 다르면 같은 숫자도 의미가 달라집니다. 화면에 비교 기준을 함께 표시해야 오해를 줄일 수 있습니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="text-xs font-bold text-[#0D9488]">비교 기준 01</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">기준월 vs 본인의 6개월 평균</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">다른 직원과의 경쟁이 아니라, <b>본인의 최근 6개월 흐름 대비</b> 이번 달 변화를 보여줍니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="text-xs font-bold text-[#0D9488]">비교 기준 02</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">기준월 순위 vs 제공된 회기 평균 순위</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">단월 순위와 회기 누적·평균 순위는 산출 기간이 다릅니다. 순위 차이는 <b>서로 다른 기준의 순위를 뺀 값임</b>을 표시합니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="text-xs font-bold text-[#0D9488]">비교 기준 03</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-1">지점 내 비교 vs 전체 비교</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">전체 순위인지, 동일 직무·직위 내 순위인지 비교 모수를 명확히 적어야 면담에서 혼선이 없습니다.</p>
+            </div>
+          </div>
+        `,
+        footerNote: "기간과 집단이 다르면 숫자의 의미도 달라집니다. 비교 기준을 숫자 옆에 함께 표시합니다."
+      },
+      {
+        id: 32,
+        type: "normal",
+        module: "M4. 검증하고 개선하기",
+        journey: "검증·수정",
+        badge: "결측과 0은 다릅니다",
+        title: "데이터가 없을 때도 숫자를 만들면 안 됩니다",
+        body: "값이 비어 있는 것(결측)을 실적 0으로 처리하면 변화율이 -100%로 왜곡됩니다. 예외 표시 기준을 명확히 정합니다.",
+        renderContent: () => `
+          <div class="overflow-hidden border border-slate-200 rounded-xl my-auto">
+            <table class="w-full text-left text-xs md:text-sm">
+              <thead class="bg-[#101D35] text-white">
+                <tr>
+                  <th class="py-3 px-4">데이터 예외 상황</th>
+                  <th class="py-3 px-4">고객사 원본 HTML의 처리 (개선 대상)</th>
+                  <th class="py-3 px-4 text-[#39B8B2]">교육생 대시보드 표시 기준</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 bg-white">
+                <tr>
+                  <td class="py-3 px-4 font-bold text-[#101D35]">기준월 약정 누락</td>
+                  <td class="py-3 px-4 text-rose-700">결측을 숫자 0으로 처리해 급락으로 표시</td>
+                  <td class="py-3 px-4 font-bold text-[#0D9488]">→ ‘데이터 없음’으로 명확히 표시</td>
+                </tr>
+                <tr class="bg-slate-50">
+                  <td class="py-3 px-4 font-bold text-[#101D35]">6개월 평균 누락 또는 0</td>
+                  <td class="py-3 px-4 text-rose-700">비교 불가 상태를 0% 등으로 처리</td>
+                  <td class="py-3 px-4 font-bold text-[#0D9488]">→ 변화율을 ‘비교 불가’로 표시</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 font-bold text-[#101D35]">월별 자료 부족 (신규/휴직 등)</td>
+                  <td class="py-3 px-4 text-rose-700">연도별 월 값을 임의 대체 계산</td>
+                  <td class="py-3 px-4 font-bold text-[#0D9488]">→ 실제 계산에 ‘사용한 월 수’와 기간 표시</td>
+                </tr>
+                <tr class="bg-slate-50">
+                  <td class="py-3 px-4 font-bold text-[#101D35]">회기 기준 미확인</td>
+                  <td class="py-3 px-4 text-rose-700">임의 연도 기준으로 누계·평균 대체 집계</td>
+                  <td class="py-3 px-4 font-bold text-[#0D9488]">→ 회기 계산을 임의 확정하지 않고 제공값만 표시</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `,
+        footerNote: "참고: 고객사 원본에는 누락 값을 0으로 다루는 경우와 연도 기준 대체 집계가 있어 교육생 버전에서 개선합니다."
+      },
+      {
+        id: 33,
+        type: "normal",
+        module: "M4. 검증하고 개선하기",
+        journey: "검증·수정",
+        badge: "활동: 확인 기준 설계 · 참여",
+        title: "내 화면에 어떤 안내가 더 필요할까요?",
+        body: "① 빠진 값 ② 비교 기간 ③ 계산 단위 중 하나를 선택해 내 대시보드에 넣어줄 안내 문장을 작성해 보세요.",
+        renderContent: () => {
+          const opts = ["① 빠진 값 안내", "② 비교 기간 안내", "③ 계산 단위 안내"];
+          return `
+            <div class="space-y-4 my-auto">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                ${opts.map(o => `
+                  <button onclick="USER_STATE.s33_choice='${o}'; renderCurrentSlide();" class="p-4 rounded-xl border-2 text-left transition ${USER_STATE.s33_choice === o ? 'border-[#0D9488] bg-teal-50/60' : 'border-slate-200 bg-slate-50'}">
+                    <div class="flex items-center justify-between">
+                      <span class="font-extrabold text-sm text-[#101D35]">${o}</span>
+                      <i class="fa-solid ${USER_STATE.s33_choice === o ? 'fa-circle-check text-[#0D9488]' : 'fa-circle text-slate-300'}"></i>
+                    </div>
+                  </button>
+                `).join('')}
+              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                <label class="block text-xs font-bold text-[#101D35] mb-1.5">
+                  화면에 표시할 안내 문장 작성 (질문: 이 안내가 없으면 면담에서 어떤 오해가 생길까요?)
+                </label>
+                <input type="text" value="${escapeHtml(USER_STATE.s33_sentence)}" oninput="USER_STATE.s33_sentence=this.value" placeholder="예: 6개월 평균은 2026.04~2026.09(6개 월) 기준이며, 값이 없는 달은 0원이 아니라 집계 제외입니다." class="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs bg-white">
+              </div>
+            </div>
+          `;
+        },
+        footerNote: "활동: 안내 문장을 먼저 생각한 뒤 다음 장의 검증 수정 프롬프트로 AI에게 요청합니다."
+      },
+      {
+        id: 34,
+        type: "normal",
+        module: "M4. 검증하고 개선하기",
+        journey: "검증·수정",
+        badge: "검증을 위한 수정 요청 · 복사",
+        title: "계산의 기준과 예외를 화면에 표시합니다",
+        body: "결측치(‘데이터 없음’), 분모 0(‘비교 불가’), 6개월 평균 산출 기간, 회기 기준 임의 계산 금지 원칙을 반영합니다.",
+        renderContent: () => `
+          <div class="bg-slate-900 text-slate-100 rounded-xl p-4 my-auto border border-slate-700 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-2.5">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-[#39B8B2] text-[#101D35]">PROMPT 02</span>
+                <span class="text-xs text-slate-300 font-semibold">수치 검증 · 결측/예외 처리 · 비교 기간 명시</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="copyTextDirect(POPUP_DATA.prompt_34.content)" class="px-3 py-1 rounded-lg bg-[#0D9488] hover:bg-[#0f766e] text-white text-xs font-bold flex items-center gap-1.5">
+                  <i class="fa-regular fa-copy"></i><span>전체 복사</span>
+                </button>
+                <button onclick="openPopup('prompt_34', this)" class="px-3 py-1 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold flex items-center gap-1.5">
+                  <i class="fa-solid fa-expand"></i><span>팝업으로 크게 보기</span>
+                </button>
+              </div>
+            </div>
+            <p class="text-xs leading-relaxed font-mono-code text-slate-200 select-all">${escapeHtml(POPUP_DATA.prompt_34.content)}</p>
+          </div>
+        `,
+        footerNote: "프롬프트를 전달한 뒤 수정된 HTML을 저장하고 브라우저에서 다시 확인합니다."
+      },
+      {
+        id: 35,
+        type: "normal",
+        module: "M4. 검증하고 개선하기",
+        journey: "검증·수정",
+        badge: "나의 관리 관점 추가 · 실습",
+        title: "같은 데이터, 다른 관리 화면",
+        body: "검증된 데이터 위에서 지점장 각자의 관리 관점에 따라 화면 배치나 정렬·필터를 한 가지씩 다르게 구성해 봅니다.",
+        renderContent: () => {
+          const cards = [
+            { title: "최근 변화 중심", desc: "평균 대비 변화율(상승·하락 폭) 순으로 직원 목록 정렬 및 추세 강조" },
+            { title: "직무·직위 중심", desc: "동일 직무(PB/리테일/법인) 및 직위 그룹 내 비교 위치와 필터 강조" },
+            { title: "면담 중심", desc: "숫자 요약 옆에 지점장의 관찰 사실·열린 질문·메모 입력란을 크게 배치" },
+            { title: "내가 고른 질문", desc: "16페이지에서 직접 정의한 나만의 최우선 확인 질문을 상단에 배치" }
+          ];
+          return `
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 my-auto">
+              ${cards.map(c => `
+                <button onclick="USER_STATE.s35_view='${c.title}'; renderCurrentSlide();" class="p-4 rounded-xl border-2 text-left flex flex-col justify-between transition ${USER_STATE.s35_view === c.title ? 'border-[#0D9488] bg-teal-50/60' : 'border-slate-200 bg-slate-50 hover:border-slate-300'}">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-sm font-extrabold text-[#101D35]">${c.title}</span>
+                      <i class="fa-solid ${USER_STATE.s35_view === c.title ? 'fa-circle-check text-[#0D9488]' : 'fa-circle text-slate-300'}"></i>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">${c.desc}</p>
+                  </div>
+                  <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-bold text-[#0D9488]">선택하여 수정 요청</div>
+                </button>
+              `).join('')}
+            </div>
+          `;
+        },
+        footerNote: "활동: 한 항목만 선택해 위치·필터·정렬·설명을 수정합니다. 기존 기능을 유지하고 수정된 결과를 다시 실행해 봅니다."
+      },
+      {
+        id: 36,
+        type: "normal",
+        module: "M4. 검증하고 개선하기",
+        journey: "검증·수정",
+        badge: "결과 확인과 공유",
+        title: "수정한 화면이 질문에 답하나요?",
+        body: "수정한 화면이 정상 작동하는지 네 가지를 점검하고, 옆 자리 지점장님과 내가 바꾼 관점을 공유합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 text-xs">
+              <h3 class="text-sm font-extrabold text-[#101D35] mb-2">최종 동작 확인 4가지</h3>
+              <div class="p-2.5 bg-white rounded border border-slate-200 flex items-center gap-2"><i class="fa-solid fa-check text-[#0D9488]"></i><span>1. 직원을 바꿔도 정보가 맞게 바뀌는가?</span></div>
+              <div class="p-2.5 bg-white rounded border border-slate-200 flex items-center gap-2"><i class="fa-solid fa-check text-[#0D9488]"></i><span>2. 비교 기준과 단위가 화면에 보이는가?</span></div>
+              <div class="p-2.5 bg-white rounded border border-slate-200 flex items-center gap-2"><i class="fa-solid fa-check text-[#0D9488]"></i><span>3. 빠진 값(데이터 없음 / 비교 불가)을 구분하는가?</span></div>
+              <div class="p-2.5 bg-white rounded border border-slate-200 flex items-center gap-2"><i class="fa-solid fa-check text-[#0D9488]"></i><span>4. 수정 전 기존 기능이 그대로 남아 있는가?</span></div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5">
+              <h3 class="text-sm font-extrabold text-[#101D35]">짝과 공유하기 메모</h3>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">내가 바꾼 한 가지 & 바꾼 이유</label>
+                <input type="text" value="${escapeHtml(USER_STATE.s36_change)}" oninput="USER_STATE.s36_change=this.value" placeholder="예: 변화율 정렬 버튼 추가 / 급변한 직원을 먼저 파악하기 위해" class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">실행 후 확인한 결과</label>
+                <input type="text" value="${escapeHtml(USER_STATE.s36_reason)}" oninput="USER_STATE.s36_reason=this.value" placeholder="예: 정렬 시에도 김도윤 +6.7% 수치가 정확히 유지됨" class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">
+              </div>
+            </div>
+          </div>
+        `,
+        footerNote: "공유: 내가 바꾼 한 가지 / 바꾼 이유 / 확인한 결과를 짝과 공유합니다."
+      },
+
+      // ---------------- M5. 직원 면담과 코칭 (37~44) ----------------
+      {
+        id: 37,
+        type: "divider",
+        module: "MODULE 05",
+        journey: "코칭",
+        title: "숫자를 대화로 연결합니다",
+        subtitle: "실적을 본 다음 어떤 질문으로 시작할까요?",
+        visualFlow: ["관찰 사실과 해석 분리", "면담 카드 작성", "대화를 여는 메시지"]
+      },
+      {
+        id: 38,
+        type: "normal",
+        module: "M5. 직원 면담과 코칭",
+        journey: "코칭",
+        badge: "관찰과 해석 · 참여",
+        title: "이 문장 중 데이터로 확인되는 것은?",
+        body: "공통 검산 데이터(김도윤)만 이용해 ‘데이터로 확인되는 사실’과 ‘추가 확인이 필요한 해석’을 구분해 보세요.",
+        renderContent: () => {
+          const choices = [
+            { id: "A", text: "A. 9월 실적은 제공된 6개월 평균보다 약 6.7% 높다", sub: "기준월 19,181 vs 제공 6개월 평균 17,984" },
+            { id: "B", text: "B. 직원이 더 노력해서 실적이 올랐다", sub: "개인의 태도·노력에 대한 단정" },
+            { id: "C", text: "C. 고객 기반이 개선되었다", sub: "고객 포트폴리오·기반에 대한 추정" }
+          ];
+          return `
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
+              ${choices.map(c => `
+                <button onclick="USER_STATE.s38_choice='${c.id}'; renderCurrentSlide();" class="p-5 rounded-xl border-2 text-left transition flex flex-col justify-between ${USER_STATE.s38_choice === c.id ? 'border-[#0D9488] bg-teal-50/60' : 'border-slate-200 bg-slate-50 hover:border-slate-300'}">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="px-2.5 py-0.5 rounded text-xs font-extrabold bg-[#101D35] text-white">선택지 ${c.id}</span>
+                      <i class="fa-solid ${USER_STATE.s38_choice === c.id ? 'fa-circle-check text-[#0D9488]' : 'fa-circle text-slate-300'}"></i>
+                    </div>
+                    <h3 class="text-base font-extrabold text-[#101D35] mt-2 leading-snug">${c.text}</h3>
+                  </div>
+                  <p class="text-xs text-slate-500 mt-4 pt-2 border-t border-slate-200">${c.sub}</p>
+                </button>
+              `).join('')}
+            </div>
+          `;
+        },
+        footerNote: "활동: 데이터로 확인되는 문장을 골라보세요. 해설은 다음 장에서 확인합니다."
+      },
+      {
+        id: 39,
+        type: "normal",
+        module: "M5. 직원 면담과 코칭",
+        journey: "코칭",
+        badge: "데이터에서 질문으로",
+        title: "확인한 사실과 확인할 맥락을 나눕니다",
+        body: "데이터로 계산 가능한 관찰 사실로 대화를 열고, 데이터에 없는 원인은 열린 질문으로 물어봅니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+            <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-700 text-white">선택지 A: 확인한 사실</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-2">제공 값으로 계산 가능</h3>
+              <p class="text-xs text-slate-700 mt-2 leading-relaxed">
+                9월 실적(19,181)이 제공된 6개월 평균(17,984)보다 약 6.7% 높다는 것은 지점장과 직원이 화면을 함께 보며 동의할 수 있는 객관적 사실입니다.
+              </p>
+            </div>
+            <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-amber-700 text-white">선택지 B · C: 확인할 맥락</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-2">면담이나 다른 근거가 필요</h3>
+              <p class="text-xs text-slate-700 mt-2 leading-relaxed">
+                직원의 노력(B)이나 고객 기반 개선(C)은 월별 약정 CSV에 없는 설명입니다. 지점장이 미리 단정하지 않고 면담에서 질문으로 확인합니다.
+              </p>
+            </div>
+          </div>
+          <div class="bg-[#101D35] text-white rounded-xl p-4 flex items-center gap-3">
+            <i class="fa-solid fa-quote-left text-2xl text-[#39B8B2] shrink-0"></i>
+            <p class="text-sm md:text-base font-bold leading-relaxed">
+              대화 예시: “최근 흐름을 함께 살펴보니 기준월이 평균보다 높네요. 어떤 변화가 있었는지 들려주실 수 있을까요?”
+            </p>
+          </div>
+        `,
+        footerNote: "관찰 사실을 먼저 공유하고, 원인은 열린 질문으로 직원에게 먼저 묻습니다."
+      },
+      {
+        id: 40,
+        type: "normal",
+        module: "M5. 직원 면담과 코칭",
+        journey: "코칭",
+        badge: "코칭 준비의 네 단계",
+        title: "관찰 → 질문 → 경청 → 다음 행동",
+        body: "대시보드의 숫자를 직원 코칭 대화로 자연스럽게 연결하는 4단계 프레임워크입니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 01</span>
+              <h3 class="text-lg font-extrabold text-[#101D35] mt-1">관찰</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed"><b>기간·숫자·비교 기준</b>을 명확히 짚어 객관적 사실을 공유합니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 02</span>
+              <h3 class="text-lg font-extrabold text-[#101D35] mt-1">질문</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">원인을 미리 단정하지 않고 <b>열린 형태</b>로 직원의 생각을 묻습니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 03</span>
+              <h3 class="text-lg font-extrabold text-[#101D35] mt-1">경청</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">데이터에 나타나지 않는 <b>직원의 상황과 필요한 지원</b>을 듣습니다.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="text-xs font-extrabold text-[#0D9488]">STEP 04</span>
+              <h3 class="text-lg font-extrabold text-[#101D35] mt-1">다음 행동</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">면담을 통해 지점장과 직원이 <b>함께 정한 다음 단계</b>를 정리합니다.</p>
+            </div>
+          </div>
+        `,
+        footerNote: "중요: 순위·유형은 대화의 출발점이며 사람에 대한 결론이 아닙니다."
+      },
+      {
+        id: 41,
+        type: "normal",
+        module: "M5. 직원 면담과 코칭",
+        journey: "코칭",
+        badge: "활동: 면담 카드 직접 작성 · 참여",
+        title: "가상 직원 한 명을 위한 면담을 준비해 보세요",
+        body: "내 대시보드 화면과 CSV를 근거로 가상 직원 한 명의 면담 준비 카드를 먼저 직접 작성해 봅니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-auto bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs">
+            <div>
+              <label class="font-bold text-[#101D35] block mb-1">① 확인한 사실 1개 (기간·수치·비교 기준 포함)</label>
+              <input type="text" value="${escapeHtml(USER_STATE.s41_fact)}" oninput="USER_STATE.s41_fact=this.value" placeholder="예: 2026.09 약정 19,181로 제공 6개월 평균(17,984) 대비 +6.7% 상승" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
+            </div>
+            <div>
+              <label class="font-bold text-[#101D35] block mb-1">② 데이터가 뒷받침하는 인정할 점 1개</label>
+              <input type="text" value="${escapeHtml(USER_STATE.s41_praise)}" oninput="USER_STATE.s41_praise=this.value" placeholder="예: 최근 6개월간 큰 낙폭 없이 꾸준한 흐름을 유지하며 기준월 최고치 기록" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
+            </div>
+            <div class="md:col-span-2">
+              <label class="font-bold text-[#0D9488] block mb-1">③ 원인을 단정하지 않는 열린 질문 3개</label>
+              <input type="text" value="${escapeHtml(USER_STATE.s41_questions)}" oninput="USER_STATE.s41_questions=this.value" placeholder="예: 1) 9월에 어떤 변화가 있었나요? 2) 요즘 고객 상담에서 자주 나오는 주제는? 3) 지점에서 어떤 지원이 필요한가요?" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
+            </div>
+            <div>
+              <label class="font-bold text-[#101D35] block mb-1">④ 함께 논의할 행동 1개</label>
+              <input type="text" value="${escapeHtml(USER_STATE.s41_action)}" oninput="USER_STATE.s41_action=this.value" placeholder="예: 다음 달 주력 고객군 상담 일정 및 세미나 지원 협의" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
+            </div>
+            <div>
+              <label class="font-bold text-[#101D35] block mb-1">⑤ 추가 확인 사항</label>
+              <input type="text" value="${escapeHtml(USER_STATE.s41_extra)}" oninput="USER_STATE.s41_extra=this.value" placeholder="예: 상품별 세부 구성 변화 및 애로사항" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
+            </div>
+          </div>
+        `,
+        footerNote: "활동: 먼저 직접 작성해 본 뒤, 다음 장에서 AI 면담 초안 요청 예시와 비교합니다."
+      },
+      {
+        id: 42,
+        type: "normal",
+        module: "M5. 직원 면담과 코칭",
+        journey: "코칭",
+        badge: "면담 초안 프롬프트 · 복사",
+        title: "AI에게 면담 준비를 도와달라고 요청합니다",
+        body: "데이터에 없는 노력·성격·고객 상황을 추측하지 않도록 제약을 걸어 면담 준비 카드 초안을 요청합니다.",
+        renderContent: () => `
+          <div class="bg-slate-900 text-slate-100 rounded-xl p-4 my-auto border border-slate-700 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-2.5">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-[#39B8B2] text-[#101D35]">PROMPT 03</span>
+                <span class="text-xs text-slate-300 font-semibold">사실 기반 관찰 · 열린 질문 3개 · 추측 금지</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="copyTextDirect(POPUP_DATA.prompt_42.content)" class="px-3 py-1 rounded-lg bg-[#0D9488] hover:bg-[#0f766e] text-white text-xs font-bold flex items-center gap-1.5">
+                  <i class="fa-regular fa-copy"></i><span>전체 복사</span>
+                </button>
+                <button onclick="openPopup('prompt_42', this)" class="px-3 py-1 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold flex items-center gap-1.5">
+                  <i class="fa-solid fa-expand"></i><span>팝업으로 크게 보기</span>
+                </button>
+              </div>
+            </div>
+            <p class="text-xs leading-relaxed font-mono-code text-slate-200 select-all">${escapeHtml(POPUP_DATA.prompt_42.content)}</p>
+          </div>
+        `,
+        footerNote: "안내: 가상 데이터만 AI에 제공합니다. 화면에서 정해진 규칙으로 생성된 문구와 AI 대화에서 생성한 문구를 구분합니다."
+      },
+      {
+        id: 43,
+        type: "normal",
+        module: "M5. 직원 면담과 코칭",
+        journey: "코칭",
+        badge: "메시지 다듬기 · 실습",
+        title: "직원이 대화를 시작할 수 있는 표현으로",
+        body: "고객사 원본의 메신저 문구 또는 AI 초안에서 한 문장을 선택해 네 가지 기준으로 직접 고쳐 봅니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 my-auto">
+            <div class="md:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 text-xs">
+              <h3 class="text-sm font-extrabold text-[#101D35] mb-1">메시지 점검 질문 4가지</h3>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>1. 수치가 맞는가?</b> (과장이나 오기 없이 정확한지)</div>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>2. 추측을 사실처럼 쓰지 않았는가?</b> (원인 단정 배제)</div>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>3. 존중하는 어조인가?</b> (일방적 통보·추궁 지양)</div>
+              <div class="p-2.5 bg-white rounded border border-slate-200"><b>4. 직원이 설명할 여지가 있는가?</b> (열린 대화 초대)</div>
+            </div>
+            <div class="md:col-span-7 bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col">
+              <label class="text-xs font-bold text-[#101D35] mb-1.5">내가 다듬은 면담 사전 안내 메시지 작성</label>
+              <textarea rows="5" oninput="USER_STATE.s43_msg=this.value" placeholder="초안 문장을 선택한 뒤, 직원이 부담 없이 자신의 이야기를 준비해 올 수 있는 표현으로 고쳐 적어보세요..." class="w-full flex-1 p-3 rounded-lg border border-slate-300 text-xs bg-white">${escapeHtml(USER_STATE.s43_msg)}</textarea>
+            </div>
+          </div>
+        `,
+        footerNote: "활동: AI 초안을 그대로 복사해 보내지 않고 지점장의 언어로 직접 다듬습니다."
+      },
+      {
+        id: 44,
+        type: "normal",
+        module: "M5. 직원 면담과 코칭",
+        journey: "코칭",
+        badge: "코칭 예시와 검토",
+        title: "실적을 평가하는 말에서 대화를 여는 말로",
+        body: "면담 전 직원에게 보내는 메시지는 결론을 통보하는 것이 아니라 대화의 목적과 주제를 공유하는 과정입니다.",
+        renderContent: () => `
+          <div class="my-auto space-y-4">
+            <div class="bg-teal-50/70 border-l-4 border-[#0D9488] rounded-r-xl p-6 shadow-xs">
+              <span class="text-xs font-extrabold text-[#0D9488]">대화를 여는 메시지 예시</span>
+              <p class="text-lg md:text-xl font-extrabold text-[#101D35] mt-2 leading-relaxed">
+                “최근 실적 흐름을 함께 살펴보면서 잘되고 있는 부분과 필요한 지원을 이야기해 보고 싶습니다. 이번 주에 잠시 시간 괜찮으실까요?”
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
+                <b class="text-[#101D35]">✔ 함께 살펴보기:</b> 대시보드 화면을 평가표가 아닌 공동의 참고자료로 활용
+              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
+                <b class="text-[#101D35]">✔ 강점과 지원 연결:</b> 잘되고 있는 부분 인정 + 지점 차원의 지원 논의
+              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
+                <b class="text-[#101D35]">✔ 지점장의 최종 검토:</b> 수치와 최근 지점 상황을 고려해 직접 어조 조정
+              </div>
+            </div>
+          </div>
+        `,
+        footerNote: "메시지와 면담 내용은 초안입니다. 지점장이 수치와 상황을 확인하고 직접 다듬습니다."
+      },
+
+      // ---------------- 휴식 (45) ----------------
+      {
+        id: 45,
+        type: "break",
+        module: "휴식",
+        journey: "코칭",
+        title: "잠시 쉬어갑니다",
+        subtitle: "다음: 나의 관리 관점으로 확장하기"
+      },
+
+      // ---------------- M6. 나의 관리 화면과 적용 (46~52) ----------------
+      {
+        id: 46,
+        type: "divider",
+        module: "MODULE 06",
+        journey: "나의 적용",
+        title: "나의 지점 운영으로 연결합니다",
+        subtitle: "내가 다음에 확인하고 싶은 것은 무엇인가요?",
+        visualFlow: ["선택 과제 확장", "현업 적용 전 4대 점검", "나의 첫 적용 계획"]
+      },
+      {
+        id: 47,
+        type: "normal",
+        module: "M6. 나의 관리 화면과 적용",
+        journey: "나의 적용",
+        badge: "선택 과제 · 활동",
+        title: "나의 질문에 맞춰 한 가지를 더 바꿉니다",
+        body: "공통 선택 과제 중 하나를 골라 완성도를 높이거나, 추가 가상 데이터가 준비된 경우 선택 확장을 진행합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto">
+            <div class="bg-slate-50 border-2 border-[#0D9488] rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-[#0D9488] text-white">공통 선택 (현재 샘플 CSV 기반)</span>
+              <h3 class="text-lg font-extrabold text-[#101D35] mt-2">나의 관리 화면 고도화</h3>
+              <div class="grid grid-cols-2 gap-2.5 mt-3 text-xs">
+                <div class="p-3 bg-white rounded-lg border border-slate-200 font-bold text-[#101D35]">① 면담 카드 배치</div>
+                <div class="p-3 bg-white rounded-lg border border-slate-200 font-bold text-[#101D35]">② 변화율 정렬</div>
+                <div class="p-3 bg-white rounded-lg border border-slate-200 font-bold text-[#101D35]">③ 직무·직위 필터</div>
+                <div class="p-3 bg-white rounded-lg border border-slate-200 font-bold text-[#101D35]">④ 개인이 정한 화면</div>
+              </div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-[#101D35] text-white">선택 확장 (추가 가상 데이터 준비 시)</span>
+              <h3 class="text-lg font-extrabold text-[#101D35] mt-2">영업 구성 또는 상품·종목 Top 5</h3>
+              <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+                강사가 사전 제작·검산한 별도 가상 데이터가 준비된 경우에만 영업 구성 차트 또는 상품·종목 Top 5 화면을 연결합니다.
+              </p>
+              <div class="mt-3 p-2.5 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-900 font-semibold">
+                ※ 주의: 교육 중 실제 사내 데이터나 고객 정보는 절대 사용하지 않습니다.
+              </div>
+            </div>
+          </div>
+        `,
+        footerNote: "추가 가상 데이터가 준비되지 않았다면 공통 선택 과제로 나만의 대시보드를 완성합니다."
+      },
+      {
+        id: 48,
+        type: "normal",
+        module: "M6. 나의 관리 화면과 적용",
+        journey: "나의 적용",
+        badge: "확장에 필요한 데이터",
+        title: "보여주고 싶은 정보가 있다면, 먼저 필요한 열을 확인합니다",
+        body: "화면에 새로운 차트나 표를 추가하려면 그에 맞는 데이터 구조(열)가 먼저 준비되어 있어야 합니다.",
+        renderContent: () => `
+          <div class="overflow-hidden border border-slate-200 rounded-xl my-auto">
+            <table class="w-full text-left text-xs md:text-sm">
+              <thead class="bg-[#101D35] text-white">
+                <tr>
+                  <th class="py-3 px-4">확장하려는 정보</th>
+                  <th class="py-3 px-4">필수로 있어야 하는 데이터 열</th>
+                  <th class="py-3 px-4">비고 및 주의사항</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 bg-white">
+                <tr>
+                  <td class="py-3 px-4 font-bold text-[#101D35]">영업 구성 비교</td>
+                  <td class="py-3 px-4 font-bold text-[#0D9488]">→ 직원 ID · 기준월 · 분류 · 지표 값(단위)</td>
+                  <td class="py-3 px-4 text-slate-600">주식·금융상품·이자수익 등 분류 체계와 약정/수익 구분</td>
+                </tr>
+                <tr class="bg-slate-50">
+                  <td class="py-3 px-4 font-bold text-[#101D35]">상품·종목 Top 5</td>
+                  <td class="py-3 px-4 font-bold text-[#0D9488]">→ 직원 ID · 기준일 · 항목명 · 금액(비중 분모)</td>
+                  <td class="py-3 px-4 text-slate-600">현재 공통 CSV에는 상품·종목 상세 열이 없음</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 font-bold text-[#101D35]">고객별 포트폴리오</td>
+                  <td class="py-3 px-4 font-bold text-rose-700">→ 별도의 고객 단위 가상 자료 필요</td>
+                  <td class="py-3 px-4 text-rose-800 font-semibold">고객별 자료 없이 직원 실적만으로 고객 포트폴리오를 추정하지 않음</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `,
+        footerNote: "현재 CSV에는 상품·종목 상세가 없습니다. 준비되지 않았다면 공통 선택 과제로 진행합니다."
+      },
+      {
+        id: 49,
+        type: "normal",
+        module: "M6. 나의 관리 화면과 적용",
+        journey: "나의 적용",
+        badge: "방사형 차트와 Top 5",
+        title: "비교를 위한 기준도 함께 설계합니다",
+        body: "시각화 차트를 추가할 때는 축의 정의와 분모 기준을 함께 표시해야 숫자를 오해하지 않습니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-[#101D35] text-white">방사형 차트 설계 기준</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-2">축의 정의 · 단위 · 정규화 기준 · 비교 집단</h3>
+              <ul class="text-xs text-slate-700 space-y-2 mt-3 list-disc pl-4 leading-relaxed">
+                <li>각 축이 약정인지 순수익인지 <b>지표와 단위</b>를 명시합니다.</li>
+                <li>점수화(정규화) 기준과 비교 집단(지점 평균 vs 직무 평균)을 함께 표시합니다.</li>
+                <li>참고 엑셀은 금융상품의 온라인·오프라인 분류를 제시하지 않으므로, 해당 축은 별도 가상 데이터가 있을 때만 사용합니다.</li>
+              </ul>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-[#0D9488] text-white">Top 5 설계 기준</span>
+              <h3 class="text-base font-extrabold text-[#101D35] mt-2">항목명 · 기준 시점 · 금액 · 비중의 분모</h3>
+              <ul class="text-xs text-slate-700 space-y-2 mt-3 list-disc pl-4 leading-relaxed">
+                <li>상위 5개 항목의 <b>기준 시점(기준월/기준일)</b>과 금액 단위를 표시합니다.</li>
+                <li>비중(%)을 표시할 때는 <b>분모가 직원 전체 약정인지, 해당 분류 합계인지</b> 명시합니다.</li>
+              </ul>
+            </div>
+          </div>
+        `,
+        footerNote: "참고: 차트는 영업 구성의 교육용 예시이며 공식 역량 평가가 아닙니다."
+      },
+      {
+        id: 50,
+        type: "normal",
+        module: "M6. 나의 관리 화면과 적용",
+        journey: "나의 적용",
+        badge: "최종 실습: 요청·실행·확인 · 실습",
+        title: "내가 선택한 기능을 직접 추가합니다",
+        body: "① 질문 작성 → ② 데이터 확인 → ③ AI 수정 요청 → ④ 저장·실행 → ⑤ 새 기능과 기존 기능 점검 순으로 완성합니다.",
+        renderContent: () => {
+          const builtPrompt = `제가 확인할 질문은 [${USER_STATE.s50_q}]입니다. 사용할 가상 데이터는 [${USER_STATE.s50_data}]입니다. 화면에 [${USER_STATE.s50_ui}]를 추가해 주세요. 비교 기준·단위와 데이터가 없을 때의 표시를 알려주고 기존 [${USER_STATE.s50_keep}] 기능은 유지해 주세요.`;
+          return `
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 my-auto">
+              <div class="lg:col-span-6 bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2 text-xs">
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="font-bold text-[#101D35] block mb-1">1. 확인할 질문</label>
+                    <input type="text" value="${escapeHtml(USER_STATE.s50_q)}" oninput="USER_STATE.s50_q=this.value; renderCurrentSlide();" class="w-full px-2.5 py-1.5 rounded border border-slate-300 bg-white">
+                  </div>
+                  <div>
+                    <label class="font-bold text-[#101D35] block mb-1">2. 사용할 가상 데이터</label>
+                    <input type="text" value="${escapeHtml(USER_STATE.s50_data)}" oninput="USER_STATE.s50_data=this.value; renderCurrentSlide();" class="w-full px-2.5 py-1.5 rounded border border-slate-300 bg-white">
+                  </div>
+                </div>
+                <div>
+                  <label class="font-bold text-[#101D35] block mb-1">3. 화면에 추가할 기능</label>
+                  <input type="text" value="${escapeHtml(USER_STATE.s50_ui)}" oninput="USER_STATE.s50_ui=this.value; renderCurrentSlide();" class="w-full px-2.5 py-1.5 rounded border border-slate-300 bg-white">
+                </div>
+                <div>
+                  <label class="font-bold text-[#101D35] block mb-1">4. 그대로 유지할 기존 기능</label>
+                  <input type="text" value="${escapeHtml(USER_STATE.s50_keep)}" oninput="USER_STATE.s50_keep=this.value; renderCurrentSlide();" class="w-full px-2.5 py-1.5 rounded border border-slate-300 bg-white">
+                </div>
+              </div>
+              <div class="lg:col-span-6 bg-slate-900 text-white rounded-xl p-4 flex flex-col justify-between border border-slate-700">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+                  <span class="text-xs font-bold text-[#39B8B2]">완성된 최종 요청 프롬프트</span>
+                  <div class="flex gap-1.5">
+                    <button onclick="copyTextDirect('${escapeJs(builtPrompt)}')" class="px-2.5 py-1 rounded bg-[#0D9488] text-white text-xs font-bold">복사하기</button>
+                    <button onclick="openPopup('prompt_50', this)" class="px-2.5 py-1 rounded bg-slate-700 text-white text-xs font-bold">기본 틀 팝업</button>
+                  </div>
+                </div>
+                <p class="font-mono-code text-xs leading-relaxed text-slate-200 my-auto select-all">${escapeHtml(builtPrompt)}</p>
+              </div>
+            </div>
+          `;
+        },
+        footerNote: "운영 안내: 확장 데이터가 준비되지 않았거나 시간이 부족하면 35페이지 결과를 한 번 더 개선합니다."
+      },
+      {
+        id: 51,
+        type: "normal",
+        module: "M6. 나의 관리 화면과 적용",
+        journey: "나의 적용",
+        badge: "현업 적용 전 확인",
+        title: "현업에 적용하기 전에 확인할 네 가지",
+        body: "사내 실제 데이터 적용은 데이터 기준, 계산 검산, 실행 환경, 회사 승인 절차를 별도로 확인한 뒤 검토합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-auto">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div class="w-9 h-9 rounded-lg bg-[#101D35] text-[#39B8B2] flex items-center justify-center mb-3"><i class="fa-solid fa-database"></i></div>
+              <h3 class="text-base font-extrabold text-[#101D35]">1. 데이터</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">실제 사내 데이터의 열 구조, 기간, 확정 단위와 공식 회기 정의 확인</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div class="w-9 h-9 rounded-lg bg-[#101D35] text-[#39B8B2] flex items-center justify-center mb-3"><i class="fa-solid fa-calculator"></i></div>
+              <h3 class="text-base font-extrabold text-[#101D35]">2. 계산</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">비교 기준(평균·순위·누계)과 결측치 처리 로직의 대조 검산</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div class="w-9 h-9 rounded-lg bg-[#101D35] text-[#39B8B2] flex items-center justify-center mb-3"><i class="fa-solid fa-network-wired"></i></div>
+              <h3 class="text-base font-extrabold text-[#101D35]">3. 환경</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">파일 실행 환경, 외부 라이브러리/서버 연결 여부, 파일 저장 방식 점검</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+              <div class="w-9 h-9 rounded-lg bg-[#101D35] text-[#39B8B2] flex items-center justify-center mb-3"><i class="fa-solid fa-shield-halved"></i></div>
+              <h3 class="text-base font-extrabold text-[#101D35]">4. 승인</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">회사의 데이터 사용 기준과 정보보안 승인 절차 사전 확인</p>
+            </div>
+          </div>
+          <div class="bg-rose-50 border-l-4 border-rose-600 rounded-r-xl p-3.5 text-xs text-rose-950 font-bold">
+            주의: 로컬에서 HTML을 연다는 사실만으로 외부 통신이 없거나 사내 사용이 승인된 것은 아닙니다.
+          </div>
+        `,
+        footerNote: "사내 실제 데이터 적용은 회사 보안 및 승인 기준을 반드시 먼저 확인합니다."
+      },
+      {
+        id: 52,
+        type: "normal",
+        module: "M6. 나의 관리 화면과 적용",
+        journey: "나의 적용",
+        badge: "마무리 · 나의 적용 계획",
+        title: "내가 다음에 바꿔볼 질문 하나",
+        body: "오늘 실습한 과정을 바탕으로 내 업무에서 확인하고 싶은 질문과 먼저 해볼 작은 행동을 정리합니다.",
+        renderContent: () => `
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 my-auto space-y-3">
+            <div>
+              <label class="block text-xs font-extrabold text-[#101D35] mb-1">1. 내 업무에서 확인하고 싶은 질문</label>
+              <input type="text" value="${escapeHtml(USER_STATE.s52_q)}" oninput="USER_STATE.s52_q=this.value" placeholder="예: 우리 지점 직원들의 최근 6개월 추세 변화와 면담에서 우선 지원할 포인트는 무엇인가?" class="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-extrabold text-[#101D35] mb-1">2. 필요한 데이터 또는 확인할 사람</label>
+              <input type="text" value="${escapeHtml(USER_STATE.s52_data)}" oninput="USER_STATE.s52_data=this.value" placeholder="예: 지점 월별 실적 표(단위·회기 기준 확인) 및 사내 보안/승인 담당 부서 확인" class="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-extrabold text-[#101D35] mb-1">3. 먼저 해볼 작은 행동</label>
+              <input type="text" value="${escapeHtml(USER_STATE.s52_action)}" oninput="USER_STATE.s52_action=this.value" placeholder="예: 다음 직원 면담 전에 관찰 사실 1개와 열린 질문 3개를 먼저 메모해 대화를 시작하기" class="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs bg-white">
+            </div>
+          </div>
+          <div class="bg-[#101D35] text-white rounded-xl p-4 text-center">
+            <p class="text-sm md:text-base font-bold text-[#39B8B2]">
+              “AI는 질문을 화면과 초안으로 만드는 과정을 돕습니다. 숫자를 검토하고 직원의 이야기를 듣는 판단은 지점장이 합니다.”
+            </p>
+          </div>
+        `,
+        footerNote: "유안타증권 지점장 교육 — AI와 함께 만드는 영업직원 코칭 대시보드"
+      }
+    ];
+
+    // =========================================================================
+    // 5. 렌더링 및 상태 관리 로직
+    // =========================================================================
+    let currentSlideIndex = 0; // 0 ~ 51
+    let isReadAllMode = false;
+    let activeModalId = null;
+    let lastTriggerElement = null;
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function escapeJs(str) {
+      if (!str) return "";
+      return String(str).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+    }
+
+    // 여정 표시 바 생성
+    function renderJourneyBar(activeJourney, isDark = false) {
+      return `
+        <div class="flex items-center flex-wrap gap-1.5 text-[11px] font-bold">
+          <span class="${isDark ? 'text-slate-400' : 'text-slate-400'} mr-1">여정:</span>
+          ${JOURNEY_STEPS.map((step, idx) => {
+            const isActive = step === activeJourney;
+            const activeClass = isDark
+              ? "bg-[#39B8B2] text-[#101D35] px-2 py-0.5 rounded font-extrabold"
+              : "bg-[#101D35] text-[#39B8B2] px-2 py-0.5 rounded font-extrabold";
+            const inactiveClass = isDark ? "text-slate-400" : "text-slate-400";
+            return `
+              <span class="${isActive ? activeClass : inactiveClass}">${step}</span>
+              ${idx < JOURNEY_STEPS.length - 1 ? `<span class="${isDark ? 'text-slate-600' : 'text-slate-300'}">→</span>` : ''}
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // 개별 슬라이드 HTML 마크업 생성
+    function buildSlideHTML(slide) {
+      const pageNumStr = String(slide.id).padStart(2, "0");
+
+      // 1) 표지 (01) - 남색 #101D35
+      if (slide.type === "cover") {
+        return `
+          <div class="w-full h-full bg-[#101D35] text-white p-8 md:p-14 flex flex-col justify-between relative overflow-hidden">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+              <span class="text-xs md:text-sm font-extrabold tracking-widest text-[#39B8B2]">YUANTA SECURITIES · BRANCH MANAGER WORKSHOP</span>
+              <span class="font-mono-code text-xs text-slate-400">${pageNumStr} / 52</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto py-4">
+              <div class="lg:col-span-7 space-y-4">
+                <div class="inline-block px-3 py-1 rounded-full bg-[#39B8B2]/15 border border-[#39B8B2]/40 text-[#39B8B2] text-xs font-bold">
+                  유안타증권 지점장 교육
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight text-white">
+                  AI와 함께 만드는<br><span class="text-[#39B8B2]">영업직원 코칭 대시보드</span>
+                </h2>
+                <p class="text-base md:text-xl text-slate-300 font-medium">
+                  ${slide.subtitle}
+                </p>
+                <div class="pt-2 text-xs md:text-sm text-slate-400 font-medium">
+                  [교육일] · [강사명]
+                </div>
+              </div>
+
+              <!-- 오른쪽: 직원 실적 그래프에서 대화 말풍선으로 이어지는 도식 (SVG) -->
+              <div class="lg:col-span-5 bg-slate-900/90 border border-slate-700 rounded-2xl p-5 shadow-xl">
+                <div class="text-xs font-bold text-[#39B8B2] mb-3 flex items-center justify-between">
+                  <span>실적 데이터에서 코칭 대화로</span>
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <svg viewBox="0 0 360 190" class="w-full h-auto">
+                  <!-- 좌측 차트 박스 -->
+                  <rect x="10" y="20" width="145" height="145" rx="10" fill="#101D35" stroke="#334155" stroke-width="1.5"/>
+                  <text x="24" y="42" fill="#94A3B8" font-size="10" font-weight="bold">월별 실적 &amp; 6개월 평균</text>
+                  <rect x="28" y="110" width="18" height="38" rx="3" fill="#334155"/>
+                  <rect x="56" y="95" width="18" height="53" rx="3" fill="#475569"/>
+                  <rect x="84" y="82" width="18" height="66" rx="3" fill="#0D9488"/>
+                  <rect x="112" y="60" width="18" height="88" rx="3" fill="#39B8B2"/>
+                  <polyline points="37,105 65,90 93,78 121,54" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+                  <circle cx="121" cy="54" r="4" fill="#39B8B2" stroke="#FFFFFF" stroke-width="1.5"/>
+                  <!-- 중앙 화살표 -->
+                  <path d="M165 92 L195 92" stroke="#39B8B2" stroke-width="2.5" stroke-dasharray="4 3"/>
+                  <polygon points="195,87 205,92 195,97" fill="#39B8B2"/>
+                  <!-- 우측 대화 말풍선 -->
+                  <rect x="212" y="28" width="138" height="125" rx="12" fill="#1E293B" stroke="#39B8B2" stroke-width="2"/>
+                  <text x="226" y="52" fill="#39B8B2" font-size="10" font-weight="bold">지점장 면담 질문</text>
+                  <text x="226" y="74" fill="#FFFFFF" font-size="11" font-weight="bold">“기준월 실적이 평균보다</text>
+                  <text x="226" y="92" fill="#FFFFFF" font-size="11" font-weight="bold">+6.7% 높네요. 어떤</text>
+                  <text x="226" y="110" fill="#FFFFFF" font-size="11" font-weight="bold">변화가 있었나요?”</text>
+                  <rect x="226" y="124" width="90" height="16" rx="4" fill="#0D9488"/>
+                  <text x="234" y="135" fill="#FFFFFF" font-size="9" font-weight="bold">관찰 → 질문 → 지원</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
+              ${renderJourneyBar(slide.journey, true)}
+              <span class="text-xs text-slate-400">가상 데이터 기반 실습 · 사내 비공개 데이터 입력 금지</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // 2) 모듈 간지 (02, 10, 17, 28, 37, 46) - 남색 #101D35, 흰색 제목, 청록색 #39B8B2 강조
+      if (slide.type === "divider") {
+        return `
+          <div class="w-full h-full bg-[#101D35] text-white p-8 md:p-14 flex flex-col justify-between">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+              <span class="px-3 py-1 rounded-md bg-[#39B8B2]/20 text-[#39B8B2] font-mono-code text-sm font-extrabold">${slide.module}</span>
+              <span class="font-mono-code text-xs text-slate-400">${pageNumStr} / 52</span>
+            </div>
+
+            <div class="my-auto space-y-6">
+              <div class="space-y-3">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight">${slide.title}</h2>
+                <p class="text-lg md:text-2xl text-[#39B8B2] font-semibold">${slide.subtitle}</p>
+              </div>
+              <div class="w-16 h-1 bg-[#39B8B2]"></div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 max-w-3xl">
+                ${(slide.visualFlow || []).map((step, i) => `
+                  <div class="bg-slate-900/90 border border-slate-700 rounded-xl p-4 flex items-center gap-3">
+                    <span class="w-7 h-7 rounded-full bg-[#39B8B2] text-[#101D35] font-extrabold text-xs flex items-center justify-center shrink-0">${i + 1}</span>
+                    <span class="text-sm font-bold text-slate-100">${step}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+              ${renderJourneyBar(slide.journey, true)}
+              <span class="text-xs text-slate-400">유안타증권 지점장 교육</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // 3) 휴식 슬라이드 (27, 45) - 흰 배경에 남색 제목 (시간표/타이머 배제)
+      if (slide.type === "break") {
+        return `
+          <div class="w-full h-full bg-white text-[#101D35] p-8 md:p-14 flex flex-col justify-between">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+              <span class="text-xs font-extrabold text-[#0D9488]">BREAK TIME</span>
+              <span class="font-mono-code text-xs text-slate-400 font-bold">${pageNumStr} / 52</span>
+            </div>
+            <div class="my-auto text-center space-y-4">
+              <div class="w-16 h-16 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center text-3xl mx-auto">
+                <i class="fa-solid fa-mug-hot"></i>
+              </div>
+              <h2 class="text-3xl md:text-4xl font-extrabold text-[#101D35]">${slide.title}</h2>
+              <p class="text-base md:text-xl text-slate-600 font-semibold">${slide.subtitle}</p>
+            </div>
+            <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+              ${renderJourneyBar(slide.journey, false)}
+              <span class="text-xs text-slate-400">유안타증권 지점장 교육</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // 4) 일반 본문·실습·참여·복사 슬라이드 - 흰 배경에 남색 제목
+      return `
+        <div class="w-full h-full bg-white text-[#101D35] p-6 md:p-10 flex flex-col justify-between">
+          <!-- 상단 헤더: 모듈, 배지, 페이지 번호, 제목, 본문 -->
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2.5 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-extrabold text-[#101D35]">${slide.module}</span>
+                <span class="text-slate-300">|</span>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-teal-50 text-[#0D9488] border border-teal-200">${slide.badge || '본문'}</span>
+              </div>
+              <div class="flex items-center gap-3">
+                ${renderJourneyBar(slide.journey, false)}
+                <span class="font-mono-code text-xs font-extrabold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${pageNumStr} / 52</span>
+              </div>
+            </div>
+            <h2 class="text-xl md:text-2xl font-extrabold text-[#101D35] leading-snug">${slide.title}</h2>
+            <p class="text-xs md:text-sm text-slate-600 mt-1 leading-relaxed">${slide.body}</p>
+          </div>
+
+          <!-- 중앙 콘텐츠 영역 -->
+          <div class="flex-1 flex flex-col justify-center py-2">
+            ${slide.renderContent ? slide.renderContent() : ''}
+          </div>
+
+          <!-- 하단 요약/안내 푸터 -->
+          <div class="pt-2.5 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600">
+            <div class="flex items-center gap-2 font-medium">
+              <span class="w-2 h-2 rounded-full bg-[#39B8B2] shrink-0"></span>
+              <span>${slide.footerNote || ''}</span>
+            </div>
+            <span class="font-mono-code text-[11px] text-slate-400 shrink-0 ml-2">P.${pageNumStr}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // 현재 슬라이드 렌더링
+    function renderCurrentSlide() {
+      const host = document.getElementById("active-slide-Host");
+      const slide = SLIDES[currentSlideIndex];
+      host.innerHTML = buildSlideHTML(slide);
+
+      // 페이지 번호 및 이전/다음 버튼 상태 업데이트
+      document.getElementById("page-indicator").textContent = String(slide.id).padStart(2, "0");
+      document.getElementById("btn-prev").disabled = currentSlideIndex === 0;
+      document.getElementById("btn-next").disabled = currentSlideIndex === SLIDES.length - 1;
+    }
+
+    // 슬라이드 이동
+    function changeSlide(delta) {
+      const nextIndex = currentSlideIndex + delta;
+      if (nextIndex >= 0 && nextIndex < SLIDES.length) {
+        currentSlideIndex = nextIndex;
+        renderCurrentSlide();
+      }
+    }
+
+    function jumpToSlide(index) {
+      if (index >= 0 && index < SLIDES.length) {
+        currentSlideIndex = index;
+        renderCurrentSlide();
+        closeModal("modal-toc");
+        if (isReadAllMode) {
+          toggleReadAllMode();
+        }
+      }
+    }
+
+    // 목차 그리드 초기화
+    function initTocGrid() {
+      const grid = document.getElementById("toc-grid");
+      grid.innerHTML = SLIDES.map((s, idx) => {
+        const num = String(s.id).padStart(2, "0");
+        const isDarkType = s.type === "cover" || s.type === "divider";
+        return `
+          <button onclick="jumpToSlide(${idx})" class="text-left p-3 rounded-xl border transition flex items-start gap-3 ${idx === currentSlideIndex ? 'border-[#0D9488] bg-teal-50/70' : 'border-slate-200 bg-white hover:border-[#39B8B2]'}">
+            <span class="font-mono-code text-xs font-extrabold px-2 py-1 rounded ${isDarkType ? 'bg-[#101D35] text-[#39B8B2]' : 'bg-slate-100 text-[#101D35]'}">${num}</span>
+            <div class="min-w-0 flex-1">
+              <div class="text-[11px] font-bold text-[#0D9488] truncate">${s.module} · ${s.journey}</div>
+              <div class="text-xs font-extrabold text-[#101D35] truncate mt-0.5">${s.title}</div>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // 전체 읽기 모드 토글
+    function toggleReadAllMode() {
+      isReadAllMode = !isReadAllMode;
+      const presWrapper = document.getElementById("presentation-wrapper");
+      const readAllWrapper = document.getElementById("read-all-wrapper");
+      const label = document.getElementById("read-all-label");
+
+      if (isReadAllMode) {
+        document.body.classList.add("read-all-mode");
+        presWrapper.classList.add("hidden");
+        readAllWrapper.classList.remove("hidden");
+        label.textContent = "슬라이드 보기";
+        const container = document.getElementById("read-all-container");
+        container.innerHTML = SLIDES.map(s => `
+          <div class="slide-viewport bg-white flex flex-col justify-between mx-auto">
+            ${buildSlideHTML(s)}
+          </div>
+        `).join('');
+      } else {
+        document.body.classList.remove("read-all-mode");
+        readAllWrapper.classList.add("hidden");
+        presWrapper.classList.remove("hidden");
+        label.textContent = "전체 읽기";
+        renderCurrentSlide();
+      }
+    }
+
+    // 전체 화면 토글
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(() => {
+            showToast("현재 브라우저 환경에서는 전체 화면 전환이 제한되어 있습니다.", true);
+          });
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // =========================================================================
+    // 6. 팝업(Modal) 및 복사(Clipboard) 제어
+    // =========================================================================
+    function openModal(modalId, triggerEl) {
+      if (triggerEl) lastTriggerElement = triggerEl;
+      activeModalId = modalId;
+      if (modalId === "modal-toc") initTocGrid();
+      const modal = document.getElementById(modalId);
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+      activeModalId = null;
+      if (lastTriggerElement && typeof lastTriggerElement.focus === "function") {
+        lastTriggerElement.focus();
+      }
+    }
+
+    function handleBackdropClick(e, modalId) {
+      if (e.target.id === modalId) {
+        closeModal(modalId);
+      }
+    }
+
+    function openPopup(key, triggerEl) {
+      const data = POPUP_DATA[key];
+      if (!data) return;
+      document.getElementById("modal-popup-title").textContent = data.title;
+      document.getElementById("modal-popup-desc").textContent = data.desc;
+      document.getElementById("modal-popup-content").textContent = data.content;
+      const copyBtn = document.getElementById("modal-copy-btn");
+      if (data.hideCopy) {
+        copyBtn.classList.add("hidden");
+      } else {
+        copyBtn.classList.remove("hidden");
+      }
+      openModal("modal-popup", triggerEl);
+    }
+
+    function copyPopupText() {
+      const text = document.getElementById("modal-popup-content").textContent;
+      copyTextDirect(text);
+    }
+
+    function copyTextDirect(text) {
+      try {
+        const tempArea = document.createElement("textarea");
+        tempArea.value = text;
+        tempArea.style.position = "fixed";
+        tempArea.style.left = "-9999px";
+        document.body.appendChild(tempArea);
+        tempArea.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(tempArea);
+        if (ok) {
+          showToast("클립보드에 복사되었습니다. AI 대화창에 붙여넣기(Ctrl+V) 하세요.");
+        } else {
+          showToast("복사에 실패했습니다. 텍스트를 직접 드래그하여 복사해 주세요.", true);
+        }
+      } catch (err) {
+        showToast("복사에 실패했습니다. 텍스트를 직접 선택해 복사해 주세요.", true);
+      }
+    }
+
+    let toastTimer = null;
+    function showToast(message, isError = false) {
+      const box = document.getElementById("toast-box");
+      const icon = document.getElementById("toast-icon");
+      const msg = document.getElementById("toast-msg");
+      msg.textContent = message;
+      icon.className = isError
+        ? "fa-solid fa-triangle-exclamation text-amber-400 text-lg"
+        : "fa-solid fa-circle-check text-[#39B8B2] text-lg";
+      box.classList.remove("hidden");
+      box.classList.add("flex");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        box.classList.add("hidden");
+        box.classList.remove("flex");
+      }, 3200);
+    }
+
+    // =========================================================================
+    // 7. HTML 파일 직접 다운로드 기능 (사용자 요청 해결)
+    // =========================================================================
+    function downloadThisHtml() {
+      try {
+        const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+        const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "유안타증권_지점장교육_AI코칭대시보드_슬라이드.html";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast("HTML 슬라이드 파일 다운로드가 시작되었습니다.");
+      } catch (e) {
+        showToast("다운로드 중 오류가 발생했습니다. 코드 편집기에서 전체 복사를 이용해 주세요.", true);
+      }
+    }
+
+    // =========================================================================
+    // 8. 키보드 네비게이션 (팝업 열림 시 슬라이드 방향키 이동 차단)
+    // =========================================================================
+    window.addEventListener("keydown", (e) => {
+      // 팝업이 열려 있을 때: Escape로 닫기 지원, 좌우 방향키 슬라이드 이동 차단
+      if (activeModalId) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          closeModal(activeModalId);
+        }
+        return;
+      }
+
+      // 입력창(input, textarea)에 포커스가 있을 때는 방향키 이동 차단
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : "";
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") {
+        return;
+      }
+
+      if (!isReadAllMode) {
+        if (e.key === "ArrowRight" || e.key === "PageDown") {
+          e.preventDefault();
+          changeSlide(1);
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          changeSlide(-1);
+        }
+      }
+    });
+
+    // 초기 실행 및 인쇄 시 전체 슬라이드 자동 구성
+    window.addEventListener("beforeprint", () => {
+      const container = document.getElementById("read-all-container");
+      if (container && !container.innerHTML.trim()) {
+        container.innerHTML = SLIDES.map(s => `
+          <div class="slide-viewport bg-white flex flex-col justify-between mx-auto">
+            ${buildSlideHTML(s)}
+          </div>
+        `).join('');
+      }
+    });
+
+    window.onload = function () {
+      renderCurrentSlide();
+    };
+  </script>
+</body>
+</html>
