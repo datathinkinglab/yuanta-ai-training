@@ -71,7 +71,7 @@
 
   <!-- 상단 네비게이션 헤더 -->
   <header class="bg-yuanta-navy text-white sticky top-0 z-50 shadow-md border-b border-slate-700/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3.5 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3.5 flex flex-wrap gap-4 items-center justify-between">
       <div class="flex items-center space-x-3.5">
         <!-- CI 로고 심볼 / 엠블럼 -->
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-yuanta-teal to-teal-400 flex items-center justify-center font-bold text-yuanta-navy shadow-inner text-lg">
@@ -85,8 +85,11 @@
           <p class="text-xs text-slate-300">유안타증권 생성형 AI 혁신 교육 포털</p>
         </div>
       </div>
-
-
+      <nav aria-label="주 메뉴" class="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-bold">
+        <a href="index.html" aria-current="page" class="px-4 py-2 rounded-lg bg-yuanta-teal/20 text-yuanta-teal">교육 안내</a>
+        <a href="instructor.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">강사소개</a>
+        <a href="https://www.datathinkinglab.com" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-yuanta-teal text-yuanta-navy hover:bg-teal-300 transition-colors" aria-label="Data Thinking Lab 홈페이지 방문 (새 창)">홈페이지 방문 ↗</a>
+      </nav>
     </div>
   </header>
 
