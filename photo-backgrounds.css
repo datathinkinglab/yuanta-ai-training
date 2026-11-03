@@ -1,0 +1,12 @@
+/* Photographic backgrounds for portal hero, course covers and module dividers. */
+.photo-portal-hero {background-image:linear-gradient(90deg,rgba(10,18,32,.94) 0%,rgba(10,18,32,.76) 48%,rgba(10,18,32,.32) 100%),url('assets/backgrounds/finance-city.jpg')!important;background-size:cover!important;background-position:center 52%!important;}
+body[data-photo-course="executives"] {--lecture-photo:url('assets/backgrounds/finance-city.jpg');}
+body[data-photo-course="team"] {--lecture-photo:url('assets/backgrounds/team-office.jpg');}
+body[data-photo-course="branch"] {--lecture-photo:url('assets/backgrounds/advisory-lounge.jpg');}
+body[data-photo-course] .unified-dark {background-image:linear-gradient(90deg,rgba(10,18,32,.94) 0%,rgba(10,18,32,.82) 48%,rgba(10,18,32,.38) 100%),var(--lecture-photo)!important;background-size:cover!important;background-position:center!important;}
+body[data-photo-course] .unified-dark .unified-body {background:transparent;}
+body[data-photo-course] .unified-dark .unified-footer {background:rgba(10,18,32,.85);}
+body[data-photo-course] .unified-dark .unified-cover-aside {background:rgba(10,18,32,.76);backdrop-filter:blur(6px);}
+body[data-photo-course] .unified-dark .unified-divider-flow {background:rgba(10,18,32,.62);}
+body[data-photo-course] .unified-dark h1,body[data-photo-course] .unified-dark h2 {text-shadow:0 2px 20px rgba(0,0,0,.4);}
+@media print {.photo-portal-hero,body[data-photo-course] .unified-dark{print-color-adjust:exact;-webkit-print-color-adjust:exact;}}
