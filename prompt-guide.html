@@ -1,24 +1,1437 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>공통 강의 · 프롬프트 작성법</title><style>*{box-sizing:border-box}body{margin:0;background:#09101d;color:#17253b;font-family:Pretendard,'Malgun Gothic',sans-serif}button,a{font:inherit}a{color:#137d78}.bar{display:flex;gap:8px;flex-wrap:wrap;max-width:1200px;margin:auto;padding:12px;color:white}.bar a,.bar button{background:#1c304a;border:1px solid #40536b;border-radius:7px;color:white;padding:8px 12px;text-decoration:none;cursor:pointer}.bar .nav{margin-left:auto}.stage{max-width:1200px;margin:auto}.slide{display:none;background:white;min-height:650px;padding:32px 48px;border-radius:8px;flex-direction:column}.slide.active,.reading .slide{display:flex}.reading .slide{margin-bottom:20px}.top,.bottom{display:flex;justify-content:space-between;color:#64748b;font-size:14px}.top b{color:#248d88}.content{flex:1;padding:42px 0}h1{font-size:36px;color:#101d35;margin:0 0 10px}.sub{color:#288580;font-size:20px;margin:0 0 35px}.lead{font-size:24px;line-height:1.55}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:28px 0}.cards>div{background:#f1f7f7;border:1px solid #dce9e8;border-radius:12px;padding:22px;line-height:1.65}.cards b{font-size:21px;color:#137d78}.note{background:#e8f7f6;border-left:4px solid #39b8b2;padding:14px 18px;line-height:1.6}table{border-collapse:collapse;width:100%;line-height:1.5}th,td{text-align:left;border-bottom:1px solid #dce4eb;padding:14px}th{background:#101d35;color:white}pre{white-space:pre-wrap;background:#f1f5f9;border-radius:10px;padding:20px;font:inherit;line-height:1.65}.copy{background:#101d35;color:white;border:0;border-radius:7px;padding:10px 15px;cursor:pointer}.sources{font-size:14px;line-height:1.8}dialog{border:0;border-radius:12px;width:min(90%,650px);padding:24px}dialog::backdrop{background:#0009}dialog button{display:block;width:100%;text-align:left;padding:10px;border:0;background:white;cursor:pointer}@media(max-width:700px){.slide{padding:24px;min-height:0}.content{padding:28px 0}h1{font-size:27px}.sub{font-size:17px}table{font-size:13px}th,td{padding:8px}.bar .nav{margin-left:0}}@media print{body{background:white}.bar{display:none}.slide,.reading .slide{display:flex;break-after:page;min-height:95vh}.slide:last-child{break-after:auto}}</style></head><body><nav class="bar" aria-label="강의 메뉴"><a href="index.html">⌂ 메인 화면</a><button id="toc">목차</button><button id="read" aria-pressed="false">전체 읽기</button><button id="full">화면 전체보기</button><button onclick="window.print()">PDF 출력</button><span class="nav"><button id="prev">◀ 이전</button> <span id="count"></span> <button id="next">다음 ▶</button></span></nav><main class="stage"><section class="slide" data-title="AI에게 일을 맡기는 프롬프트 작성법"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>시작</b></div><div class="content"><h1>AI에게 일을 맡기는 프롬프트 작성법</h1><p class="sub">유안타증권 임직원 공통 강의</p><p class="lead">무엇을 · 왜 · 어떻게</p><div class="cards"><div><b>업무를 설명하기</b><p>원하는 결과와 사용 목적을 말합니다.</p></div><div><b>요청을 작성하기</b><p>자료와 조건을 붙여 실행 가능한 요청을 만듭니다.</p></div><div><b>결과를 확인하기</b><p>원문과 대조하고 수정할 내용을 구체적으로 요청합니다.</p></div></div><p class="note">이 강의를 마치면 자신의 업무 한 가지를 세 질문으로 설명하고, AI 결과를 확인할 기준을 정할 수 있습니다.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>1 / 16</span></div></section>
-<section class="slide" data-title="“회의 내용을 요약해줘”면 충분할까요?"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>질문</b></div><div class="content"><h1>“회의 내용을 요약해줘”면 충분할까요?</h1><p class="sub">같은 회의 메모로도 필요한 결과는 달라집니다</p><div class="cards"><div><b>보고 준비</b><p>상사가 알아야 할 핵심 쟁점은 무엇인가?</p></div><div><b>실행 관리</b><p>누가 무엇을 언제까지 해야 하는가?</p></div><div><b>후속 회의</b><p>무엇을 추가로 결정해야 하는가?</p></div></div><p class="note">생각해 보기: 지금 필요한 것은 보고 요약, 실행 목록, 다음 회의 안건 중 무엇인가요?</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>2 / 16</span></div></section>
-<section class="slide" data-title="프롬프트는 AI에게 전달하는 업무 요청입니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>개념</b></div><div class="content"><h1>프롬프트는 AI에게 전달하는 업무 요청입니다</h1><p class="sub">AI가 알 수 없는 업무 맥락을 함께 제공합니다</p><p class="lead">“잘 정리해줘”를 “이 목적에 맞게, 이 자료로, 이런 결과를 만들어줘”로 바꿉니다.</p><div class="cards"><div><b>목표를 공유</b><p>같은 자료라도 독자와 목적에 따라 강조점이 바뀝니다.</p></div><div><b>조건을 명시</b><p>사용할 자료, 제외할 범위, 결과 형식을 정합니다.</p></div><div><b>확인 기준을 설정</b><p>무엇을 확인해야 사용할 수 있는 결과인지 정합니다.</p></div></div></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>3 / 16</span></div></section>
-<section class="slide" data-title="세 질문으로 요청을 구성합니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>기본 틀</b></div><div class="content"><h1>세 질문으로 요청을 구성합니다</h1><p class="sub">무엇을 → 왜 → 어떻게</p><div class="cards"><div><b>무엇을</b><p>수행할 일과 받을 산출물<br><strong>동사 + 대상 + 결과</strong><br>예: 회의 메모에서 후속 실행 목록을 만들어 주세요.</p></div><div><b>왜</b><p>사용 목적과 결과를 읽을 사람<br><strong>목적 + 독자 + 상황</strong><br>예: 팀장이 다음 회의에서 진행 상황을 점검하려고 합니다.</p></div><div><b>어떻게</b><p>사용 자료와 작성·확인 조건<br><strong>자료 + 형식 + 제약 + 완료 기준</strong><br>예: 담당자·기한을 표로 쓰고 없는 정보는 확인 필요로 표시해 주세요.</p></div></div><p class="note">항상 세 개의 제목을 붙일 필요는 없습니다. 세 질문의 답이 요청 안에 들어 있는지 확인하세요.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>4 / 16</span></div></section>
-<section class="slide" data-title="“분석해줘”를 구체적인 산출물로 바꿉니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>무엇을</b></div><div class="content"><h1>“분석해줘”를 구체적인 산출물로 바꿉니다</h1><p class="sub">업무 동사와 결과의 범위를 정합니다</p><table><tr><th>모호한 요청</th><th>구체적인 요청</th></tr><tr><td>자료 좀 봐줘</td><td>제공한 자료 두 건의 차이와 확인할 쟁점을 표로 비교해 주세요.</td></tr><tr><td>회의 준비해줘</td><td>회의에서 결정할 안건 3개와 안건별 확인 질문을 작성해 주세요.</td></tr><tr><td>직원 코칭 자료 만들어줘</td><td>가상 업무 사례에 대한 피드백 대화 초안을 작성해 주세요.</td></tr></table><p class="note">확인 질문: 결과를 받았을 때 “요청한 일이 끝났다”고 판단할 수 있나요?</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>5 / 16</span></div></section>
-<section class="slide" data-title="목적을 알려주면 요약의 기준이 생깁니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>왜</b></div><div class="content"><h1>목적을 알려주면 요약의 기준이 생깁니다</h1><p class="sub">같은 자료, 다른 독자와 의사결정</p><table><tr><th>사용 목적</th><th>요청에 추가할 설명</th></tr><tr><td>경영회의 의제 선정</td><td>경영진이 우선 검토할 쟁점을 고르기 위한 자료입니다. 영향과 불확실성을 중심으로 정리해 주세요.</td></tr><tr><td>팀 업무 점검</td><td>팀장이 후속 조치를 확인할 자료입니다. 담당자와 기한, 미결사항을 중심으로 정리해 주세요.</td></tr><tr><td>직원 피드백 준비</td><td>직원이 다음 행동을 정하도록 돕는 대화 초안입니다. 관찰 사실과 제안을 구분해 주세요.</td></tr></table><p class="note">“왜”는 AI의 사고 과정을 요구하는 말이 아니라, 이 결과를 어디에 사용할지 알려주는 설명입니다.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>6 / 16</span></div></section>
-<section class="slide" data-title="자료·형식·제약·완료 기준을 정합니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>어떻게</b></div><div class="content"><h1>자료·형식·제약·완료 기준을 정합니다</h1><p class="sub">중요한 조건부터 짧고 명확하게 전달합니다</p><div class="cards"><div><b>어떤 자료로?</b><p>제공한 회의 메모만 사용합니다. 자료에 없는 사실은 만들지 않습니다.</p></div><div><b>어떤 형태로?</b><p>결정사항·후속조치·담당자·기한을 표로 작성합니다.</p></div><div><b>어디까지 확인?</b><p>메모에 없는 담당자나 기한은 “확인 필요”로 표시하고, 각 항목에 근거 문장을 붙입니다.</p></div></div><p class="note">최신 모델 활용의 핵심: 목표와 제약, 결과 기준을 분명히 하되 불필요하게 모든 중간 과정을 지시하지 않습니다.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>7 / 16</span></div></section>
-<section class="slide" data-title="긴 역할 설정보다 업무 조건을 구체화합니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>작성 습관</b></div><div class="content"><h1>긴 역할 설정보다 업무 조건을 구체화합니다</h1><p class="sub">기존 작성 습관을 실무 요청으로 다듬기</p><table><tr><th>흔한 요청</th><th>더 유용한 작성 방법</th></tr><tr><td>“당신은 20년 경력의 전문가입니다.”</td><td>필요한 관점을 명시합니다. 예: 팀 업무 점검 관점에서 누락된 담당자와 기한을 찾아 주세요.</td></tr><tr><td>“단계별로 자세히 생각해 주세요.”</td><td>결과에 필요한 근거와 확인 사항을 요청합니다. 예: 각 제안의 근거와 가정을 함께 써 주세요.</td></tr><tr><td>“무조건 질문부터 해 주세요.”</td><td>결과가 크게 달라질 핵심 정보가 없으면 질문하고, 나머지 누락은 확인 필요로 표시하게 합니다.</td></tr><tr><td>“알아서 완벽하게 해 주세요.”</td><td>완료 기준을 씁니다. 예: 모든 후속조치에 담당자·기한 또는 확인 필요가 표시되어야 합니다.</td></tr></table><p class="note">역할, 과업, 맥락, 출력 형식은 여전히 유용한 점검 요소입니다. 세 질문 안에 필요한 요소를 담으면 됩니다.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>8 / 16</span></div></section>
-<section class="slide" data-title="가상 회의 메모로 요청을 작성해 봅니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>실습 자료</b></div><div class="content"><h1>가상 회의 메모로 요청을 작성해 봅니다</h1><p class="sub">아래 자료를 AI에 제공한다고 가정합니다</p><pre>가상 팀 회의 메모
-· 업무 요청이 이메일과 메신저로 나뉘어 들어와 누락 여부를 확인하기 어렵다는 의견이 나왔다.
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유안타증권 · AI에게 일을 맡기는 프롬프트 작성법</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Pretendard', 'Malgun Gothic', 'sans-serif'],
+                    },
+                    colors: {
+                        yuanta: {
+                            navy: '#0a1628',
+                            dark: '#101d35',
+                            teal: '#137d78',
+                            lightTeal: '#288580',
+                            accent: '#39b8b2',
+                            bgLight: '#f1f7f7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #070d19;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+        /* Slide Transition & Layout */
+        .slide {
+            display: none;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Reading Mode */
+        .reading-mode .slide {
+            display: flex !important;
+            opacity: 1 !important;
+            transform: none !important;
+            margin-bottom: 2.5rem;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .stage-container {
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+            .slide {
+                display: flex !important;
+                opacity: 1 !important;
+                transform: none !important;
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0 !important;
+                break-after: page;
+                min-height: 94vh !important;
+                margin-bottom: 0 !important;
+            }
+            .slide:last-child {
+                break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-yuanta-accent selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <header class="no-print sticky top-0 z-30 bg-[#0a1324]/90 backdrop-blur-md border-b border-slate-800/80 px-4 py-2.5">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <!-- Brand & Course Title -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-200 text-sm font-medium transition border border-slate-700/80 shadow-sm" title="메인 화면으로 이동">
+                    <i class="ph ph-house text-yuanta-accent text-lg"></i>
+                    <span class="hidden sm:inline">메인 화면</span>
+                </a>
+                <div class="h-4 w-[1px] bg-slate-700 hidden sm:block"></div>
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded text-xs font-bold bg-yuanta-teal/30 text-yuanta-accent border border-yuanta-accent/30">STEP-UP</span>
+                    <span class="text-slate-200 font-semibold text-sm sm:text-base tracking-tight">프롬프트 작성법</span>
+                </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+                <button id="btn-toc" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-sm font-medium transition border border-slate-700">
+                    <i class="ph ph-list-bullets text-yuanta-accent"></i>
+                    <span>목차</span>
+                </button>
+                <button id="btn-read" aria-pressed="false" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-sm font-medium transition border border-slate-700">
+                    <i class="ph ph-book-open-text text-yuanta-accent"></i>
+                    <span id="read-label">전체 읽기</span>
+                </button>
+                <button id="btn-full" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-sm font-medium transition border border-slate-700">
+                    <i class="ph ph-corners-out text-yuanta-accent" id="full-icon"></i>
+                    <span id="full-label">전체화면</span>
+                </button>
+                <button onclick="window.print()" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-sm font-medium transition border border-slate-700">
+                    <i class="ph ph-printer text-yuanta-accent"></i>
+                    <span>PDF 출력</span>
+                </button>
+            </div>
+
+            <!-- Slide Prev/Next Controls -->
+            <div class="flex items-center gap-2 ml-auto sm:ml-0">
+                <button id="btn-prev" class="p-2 rounded-lg bg-slate-800 hover:bg-yuanta-teal text-white disabled:opacity-30 disabled:hover:bg-slate-800 transition border border-slate-700" title="이전 슬라이드 (←)">
+                    <i class="ph-bold ph-caret-left"></i>
+                </button>
+                <span id="slide-counter" class="text-slate-300 font-mono text-sm font-semibold min-w-[60px] text-center">1 / 16</span>
+                <button id="btn-next" class="p-2 rounded-lg bg-slate-800 hover:bg-yuanta-teal text-white disabled:opacity-30 disabled:hover:bg-slate-800 transition border border-slate-700" title="다음 슬라이드 (→)">
+                    <i class="ph-bold ph-caret-right"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Progress Bar -->
+        <div class="max-w-7xl mx-auto mt-2 h-1 bg-slate-800 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-yuanta-teal to-yuanta-accent transition-all duration-300" style="width: 6.25%;"></div>
+        </div>
+    </header>
+
+    <!-- Main Slide Stage -->
+    <main id="stage" class="stage-container flex-1 max-w-6xl w-full mx-auto px-4 py-6 sm:py-8 flex flex-col justify-center">
+
+        <!-- ==================== SLIDE 1: 시작 ==================== -->
+        <section class="slide active bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12 relative overflow-hidden" data-title="AI에게 일을 맡기는 프롬프트 작성법" data-tag="시작">
+            <div class="absolute -right-24 -top-24 w-80 h-80 bg-yuanta-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <!-- Top Meta -->
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">01 · 시작</span>
+            </div>
+
+            <!-- Content -->
+            <div class="my-auto py-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yuanta-dark text-yuanta-accent text-xs font-semibold mb-4">
+                    <i class="ph-fill ph-sparkle"></i>
+                    <span>유안타증권 임직원 공통 강의</span>
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-extrabold text-yuanta-dark tracking-tight leading-tight mb-4">
+                    AI에게 일을 맡기는<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-yuanta-teal to-yuanta-accent">프롬프트 작성법</span>
+                </h1>
+                <p class="text-xl sm:text-2xl font-semibold text-slate-600 mb-8 flex items-center gap-3">
+                    <span>무엇을</span>
+                    <i class="ph-bold ph-arrow-right text-yuanta-accent text-lg"></i>
+                    <span>왜</span>
+                    <i class="ph-bold ph-arrow-right text-yuanta-accent text-lg"></i>
+                    <span>어떻게</span>
+                </p>
+
+                <!-- 3 Pillars -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6 hover:shadow-md transition relative group">
+                        <div class="w-11 h-11 rounded-lg bg-yuanta-teal text-white flex items-center justify-center text-xl mb-4 shadow-sm">
+                            <i class="ph-duotone ph-chat-centered-text"></i>
+                        </div>
+                        <div class="text-xs font-bold text-yuanta-teal mb-1">STEP 01</div>
+                        <h3 class="text-lg font-bold text-yuanta-dark mb-2">업무를 설명하기</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">원하는 결과물과 그 결과를 사용할 목적을 분명하게 말합니다.</p>
+                    </div>
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6 hover:shadow-md transition relative group">
+                        <div class="w-11 h-11 rounded-lg bg-yuanta-teal text-white flex items-center justify-center text-xl mb-4 shadow-sm">
+                            <i class="ph-duotone ph-Sliders-horizontal"></i>
+                        </div>
+                        <div class="text-xs font-bold text-yuanta-teal mb-1">STEP 02</div>
+                        <h3 class="text-lg font-bold text-yuanta-dark mb-2">요청을 작성하기</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">참고할 자료와 제약 조건을 붙여 실행 가능한 요청을 만듭니다.</p>
+                    </div>
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6 hover:shadow-md transition relative group">
+                        <div class="w-11 h-11 rounded-lg bg-yuanta-teal text-white flex items-center justify-center text-xl mb-4 shadow-sm">
+                            <i class="ph-duotone ph-seal-check"></i>
+                        </div>
+                        <div class="text-xs font-bold text-yuanta-teal mb-1">STEP 03</div>
+                        <h3 class="text-lg font-bold text-yuanta-dark mb-2">결과를 확인하기</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">원문과 대조하여 검증하고 수정할 내용을 구체적으로 재요청합니다.</p>
+                    </div>
+                </div>
+
+                <!-- Callout Note -->
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 sm:p-5 flex items-start gap-3.5">
+                    <i class="ph-fill ph-lightbulb-filament text-yuanta-teal text-2xl shrink-0 mt-0.5"></i>
+                    <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
+                        이 강의를 마치면 <strong>자신의 업무 한 가지를 세 가지 질문으로 설명</strong>하고, AI가 만든 결과를 확인할 명확한 기준을 세울 수 있습니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Meta -->
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">1 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 2: 질문 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="“회의 내용을 요약해줘”면 충분할까요?" data-tag="질문">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">02 · 질문</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">“회의 내용을 요약해줘”면 충분할까요?</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-8">같은 회의 메모라도 필요한 결과는 상황에 따라 달라집니다</p>
+
+                <!-- Visual Prompt Comparison -->
+                <div class="bg-slate-900 text-white rounded-xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-bold">흔한 입력</span>
+                        <span class="font-mono text-base sm:text-lg">“오늘 팀 회의록 요약해줘.”</span>
+                    </div>
+                    <span class="text-xs text-slate-400 flex items-center gap-1">
+                        <i class="ph ph-warning-circle text-amber-400 text-base"></i>
+                        AI는 내가 왜 요약을 원하는지 알지 못합니다
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold px-2.5 py-1 rounded bg-white text-yuanta-teal border border-teal-200">상황 A</span>
+                                <i class="ph-duotone ph-presentation-chart text-2xl text-yuanta-teal"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-yuanta-dark mb-2">보고 준비</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">상사가 의사결정을 위해 알아야 할 <strong>핵심 쟁점과 결론</strong>은 무엇인가?</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-teal-200/60 text-xs text-slate-500">
+                            산출물: 경영진/상사 보고용 핵심 요약본
+                        </div>
+                    </div>
+
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold px-2.5 py-1 rounded bg-white text-yuanta-teal border border-teal-200">상황 B</span>
+                                <i class="ph-duotone ph-check-square-offset text-2xl text-yuanta-teal"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-yuanta-dark mb-2">실행 관리</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">회의 직후 실무에서 <strong>누가 무엇을 언제까지</strong> 해야 하는가?</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-teal-200/60 text-xs text-slate-500">
+                            산출물: 담당자·기한별 후속 조치(Action Item) 표
+                        </div>
+                    </div>
+
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold px-2.5 py-1 rounded bg-white text-yuanta-teal border border-teal-200">상황 C</span>
+                                <i class="ph-duotone ph-calendar-plus text-2xl text-yuanta-teal"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-yuanta-dark mb-2">후속 회의</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">이번에 결론 나지 않아 <strong>다음에 추가로 결정해야 할 사항</strong>은 무엇인가?</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-teal-200/60 text-xs text-slate-500">
+                            산출물: 미결 쟁점 및 차기 회의 안건 리스트
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 sm:p-5 flex items-center gap-3.5">
+                    <i class="ph-fill ph-question text-yuanta-teal text-2xl shrink-0"></i>
+                    <p class="text-slate-700 text-sm sm:text-base font-medium">
+                        <strong>생각해 보기:</strong> 지금 당장 내 업무에 필요한 것은 <strong>보고 요약, 실행 목록, 다음 회의 안건</strong> 중 무엇인가요?
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">2 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 3: 개념 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="프롬프트는 AI에게 전달하는 업무 요청입니다" data-tag="개념">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">03 · 개념</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">프롬프트는 AI에게 전달하는 업무 요청입니다</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-6">AI가 스스로 알 수 없는 우리의 ‘업무 맥락’을 함께 제공합니다</p>
+
+                <!-- Transformation Banner -->
+                <div class="bg-gradient-to-r from-slate-50 to-teal-50/60 border border-teal-200 rounded-2xl p-5 sm:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="px-3 py-1 rounded-full bg-slate-200 text-slate-600 text-xs font-bold">Before</span>
+                        <span class="text-base sm:text-lg text-slate-500 line-through font-medium">“이 자료 잘 정리해줘”</span>
+                    </div>
+                    <i class="ph-bold ph-arrow-right text-yuanta-teal text-2xl rotate-90 md:rotate-0"></i>
+                    <div class="flex items-center gap-3">
+                        <span class="px-3 py-1 rounded-full bg-yuanta-teal text-white text-xs font-bold">After</span>
+                        <span class="text-base sm:text-lg text-yuanta-dark font-bold">“이 목적에 맞게, 이 자료로, 이런 결과를 만들어줘”</span>
+                    </div>
+                </div>
+
+                <!-- 3 Core Elements -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6">
+                        <div class="w-10 h-10 rounded-lg bg-yuanta-dark text-yuanta-accent flex items-center justify-center text-xl mb-4">
+                            <i class="ph-fill ph-target"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-yuanta-teal mb-2">1. 목표를 공유</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">같은 원문 자료라도 읽는 독자와 활용 목적에 따라 강조해야 할 포인트가 완전히 바뀝니다.</p>
+                    </div>
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6">
+                        <div class="w-10 h-10 rounded-lg bg-yuanta-dark text-yuanta-accent flex items-center justify-center text-xl mb-4">
+                            <i class="ph-fill ph-funnel"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-yuanta-teal mb-2">2. 조건을 명시</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">사용할 자료의 한계, 제외할 범위, 표나 글머리 기호 같은 결과 형식을 명확히 정합니다.</p>
+                    </div>
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6">
+                        <div class="w-10 h-10 rounded-lg bg-yuanta-dark text-yuanta-accent flex items-center justify-center text-xl mb-4">
+                            <i class="ph-fill ph-check-circle"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-yuanta-teal mb-2">3. 확인 기준을 설정</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">근거 문장 표시나 미확인 정보 표기 등 무엇을 통과해야 실무에 쓸 수 있는지 정합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">3 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 4: 기본 틀 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="세 질문으로 요청을 구성합니다" data-tag="기본 틀">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">04 · 기본 틀</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">세 질문으로 요청을 구성합니다</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-8">무엇을 (What) → 왜 (Why) → 어떻게 (How)</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                    <!-- WHAT -->
+                    <div class="bg-[#f2f8f8] border-2 border-yuanta-teal/30 rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-2xl font-extrabold text-yuanta-teal">무엇을</span>
+                                <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-teal-100 text-yuanta-teal font-bold">WHAT</span>
+                            </div>
+                            <p class="text-slate-700 font-semibold text-sm mb-3">수행할 일과 받을 산출물</p>
+                            <div class="bg-white rounded-lg p-3 border border-teal-200/80 text-xs font-bold text-yuanta-dark mb-4 text-center">
+                                동사 + 대상 + 결과
+                            </div>
+                        </div>
+                        <div class="bg-white/80 rounded-lg p-3.5 text-xs text-slate-600 leading-relaxed border border-slate-200/60">
+                            <strong class="text-yuanta-teal block mb-1">작성 예시</strong>
+                            “회의 메모에서 후속 실행 목록을 만들어 주세요.”
+                        </div>
+                    </div>
+
+                    <!-- WHY -->
+                    <div class="bg-[#f2f8f8] border-2 border-yuanta-teal/30 rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-2xl font-extrabold text-yuanta-teal">왜</span>
+                                <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-teal-100 text-yuanta-teal font-bold">WHY</span>
+                            </div>
+                            <p class="text-slate-700 font-semibold text-sm mb-3">사용 목적과 결과를 읽을 사람</p>
+                            <div class="bg-white rounded-lg p-3 border border-teal-200/80 text-xs font-bold text-yuanta-dark mb-4 text-center">
+                                목적 + 독자 + 상황
+                            </div>
+                        </div>
+                        <div class="bg-white/80 rounded-lg p-3.5 text-xs text-slate-600 leading-relaxed border border-slate-200/60">
+                            <strong class="text-yuanta-teal block mb-1">작성 예시</strong>
+                            “팀장이 다음 회의에서 진행 상황을 점검하려고 합니다.”
+                        </div>
+                    </div>
+
+                    <!-- HOW -->
+                    <div class="bg-[#f2f8f8] border-2 border-yuanta-teal/30 rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-2xl font-extrabold text-yuanta-teal">어떻게</span>
+                                <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-teal-100 text-yuanta-teal font-bold">HOW</span>
+                            </div>
+                            <p class="text-slate-700 font-semibold text-sm mb-3">사용 자료와 작성·확인 조건</p>
+                            <div class="bg-white rounded-lg p-3 border border-teal-200/80 text-xs font-bold text-yuanta-dark mb-4 text-center">
+                                자료 + 형식 + 제약 + 완료 기준
+                            </div>
+                        </div>
+                        <div class="bg-white/80 rounded-lg p-3.5 text-xs text-slate-600 leading-relaxed border border-slate-200/60">
+                            <strong class="text-yuanta-teal block mb-1">작성 예시</strong>
+                            “담당자·기한을 표로 쓰고 없는 정보는 ‘확인 필요’로 표시해 주세요.”
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 sm:p-5 flex items-center gap-3.5">
+                    <i class="ph-fill ph-info text-yuanta-teal text-2xl shrink-0"></i>
+                    <p class="text-slate-700 text-sm sm:text-base font-medium">
+                        항상 [무엇을], [왜], [어떻게]라는 제목을 붙일 필요는 없습니다. <strong>세 질문의 답이 요청 문장 안에 자연스럽게 들어 있는지</strong> 확인하세요.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">4 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 5: 무엇을 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="“분석해줘”를 구체적인 산출물로 바꿉니다" data-tag="무엇을">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">05 · 무엇을 (What)</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">“분석해줘”를 구체적인 산출물로 바꿉니다</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-8">수행할 업무 동사와 결과물의 범위를 명확히 정합니다</p>
+
+                <div class="overflow-hidden rounded-xl border border-slate-200 mb-8 shadow-sm">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-yuanta-dark text-white text-sm sm:text-base">
+                                <th class="py-4 px-5 w-1/3 font-semibold border-r border-slate-700">
+                                    <div class="flex items-center gap-2">
+                                        <i class="ph-fill ph-x-circle text-rose-400"></i>
+                                        <span>모호한 요청</span>
+                                    </div>
+                                </th>
+                                <th class="py-4 px-5 font-semibold">
+                                    <div class="flex items-center gap-2">
+                                        <i class="ph-fill ph-check-circle text-yuanta-accent"></i>
+                                        <span>구체적인 산출물 요청 (동사 + 대상 + 결과)</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-sm sm:text-base">
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="py-4 px-5 font-medium text-slate-500 bg-slate-50/50 border-r border-slate-200">“자료 좀 봐줘”</td>
+                                <td class="py-4 px-5 text-slate-800 font-medium">제공한 <span class="text-yuanta-teal font-bold">자료 두 건의 차이와 확인할 쟁점을 표로 비교</span>해 주세요.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="py-4 px-5 font-medium text-slate-500 bg-slate-50/50 border-r border-slate-200">“회의 준비해줘”</td>
+                                <td class="py-4 px-5 text-slate-800 font-medium">회의에서 <span class="text-yuanta-teal font-bold">결정할 안건 3개와 안건별 확인 질문</span>을 작성해 주세요.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="py-4 px-5 font-medium text-slate-500 bg-slate-50/50 border-r border-slate-200">“직원 코칭 자료 만들어줘”</td>
+                                <td class="py-4 px-5 text-slate-800 font-medium">가상 업무 사례에 대한 <span class="text-yuanta-teal font-bold">피드백 대화 초안</span>을 작성해 주세요.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 sm:p-5 flex items-center gap-3.5">
+                    <i class="ph-fill ph-seal-question text-yuanta-teal text-2xl shrink-0"></i>
+                    <p class="text-slate-700 text-sm sm:text-base font-medium">
+                        <strong>확인 질문:</strong> AI로부터 결과를 받았을 때, <strong>“내가 요청한 일이 끝났다”</strong>고 즉시 판단할 수 있나요?
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">5 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 6: 왜 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="목적을 알려주면 요약의 기준이 생깁니다" data-tag="왜">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">06 · 왜 (Why)</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">목적을 알려주면 요약의 기준이 생깁니다</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-8">같은 자료라도 읽는 독자와 의사결정에 따라 선별 기준이 달라집니다</p>
+
+                <div class="overflow-hidden rounded-xl border border-slate-200 mb-8 shadow-sm">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-yuanta-dark text-white text-sm sm:text-base">
+                                <th class="py-4 px-5 w-1/4 font-semibold border-r border-slate-700">사용 목적</th>
+                                <th class="py-4 px-5 font-semibold">요청에 추가할 설명 (독자 + 판단 기준)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-sm sm:text-base">
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="py-4 px-5 font-bold text-yuanta-dark bg-slate-50/60 border-r border-slate-200">경영회의 의제 선정</td>
+                                <td class="py-4 px-5 text-slate-700 leading-relaxed">
+                                    “<span class="text-yuanta-teal font-semibold">경영진이 우선 검토할 쟁점</span>을 고르기 위한 자료입니다. <strong>영향과 불확실성</strong>을 중심으로 정리해 주세요.”
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="py-4 px-5 font-bold text-yuanta-dark bg-slate-50/60 border-r border-slate-200">팀 업무 점검</td>
+                                <td class="py-4 px-5 text-slate-700 leading-relaxed">
+                                    “<span class="text-yuanta-teal font-semibold">팀장이 후속 조치를 확인</span>할 자료입니다. <strong>담당자와 기한, 미결사항</strong>을 중심으로 정리해 주세요.”
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="py-4 px-5 font-bold text-yuanta-dark bg-slate-50/60 border-r border-slate-200">직원 피드백 준비</td>
+                                <td class="py-4 px-5 text-slate-700 leading-relaxed">
+                                    “<span class="text-yuanta-teal font-semibold">직원이 다음 행동을 정하도록 돕는</span> 대화 초안입니다. <strong>관찰 사실과 제안</strong>을 구분해 주세요.”
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 sm:p-5 flex items-center gap-3.5">
+                    <i class="ph-fill ph-compass text-yuanta-teal text-2xl shrink-0"></i>
+                    <p class="text-slate-700 text-sm sm:text-base font-medium">
+                        여기서 <strong>“왜”</strong>는 AI의 내부 사고 과정을 캐묻는 말이 아니라, <strong>이 결과를 실무 어디에 사용할지 알려주는 맥락 설명</strong>입니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">6 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 7: 어떻게 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="자료·형식·제약·완료 기준을 정합니다" data-tag="어떻게">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">07 · 어떻게 (How)</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">자료·형식·제약·완료 기준을 정합니다</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-8">중요한 조건부터 짧고 명확하게 전달합니다</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6">
+                        <div class="flex items-center gap-2 text-yuanta-teal font-bold text-lg mb-3">
+                            <i class="ph-fill ph-files text-2xl"></i>
+                            <span>어떤 자료로? (근거 제약)</span>
+                        </div>
+                        <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+                            제공한 회의 메모만 사용합니다. <strong>자료에 없는 사실은 임의로 만들지 않습니다.</strong>
+                        </p>
+                    </div>
+
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6">
+                        <div class="flex items-center gap-2 text-yuanta-teal font-bold text-lg mb-3">
+                            <i class="ph-fill ph-table text-2xl"></i>
+                            <span>어떤 형태로? (출력 형식)</span>
+                        </div>
+                        <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+                            <strong>결정사항 · 후속조치 · 담당자 · 기한</strong>을 한눈에 볼 수 있도록 표로 작성합니다.
+                        </p>
+                    </div>
+
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-6">
+                        <div class="flex items-center gap-2 text-yuanta-teal font-bold text-lg mb-3">
+                            <i class="ph-fill ph-shield-check text-2xl"></i>
+                            <span>어디까지 확인? (완료 기준)</span>
+                        </div>
+                        <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+                            메모에 없는 담당자나 기한은 <strong>“확인 필요”</strong>로 표시하고, 각 항목에 <strong>근거 문장</strong>을 붙입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 sm:p-5 flex items-center gap-3.5">
+                    <i class="ph-fill ph-cpu text-yuanta-teal text-2xl shrink-0"></i>
+                    <p class="text-slate-700 text-sm sm:text-base font-medium">
+                        <strong>최신 모델 활용의 핵심:</strong> 목표와 제약, 결과 기준을 분명히 하되 불필요하게 모든 중간 사고 과정을 지시하지 않습니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">7 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 8: 작성 습관 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="긴 역할 설정보다 업무 조건을 구체화합니다" data-tag="작성 습관">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">08 · 작성 습관</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">긴 역할 설정보다 업무 조건을 구체화합니다</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-6">기존의 상투적인 프롬프트 습관을 실무 요청으로 다듬기</p>
+
+                <div class="overflow-hidden rounded-xl border border-slate-200 mb-6 shadow-sm">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-yuanta-dark text-white text-sm">
+                                <th class="py-3.5 px-5 w-1/3 font-semibold border-r border-slate-700">흔히 쓰던 습관적 표현</th>
+                                <th class="py-3.5 px-5 font-semibold">더 유용한 실무 작성 방법</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-xs sm:text-sm">
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3.5 px-5 text-slate-500 bg-slate-50/50 border-r border-slate-200 font-medium">“당신은 20년 경력의 최고 전문가입니다.”</td>
+                                <td class="py-3.5 px-5 text-slate-800">
+                                    <strong class="text-yuanta-teal">필요한 검토 관점을 명시합니다.</strong><br>
+                                    예: 팀 업무 점검 관점에서 누락된 담당자와 기한을 찾아 주세요.
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3.5 px-5 text-slate-500 bg-slate-50/50 border-r border-slate-200 font-medium">“단계별로 자세히 생각해 주세요.”</td>
+                                <td class="py-3.5 px-5 text-slate-800">
+                                    <strong class="text-yuanta-teal">결과에 필요한 근거와 확인 사항을 요청합니다.</strong><br>
+                                    예: 각 제안의 원문 근거와 전제 가정을 함께 써 주세요.
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3.5 px-5 text-slate-500 bg-slate-50/50 border-r border-slate-200 font-medium">“무조건 질문부터 해 주세요.”</td>
+                                <td class="py-3.5 px-5 text-slate-800">
+                                    <strong class="text-yuanta-teal">핵심 결측치와 일반 누락 처리 방식을 구분합니다.</strong><br>
+                                    예: 결과가 크게 달라질 핵심 정보가 없으면 질문하고, 나머지 누락은 ‘확인 필요’로 표시하세요.
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-3.5 px-5 text-slate-500 bg-slate-50/50 border-r border-slate-200 font-medium">“알아서 완벽하게 해 주세요.”</td>
+                                <td class="py-3.5 px-5 text-slate-800">
+                                    <strong class="text-yuanta-teal">구체적인 완료 기준을 씁니다.</strong><br>
+                                    예: 모든 후속조치에 담당자·기한 또는 ‘확인 필요’가 빠짐없이 표시되어야 합니다.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 flex items-center gap-3.5">
+                    <i class="ph-fill ph-check-fat text-yuanta-teal text-xl shrink-0"></i>
+                    <p class="text-slate-700 text-xs sm:text-sm font-medium">
+                        역할, 과업, 맥락, 출력 형식은 여전히 유용한 점검 요소입니다. <strong>세 가지 질문(무엇을·왜·어떻게) 안에 필요한 요소를 담으면 됩니다.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">8 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 9: 실습 자료 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="가상 회의 메모로 요청을 작성해 봅니다" data-tag="실습 자료">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200 font-bold text-xs tracking-wide">09 · 실습 자료</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">가상 회의 메모로 요청을 작성해 봅니다</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-6">아래 원문 자료를 AI에 제공한다고 가정합니다</p>
+
+                <!-- Memo Box -->
+                <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-6 sm:p-8 mb-6 relative shadow-inner">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-4">
+                        <div class="flex items-center gap-2">
+                            <i class="ph-fill ph-note-pencil text-yuanta-teal text-xl"></i>
+                            <span class="font-bold text-yuanta-dark">가상 팀 회의 메모</span>
+                        </div>
+                        <span class="text-xs px-2.5 py-1 rounded bg-slate-200 text-slate-600 font-mono">원문 데이터 (Input)</span>
+                    </div>
+                    <pre id="memo-source" class="whitespace-pre-wrap font-sans text-slate-800 text-base sm:text-lg leading-loose">· 업무 요청이 이메일과 메신저로 나뉘어 들어와 누락 여부를 확인하기 어렵다는 의견이 나왔다.
 · 김 담당자가 공통 요청 양식 초안을 다음 회의까지 작성하기로 했다.
 · 요청 현황을 한곳에서 관리하는 방안은 검토하기로 했으나 담당자는 정하지 않았다.
-· 개선 효과를 어떤 지표로 확인할지는 다음 회의에서 논의하기로 했다.</pre><p class="note">가상 인물·가상 상황이며 실제 유안타증권의 업무 현황을 나타내지 않습니다.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>9 / 16</span></div></section>
-<section class="slide" data-title="세 질문에 답해 요청을 완성하세요"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>작성 실습</b></div><div class="content"><h1>세 질문에 답해 요청을 완성하세요</h1><p class="sub">팀장이 다음 회의에서 후속 조치를 점검할 자료가 필요합니다</p><div class="cards"><div><b>무엇을</b><p>어떤 항목을 추출하고 어떤 결과를 받을까요?</p></div><div><b>왜</b><p>누가 어떤 판단이나 점검에 사용할까요?</p></div><div><b>어떻게</b><p>표의 열은 무엇인가요? 담당자·날짜가 없으면 어떻게 표시할까요?</p></div></div><p class="note">직접 작성한 뒤 다음 장의 예시와 비교하세요. 특히 “검토하기로 함”과 “실행하기로 결정함”을 구분할 조건이 있는지 살펴보세요.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>10 / 16</span></div></section>
-<section class="slide" data-title="목적·누락 처리·근거가 들어간 요청"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>해설</b></div><div class="content"><h1>목적·누락 처리·근거가 들어간 요청</h1><p class="sub">실습 요청 예시</p><pre id="sample">[무엇을] 앞의 가상 회의 메모에서 후속 조치와 미결사항을 정리해 주세요.
+· 개선 효과를 어떤 지표로 확인할지는 다음 회의에서 논의하기로 했다.</pre>
+                </div>
+
+                <!-- Key Observation Points -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                    <div class="bg-teal-50/70 border border-teal-200 rounded-lg p-3 text-xs text-slate-700">
+                        <strong class="text-yuanta-teal block mb-0.5">포인트 1 · 확정된 실행</strong>
+                        김 담당자 / 양식 초안 / 다음 회의까지
+                    </div>
+                    <div class="bg-amber-50/70 border border-amber-200 rounded-lg p-3 text-xs text-slate-700">
+                        <strong class="text-amber-700 block mb-0.5">포인트 2 · 미확정(검토)</strong>
+                        통합 관리 방안은 ‘검토’ 단계이며 담당자 미정
+                    </div>
+                    <div class="bg-indigo-50/70 border border-indigo-200 rounded-lg p-3 text-xs text-slate-700">
+                        <strong class="text-indigo-700 block mb-0.5">포인트 3 · 차기 논의</strong>
+                        개선 효과 지표는 다음 회의 안건
+                    </div>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 flex items-center gap-3.5">
+                    <i class="ph-fill ph-shield-warning text-yuanta-teal text-xl shrink-0"></i>
+                    <p class="text-slate-700 text-xs sm:text-sm font-medium">
+                        위 메모는 교육을 위한 가상 인물·가상 상황이며 실제 유안타증권의 업무 현황을 나타내지 않습니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">9 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 10: 작성 실습 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="세 질문에 답해 요청을 완성하세요" data-tag="작성 실습">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200 font-bold text-xs tracking-wide">10 · 작성 실습</span>
+            </div>
+
+            <div class="my-auto py-5">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">세 질문에 답해 요청을 완성하세요</h1>
+                <p class="text-base sm:text-lg text-yuanta-lightTeal font-semibold mb-5">상황: 팀장이 다음 회의에서 후속 조치를 점검할 자료가 필요합니다</p>
+
+                <!-- Interactive Practice Inputs -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-4 flex flex-col">
+                        <label class="text-base font-bold text-yuanta-teal mb-1 flex items-center justify-between">
+                            <span>1. 무엇을</span>
+                            <span class="text-[11px] font-normal text-slate-500">추출 항목·산출물</span>
+                        </label>
+                        <p class="text-xs text-slate-500 mb-2.5">어떤 항목을 추출하고 어떤 결과를 받을까요?</p>
+                        <textarea id="prac-what" rows="3" placeholder="예: 회의 메모에서 후속 조치와 미결사항을 정리해 주세요." class="w-full rounded-lg border border-teal-200 bg-white p-2.5 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-yuanta-teal"></textarea>
+                    </div>
+
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-4 flex flex-col">
+                        <label class="text-base font-bold text-yuanta-teal mb-1 flex items-center justify-between">
+                            <span>2. 왜</span>
+                            <span class="text-[11px] font-normal text-slate-500">독자·점검 목적</span>
+                        </label>
+                        <p class="text-xs text-slate-500 mb-2.5">누가 어떤 판단이나 점검에 사용할까요?</p>
+                        <textarea id="prac-why" rows="3" placeholder="예: 팀장이 다음 회의에서 진행 상황과 결정할 사항을 점검할 자료입니다." class="w-full rounded-lg border border-teal-200 bg-white p-2.5 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-yuanta-teal"></textarea>
+                    </div>
+
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-4 flex flex-col">
+                        <label class="text-base font-bold text-yuanta-teal mb-1 flex items-center justify-between">
+                            <span>3. 어떻게</span>
+                            <span class="text-[11px] font-normal text-slate-500">표 열·누락 처리</span>
+                        </label>
+                        <p class="text-xs text-slate-500 mb-2.5">표의 열은? 담당자·날짜가 없으면 어떻게 표시할까요?</p>
+                        <textarea id="prac-how" rows="3" placeholder="예: 항목·상태·담당자·기한을 표로 작성하고, 없는 정보는 '확인 필요'로 표시하세요." class="w-full rounded-lg border border-teal-200 bg-white p-2.5 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-yuanta-teal"></textarea>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <button id="btn-fill-prac" class="text-xs font-semibold text-yuanta-teal hover:underline flex items-center gap-1">
+                        <i class="ph-bold ph-magic-wand"></i> 예시 답안 채워보기
+                    </button>
+                    <span class="text-xs text-slate-400">직접 입력해보거나 다음 슬라이드의 모범 해설과 비교해 보세요.</span>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 flex items-center gap-3.5">
+                    <i class="ph-fill ph-magnifying-glass text-yuanta-teal text-xl shrink-0"></i>
+                    <p class="text-slate-700 text-xs sm:text-sm font-medium">
+                        직접 작성한 뒤 다음 장의 예시와 비교하세요. 특히 <strong>“검토하기로 함”과 “실행하기로 결정함”을 구분할 조건</strong>이 들어 있는지 살펴보세요.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">10 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 11: 해설 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="목적·누락 처리·근거가 들어간 요청" data-tag="해설">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">11 · 해설</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">목적·누락 처리·근거가 들어간 요청</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-6">실습 요청 모범 예시</p>
+
+                <div class="bg-slate-900 text-slate-100 rounded-2xl p-6 sm:p-7 mb-5 relative shadow-lg">
+                    <div class="flex items-center justify-between border-b border-slate-700 pb-3 mb-4">
+                        <span class="text-xs font-mono text-yuanta-accent font-semibold flex items-center gap-1.5">
+                            <i class="ph-fill ph-terminal-window text-base"></i> PROMPT EXAMPLE
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-emerald-400 font-medium" id="msg-sample" aria-live="polite"></span>
+                            <button data-copy="sample" class="px-3 py-1.5 rounded-lg bg-yuanta-teal hover:bg-yuanta-lightTeal text-white text-xs font-semibold flex items-center gap-1.5 transition shadow">
+                                <i class="ph ph-copy"></i> 프롬프트 복사
+                            </button>
+                        </div>
+                    </div>
+                    <pre id="sample" class="whitespace-pre-wrap font-sans text-sm sm:text-base leading-relaxed text-slate-100">[무엇을] 앞의 가상 회의 메모에서 후속 조치와 미결사항을 정리해 주세요.
 [왜] 팀장이 다음 회의에서 진행 상황과 추가로 결정할 사항을 점검하기 위한 자료입니다.
-[어떻게] 항목·상태·담당자·기한·근거 문장을 표로 작성해 주세요. 실행이 합의된 일과 검토 또는 논의할 일을 구분해 주세요. 메모에 없는 담당자나 기한은 추정하지 말고 “확인 필요”로 표시하세요. “다음 회의까지”는 그대로 쓰고 임의의 날짜로 바꾸지 마세요.</pre><button class="copy" data-copy="sample">프롬프트 복사</button> <span aria-live="polite"></span><p class="note">자료와 지시를 구분해 전달합니다. 자료에 없는 정보가 중요한 경우 추가 질문으로 보완합니다.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>11 / 16</span></div></section>
-<section class="slide" data-title="답변을 받으면 원문과 대조합니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>결과 확인</b></div><div class="content"><h1>답변을 받으면 원문과 대조합니다</h1><p class="sub">아래는 확인 기준을 설명하기 위한 예상 결과입니다</p><table><tr><th>항목</th><th>상태</th><th>담당자</th><th>기한</th></tr><tr><td>공통 요청 양식 초안</td><td>작성 합의</td><td>김 담당자</td><td>다음 회의까지</td></tr><tr><td>요청 현황 통합 관리</td><td>검토 예정</td><td>확인 필요</td><td>확인 필요</td></tr><tr><td>개선 효과 확인 지표</td><td>논의 예정</td><td>확인 필요</td><td>다음 회의</td></tr></table><p class="note">확인할 점: 통합 관리가 “도입 확정”으로 바뀌지 않았나요? 없는 날짜를 만들지 않았나요? 각 항목에 원문 근거가 붙었나요? 실제 AI 출력은 달라질 수 있습니다.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>12 / 16</span></div></section>
-<section class="slide" data-title="부족한 부분을 짚어 다시 요청합니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>수정 요청</b></div><div class="content"><h1>부족한 부분을 짚어 다시 요청합니다</h1><p class="sub">기준과 차이를 알려주면 수정 방향이 분명해집니다</p><pre id="revision">통합 관리 방안은 도입이 확정된 것이 아니라 검토하기로 한 사항입니다. 상태를 “검토 예정”으로 수정하고, 메모에 없는 담당자와 날짜는 “확인 필요”로 표시해 주세요. 각 행의 근거 문장을 원문에서 찾아 붙이고, 확정된 사실과 제안을 구분해 주세요.</pre><button class="copy" data-copy="revision">프롬프트 복사</button> <span aria-live="polite"></span><p class="note">“더 잘해줘” 대신 틀린 부분·바꿀 기준·원하는 결과를 알려줍니다. AI의 자체 점검 후에도 원문 확인은 담당자가 합니다.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>13 / 16</span></div></section>
-<section class="slide" data-title="자신의 업무로 세 질문을 바꿔봅니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>업무 적용</b></div><div class="content"><h1>자신의 업무로 세 질문을 바꿔봅니다</h1><p class="sub">회의 정리에서 보고·비교·코칭으로 확장합니다</p><table><tr><th>업무</th><th>무엇을</th><th>왜 · 어떻게</th></tr><tr><td>경영 보고</td><td>공개 자료의 핵심 쟁점 비교</td><td>의제 선정용 · 기준일과 출처, 사실과 해석 구분</td></tr><tr><td>본사 업무 개선</td><td>제공한 업무 흐름의 중복·누락 정리</td><td>개선 우선순위 논의용 · 관찰 근거와 제안 구분</td></tr><tr><td>지점 직원 코칭</td><td>가상 사례의 피드백 대화 초안</td><td>직원 행동 개선용 · 관찰 사실과 확인 질문 중심</td></tr></table><p class="note">실습에는 가상 또는 사용이 허용된 자료를 씁니다. 고객 식별정보·미공개 정보는 사내 기준에 따라 취급하고, 실제 업무 적용 전 담당자가 검토합니다.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>14 / 16</span></div></section>
-<section class="slide" data-title="세 질문으로 요청하고, 근거로 확인합니다"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>마무리</b></div><div class="content"><h1>세 질문으로 요청하고, 근거로 확인합니다</h1><p class="sub">내 업무에 사용할 요청 한 개를 완성하세요</p><pre id="template">[무엇을] 제공한 [자료]를 바탕으로 [수행할 일]을 하고 [산출물]을 작성해 주세요.
+[어떻게] 항목·상태·담당자·기한·근거 문장을 표로 작성해 주세요. 실행이 합의된 일과 검토 또는 논의할 일을 구분해 주세요. 메모에 없는 담당자나 기한은 추정하지 말고 “확인 필요”로 표시하세요. “다음 회의까지”는 그대로 쓰고 임의의 날짜로 바꾸지 마세요.</pre>
+                </div>
+
+                <!-- Highlight Tags -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-yuanta-teal text-xs font-semibold">#합의와_검토_구분</span>
+                    <span class="px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-yuanta-teal text-xs font-semibold">#추정금지_확인필요표시</span>
+                    <span class="px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-yuanta-teal text-xs font-semibold">#임의날짜변환금지</span>
+                    <span class="px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-yuanta-teal text-xs font-semibold">#근거문장포함</span>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 flex items-center gap-3.5">
+                    <i class="ph-fill ph-check-circle text-yuanta-teal text-xl shrink-0"></i>
+                    <p class="text-slate-700 text-xs sm:text-sm font-medium">
+                        원문 자료와 지시문을 명확히 구분해 전달합니다. 만약 자료에 없는 정보가 의사결정에 꼭 필요한 경우 추가 질문으로 보완합니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">11 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 12: 결과 확인 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="답변을 받으면 원문과 대조합니다" data-tag="결과 확인">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">12 · 결과 확인</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">답변을 받으면 원문과 대조합니다</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-6">아래는 확인 기준을 설명하기 위한 예상 결과표입니다</p>
+
+                <div class="overflow-hidden rounded-xl border border-slate-200 mb-6 shadow-sm">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-yuanta-dark text-white text-sm sm:text-base">
+                                <th class="py-3.5 px-5 font-semibold">항목</th>
+                                <th class="py-3.5 px-5 font-semibold">상태</th>
+                                <th class="py-3.5 px-5 font-semibold">담당자</th>
+                                <th class="py-3.5 px-5 font-semibold">기한</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-sm sm:text-base">
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-5 font-bold text-yuanta-dark">공통 요청 양식 초안</td>
+                                <td class="py-4 px-5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">작성 합의</span></td>
+                                <td class="py-4 px-5 font-medium text-slate-800">김 담당자</td>
+                                <td class="py-4 px-5 text-slate-700">다음 회의까지</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-5 font-bold text-yuanta-dark">요청 현황 통합 관리</td>
+                                <td class="py-4 px-5"><span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">검토 예정</span></td>
+                                <td class="py-4 px-5"><span class="px-2 py-0.5 rounded bg-rose-50 text-rose-600 border border-rose-200 text-xs font-semibold">확인 필요</span></td>
+                                <td class="py-4 px-5"><span class="px-2 py-0.5 rounded bg-rose-50 text-rose-600 border border-rose-200 text-xs font-semibold">확인 필요</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-5 font-bold text-yuanta-dark">개선 효과 확인 지표</td>
+                                <td class="py-4 px-5"><span class="px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold">논의 예정</span></td>
+                                <td class="py-4 px-5"><span class="px-2 py-0.5 rounded bg-rose-50 text-rose-600 border border-rose-200 text-xs font-semibold">확인 필요</span></td>
+                                <td class="py-4 px-5 text-slate-700">다음 회의</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 sm:p-5 flex items-start gap-3.5">
+                    <i class="ph-fill ph-Detective text-yuanta-teal text-2xl shrink-0 mt-0.5"></i>
+                    <div class="text-slate-700 text-xs sm:text-sm leading-relaxed">
+                        <strong class="text-yuanta-dark block mb-1">담당자 필수 점검 포인트:</strong>
+                        1) 통합 관리가 “도입 확정”으로 과장되지 않았나요? &nbsp;
+                        2) 원문에 없는 날짜를 임의로 만들지 않았나요? &nbsp;
+                        3) 각 항목에 원문 근거가 정확히 붙었나요? (실제 AI 출력은 매번 조금씩 달라질 수 있습니다.)
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">12 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 13: 수정 요청 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="부족한 부분을 짚어 다시 요청합니다" data-tag="수정 요청">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">13 · 수정 요청</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">부족한 부분을 짚어 다시 요청합니다</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-6">원문 기준과 차이를 구체적으로 알려주면 수정 방향이 분명해집니다</p>
+
+                <div class="bg-slate-900 text-slate-100 rounded-2xl p-6 sm:p-7 mb-6 relative shadow-lg">
+                    <div class="flex items-center justify-between border-b border-slate-700 pb-3 mb-4">
+                        <span class="text-xs font-mono text-amber-400 font-semibold flex items-center gap-1.5">
+                            <i class="ph-fill ph-arrows-clockwise text-base"></i> REVISION PROMPT
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-emerald-400 font-medium" id="msg-revision" aria-live="polite"></span>
+                            <button data-copy="revision" class="px-3 py-1.5 rounded-lg bg-yuanta-teal hover:bg-yuanta-lightTeal text-white text-xs font-semibold flex items-center gap-1.5 transition shadow">
+                                <i class="ph ph-copy"></i> 프롬프트 복사
+                            </button>
+                        </div>
+                    </div>
+                    <pre id="revision" class="whitespace-pre-wrap font-sans text-sm sm:text-base leading-relaxed text-slate-100">통합 관리 방안은 도입이 확정된 것이 아니라 검토하기로 한 사항입니다. 상태를 “검토 예정”으로 수정하고, 메모에 없는 담당자와 날짜는 “확인 필요”로 표시해 주세요. 각 행의 근거 문장을 원문에서 찾아 붙이고, 확정된 사실과 제안을 구분해 주세요.</pre>
+                </div>
+
+                <!-- 3 Step Formula for Revision -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-4">
+                        <span class="text-xs font-bold text-rose-600 block mb-1">1. 틀린 부분 지적</span>
+                        <p class="text-xs sm:text-sm text-slate-700 font-medium">“통합 관리 방안은 도입 확정이 아니라 검토 사항입니다.”</p>
+                    </div>
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-4">
+                        <span class="text-xs font-bold text-yuanta-teal block mb-1">2. 바꿀 기준 제시</span>
+                        <p class="text-xs sm:text-sm text-slate-700 font-medium">“상태를 ‘검토 예정’으로 수정하고 없는 정보는 ‘확인 필요’로 표시하세요.”</p>
+                    </div>
+                    <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-4">
+                        <span class="text-xs font-bold text-indigo-600 block mb-1">3. 원하는 검증 결과</span>
+                        <p class="text-xs sm:text-sm text-slate-700 font-medium">“각 행의 원문 근거 문장을 붙이고 사실과 제안을 구분하세요.”</p>
+                    </div>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 flex items-center gap-3.5">
+                    <i class="ph-fill ph-user-check text-yuanta-teal text-xl shrink-0"></i>
+                    <p class="text-slate-700 text-xs sm:text-sm font-medium">
+                        “다시 잘해줘” 대신 <strong>틀린 부분 · 바꿀 기준 · 원하는 결과</strong>를 짚어줍니다. AI의 자체 점검 후에도 최종 원문 확인은 담당자가 수행합니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">13 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 14: 업무 적용 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="자신의 업무로 세 질문을 바꿔봅니다" data-tag="업무 적용">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">14 · 업무 적용</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">자신의 업무로 세 질문을 바꿔봅니다</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-8">회의 정리에서 경영 보고 · 업무 개선 · 직원 코칭으로 확장합니다</p>
+
+                <div class="overflow-hidden rounded-xl border border-slate-200 mb-8 shadow-sm">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-yuanta-dark text-white text-sm sm:text-base">
+                                <th class="py-4 px-5 w-1/5 font-semibold border-r border-slate-700">업무 영역</th>
+                                <th class="py-4 px-5 w-2/5 font-semibold border-r border-slate-700">무엇을 (수행할 일과 산출물)</th>
+                                <th class="py-4 px-5 font-semibold">왜 · 어떻게 (목적과 작성 조건)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-sm sm:text-base">
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-4 px-5 font-bold text-yuanta-dark bg-slate-50/60 border-r border-slate-200">경영 보고</td>
+                                <td class="py-4 px-5 font-medium text-slate-800 border-r border-slate-200">공개 자료의 핵심 쟁점 비교표</td>
+                                <td class="py-4 px-5 text-slate-700">의제 선정용 · <strong class="text-yuanta-teal">기준일과 출처 명시, 사실과 해석 구분</strong></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-4 px-5 font-bold text-yuanta-dark bg-slate-50/60 border-r border-slate-200">본사 업무 개선</td>
+                                <td class="py-4 px-5 font-medium text-slate-800 border-r border-slate-200">제공한 업무 흐름의 중복·누락 정리</td>
+                                <td class="py-4 px-5 text-slate-700">개선 우선순위 논의용 · <strong class="text-yuanta-teal">관찰 근거와 개선 제안 구분</strong></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="py-4 px-5 font-bold text-yuanta-dark bg-slate-50/60 border-r border-slate-200">지점 직원 코칭</td>
+                                <td class="py-4 px-5 font-medium text-slate-800 border-r border-slate-200">가상 사례의 피드백 대화 초안</td>
+                                <td class="py-4 px-5 text-slate-700">직원 행동 개선용 · <strong class="text-yuanta-teal">관찰 사실과 확인 질문 중심 구성</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-[#e8f7f6] border-l-4 border-yuanta-accent rounded-r-xl p-4 sm:p-5 flex items-start gap-3.5">
+                    <i class="ph-fill ph-lock-key text-yuanta-teal text-2xl shrink-0 mt-0.5"></i>
+                    <p class="text-slate-700 text-xs sm:text-sm leading-relaxed font-medium">
+                        <strong>보안 및 컴플라이언스 유의사항:</strong> 실습에는 가상 또는 사용이 허용된 자료만 씁니다. <strong>고객 식별정보·미공개 중요정보는 사내 보안 기준에 따라 엄격히 취급</strong>하고, 실제 업무 적용 전 반드시 담당자가 검토합니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">14 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 15: 마무리 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="세 질문으로 요청하고, 근거로 확인합니다" data-tag="마무리">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">15 · 마무리</span>
+            </div>
+
+            <div class="my-auto py-5">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">세 질문으로 요청하고, 근거로 확인합니다</h1>
+                <p class="text-base sm:text-xl text-yuanta-lightTeal font-semibold mb-5">내 업무에 바로 사용할 프롬프트 템플릿을 완성하세요</p>
+
+                <!-- Template Box -->
+                <div class="bg-slate-900 text-slate-100 rounded-2xl p-5 sm:p-6 mb-5 relative shadow-lg">
+                    <div class="flex items-center justify-between border-b border-slate-700 pb-3 mb-3">
+                        <span class="text-xs font-mono text-yuanta-accent font-semibold flex items-center gap-1.5">
+                            <i class="ph-fill ph-file-text text-base"></i> UNIVERSAL WORK PROMPT TEMPLATE
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-emerald-400 font-medium" id="msg-template" aria-live="polite"></span>
+                            <button data-copy="template" class="px-3 py-1.5 rounded-lg bg-yuanta-teal hover:bg-yuanta-lightTeal text-white text-xs font-semibold flex items-center gap-1.5 transition shadow">
+                                <i class="ph ph-copy"></i> 템플릿 복사
+                            </button>
+                        </div>
+                    </div>
+                    <pre id="template" class="whitespace-pre-wrap font-sans text-sm sm:text-base leading-relaxed text-slate-100">[무엇을] 제공한 [자료]를 바탕으로 [수행할 일]을 하고 [산출물]을 작성해 주세요.
 [왜] [독자]가 [사용 목적·결정]에 활용할 자료입니다.
-[어떻게] [형식·분량]으로 작성하고 [필수 조건]을 지켜 주세요. 자료에 없는 내용은 [누락 처리 방식]으로 표시하고 [확인 기준]에 따라 점검해 주세요.</pre><button class="copy" data-copy="template">프롬프트 복사</button> <span aria-live="polite"></span><p class="note">제출 전 확인: 원하는 결과가 분명한가? 목적과 독자가 있는가? 사용할 자료와 제약이 있는가? 누락 처리와 검증 기준이 있는가?</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>15 / 16</span></div></section>
-<section class="slide" data-title="프롬프트 작성 참고자료"><div class="top"><span>유안타증권 · AIbility Academy STEP-UP</span><b>참고</b></div><div class="content"><h1>프롬프트 작성 참고자료</h1><p class="sub">업무에 맞게 적용하고 결과를 확인합니다</p><p>본 강의는 명확한 목표, 필요한 맥락과 제약, 결과 형식과 검증 기준을 강조하는 공식 가이드를 업무 요청 작성에 맞게 구성했습니다.</p><p class="sources"><a href="https://developers.openai.com/api/docs/guides/prompt-engineering" target="_blank" rel="noopener">OpenAI · Prompt engineering</a><br><a href="https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra" target="_blank" rel="noopener">OpenAI · Rethinking skills and prompts for GPT-6 Astra</a><br><a href="https://developers.openai.com/api/docs/guides/reasoning" target="_blank" rel="noopener">OpenAI · Reasoning models</a></p><p class="sources">참고 확인: 2026.11.03. 공식 문서에는 API와 에이전트 사용 맥락도 포함됩니다.</p></div><div class="bottom"><span>유안타증권 임직원 공통 · Data Thinking Lab</span><span>16 / 16</span></div></section></main><dialog id="dialog"><h2>강의 목차</h2><div id="links"></div><button id="close">닫기</button></dialog><script>const slides=[...document.querySelectorAll('.slide')],stage=document.querySelector('.stage'),dialog=document.querySelector('#dialog');let current=0;function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===current));document.querySelector('#count').textContent=(current+1)+' / '+slides.length;document.querySelector('#prev').disabled=current===0;document.querySelector('#next').disabled=current===slides.length-1;location.hash=current+1}document.querySelector('#prev').onclick=()=>show(current-1);document.querySelector('#next').onclick=()=>show(current+1);document.querySelector('#links').innerHTML=slides.map((s,i)=>'<button data-index="'+i+'">'+(i+1)+'. '+s.dataset.title+'</button>').join('');document.querySelector('#links').onclick=e=>{if(e.target.dataset.index!==undefined){show(+e.target.dataset.index);dialog.close();if(stage.classList.contains('reading'))slides[current].scrollIntoView()}};document.querySelector('#toc').onclick=()=>dialog.showModal();document.querySelector('#close').onclick=()=>dialog.close();document.querySelector('#read').onclick=e=>{let on=stage.classList.toggle('reading');e.currentTarget.textContent=on?'슬라이드로 돌아가기':'전체 읽기';e.currentTarget.setAttribute('aria-pressed',on);if(on)slides[current].scrollIntoView();else window.scrollTo(0,0)};document.querySelector('#full').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();document.addEventListener('fullscreenchange',()=>document.querySelector('#full').textContent=document.fullscreenElement?'전체화면 해제':'화면 전체보기');document.addEventListener('keydown',e=>{if(dialog.open||stage.classList.contains('reading'))return;if(e.key==='ArrowRight'||e.key==='PageDown')show(current+1);if(e.key==='ArrowLeft'||e.key==='PageUp')show(current-1)});document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{const el=document.getElementById(b.dataset.copy);try{await navigator.clipboard.writeText(el.textContent);b.nextElementSibling.textContent='복사했습니다.'}catch{let range=document.createRange();range.selectNodeContents(el);let s=window.getSelection();s.removeAllRanges();s.addRange(range);b.nextElementSibling.textContent='선택된 내용을 직접 복사해 주세요.'}});show((parseInt(location.hash.slice(1))||1)-1);</script></body></html>
+[어떻게] [형식·분량]으로 작성하고 [필수 조건]을 지켜 주세요. 자료에 없는 내용은 [누락 처리 방식]으로 표시하고 [확인 기준]에 따라 점검해 주세요.</pre>
+                </div>
+
+                <!-- Interactive Self-Checklist -->
+                <div class="bg-[#f2f8f8] border border-[#d5e8e7] rounded-xl p-4 sm:p-5">
+                    <div class="text-xs sm:text-sm font-bold text-yuanta-dark mb-3 flex items-center gap-2">
+                        <i class="ph-fill ph-check-square text-yuanta-teal text-lg"></i>
+                        <span>제출 전 자가 점검 체크리스트 (클릭하여 점검해 보세요)</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm">
+                        <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-white border border-slate-200 cursor-pointer hover:border-yuanta-teal transition">
+                            <input type="checkbox" class="w-4 h-4 accent-yuanta-teal rounded">
+                            <span class="text-slate-700 font-medium">원하는 결과물(산출물)이 분명한가?</span>
+                        </label>
+                        <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-white border border-slate-200 cursor-pointer hover:border-yuanta-teal transition">
+                            <input type="checkbox" class="w-4 h-4 accent-yuanta-teal rounded">
+                            <span class="text-slate-700 font-medium">활용 목적과 결과를 읽을 독자가 있는가?</span>
+                        </label>
+                        <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-white border border-slate-200 cursor-pointer hover:border-yuanta-teal transition">
+                            <input type="checkbox" class="w-4 h-4 accent-yuanta-teal rounded">
+                            <span class="text-slate-700 font-medium">사용할 자료 범위와 제약 조건이 있는가?</span>
+                        </label>
+                        <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-white border border-slate-200 cursor-pointer hover:border-yuanta-teal transition">
+                            <input type="checkbox" class="w-4 h-4 accent-yuanta-teal rounded">
+                            <span class="text-slate-700 font-medium">누락 처리 방식과 원문 검증 기준이 있는가?</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">15 / 16</span>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 16: 참고 ==================== -->
+        <section class="slide bg-white rounded-2xl shadow-2xl border border-slate-200/80 min-h-[660px] flex-col justify-between p-6 sm:p-12" data-title="프롬프트 작성 참고자료" data-tag="참고">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                    <i class="ph-fill ph-buildings text-yuanta-teal"></i>
+                    <span>유안타증권 · AIbility Academy STEP-UP</span>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-yuanta-teal font-bold text-xs tracking-wide">16 · 참고</span>
+            </div>
+
+            <div class="my-auto py-6">
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-yuanta-dark mb-2">프롬프트 작성 참고자료</h1>
+                <p class="text-lg sm:text-xl text-yuanta-lightTeal font-semibold mb-6">업무에 맞게 적용하고 결과를 확인합니다</p>
+
+                <p class="text-slate-700 text-base sm:text-lg leading-relaxed mb-8">
+                    본 강의는 명확한 목표, 필요한 맥락과 제약, 결과 형식과 검증 기준을 강조하는 공식 가이드를 유안타증권 임직원의 업무 요청 작성에 맞게 재구성했습니다.
+                </p>
+
+                <div class="space-y-3 mb-8">
+                    <a href="https://developers.openai.com/api/docs/guides/prompt-engineering" target="_blank" rel="noopener" class="flex items-center justify-between p-4 rounded-xl bg-[#f2f8f8] border border-[#d5e8e7] hover:border-yuanta-teal hover:shadow-sm transition group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-yuanta-dark text-yuanta-accent flex items-center justify-center text-xl">
+                                <i class="ph-duotone ph-book-bookmark"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-yuanta-dark group-hover:text-yuanta-teal transition">OpenAI · Prompt engineering</div>
+                                <div class="text-xs text-slate-500 font-mono">developers.openai.com/api/docs/guides/prompt-engineering</div>
+                            </div>
+                        </div>
+                        <i class="ph-bold ph-arrow-up-right text-slate-400 group-hover:text-yuanta-teal"></i>
+                    </a>
+
+                    <a href="https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra" target="_blank" rel="noopener" class="flex items-center justify-between p-4 rounded-xl bg-[#f2f8f8] border border-[#d5e8e7] hover:border-yuanta-teal hover:shadow-sm transition group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-yuanta-dark text-yuanta-accent flex items-center justify-center text-xl">
+                                <i class="ph-duotone ph-article"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-yuanta-dark group-hover:text-yuanta-teal transition">OpenAI · Rethinking skills and prompts for GPT-6 Astra</div>
+                                <div class="text-xs text-slate-500 font-mono">developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra</div>
+                            </div>
+                        </div>
+                        <i class="ph-bold ph-arrow-up-right text-slate-400 group-hover:text-yuanta-teal"></i>
+                    </a>
+
+                    <a href="https://developers.openai.com/api/docs/guides/reasoning" target="_blank" rel="noopener" class="flex items-center justify-between p-4 rounded-xl bg-[#f2f8f8] border border-[#d5e8e7] hover:border-yuanta-teal hover:shadow-sm transition group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-yuanta-dark text-yuanta-accent flex items-center justify-center text-xl">
+                                <i class="ph-duotone ph-brain"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-yuanta-dark group-hover:text-yuanta-teal transition">OpenAI · Reasoning models</div>
+                                <div class="text-xs text-slate-500 font-mono">developers.openai.com/api/docs/guides/reasoning</div>
+                            </div>
+                        </div>
+                        <i class="ph-bold ph-arrow-up-right text-slate-400 group-hover:text-yuanta-teal"></i>
+                    </a>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-400">
+                    참고 확인: 2026.11.03. 공식 문서에는 API와 에이전트 사용 맥락도 포함됩니다.
+                </p>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4 text-xs sm:text-sm text-slate-400">
+                <span>유안타증권 임직원 공통 · Data Thinking Lab</span>
+                <span class="font-mono font-semibold text-slate-500">16 / 16</span>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Keyboard Hint Bar -->
+    <footer class="no-print text-center py-3 text-xs text-slate-500 border-t border-slate-800/60 bg-[#070d19]">
+        <span>키보드 <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 font-mono">←</kbd> <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 font-mono">→</kbd> 또는 화면 좌우 스와이프로 슬라이드를 이동할 수 있습니다.</span>
+    </footer>
+
+    <!-- Table of Contents Modal -->
+    <div id="toc-modal" class="no-print fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <i class="ph-fill ph-list-Numbers text-yuanta-accent text-xl"></i>
+                    <h2 class="text-lg font-bold text-white">강의 목차 (전체 16장)</h2>
+                </div>
+                <button id="btn-close-toc" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+                    <i class="ph-bold ph-x text-lg"></i>
+                </button>
+            </div>
+            <div id="toc-list" class="p-4 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        (function() {
+            const slides = Array.from(document.querySelectorAll('.slide'));
+            const stage = document.getElementById('stage');
+            const counter = document.getElementById('slide-counter');
+            const progressBar = document.getElementById('progress-bar');
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            const btnToc = document.getElementById('btn-toc');
+            const btnCloseToc = document.getElementById('btn-close-toc');
+            const tocModal = document.getElementById('toc-modal');
+            const tocList = document.getElementById('toc-list');
+            const btnRead = document.getElementById('btn-read');
+            const readLabel = document.getElementById('read-label');
+            const btnFull = document.getElementById('btn-full');
+            const fullLabel = document.getElementById('full-label');
+            const fullIcon = document.getElementById('full-icon');
+
+            let current = 0;
+
+            function showSlide(index) {
+                current = Math.max(0, Math.min(slides.length - 1, index));
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === current);
+                });
+                counter.textContent = `${current + 1} / ${slides.length}`;
+                const progress = ((current + 1) / slides.length) * 100;
+                progressBar.style.width = `${progress}%`;
+
+                btnPrev.disabled = current === 0;
+                btnNext.disabled = current === slides.length - 1;
+                history.replaceState(null, null, `#${current + 1}`);
+                updateTocHighlight();
+            }
+
+            // Build TOC
+            function buildToc() {
+                tocList.innerHTML = slides.map((s, i) => {
+                    const tag = s.dataset.tag || '';
+                    const title = s.dataset.title || `슬라이드 ${i + 1}`;
+                    return `
+                        <button data-index="${i}" class="toc-item text-left p-3 rounded-xl border border-slate-800 hover:border-yuanta-accent/60 hover:bg-slate-800/70 transition flex items-start gap-3 group">
+                            <span class="font-mono text-xs font-bold px-2 py-1 rounded bg-slate-800 text-yuanta-accent group-hover:bg-yuanta-teal group-hover:text-white transition">${String(i + 1).padStart(2, '0')}</span>
+                            <div class="overflow-hidden">
+                                <div class="text-[11px] text-slate-400 font-semibold">${tag}</div>
+                                <div class="text-sm text-slate-200 font-medium truncate">${title}</div>
+                            </div>
+                        </button>
+                    `;
+                }).join('');
+            }
+
+            function updateTocHighlight() {
+                const items = tocList.querySelectorAll('.toc-item');
+                items.forEach((item, idx) => {
+                    if (idx === current) {
+                        item.classList.add('border-yuanta-accent', 'bg-slate-800/90');
+                    } else {
+                        item.classList.remove('border-yuanta-accent', 'bg-slate-800/90');
+                    }
+                });
+            }
+
+            // Navigation Events
+            btnPrev.addEventListener('click', () => showSlide(current - 1));
+            btnNext.addEventListener('click', () => showSlide(current + 1));
+
+            // TOC Modal Events
+            btnToc.addEventListener('click', () => {
+                tocModal.classList.remove('hidden');
+                tocModal.classList.add('flex');
+                updateTocHighlight();
+            });
+
+            function closeToc() {
+                tocModal.classList.add('hidden');
+                tocModal.classList.remove('flex');
+            }
+
+            btnCloseToc.addEventListener('click', closeToc);
+            tocModal.addEventListener('click', (e) => {
+                if (e.target === tocModal) closeToc();
+            });
+
+            tocList.addEventListener('click', (e) => {
+                const btn = e.target.closest('button[data-index]');
+                if (!btn) return;
+                const targetIndex = parseInt(btn.dataset.index, 10);
+                showSlide(targetIndex);
+                closeToc();
+                if (stage.classList.contains('reading-mode')) {
+                    slides[current].scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+
+            // Reading Mode Toggle
+            btnRead.addEventListener('click', () => {
+                const isReading = stage.classList.toggle('reading-mode');
+                btnRead.setAttribute('aria-pressed', isReading);
+                readLabel.textContent = isReading ? '슬라이드 보기' : '전체 읽기';
+                if (isReading) {
+                    slides[current].scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            // Fullscreen Toggle
+            if (btnFull) {
+                btnFull.addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(() => {});
+                    } else {
+                        document.exitFullscreen().catch(() => {});
+                    }
+                });
+                document.addEventListener('fullscreenchange', () => {
+                    const isFull = !!document.fullscreenElement;
+                    fullLabel.textContent = isFull ? '전체화면 해제' : '전체화면';
+                    fullIcon.className = isFull ? 'ph ph-corners-in text-yuanta-accent' : 'ph ph-corners-out text-yuanta-accent';
+                });
+            }
+
+            // Keyboard Navigation
+            document.addEventListener('keydown', (e) => {
+                const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+                if (activeTag === 'textarea' || activeTag === 'input') return;
+                if (!tocModal.classList.contains('hidden')) {
+                    if (e.key === 'Escape') closeToc();
+                    return;
+                }
+                if (stage.classList.contains('reading-mode')) return;
+
+                if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+                    e.preventDefault();
+                    showSlide(current + 1);
+                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    showSlide(current - 1);
+                }
+            });
+
+            // Touch Swipe Support for Mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            stage.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            stage.addEventListener('touchend', (e) => {
+                if (stage.classList.contains('reading-mode')) return;
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 60) {
+                    if (diff > 0) showSlide(current + 1);
+                    else showSlide(current - 1);
+                }
+            }, { passive: true });
+
+            // Copy to Clipboard Functionality (iFrame-safe)
+            document.querySelectorAll('[data-copy]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-copy');
+                    const targetEl = document.getElementById(targetId);
+                    const msgEl = document.getElementById(`msg-${targetId}`);
+                    if (!targetEl) return;
+
+                    const textToCopy = targetEl.textContent;
+                    const tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = textToCopy;
+                    tempTextArea.style.position = 'fixed';
+                    tempTextArea.style.left = '-9999px';
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.select();
+
+                    try {
+                        document.execCommand('copy');
+                        if (msgEl) {
+                            msgEl.textContent = '✓ 클립보드에 복사되었습니다';
+                            setTimeout(() => { msgEl.textContent = ''; }, 2500);
+                        }
+                    } catch (err) {
+                        if (msgEl) msgEl.textContent = '직접 선택하여 복사해 주세요.';
+                    } finally {
+                        document.body.removeChild(tempTextArea);
+                    }
+                });
+            });
+
+            // Practice Fill Sample Button (Slide 10)
+            const btnFillPrac = document.getElementById('btn-fill-prac');
+            if (btnFillPrac) {
+                btnFillPrac.addEventListener('click', () => {
+                    document.getElementById('prac-what').value = '앞의 가상 회의 메모에서 후속 조치와 미결사항을 정리해 주세요.';
+                    document.getElementById('prac-why').value = '팀장이 다음 회의에서 진행 상황과 추가로 결정할 사항을 점검하기 위한 자료입니다.';
+                    document.getElementById('prac-how').value = '항목·상태·담당자·기한·근거 문장을 표로 작성해 주세요. 합의된 일과 검토할 일을 구분하고 없는 정보는 “확인 필요”로 표시하세요.';
+                });
+            }
+
+            // Initialize
+            buildToc();
+            const initialHash = parseInt(location.hash.slice(1), 10);
+            showSlide((initialHash && initialHash >= 1 && initialHash <= slides.length) ? initialHash - 1 : 0);
+        })();
+    </script>
+</body>
+</html>
