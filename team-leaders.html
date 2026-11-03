@@ -2336,66 +2336,17 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     {
       page: 32, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => `
-        <div class="flex items-start justify-between">
-          <div>
-            <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M4 · 제작 결과 점검</span>
-            <h2 class="text-3xl font-extrabold text-[#101D35] mt-1">실행한 화면을 업무 개선안과 연결했습니까?</h2>
-          </div>
-          <button onclick="openPopup('storageShareNote')" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold border border-slate-300">
-            📌 교육용 보드 활용 주의사항
-          </button>
+        <div class="flex justify-between items-start gap-3"><div><span class="text-xs font-bold text-[#2A918C]">M4 · 제작 마무리 → 보고 준비</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">대시보드와 직접 확인한 결과를 함께 남깁니다</h2><p class="text-base text-slate-600 mt-2">화면을 만든 뒤, 실제로 확인한 내용만 짧게 메모합니다. 이 자료를 다음 모듈의 AI 보고 요청에 사용합니다.</p></div><button onclick="openPopup('storageShareNote')" class="px-3 py-2 rounded-lg bg-slate-100 text-xs font-bold shrink-0">저장·공유 안내</button></div>
+        <div class="grid grid-cols-3 gap-5 my-auto">
+          <div class="card-box space-y-3"><span class="font-bold text-[#2A918C]">1 · 결과물 준비</span><h3 class="text-xl font-extrabold">최종 HTML과 화면</h3><p>마지막 수정본을 저장해 다시 열고, 주요 지표와 과제 목록이 보이는 화면을 준비합니다.</p><p class="text-sm text-slate-600">파일·화면은 일반화·가상화한 교육용 자료를 사용합니다.</p></div>
+          <div class="card-box space-y-3 bg-[#E6F7F6] border-[#39B8B2]"><span class="font-bold text-[#2A918C]">2 · 직접 확인</span><h3 class="text-xl font-extrabold">숫자와 동작</h3><p>원자료와 지표를 대조하고 필터·상태 변경·추가 기능을 시험합니다.</p><p class="text-sm text-slate-700">예상값과 실제 결과를 나란히 적습니다. 정상·누락 사례 중 시험하지 않은 것은 미검증으로 남깁니다.</p></div>
+          <div class="card-box space-y-3"><span class="font-bold text-[#2A918C]">3 · 한계 기록</span><h3 class="text-xl font-extrabold">모르는 것과 다음 확인</h3><p>오류·미검증 기능, 저장·공동사용의 제약, 현업 적용 전에 확인할 내용을 남깁니다.</p><p class="text-sm text-slate-600">교육용 보드 제작과 실제 업무 효과는 구분합니다.</p></div>
         </div>
-
-        <div class="my-auto grid grid-cols-12 gap-6">
-          <div class="col-span-7 space-y-2.5">
-            <label class="flex items-center gap-3p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
-              <input type="checkbox" checked class="w-5 h-5 accent-[#101D35]">
-              <span class="text-sm font-bold text-[#101D35]">1. 저장한 HTML 파일이 브라우저에서 정상적으로 열린다</span>
-            </label>
-            <label class="flex items-center gap-3p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
-              <input type="checkbox" checked class="w-5 h-5 accent-[#101D35]">
-              <span class="text-sm font-bold text-[#101D35]">2. 우리 부서 개선 요소를 한 가지 이상 화면에 반영했다 (${escapeHtml(userState.boardFeature)})</span>
-            </label>
-            <label class="flex items-center gap-3p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
-              <input type="checkbox" checked class="w-5 h-5 accent-[#101D35]">
-              <span class="text-sm font-bold text-[#101D35]">3. 상단 지표 숫자(8·6·2·1·1·2)를 원자료와 대조해 확인했다</span>
-            </label>
-            <label class="flex items-center gap-3p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
-              <input type="checkbox" checked class="w-5 h-5 accent-[#101D35]">
-              <span class="text-sm font-bold text-[#101D35]">4. 새 기능의 정상 입력 상황과 누락/미확인 상황을 모두 확인했다</span>
-            </label>
-            <label class="flex items-center gap-3p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
-              <input type="checkbox" checked class="w-5 h-5 accent-[#101D35]">
-              <span class="text-sm font-bold text-[#101D35]">5. 화면 밖에서의 갱신·확인 책임과 인계 조건을 함께 적었다</span>
-            </label>
-          </div>
-
-          <div class="col-span-5p-5 rounded-2xl bg-amber-50 border border-amber-200 flex flex-col justify-between text-sm">
-            <div class="space-y-2">
-              <div class="font-extrabold text-amber-950 text-base">⚠️ 반드시 구분할 사항</div>
-              <p class="text-xs text-amber-900 leading-relaxed">
-                • <strong>가상 수치 분리:</strong> 이 보드의 수치와 과제 8건은 교육용입니다. 우리 부서의 실제 실적이나 문제를 입증하는 근거 자료로 사용하지 않습니다.
-              </p>
-              <p class="text-xs text-amber-900 leading-relaxed">
-                • <strong>예비 결과물 활용:</strong> 네트워크나 생성 지연이 있을 경우 사전에 준비된 예비 결과물로 검증을 마칩니다.
-              </p>
-            </div>
-            <div class="p-3 rounded-xl bg-white border border-amber-300 text-xs font-bold text-[#101D35]">
-              ✓ M4 산출물: 실행·수정·검증한 교육용 보드 완료
-            </div>
-          </div>
-        </div>
-
-        <div class="p-3 rounded-xl bg-slate-100 text-xs text-slate-600 text-center">
-          이어서 모듈 5에서는 만든 대시보드로 임원 보고자료와 예상 Q&A를 만들고 레드팀 검토로 보완합니다.
-        </div>
+        <div class="p-4 rounded-xl bg-slate-100 space-y-2"><div class="flex justify-between items-center gap-3"><strong class="text-sm text-[#101D35]">검증 메모 · 실제 결과를 채워 보고에 활용</strong><button onclick="copyText(buildDashboardVerificationMemo(), '32p 대시보드 검증 메모 양식')" class="px-3 py-2 rounded-lg bg-[#101D35] text-white text-xs font-bold shrink-0">📋 메모 양식 복사</button></div><p class="text-sm text-slate-700">확인 항목 / 예상값·기대 동작 / 실제 결과 / 미검증·오류 / 추가 확인</p><p class="text-xs text-slate-500">가상 자료 초기 상태의 예상값: 전체 8 · 미완료 6 · 기한 경과 미완료 2 · 오늘 마감 미완료 1 · 기한 확인 필요 1 · 완료 2. 이는 검증 완료 표시가 아닙니다.</p></div>
+        <div class="p-3 rounded-xl bg-[#E6F7F6] text-sm font-semibold text-[#101D35]">다음 모듈: 대시보드와 검증 메모 → 임원 보고자료 → 예상 Q&A와 레드팀 검토</div>
       `
     },
 
-
-    // ------------------------------------------------------------------------
-    // MODULE 5 (35 ~ 41)
-    // ------------------------------------------------------------------------
     {
       page: 33, module: 'M5', moduleTitle: '대시보드로 임원 보고 준비하기', journey: '보고', theme: 'navy',
       render: () => renderSectionCover('MODULE 05', '대시보드로 임원 보고 준비하기', '만든 화면의 확인 내용과 한계를 설명하고, 임원의 질문에 근거를 갖춰 답합니다.', '대시보드 확인 → 보고자료 → 예상 Q&A → 레드팀 검토 → 보완', '보고')
@@ -2866,6 +2817,10 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     copyText(buildProjectPrompt(step), `${step}단계 우리 부서 웹앱 실습 프롬프트`);
   }
 
+  function buildDashboardVerificationMemo() {
+    return `대시보드 검증 메모 (교육용 가상 자료)\n\n최종 파일명 또는 화면: [입력]\n직접 확인한 날짜와 데이터 기준일: [입력 / 기준일 2026-11-16]\n\n1. 초기 상태의 기본 지표\n예상값: 전체 8 / 미완료 6 / 기한 경과 미완료 2 / 오늘 마감 미완료 1 / 기한 확인 필요 1 / 완료 2\n실제 화면의 값: [직접 확인해 입력]\n차이와 확인할 사항: [입력]\n\n2. 필터와 상태 변경\n예상: 담당 A 필터 목록 3건, 상단 지표는 전체 기준 유지. 상태 변경 시 관련 지표 재계산.\n실제 시험한 조작과 결과: [입력]\n\n3. 추가 기능\n선택한 실습용 기능: ${userState.boardFeatureChosen ? projectValue(userState.boardFeature) : '미선택'}\n실제로 구현된 기능: [직접 확인해 입력]\n정상·누락 사례의 기대 동작과 실제 결과: [입력]\n\n4. 오류·미검증·운영 한계\n[아직 시험하지 않은 부분, 새로고침 시 초기화·공동사용 등 직접 확인한 제약 입력]\n\n5. 다음 확인과 필요한 지원\n[입력]\n\n예상값은 실제 검증 결과가 아닙니다. 가상 수치를 부서 실적으로 사용하지 않습니다.`;
+  }
+
   function buildDashboardReportPrompt(step) {
     const guard = '제공한 대시보드와 검증 메모에 근거해 작성하세요. 교육용 가상 수치는 실제 부서 실적으로 사용하지 말고, 화면 구현·기능 검증·현업 효과를 구분하세요. 없는 근거·수치·승인·검증 결과는 만들지 말고 확인 필요로 남기세요.';
     if (step === 0) return `당신은 팀장의 임원 보고자료 작성을 돕습니다. ${guard}\n\n[입력 자료]\n대시보드 화면 또는 HTML 코드: [첨부하거나 붙여 넣기]\n직접 확인한 기능과 검증 결과: [확인한 항목만 입력]\n검증하지 못한 부분·제약: [입력]\n대상 업무: ${projectValue(userState.taskName)}\n선택한 실습용 기능: ${userState.boardFeatureChosen ? projectValue(userState.boardFeature) : '확인 필요'}\n역할·다음 조치의 실습 초안: ${projectValue(userState.boardUser)} / ${projectValue(userState.boardAction)}\n임원에게 요청할 결정·지원: [입력]\n\n[출력: 임원 보고자료 1장 초안]\n1. 대시보드를 만든 목적과 사용 대상.\n2. 화면에서 확인되는 주요 지표·상태와 계산 기준.\n3. 실제 검증한 기능, 아직 검증하지 않은 부분과 운영상 한계.\n4. 화면을 보고 담당자와 팀장이 취할 다음 행동.\n5. 현업 적용을 위해 필요한 조건과 임원에게 요청할 결정·지원.\n화면에 없는 사항을 추측하지 마세요. 자료가 부족하면 먼저 확인 질문을 제시하세요.`;
@@ -3212,7 +3167,7 @@ ${steps}
       29: '실습 6: 숫자와 기능 검증',
       30: '실습 7: 상태 변경 확인 (T01 완료)',
       31: '화면과 업무를 연결',
-      32: '제작 결과 점검 체크리스트',
+      32: '대시보드 결과물과 검증 메모 준비',
       33: '모듈 5 간지',
       34: '대시보드 보고 근거 준비',
       35: '대시보드 내용과 보고 메시지',
