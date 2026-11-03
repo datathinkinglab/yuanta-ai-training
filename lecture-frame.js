@@ -66,8 +66,13 @@
     foot.querySelector('.unified-left').insertAdjacentHTML('afterbegin','<a href="index.html">⌂ 메인 화면</a>');
     foot.querySelector('.unified-copyright').innerHTML = '<strong>AIbility Academy STEP-UP · Leader</strong><small>© 2026 Data Thinking Lab. All rights reserved</small>';
   }
+  // 브라우저 확대/축소는 슬라이드에도 반영하고, 실제 창 크기 변경만 자동 맞춤에 반영합니다.
+  const initialPixelRatio = window.devicePixelRatio || 1;
   function scale() {
-    stage.style.setProperty('--stage-scale', Math.min(innerWidth / 1600, innerHeight / 900) * .98);
+    const zoomRatio = (window.devicePixelRatio || 1) / initialPixelRatio;
+    const availableWidth = innerWidth * zoomRatio;
+    const availableHeight = innerHeight * zoomRatio;
+    stage.style.setProperty('--stage-scale', Math.min(availableWidth / 1600, availableHeight / 900) * .98);
   }
   function showReading(printing = false) {
     reading.innerHTML = `<div class="reading-toolbar"><a href="index.html">⌂ 메인 화면</a><button onclick="lectureFrame.read()">슬라이드로 돌아가기</button></div>` + SLIDES.map((s,i) => `<article class="reading-slide ${dark(s) ? 'unified-dark' : ''}" data-page="${i}">${dark(s) ? '' : `<header class="unified-header">${header(s)}</header>`}<main class="unified-body">${content(s)}</main><div class="reading-page">${i+1} / ${SLIDES.length}</div></article>`).join('');
@@ -99,3 +104,4 @@
   window.addEventListener('afterprint', () => { if (read) lectureFrame.read(); });
   scale(); render();
 })();
+
