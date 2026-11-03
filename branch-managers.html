@@ -267,7 +267,7 @@
       sample_csv_21: {
         title: "대체용 가상 CSV 샘플 데이터 (파일 첨부 불가 시 복사)",
         desc: "AI 대화창에 파일 첨부가 제한될 경우 아래 가상 CSV 텍스트를 복사하여 붙여넣으세요.",
-        content: `사번,성명,직위,직무,근속개월,2025.10,2025.11,2025.12,2026.01,2026.02,2026.03,2026.04,2026.05,2026.06,2026.07,2026.08,2026.09,6개월평균약정,기준월전체순위,기준월직무순위,기준월직위순위\n1001,김도윤,차장,PB,96,16200,16800,17100,16900,17500,17200,17400,17800,18100,17650,17775,19181,17984,2,2,1\n1002,이서연,과장,PB,72,14500,14900,15200,14800,15100,15300,15600,15900,16200,16000,15800,14200,15617,5,4,2\n1003,박지훈,대리,리테일,48,9800,10200,10500,10100,10400,10800,11000,11200,11500,11800,12100,12900,11750,8,3,1\n1004,최수아,차장,PB,108,21000,20500,21800,22100,21500,22400,22800,23100,22900,23400,23800,24500,23417,1,1,1\n1005,정우진,과장,법인,84,18500,18200,17900,18100,17600,17400,17200,16900,16500,16800,16400,15900,16617,4,1,1\n1006,강하은,주임,리테일,18,6200,6500,6800,7100,7400,7600,7900,8200,8500,8800,9100,9600,8683,11,5,2`
+        content: `사번,성명,직위,직무,근속개월,기준월_전체순위,기준월_직무순위,기준월_직위순위,기준월_직무직위순위,회기월평균_전체순위,회기월평균_직위순위,회기월평균_약정,누계약정,6개월평균약정,2025.10,2025.11,2025.12,2026.01,2026.02,2026.03,2026.04,2026.05,2026.06,2026.07,2026.08,2026.09\nY10231,김도윤,부장,주식영업,212,76,50,19,12,102,25,17207,154866,17984,13360,13687,14986,14689,15984,16287,16335,17686,17410,18711,18583,19181\nY10587,이서준,차장,주식영업,181,278,166,68,40,138,38,14351,129159,13460,16250,16133,16509,15906,16432,16064,15969,15952,14587,13063,11254,9932\nY11342,박지민,과장,자산관리,97,380,148,99,38,389,101,7647,68819,7690,7737,7545,7459,7665,7564,7448,7824,7751,7406,7657,7619,7885\nY12765,최하은,대리,주식영업,41,357,217,60,37,553,111,5232,47086,5989,3528,3651,3487,3716,3752,3682,3792,4220,5480,6511,7585,8348\nY11908,정우진,과장,주식영업,110,204,125,54,34,336,88,8498,76485,8331,10817,5163,9310,12035,4458,10006,5466,11844,4757,10252,5879,11788\nY13510,강민서,사원,자산관리,14,752,299,108,42,780,118,2479,22313,2662,1618,1802,1920,2059,2065,2218,2329,2584,2733,2643,2772,2910\nY10422,윤태호,차장,주식영업,203,673,410,142,88,660,139,4081,36729,3943,4178,4491,4266,4045,4515,4513,4104,4098,3808,3912,3911,3823\nY12233,장수아,대리,자산관리,53,675,263,139,57,499,93,6028,54250,5344,7305,7326,7330,7277,7437,7469,6905,6269,5562,4932,4459,3940\nY10105,임재현,부장,주식영업,241,162,97,36,22,169,36,13573,122158,13485,13558,13186,13907,14206,13673,13369,13067,13583,13438,14039,13323,13460\nY13622,한예린,사원,주식영업,19,769,466,111,66,760,110,2803,25227,2805,1610,2396,1770,3126,2050,3221,2230,3560,2537,1988,3670,2845\nY11777,오승민,과장,자산관리,86,365,143,91,37,488,127,6135,55217,6311,7025,6696,7125,6961,5708,4682,4343,4975,5621,7011,7757,8159\nY12490,서지우,대리,주식영업,62,456,273,81,50,473,88,6282,56536,6358,6068,5800,5870,6262,6197,5926,5963,6042,6584,6590,6232,6740`
       },
       prompt_25: {
         title: "화면 오류 및 개선 수정 요청 프롬프트 (25페이지)",
@@ -557,11 +557,12 @@
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 my-auto">
             <div class="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5">
               <h3 class="text-sm font-extrabold text-[#101D35] flex items-center gap-2">
-                <i class="fa-solid fa-list-check text-[#0D9488]"></i>실습 절차
+                <i class="fa-solid fa-list-check text-[#0D9488]"></i>실습 자료 다운로드
               </h3>
+              <div class="flex flex-wrap gap-2"><a href="downloads/지점_영업직원_코칭대시보드.html" download class="px-3 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold">대시보드 HTML 다운로드</a><a href="downloads/샘플_지점영업직원_실적.csv" download class="px-3 py-2 rounded-lg bg-slate-700 text-white text-xs font-bold">가상 샘플 CSV 다운로드</a></div>
               <div class="text-xs space-y-2 text-slate-700">
                 <div class="p-2.5 bg-white rounded-lg border border-slate-200"><b>① 파일 열기:</b> 제공된 <code class="text-[#0D9488] font-bold">지점_영업직원_코칭대시보드.html</code>을 브라우저에서 열기</div>
-                <div class="p-2.5 bg-white rounded-lg border border-slate-200"><b>② 샘플 시작:</b> 화면의 <b>‘가상 샘플 데이터로 체험하기’</b> 선택</div>
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200"><b>② 샘플 시작:</b> 화면의 <b>‘가상 샘플 데이터로 체험하기’</b>를 누르거나 다운로드한 CSV 불러오기</div>
                 <div class="p-2.5 bg-white rounded-lg border border-slate-200"><b>③ 전체 파악:</b> 지점 요약 지표와 좌측 직원 목록 살펴보기</div>
                 <div class="p-2.5 bg-white rounded-lg border border-slate-200"><b>④ 상세 확인:</b> 직원 한 명을 클릭해 상세 차트와 코칭 문구 확인</div>
               </div>
@@ -575,7 +576,7 @@
                 <div class="bg-white border border-slate-200 rounded-lg p-3 grid grid-cols-3 gap-2 text-xs mb-3">
                   <div class="col-span-1 bg-slate-100 p-2 rounded">
                     <div class="font-bold text-[#101D35] mb-1">직원 목록 / 필터</div>
-                    <div class="text-[11px] text-slate-500">직무·직위 선택<br>김도윤 / 이서연 ...</div>
+                    <div class="text-[11px] text-slate-500">직무·직위 선택<br>김도윤 / 이서준 ...</div>
                   </div>
                   <div class="col-span-2 bg-slate-100 p-2 rounded">
                     <div class="font-bold text-[#101D35] mb-1">월별 추이 & 규칙 기반 코칭 문구</div>
@@ -616,7 +617,7 @@
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
               <span class="text-xs font-bold text-[#0D9488]">구성 02</span>
               <h3 class="text-base font-extrabold text-[#101D35] mt-1">직무·직위 필터</h3>
-              <p class="text-xs text-slate-600 mt-2 leading-relaxed">PB·리테일·법인 등 직무와 직위 그룹별로 직원을 좁혀서 살펴봅니다.</p>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">주식영업·자산관리 등 직무와 직위 그룹별로 직원을 좁혀서 살펴봅니다.</p>
             </div>
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
               <span class="text-xs font-bold text-[#0D9488]">구성 03</span>
@@ -717,32 +718,32 @@
                   </thead>
                   <tbody class="divide-y divide-slate-200 bg-white">
                     <tr>
-                      <td class="p-2.5 font-mono-code">1001</td>
+                      <td class="p-2.5 font-mono-code">Y10231</td>
                       <td class="p-2.5 font-bold">김도윤</td>
-                      <td class="p-2.5">차장</td>
-                      <td class="p-2.5">PB</td>
-                      <td class="p-2.5">96</td>
-                      <td class="p-2.5 text-slate-500">16,200 … 17,775</td>
+                      <td class="p-2.5">부장</td>
+                      <td class="p-2.5">주식영업</td>
+                      <td class="p-2.5">212</td>
+                      <td class="p-2.5 text-slate-500">13,360 … 18,583</td>
                       <td class="p-2.5 font-bold text-[#0D9488]">19,181</td>
                       <td class="p-2.5 font-bold text-[#101D35]">17,984</td>
-                      <td class="p-2.5">2위 / 2위 / 1위</td>
+                      <td class="p-2.5">76위 / 50위 / 19위</td>
                     </tr>
                     <tr class="bg-slate-50">
-                      <td class="p-2.5 font-mono-code">1002</td>
-                      <td class="p-2.5 font-bold">이서연</td>
-                      <td class="p-2.5">과장</td>
-                      <td class="p-2.5">PB</td>
-                      <td class="p-2.5">72</td>
-                      <td class="p-2.5 text-slate-500">14,500 … 15,800</td>
-                      <td class="p-2.5 font-bold text-[#0D9488]">14,200</td>
-                      <td class="p-2.5 font-bold text-[#101D35]">15,617</td>
-                      <td class="p-2.5">5위 / 4위 / 2위</td>
+                      <td class="p-2.5 font-mono-code">Y10587</td>
+                      <td class="p-2.5 font-bold">이서준</td>
+                      <td class="p-2.5">차장</td>
+                      <td class="p-2.5">주식영업</td>
+                      <td class="p-2.5">181</td>
+                      <td class="p-2.5 text-slate-500">16,250 … 11,254</td>
+                      <td class="p-2.5 font-bold text-[#0D9488]">9,932</td>
+                      <td class="p-2.5 font-bold text-[#101D35]">13,460</td>
+                      <td class="p-2.5">278위 / 166위 / 68위</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
-                <div class="text-xs font-bold text-[#101D35] mb-2">활동: 원본 파일을 변경하지 않고 열어 아래 열들을 찾아 체크해 보세요 (샘플에는 팀점명, 상품·종목 상세가 없습니다)</div>
+                <div class="text-xs font-bold text-[#101D35] mb-2">활동: 원본 파일을 변경하지 않고 열어 아래 열들을 찾아 체크해 보세요 (순위는 가상 전체 집단의 제공값이며 이 파일의 12명 내 순위가 아닙니다. 팀점명과 상품·종목 상세는 없습니다)</div>
                 <div class="flex flex-wrap gap-2">
                   ${items.map((label, idx) => `
                     <button onclick="USER_STATE.s11_checks[${idx}] = !USER_STATE.s11_checks[${idx}]; renderCurrentSlide();" class="px-3 py-1.5 rounded-lg text-xs font-bold border transition flex items-center gap-1.5 ${USER_STATE.s11_checks[idx] ? 'bg-[#0D9488] text-white border-[#0D9488]' : 'bg-white text-slate-700 border-slate-300'}">
@@ -1068,7 +1069,7 @@
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
               <span class="text-xs font-extrabold text-[#0D9488]">STEP 02</span>
               <h3 class="text-base font-extrabold text-[#101D35] mt-1">② 샘플 CSV 첨부</h3>
-              <p class="text-xs text-slate-600 mt-2">제공된 <code class="font-bold text-[#101D35]">샘플_지점영업직원_실적.csv</code>(가상 데이터)를 첨부합니다.</p>
+              <p class="text-xs text-slate-600 mt-2"><a href="downloads/샘플_지점영업직원_실적.csv" download class="font-bold text-[#0D9488] underline">가상 샘플 CSV 다운로드</a> 후 AI 대화창에 첨부합니다.</p>
             </div>
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
               <span class="text-xs font-extrabold text-[#0D9488]">STEP 03</span>
