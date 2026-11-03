@@ -35,15 +35,40 @@
       nodes.forEach(e => e.textContent = '총 ' + data.total + '명 참여 · 집계 갱신');
     } catch (_) { nodes.forEach(e => e.textContent = '집계 연결 실패 · 다시 시도해 주세요'); }
   };
-  window.saveWorkshop = async function () {
-    if (!confirm('현재 입력한 업무와 검토 내용을 Google 스프레드시트에 저장합니다. 개인정보·고객정보·미공개 자료를 제거했는지 확인해 주세요.')) return;
-    const fields = ['taskName','taskPain','taskStart','taskEnd','asIsStep1','asIsStep2','asIsStep3','asIsStep4','review13'];
-    const values = Object.fromEntries(fields.map(k => [k, userState[k] || '']));
-    if (!fields.some(k => values[k].trim())) { message('먼저 실습 내용을 입력해 주세요.'); return; }
-    values.prompt12 = buildPrompt12();
-    try { await post({ action: 'workshop', id, values }); message('실습 내용이 구글에 저장되었습니다.'); }
-    catch (e) { message('저장 실패: ' + e.message); }
+  const fields = ['taskName','taskPain','taskStart','taskEnd','asIsStep1','asIsStep2','asIsStep3','asIsStep4','review13'];
+  let timer, dirty = false, saving = false;
+  function saveStatus(text) {
+    document.querySelectorAll('[data-save-status]').forEach(el => { el.textContent = text; });
+  }
+  window.scheduleWorkshopSave = function (key) {
+    if (!fields.includes(key)) return;
+    dirty = true;
+    clearTimeout(timer);
+    saveStatus('입력 내용을 저장 중입니다.');
+    timer = setTimeout(() => { timer = null; flushWorkshop(); }, 1800);
   };
+  async function flushWorkshop() {
+    if (!dirty || saving) return;
+    saving = true;
+    dirty = false;
+    const values = Object.fromEntries(fields.map(k => [k, userState[k] || '']));
+    values.prompt12 = buildPrompt12();
+    try {
+      await post({ action: 'workshop', id, values });
+      if (!dirty) saveStatus('입력 내용이 저장되었습니다.');
+    } catch (e) {
+      dirty = true;
+      saveStatus('저장 연결을 확인하고 있습니다. 창을 닫지 말아 주세요.');
+      clearTimeout(timer);
+      timer = setTimeout(() => { timer = null; flushWorkshop(); }, 8000);
+    } finally {
+      saving = false;
+    }
+    if (dirty && !timer) timer = setTimeout(() => { timer = null; flushWorkshop(); }, 1800);
+  }
+  window.addEventListener('beforeunload', e => {
+    if (dirty || saving) { e.preventDefault(); e.returnValue = ''; }
+  });
   setInterval(refreshPoll, window.YUANTA_PARTICIPATION.refreshMs || 8000);
   setTimeout(refreshPoll, 500);
 })();
