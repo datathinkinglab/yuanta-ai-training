@@ -514,8 +514,8 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
   // ============================================================================
   const POPUPS = {
     improvementDemo: {
-      title: '개선 전후 비교 · 강사 시연과 선택 실습',
-      render: () => `<div class="space-y-4 text-sm leading-relaxed"><p>이 프롬프트는 앞 대화 없이 새 AI 대화에서 사용할 수 있는 공통 가상 사례입니다. 강사 시연을 보고 흐름을 이해하면 충분합니다. 직접 해보고 싶은 경우에만 복사해 사용하세요.</p><button onclick="copyText(PROMPT_18, '18p 강사 시연 프롬프트')" class="px-4 py-2 rounded-lg bg-[#101D35] text-white font-bold">프롬프트 복사</button><div class="prompt-box">${escapeHtml(PROMPT_18)}</div><p>답변에서 확인할 점: 확인 시점이 앞당겨졌는지, 보드의 표시와 사람의 판단이 구분되는지 살펴봅니다.</p></div>`
+      title: '개선 전후 비교 · 개선 전후 비교와 선택 실습',
+      render: () => `<div class="space-y-4 text-sm leading-relaxed"><p>이 프롬프트는 앞 대화 없이 새 AI 대화에서 사용할 수 있는 공통 가상 사례입니다. 개선 전후 흐름을 비교할 때 복사해 사용할 수 있습니다.</p><button onclick="copyText(PROMPT_18, '18p 개선 전후 비교 프롬프트')" class="px-4 py-2 rounded-lg bg-[#101D35] text-white font-bold">프롬프트 복사</button><div class="prompt-box">${escapeHtml(PROMPT_18)}</div><p>답변에서 확인할 점: 확인 시점이 앞당겨졌는지, 보드의 표시와 사람의 판단이 구분되는지 살펴봅니다.</p></div>`
     },
     boardChoiceDetails: {
       title: '선택한 실습 초안 · 필요할 때만 수정',
@@ -1679,12 +1679,12 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     // ------------------------------------------------------------------------
     {
       page: 15, module: 'M3', moduleTitle: '개선 예시와 실습 유형 선택', journey: '개선', theme: 'navy',
-      render: () => renderSectionCover('MODULE 03', '개선 예시를 보고 한 가지 고르기', '정리한 업무를 잠시 내려놓고, 강사와 함께 개선의 핵심을 살펴봅니다.', '공통 사례 설명 → 함께 비교 → 실습 유형 하나 선택', '개선')
+      render: () => renderSectionCover('MODULE 03', '개선 예시를 보고 한 가지 고르기', '정리한 업무를 잠시 내려놓고, 함께 개선의 핵심을 살펴봅니다.', '공통 사례 설명 → 함께 비교 → 실습 유형 하나 선택', '개선')
     },
     {
       page: 16, module: 'M3', moduleTitle: '개선 예시와 실습 유형 선택', journey: '개선', theme: 'white',
       render: () => `
-        <div><span class="text-xs font-bold text-[#2A918C]">M3 · 강사 설명 · 교육용 가상 사례</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">다시 요청하는 일을 어디에서 줄일 수 있을까요?</h2><p class="text-base text-slate-600 mt-2">주간 자료 취합에서 필수자료가 빠져 검토가 늦어지는 사례를 함께 살펴봅니다.</p></div>
+        <div><span class="text-xs font-bold text-[#2A918C]">M3 · 개선 원칙 · 교육용 가상 사례</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">다시 요청하는 일을 어디에서 줄일 수 있을까요?</h2><p class="text-base text-slate-600 mt-2">주간 자료 취합에서 필수자료가 빠져 검토가 늦어지는 사례를 함께 살펴봅니다.</p></div>
         <div class="grid grid-cols-3 gap-5 my-auto">
           <div class="card-box space-y-4"><span class="font-bold text-slate-500">현재 모습</span><h3 class="text-2xl font-extrabold">검토할 때 누락 발견</h3><p>자료를 모은 뒤 빠진 항목을 발견합니다. 보완을 요청하고 다시 기다립니다.</p></div>
           <div class="card-box space-y-4 bg-[#E6F7F6] border-[#39B8B2]"><span class="font-bold text-[#2A918C]">바꿔볼 한 가지</span><h3 class="text-2xl font-extrabold">접수할 때 먼저 확인</h3><p>필수자료가 왔는지 먼저 표시하고, 빠진 항목은 보완을 요청합니다.</p></div>
@@ -1695,7 +1695,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     {
       page: 17, module: 'M3', moduleTitle: '개선 예시와 실습 유형 선택', journey: '개선', theme: 'white',
       render: () => `
-        <div class="flex justify-between items-start gap-4"><div><span class="text-xs font-bold text-[#2A918C]">M3 · 강사와 함께 판단하기</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">AI에게 맡길 일과 사람이 판단할 일을 나눕니다</h2><p class="text-base text-slate-600 mt-2">공통 사례의 세 제안을 비교해 봅니다. 별도 작성 없이 설명을 따라오세요.</p></div><button onclick="openPopup('leaderReviewTable')" class="px-3 py-2 rounded-lg bg-slate-100 text-xs font-bold shrink-0">상세 검토 예시</button></div>
+        <div class="flex justify-between items-start gap-4"><div><span class="text-xs font-bold text-[#2A918C]">M3 · AI 제안 검토</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">AI에게 맡길 일과 사람이 판단할 일을 나눕니다</h2><p class="text-base text-slate-600 mt-2">공통 사례의 세 제안을 비교해 봅니다. 별도 작성 없이 설명을 따라오세요.</p></div><button onclick="openPopup('leaderReviewTable')" class="px-3 py-2 rounded-lg bg-slate-100 text-xs font-bold shrink-0">상세 검토 예시</button></div>
         <div class="grid grid-cols-3 gap-5 my-auto">
           <div class="p-6 rounded-xl bg-emerald-50 border border-emerald-300 space-y-3"><span class="font-bold text-emerald-800">활용하기</span><h3 class="text-2xl font-extrabold">필수자료 목록 초안</h3><p>AI가 확인 목록의 초안을 만듭니다.</p><p class="font-bold">담당자가 실제로 필요한 항목인지 확인합니다.</p></div>
           <div class="p-6 rounded-xl bg-amber-50 border border-amber-300 space-y-3"><span class="font-bold text-amber-800">범위 조정하기</span><h3 class="text-2xl font-extrabold">보완 요청 문안</h3><p>자동 발송 대신 문안 초안을 준비합니다.</p><p class="font-bold">담당자가 대상과 내용을 확인한 뒤 발송합니다.</p></div>
@@ -1706,7 +1706,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     {
       page: 18, module: 'M3', moduleTitle: '개선 예시와 실습 유형 선택', journey: '개선', theme: 'white',
       render: () => `
-        <div class="flex justify-between items-start gap-4"><div><span class="text-xs font-bold text-[#2A918C]">M3 · 강사 시연 · 교육용 가상 사례</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">개선 전후를 한눈에 비교해 봅니다</h2><p class="text-base text-slate-600 mt-2">강사가 AI로 비교 초안을 만드는 과정을 보여드립니다. 직접 따라 입력하지 않아도 됩니다.</p></div><button onclick="openPopup('improvementDemo')" class="px-3 py-2 rounded-lg bg-[#101D35] text-white text-xs font-bold shrink-0">시연 프롬프트 · 선택 실습</button></div>
+        <div class="flex justify-between items-start gap-4"><div><span class="text-xs font-bold text-[#2A918C]">M3 · 교육용 가상 사례</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">개선 전후를 한눈에 비교해 봅니다</h2><p class="text-base text-slate-600 mt-2">AI로 정리한 개선 전후 예시에서 달라진 확인 시점과 사람의 역할을 살펴봅니다.</p></div><button onclick="openPopup('improvementDemo')" class="px-3 py-2 rounded-lg bg-[#101D35] text-white text-xs font-bold shrink-0">비교 프롬프트 · 선택 실습</button></div>
         <div class="grid grid-cols-2 gap-6 my-auto">
           <div class="p-6 rounded-2xl bg-slate-100 space-y-4"><h3 class="font-extrabold text-xl">개선 전</h3><p class="text-lg font-bold">자료 수집 → 검토 중 누락 발견 → 재요청</p><p>확인 시점이 늦어 앞 단계로 되돌아갑니다.</p></div>
           <div class="p-6 rounded-2xl bg-[#E6F7F6] border border-[#39B8B2] space-y-4"><h3 class="font-extrabold text-xl">개선 후 제안</h3><p class="text-lg font-bold">접수 시 확인 → 누락 보완 → 검토 인계</p><p>보드는 확인 상태를 보여주고, 실제 내용 검토는 사람이 합니다.</p></div>
@@ -1724,7 +1724,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     {
       page: 20, module: 'M3', moduleTitle: '개선 예시와 실습 유형 선택', journey: '개선', theme: 'white',
       render: () => `
-        <div class="flex justify-between items-start gap-4"><div><span class="text-xs font-bold text-[#2A918C]">M3 · 강사 설명 · 보드의 숫자 읽기</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">숫자를 보고 어떤 일을 먼저 확인할까요?</h2><p class="text-base text-slate-600 mt-2">다음 모듈에서 사용할 가상 8건을 기준으로 세 표시만 익힙니다. 기준일은 2026-11-16입니다.</p></div><button onclick="openPopup('metricDef')" class="px-3 py-2 rounded-lg bg-slate-100 text-xs font-bold shrink-0">계산 기준 자세히</button></div>
+        <div class="flex justify-between items-start gap-4"><div><span class="text-xs font-bold text-[#2A918C]">M3 · 보드의 숫자 읽기</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">숫자를 보고 어떤 일을 먼저 확인할까요?</h2><p class="text-base text-slate-600 mt-2">다음 모듈에서 사용할 가상 8건을 기준으로 세 표시만 익힙니다. 기준일은 2026-11-16입니다.</p></div><button onclick="openPopup('metricDef')" class="px-3 py-2 rounded-lg bg-slate-100 text-xs font-bold shrink-0">계산 기준 자세히</button></div>
         <div class="grid grid-cols-3 gap-5 my-auto">
           <div class="p-6 rounded-2xl badge-overdue space-y-4"><span class="text-4xl font-extrabold">2건</span><h3 class="text-2xl font-extrabold">기한이 지난 미완료</h3><p class="text-lg font-semibold">왜 멈췄는지, 어떤 지원이 필요한지 확인합니다.</p><p class="text-sm">T01·T05 · 완료한 과제는 제외합니다.</p></div>
           <div class="p-6 rounded-2xl badge-today space-y-4"><span class="text-4xl font-extrabold">1건</span><h3 class="text-2xl font-extrabold">오늘 마감인 미완료</h3><p class="text-lg font-semibold">오늘 처리할 순서와 담당자를 확인합니다.</p><p class="text-sm">T02 · 오늘 마감이어도 완료했으면 제외합니다.</p></div>
@@ -1738,8 +1738,8 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
       render: () => `
         <div class="flex items-start justify-between">
           <div>
-            <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M3 · 강사 설명 · 예외 처리 살펴보기</span>
-            <h2 class="text-3xl font-extrabold text-[#101D35] mt-1">정상 요청과 누락 요청을 강사와 함께 따라갑니다</h2>
+            <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M3 · 예외 처리 살펴보기</span>
+            <h2 class="text-3xl font-extrabold text-[#101D35] mt-1">정상 요청과 누락 요청의 흐름을 따라갑니다</h2>
           </div>
           <button onclick="openPopup('asIsToBeForm')" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold border border-slate-300">
             🔍 예외 점검 가이드
@@ -3119,7 +3119,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
       ['10페이지 · AI로 업무 단계 초안 작성', buildWorkflowDraftPrompt()],
       ['12페이지 · 부서 업무 분석', buildPrompt12()],
       ['13페이지 · AI 분석 근거 확인', PROMPT_13],
-      ['18페이지 · 강사 시연과 선택 실습', PROMPT_18],
+      ['18페이지 · 개선 전후 비교와 선택 실습', PROMPT_18],
       ['24~25페이지 · 교육용 가상 자료와 기본 보드', `${COMMON_DATA_TEXT}\n\n${PROMPT_26}`],
       ['28페이지 · 부서 기능 간단 추가', `${PROMPT_29}\n\n※ 요청 전 대괄호에 문제·기능·사용자·확인 조건·다음 조치를 입력하세요.`],
       ['28페이지 확장 실습 1 · 기획서 작성', buildProjectPrompt(1)],
@@ -3431,7 +3431,7 @@ ${steps}
       15: '모듈 3 간지',
       16: '공통 사례: 확인 시점 앞당기기',
       17: 'AI 지원과 사람의 판단',
-      18: '강사 시연: 개선 전후 비교',
+      18: '개선 전후 비교',
       19: '실습 유형 하나 선택',
       20: '보드 숫자와 다음 확인',
       21: '함께 보기: 정상·누락 요청',
