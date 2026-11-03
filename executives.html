@@ -1008,11 +1008,11 @@
       <div class="toc-window" onclick="event.stopPropagation()">
         <div class="modal-header" style="background: var(--navy); color: var(--white);">
           <div class="modal-title-group">
-            <span class="module-badge" style="background:var(--teal); color:var(--navy);">전체 49페이지 · 220분</span>
+            <span class="module-badge" style="background:var(--teal); color:var(--navy);">전체 48페이지 · 220분</span>
             <h2 class="modal-title" style="color:var(--white);">유안타증권 임원 AI 교육 — 모듈별 목차 이동</h2>
           </div>
           <div style="display:flex; align-items:center; gap:10px;">
-            <button class="modal-close-btn" style="background:var(--teal); color:var(--navy);" onclick="exportToPDF()">🖨️ PDF 출력 (전체 49p)</button>
+            <button class="modal-close-btn" style="background:var(--teal); color:var(--navy);" onclick="exportToPDF()">🖨️ PDF 출력 (전체 48p)</button>
             <button class="modal-close-btn" onclick="toggleFullscreen()">⛶ 전체화면 전환</button>
             <button class="modal-close-btn" onclick="toggleTOC(false)">닫기 (ESC)</button>
           </div>
@@ -2726,15 +2726,11 @@
           </div>
         `
       },
-      // 49. AX 추진 흐름
-      {
-        page: 45,
-        theme: 'white',
-        moduleCode: 'MODULE 06',
-        moduleName: 'AI 리더십과 조직 실행',
-        journeyActive: ['e'],
-        title: '개별 체험을 조직의 실행으로 연결하기',
-        lead: 'AX 조직은 공통 환경과 지원 기준을 정하고, 현업은 업무의 실제 적용 가능성을 확인합니다. 임원은 우선순위와 필요한 자원을 결정합니다.',
+      // 45. 첫 과제 선정과 실행·확산
+      {page:45, theme:'white', moduleCode:'MODULE 06', moduleName:'AI 리더십과 조직 실행', journeyActive:['e'],
+        title:'작게 시작할 과제를 고르고, 검증한 뒤 확산합니다',
+        lead:'앞에서 작성한 실행 과제 카드에 네 가지 기준을 적용하고, 작은 시도에서 성과 확인과 공유로 이어갑니다.',
+        bottomMsg:'임원: 우선순위·지원 결정 / 팀장·실무자: 시도·검증 / AX 조직: 공통 환경·확산 지원',
         popup: {
           type: 'ref',
           label: '참고: 확산 시 확인할 내용',
@@ -2749,81 +2745,11 @@
             </ul>
           `
         },
-        render: () => `
-          <div class="grid-5">
-            <div class="card">
-              <div class="card-step-num">STEP 1</div>
-              <div class="card-title" style="font-size:21px;">과제 선정</div>
-              <div class="card-desc" style="font-size:16px;">경영 필요성과 자료 준비도가 높은 구체적 업무 과제를 선정합니다.</div>
-            </div>
-            <div class="card">
-              <div class="card-step-num">STEP 2</div>
-              <div class="card-title" style="font-size:21px;">작은 범위 시도</div>
-              <div class="card-desc" style="font-size:16px;">전체 시스템을 바꾸기 전에 단일 보고서·특정 단계에서 먼저 시도합니다.</div>
-            </div>
-            <div class="card highlight">
-              <div class="card-step-num">STEP 3</div>
-              <div class="card-title" style="font-size:21px;">현업 검토</div>
-              <div class="card-desc" style="font-size:16px;">팀장과 실무자가 정확성, 검증 소요시간, 실무 제약을 엄격히 검토합니다.</div>
-            </div>
-            <div class="card">
-              <div class="card-step-num">STEP 4</div>
-              <div class="card-title" style="font-size:21px;">성과 확인</div>
-              <div class="card-desc" style="font-size:16px;">시간 단축, 재작업 감소, 근거 명확화 등 전후 변화를 측정합니다.</div>
-            </div>
-            <div class="card">
-              <div class="card-step-num">STEP 5</div>
-              <div class="card-title" style="font-size:21px;">경험 공유·확산</div>
-              <div class="card-desc" style="font-size:16px;">검증된 템플릿과 점검 기준을 AX 조직과 함께 타 부서로 확산합니다.</div>
-            </div>
-          </div>
-        `
-      },
-      // 50. 첫 과제 선택 기준
-      {
-        page: 46,
-        theme: 'white',
-        moduleCode: 'MODULE 06',
-        moduleName: 'AI 리더십과 조직 실행',
-        journeyActive: ['e'],
-        title: '무엇부터 시작할 것인가?',
-        lead: '앞에서 작성한 실행 과제 카드에 아래 네 가지 질문을 적용해 첫 시작 과제를 점검해 보세요.',
-        render: () => `
-          <div class="grid-2x2">
-            <div class="card">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="card-title">① 업무 필요성 (Need)</span>
-                <input type="checkbox" style="width:24px; height:24px; accent-color:var(--teal-dark);">
-              </div>
-              <div class="card-desc"><strong>해결할 문제가 분명한가?</strong><br>단순 호기심이 아니라 반복되는 병목이나 의사결정 지연 등 해결할 실익이 분명한 과제인지 확인합니다.</div>
-            </div>
-            <div class="card">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="card-title">② 자료 준비도 (Data)</span>
-                <input type="checkbox" style="width:24px; height:24px; accent-color:var(--teal-dark);">
-              </div>
-              <div class="card-desc"><strong>사용할 자료가 있는가?</strong><br>보안 규정을 준수하면서 즉시 활용할 수 있는 문서나 정형·비정형 자료가 준비되어 있는지 확인합니다.</div>
-            </div>
-            <div class="card">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="card-title">③ 실행 범위 (Scope)</span>
-                <input type="checkbox" style="width:24px; height:24px; accent-color:var(--teal-dark);">
-              </div>
-              <div class="card-desc"><strong>작게 시작할 수 있는가?</strong><br>거대한 개발 없이 한 부서나 하나의 브리핑 단위에서 2~4주 내에 시범 적용해 볼 수 있는지 확인합니다.</div>
-            </div>
-            <div class="card">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="card-title">④ 검증 가능성 (Verification)</span>
-                <input type="checkbox" style="width:24px; height:24px; accent-color:var(--teal-dark);">
-              </div>
-              <div class="card-desc"><strong>결과를 비교할 수 있는가?</strong><br>AI 결과물의 맞고 틀림을 원문으로 대조할 수 있고, 적용 전후의 업무 변화를 비교할 수 있는지 확인합니다.</div>
-            </div>
-          </div>
-        `
+        render: () => `<div class="grid-2" style="grid-template-columns:1fr 1.15fr;"><div class="card" style="justify-content:flex-start;gap:16px;"><div class="card-title" style="font-size:26px;">① 무엇부터 시작할까요?</div><div style="display:flex;flex-direction:column;gap:12px;"><label class="check-item" style="padding:15px;gap:14px;"><input type="checkbox"><div><strong style="font-size:21px;">업무 필요성</strong><div style="font-size:18px;margin-top:5px;color:var(--gray-600);">해결할 문제와 기대 효과가 분명한가?</div></div></label><label class="check-item" style="padding:15px;gap:14px;"><input type="checkbox"><div><strong style="font-size:21px;">자료 준비도</strong><div style="font-size:18px;margin-top:5px;color:var(--gray-600);">승인된 범위에서 쓸 자료가 준비됐는가?</div></div></label><label class="check-item" style="padding:15px;gap:14px;"><input type="checkbox"><div><strong style="font-size:21px;">실행 범위</strong><div style="font-size:18px;margin-top:5px;color:var(--gray-600);">한 부서·한 보고서로 작게 시작할 수 있는가?</div></div></label><label class="check-item" style="padding:15px;gap:14px;"><input type="checkbox"><div><strong style="font-size:21px;">검증 가능성</strong><div style="font-size:18px;margin-top:5px;color:var(--gray-600);">원문 대조와 적용 전후 비교가 가능한가?</div></div></label></div></div><div class="card" style="justify-content:flex-start;gap:16px;"><div class="card-title" style="font-size:26px;">② 어떻게 실행하고 넓힐까요?</div><div style="display:flex;flex-direction:column;gap:10px;"><div style="display:flex;gap:14px;align-items:center;padding:12px 14px;background:var(--gray-50);border-radius:8px;"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;flex-shrink:0;border-radius:50%;background:var(--navy);color:white;font-weight:800;">1</span><div><strong style="font-size:20px;">과제 선정</strong><div style="font-size:17px;color:var(--gray-600);margin-top:4px;">왼쪽 네 기준으로 첫 과제를 선택합니다.</div></div></div><div style="display:flex;gap:14px;align-items:center;padding:12px 14px;background:var(--gray-50);border-radius:8px;"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;flex-shrink:0;border-radius:50%;background:var(--navy);color:white;font-weight:800;">2</span><div><strong style="font-size:20px;">작은 범위 시도</strong><div style="font-size:17px;color:var(--gray-600);margin-top:4px;">특정 보고서나 업무 한 단계에 시범 적용합니다.</div></div></div><div style="display:flex;gap:14px;align-items:center;padding:12px 14px;background:var(--teal-bg);border-radius:8px;"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;flex-shrink:0;border-radius:50%;background:var(--navy);color:white;font-weight:800;">3</span><div><strong style="font-size:20px;">현업 검토</strong><div style="font-size:17px;color:var(--gray-600);margin-top:4px;">팀장·실무자가 정확성, 검토 부담과 제약을 확인합니다.</div></div></div><div style="display:flex;gap:14px;align-items:center;padding:12px 14px;background:var(--gray-50);border-radius:8px;"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;flex-shrink:0;border-radius:50%;background:var(--navy);color:white;font-weight:800;">4</span><div><strong style="font-size:20px;">성과 확인</strong><div style="font-size:17px;color:var(--gray-600);margin-top:4px;">시간·재작업·근거의 완결성 변화를 측정합니다.</div></div></div><div style="display:flex;gap:14px;align-items:center;padding:12px 14px;background:var(--gray-50);border-radius:8px;"><span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;flex-shrink:0;border-radius:50%;background:var(--navy);color:white;font-weight:800;">5</span><div><strong style="font-size:20px;">경험 공유·확산</strong><div style="font-size:17px;color:var(--gray-600);margin-top:4px;">검증한 템플릿과 점검 기준을 AX 조직과 공유합니다.</div></div></div></div></div></div>`
       },
       // 51. 성과 점검
       {
-        page: 47,
+        page: 46,
         theme: 'white',
         moduleCode: 'MODULE 06',
         moduleName: 'AI 리더십과 조직 실행',
@@ -2878,7 +2804,7 @@
       },
       // 52. 임원의 실행 질문
       {
-        page: 48,
+        page: 47,
         theme: 'white',
         moduleCode: 'MODULE 06',
         moduleName: 'AI 리더십과 조직 실행',
@@ -2932,7 +2858,7 @@
       },
       // 51. 마무리 참여
       {
-        page: 49,
+        page: 48,
         theme: 'white',
         moduleCode: 'MODULE 06',
         moduleName: 'AI 리더십과 조직 실행',
@@ -3177,7 +3103,7 @@
             <button class="nav-btn" onclick="toggleTOC(true)" title="전체 목차 및 모듈 이동">
               ☰ 목차 · 모듈 이동
             </button>
-            <button class="nav-btn" onclick="exportToPDF()" title="전체 49페이지 슬라이드를 PDF로 인쇄/저장합니다">
+            <button class="nav-btn" onclick="exportToPDF()" title="전체 48페이지 슬라이드를 PDF로 인쇄/저장합니다">
               🖨️ PDF 출력
             </button>
             <button class="nav-btn fs-toggle-btn" onclick="toggleFullscreen()" title="전체화면 보기 전환 (F)">
@@ -3192,9 +3118,9 @@
               ◀ 이전
             </button>
             <span class="page-indicator">
-              <span class="current">${pageNumStr}</span> / 49
+              <span class="current">${pageNumStr}</span> / 48
             </span>
-            <button class="nav-btn" onclick="nextSlide()" ${slide.page === 49 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+            <button class="nav-btn" onclick="nextSlide()" ${slide.page === 48 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
               다음 ▶
             </button>
           </div>
@@ -3460,7 +3386,7 @@
         { title: '모듈 3. AI 비교 브리핑 초안', time: '40분 (17~25p)', range: [17, 25] },
         { title: '모듈 4. 브리핑 보드 제작', time: '60분 (26~35p)', range: [26, 35] },
         { title: '모듈 5. 부서 실행 과제로 연결', time: '35분 (36~42p)', range: [36, 42] },
-        { title: '모듈 6. AI 리더십과 조직 실행', time: '30분 (43~49p)', range: [43, 49] }
+        { title: '모듈 6. AI 리더십과 조직 실행', time: '30분 (43~48p)', range: [43, 48] }
       ];
 
       const tocContent = document.getElementById('toc-content');
