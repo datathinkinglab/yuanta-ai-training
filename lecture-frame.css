@@ -35,9 +35,7 @@ body #slide-stage.unified-stage, body #presentation-wrapper.unified-stage { posi
 .unified-dark .unified-right strong { color:#39B8B2; }
 .unified-body h1 { font-size:64px; line-height:1.18; }
 .unified-body .unified-title h2 { font-size:38px; }
-.unified-body h2 { font-size:38px; line-height:1.25; }
-.unified-dark .unified-body h2 { font-size:56px; }
-.unified-body > div > h2 { font-size:56px; }
+.unified-body h2 { font-size:38px; line-height:1.25; font-weight:800; letter-spacing:-.5px; }
 .unified-reading { display:none; }
 .unified-read { display:block!important; overflow-y:auto!important; height:auto!important; }
 .unified-read #app-wrapper,.unified-read #presentation-wrapper { display:none!important; }
