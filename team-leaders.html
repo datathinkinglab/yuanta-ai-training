@@ -2487,7 +2487,7 @@ HTML 코드를 읽은 것만으로 기능을 실제 실행하거나 검증했다
     {
       page: 45, module: 'M6', moduleTitle: '팀으로 돌아가 시작할 AI 업무', journey: '실행', theme: 'white',
       render: () => `
-        <div class="flex justify-between items-start gap-3"><div><span class="text-xs font-bold text-[#2A918C]">M6 · ⑤ 우리 팀 AI 적용 계획 한 장</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">어떤 업무에, 누구와, 언제 먼저 써볼까요?</h2><p class="text-sm text-slate-600 mt-2">41~44페이지에서 살펴본 내용을 이 한 장에 모읍니다. 수업 중에는 첫 행동만 정하고, 세부 내용은 팀과 협의해 완성해도 됩니다.</p></div><div class="flex flex-col gap-2 shrink-0"><button onclick="fillSamplePilot()" class="px-3 py-2 rounded-lg bg-[#E6F7F6] text-xs font-bold">가상 예시 채우기</button><button onclick="copyText(buildTeamActionSummary(), '우리 팀 AI 적용 계획')" class="px-3 py-2 rounded-lg bg-[#101D35] text-white text-xs font-bold">📋 실행 계획 복사</button></div></div>
+        <div class="flex justify-between items-start gap-3"><div><span class="text-xs font-bold text-[#2A918C]">M6 · ⑤ 우리 팀 AI 적용 계획 한 장</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">어떤 업무에, 누구와, 언제 먼저 써볼까요?</h2><p class="text-sm text-slate-600 mt-2">41~44페이지에서 살펴본 내용을 이 한 장에 모읍니다. 수업 중에는 첫 행동만 정하고, 세부 내용은 팀과 협의해 완성해도 됩니다.</p></div><div class="flex flex-col gap-2 shrink-0"><button onclick="fillSamplePilot()" class="px-3 py-2 rounded-lg bg-[#E6F7F6] text-xs font-bold">가상 예시 채우기</button><button onclick="copyText(buildTeamActionSummary(), '우리 팀 AI 적용 계획')" class="px-3 py-2 rounded-lg bg-[#101D35] text-white text-xs font-bold">📋 실행 계획 복사</button><button onclick="openTeamActionEmail()" class="px-3 py-2 rounded-lg bg-[#2A918C] text-white text-xs font-bold">✉ 메일로 보내기</button></div></div>
         <div class="grid grid-cols-2 gap-4 my-auto">
           <div class="card-box space-y-2"><label class="text-sm font-bold">1. AI를 먼저 적용할 업무·단계</label><input class="input-field" placeholder="예: 주간 자료 취합의 요청 준비 단계" value="${escapeHtml(userState.pilotStage || (userState.taskName ? `${userState.taskName}${userState.bottleneckStage ? ' / ' + userState.bottleneckStage : ''}` : ''))}" oninput="updateField('pilotStage', this.value)"></div>
           <div class="card-box space-y-2"><label class="text-sm font-bold">2. AI 활용과 첫 행동</label><input class="input-field" placeholder="예: AI로 안내문·체크리스트 초안을 만들고 검토 후 다음 요청 1회에 사용" value="${escapeHtml(userState.firstAction)}" oninput="updateField('firstAction', this.value)"></div>
@@ -2495,7 +2495,7 @@ HTML 코드를 읽은 것만으로 기능을 실제 실행하거나 검증했다
           <div class="card-box space-y-2"><label class="text-sm font-bold">4. 적용 범위와 첫 점검 시점</label><input class="input-field" placeholder="예: 다음 주 취합 요청 1회 / 완료 직후 담당자와 확인" value="${escapeHtml(userState.firstCheckDate)}" oninput="updateField('firstCheckDate', this.value)"></div>
           <div class="card-box space-y-2"><label class="text-sm font-bold">5. 계속 쓸지 판단할 기준</label><input class="input-field" placeholder="예: 전체 준비시간·보완 요청 횟수 / 담당자 수정 부담" value="${escapeHtml(userState.metricItem)}" oninput="updateField('metricItem', this.value)"></div>
           <div class="card-box space-y-2"><label class="text-sm font-bold">6. 먼저 확인할 조건·필요한 지원</label><input class="input-field" placeholder="예: 승인된 AI와 자료 범위 확인 / 공동 저장이 필요하면 관련 조직 협의" value="${escapeHtml(userState.axSupport)}" oninput="updateField('axSupport', this.value)"></div>
-        </div><div class="p-3 rounded-xl bg-slate-100 text-sm">팀에서 먼저 정할 것: 업무·기준·검토 역할. 함께 협의할 것: 승인된 AI 환경·자료 사용·공동 저장과 시스템 연동. 작성한 계획은 복사해 팀 회의 메모에 보관하세요.</div>`
+        </div><div class="p-3 rounded-xl bg-slate-100 text-sm">팀에서 먼저 정할 것: 업무·기준·검토 역할. 함께 협의할 것: 승인된 AI 환경·자료 사용·공동 저장과 시스템 연동.<br>메일로 보내기: 기본 메일 앱에 제목·실행 계획을 채웁니다. 받는 사람을 지정하고 내용을 확인한 뒤 발송하세요. 메일 앱이 열리지 않으면 실행 계획 복사를 이용하세요.</div>`
     },
     {
       page: 46, module: 'M6', moduleTitle: '팀으로 돌아가 시작할 AI 업무', journey: '실행', theme: 'white',
@@ -2712,6 +2712,16 @@ ${steps}
     userState.axSupport = '승인된 AI와 사용 가능한 자료 범위 확인 / 공동 저장 필요 시 관련 조직 협의';
     renderSlide();
     showToast('교육용 가상 실행 계획입니다. 우리 팀 상황에 맞춰 수정하세요.', true);
+  }
+
+  function buildTeamActionMailto() {
+    const subject = '[유안타증권 교육] 우리 팀 AI 적용 계획';
+    const body = buildTeamActionSummary().replace(/\r?\n/g, '\r\n');
+    return `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
+  function openTeamActionEmail() {
+    window.location.href = buildTeamActionMailto();
   }
 
   function buildTeamActionSummary(includeCourse = false) {
