@@ -290,7 +290,7 @@
       prompt_42: {
         title: "직원 면담 준비 카드 생성 프롬프트 (41페이지)",
         desc: "선택한 가상 직원의 수치 데이터만을 기반으로 열린 질문과 면담 초안을 요청합니다.",
-        content: `선택한 가상 직원의 실적 데이터만을 바탕으로 지점장의 면담 준비 카드를 작성해 주세요.\n① 기준월·수치·비교 기준을 포함한 관찰 사실,\n② 데이터가 뒷받침하는 인정할 점,\n③ 원인을 단정하지 않는 열린 질문 세 가지,\n④ 직원과 함께 논의할 다음 행동 한 가지,\n⑤ 추가 확인할 사항을 제시해 주세요.\n데이터에 없는 직원의 노력·성격·역량·고객 상황은 추측하지 말고, 지점장이 검토할 초안이라는 안내를 넣어 주세요.`
+        content: `첨부한 가상 직원 실적을 바탕으로 지점장의 면담 준비 카드 초안을 작성해 주세요.\n① 기준월·수치·비교 기준을 포함한 관찰 사실을 정리해 주세요.\n② 데이터에서 확인되는 변화와 원인을 알 수 없는 부분을 구분해 주세요.\n③ 직원의 맥락과 지원 필요를 묻는 열린 질문 3개를 제안해 주세요.\n④ 직원과 협의할 다음 행동, 지점장의 지원, 확인 시점을 빈칸으로 제시해 주세요.\n직원의 성격·노력이나 고객 상황을 추측하지 말고, 수치와 문구를 지점장이 검토할 초안이라고 밝혀 주세요.`
       },
       prompt_50: {
         title: "나의 관리 관점 최종 확장 프롬프트 틀 (48페이지)",
@@ -1554,231 +1554,113 @@
         journey: "코칭",
         title: "숫자를 대화로 연결합니다",
         subtitle: "실적을 본 다음 어떤 질문으로 시작할까요?",
-        visualFlow: ["관찰 사실과 해석 분리", "면담 카드 작성", "대화를 여는 메시지"]
+        visualFlow: ["면담 전 숫자와 질문", "직원과 대화 연습", "행동·지원·점검 합의"]
       },
       {
         id: 37,
         type: "normal",
         module: "M5. 직원 면담과 코칭",
         journey: "코칭",
-        badge: "관찰과 해석 · 참여",
-        title: "이 문장 중 데이터로 확인되는 것은?",
-        body: "공통 검산 데이터(김도윤)만 이용해 ‘데이터로 확인되는 사실’과 ‘추가 확인이 필요한 해석’을 구분해 보세요.",
-        renderContent: () => {
-          const choices = [
-            { id: "A", text: "A. 9월 실적은 제공된 6개월 평균보다 약 6.7% 높다", sub: "기준월 19,181 vs 제공 6개월 평균 17,984" },
-            { id: "B", text: "B. 직원이 더 노력해서 실적이 올랐다", sub: "개인의 태도·노력에 대한 단정" },
-            { id: "C", text: "C. 고객 기반이 개선되었다", sub: "고객 포트폴리오·기반에 대한 추정" }
-          ];
-          return `
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
-              ${choices.map(c => `
-                <button onclick="USER_STATE.s38_choice='${c.id}'; renderCurrentSlide();" class="p-5 rounded-xl border-2 text-left transition flex flex-col justify-between ${USER_STATE.s38_choice === c.id ? 'border-[#0D9488] bg-teal-50/60' : 'border-slate-200 bg-slate-50 hover:border-slate-300'}">
-                  <div>
-                    <div class="flex items-center justify-between mb-2">
-                      <span class="px-2.5 py-0.5 rounded text-xs font-extrabold bg-[#101D35] text-white">선택지 ${c.id}</span>
-                      <i class="fa-solid ${USER_STATE.s38_choice === c.id ? 'fa-circle-check text-[#0D9488]' : 'fa-circle text-slate-300'}"></i>
-                    </div>
-                    <h3 class="text-base font-extrabold text-[#101D35] mt-2 leading-snug">${c.text}</h3>
-                  </div>
-                  <p class="text-xs text-slate-500 mt-4 pt-2 border-t border-slate-200">${c.sub}</p>
-                </button>
-              `).join('')}
-            </div>
-          `;
-        },
-        footerNote: "활동: 데이터로 확인되는 문장을 골라보세요. 해설은 다음 장에서 확인합니다."
+        badge: "면담 전 준비 · 실습",
+        title: "면담 전에 숫자 하나와 질문 하나를 준비합니다",
+        body: "대시보드에서 가상 직원 김도윤을 선택하고, 확인한 사실과 더 물어볼 맥락을 분리합니다.",
+        renderContent: () => `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+<div class="bg-slate-50 border border-slate-200 rounded-xl p-5"><h3 class="font-extrabold text-[#101D35]">① 화면에서 확인할 것</h3><p class="text-sm mt-3">기준월 2026.09 약정 <b>19,181</b><br>제공된 6개월 평균 <b>17,984</b><br>평균 대비 <b>약 +6.7%</b></p><p class="text-xs mt-3 text-slate-600">기준월·비교 기간·단위를 원본 CSV와 대조합니다.</p></div>
+<div class="bg-teal-50 border border-teal-200 rounded-xl p-5"><h3 class="font-extrabold text-[#101D35]">② 면담에서 확인할 것</h3><p class="text-sm mt-3">“최근 흐름에 어떤 변화가 있었나요?”</p><p class="text-xs mt-3 text-slate-600">변화의 원인, 직원의 상황과 필요한 지원은 숫자만으로 알 수 없습니다. 먼저 직원에게 묻습니다.</p></div></div>
+        `,
+        footerNote: "실습 자료의 수치는 가상 값입니다. 평균과 순위는 해석의 출발점으로 사용합니다."
       },
       {
         id: 38,
         type: "normal",
         module: "M5. 직원 면담과 코칭",
         journey: "코칭",
-        badge: "데이터에서 질문으로",
-        title: "확인한 사실과 확인할 맥락을 나눕니다",
-        body: "데이터로 계산 가능한 관찰 사실로 대화를 열고, 데이터에 없는 원인은 열린 질문으로 물어봅니다.",
+        badge: "대화 시작 · 사례",
+        title: "숫자를 공유하고 직원의 설명을 먼저 듣습니다",
+        body: "실적의 원인을 미리 정하지 않고, 같은 화면을 보며 대화를 시작합니다.",
         renderContent: () => `
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
-            <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-5">
-              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-700 text-white">선택지 A: 확인한 사실</span>
-              <h3 class="text-base font-extrabold text-[#101D35] mt-2">제공 값으로 계산 가능</h3>
-              <p class="text-xs text-slate-700 mt-2 leading-relaxed">
-                9월 실적(19,181)이 제공된 6개월 평균(17,984)보다 약 6.7% 높다는 것은 지점장과 직원이 화면을 함께 보며 동의할 수 있는 객관적 사실입니다.
-              </p>
-            </div>
-            <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-5">
-              <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-amber-700 text-white">선택지 B · C: 확인할 맥락</span>
-              <h3 class="text-base font-extrabold text-[#101D35] mt-2">면담이나 다른 근거가 필요</h3>
-              <p class="text-xs text-slate-700 mt-2 leading-relaxed">
-                직원의 노력(B)이나 고객 기반 개선(C)은 월별 약정 CSV에 없는 설명입니다. 지점장이 미리 단정하지 않고 면담에서 질문으로 확인합니다.
-              </p>
-            </div>
-          </div>
-          <div class="bg-[#101D35] text-white rounded-xl p-4 flex items-center gap-3">
-            <i class="fa-solid fa-quote-left text-2xl text-[#39B8B2] shrink-0"></i>
-            <p class="text-sm md:text-base font-bold leading-relaxed">
-              대화 예시: “최근 흐름을 함께 살펴보니 기준월이 평균보다 높네요. 어떤 변화가 있었는지 들려주실 수 있을까요?”
-            </p>
-          </div>
+          <div class="space-y-3 my-auto">
+<div class="bg-rose-50 border-l-4 border-rose-400 p-4 rounded-r-xl"><b class="text-rose-800 text-xs">피할 표현</b><p class="text-sm mt-1">“실적이 올랐으니 앞으로도 계속 이렇게 하세요.”</p><p class="text-xs text-slate-600 mt-1">한 달의 결과만으로 원인이나 지속 가능성을 판단합니다.</p></div>
+<div class="bg-teal-50 border-l-4 border-[#0D9488] p-4 rounded-r-xl"><b class="text-[#0D9488] text-xs">대화를 여는 표현</b><p class="text-sm font-bold mt-1">“9월 약정은 제공된 6개월 평균보다 약 6.7% 높네요. 최근 어떤 변화가 있었는지 말씀해 주시겠어요?”</p></div>
+<div class="bg-slate-50 border border-slate-200 p-4 rounded-xl text-sm"><b>이어 묻기:</b> “지금 잘되고 있는 점은 무엇인가요?” · “업무에 어려운 점이나 필요한 지원은 무엇인가요?”</div></div>
         `,
-        footerNote: "관찰 사실을 먼저 공유하고, 원인은 열린 질문으로 직원에게 먼저 묻습니다."
+        footerNote: "직원의 답변을 요약해 되짚고, 실제로 확인되지 않은 원인은 기록에서 구분합니다."
       },
       {
         id: 39,
         type: "normal",
         module: "M5. 직원 면담과 코칭",
         journey: "코칭",
-        badge: "코칭 준비의 네 단계",
-        title: "관찰 → 질문 → 경청 → 다음 행동",
-        body: "대시보드의 숫자를 직원 코칭 대화로 자연스럽게 연결하는 4단계 프레임워크입니다.",
+        badge: "면담 진행 · 현장 대화",
+        title: "직원의 이야기를 듣고 지원을 함께 정합니다",
+        body: "관찰 → 질문 → 경청 → 합의 순서로 대화를 이어갑니다.",
         renderContent: () => `
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-auto">
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
-              <span class="text-xs font-extrabold text-[#0D9488]">STEP 01</span>
-              <h3 class="text-lg font-extrabold text-[#101D35] mt-1">관찰</h3>
-              <p class="text-xs text-slate-600 mt-2 leading-relaxed"><b>기간·숫자·비교 기준</b>을 명확히 짚어 객관적 사실을 공유합니다.</p>
-            </div>
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
-              <span class="text-xs font-extrabold text-[#0D9488]">STEP 02</span>
-              <h3 class="text-lg font-extrabold text-[#101D35] mt-1">질문</h3>
-              <p class="text-xs text-slate-600 mt-2 leading-relaxed">원인을 미리 단정하지 않고 <b>열린 형태</b>로 직원의 생각을 묻습니다.</p>
-            </div>
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
-              <span class="text-xs font-extrabold text-[#0D9488]">STEP 03</span>
-              <h3 class="text-lg font-extrabold text-[#101D35] mt-1">경청</h3>
-              <p class="text-xs text-slate-600 mt-2 leading-relaxed">데이터에 나타나지 않는 <b>직원의 상황과 필요한 지원</b>을 듣습니다.</p>
-            </div>
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
-              <span class="text-xs font-extrabold text-[#0D9488]">STEP 04</span>
-              <h3 class="text-lg font-extrabold text-[#101D35] mt-1">다음 행동</h3>
-              <p class="text-xs text-slate-600 mt-2 leading-relaxed">면담을 통해 지점장과 직원이 <b>함께 정한 다음 단계</b>를 정리합니다.</p>
-            </div>
-          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-auto">
+<div class="bg-slate-50 border rounded-xl p-4"><b class="text-[#0D9488]">1. 관찰 공유</b><p class="text-sm mt-2">“9월 약정은 19,181이고 제공 평균은 17,984입니다.”</p></div>
+<div class="bg-slate-50 border rounded-xl p-4"><b class="text-[#0D9488]">2. 열린 질문</b><p class="text-sm mt-2">“최근 업무에서 어떤 변화가 있었나요?”</p></div>
+<div class="bg-slate-50 border rounded-xl p-4"><b class="text-[#0D9488]">3. 경청과 확인</b><p class="text-sm mt-2">“말씀하신 내용은 [직원의 설명]으로 이해했는데 맞나요?”</p></div>
+<div class="bg-slate-50 border rounded-xl p-4"><b class="text-[#0D9488]">4. 행동·지원 합의</b><p class="text-sm mt-2">“다음 면담 전까지 무엇을 해보고, 지점은 무엇을 지원하면 좋을까요?”</p></div></div>
         `,
-        footerNote: "중요: 순위·유형은 대화의 출발점이며 사람에 대한 결론이 아닙니다."
+        footerNote: "직원의 설명은 면담에서 확인할 내용이며 가상 데이터에 포함된 사실이 아닙니다."
       },
       {
         id: 40,
         type: "normal",
         module: "M5. 직원 면담과 코칭",
         journey: "코칭",
-        badge: "활동: 면담 카드 직접 작성 · 참여",
-        title: "가상 직원 한 명을 위한 면담을 준비해 보세요",
-        body: "내 대시보드 화면과 CSV를 근거로 가상 직원 한 명의 면담 준비 카드를 먼저 직접 작성해 봅니다.",
+        badge: "면담 준비 카드 · 작성",
+        title: "내 면담 준비 카드를 완성합니다",
+        body: "가상 직원 한 명을 선택해 사실, 질문, 확인할 지원을 적어봅니다.",
         renderContent: () => `
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-auto bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs">
-            <div>
-              <label class="font-bold text-[#101D35] block mb-1">① 확인한 사실 1개 (기간·수치·비교 기준 포함)</label> <button type="button" onclick="openPopup('example_40', this)" class="px-2 py-1 rounded bg-teal-50 hover:bg-teal-100 text-[#0D9488] text-xs font-bold border border-teal-200">예시·템플릿 보기</button>
-              <input type="text" value="${escapeHtml(USER_STATE.s41_fact)}" oninput="USER_STATE.s41_fact=this.value" placeholder="예: 2026.09 약정 19,181로 제공 6개월 평균(17,984) 대비 +6.7% 상승" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
-            </div>
-            <div>
-              <label class="font-bold text-[#101D35] block mb-1">② 데이터가 뒷받침하는 인정할 점 1개</label>
-              <input type="text" value="${escapeHtml(USER_STATE.s41_praise)}" oninput="USER_STATE.s41_praise=this.value" placeholder="예: 최근 6개월간 큰 낙폭 없이 꾸준한 흐름을 유지하며 기준월 최고치 기록" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
-            </div>
-            <div class="md:col-span-2">
-              <label class="font-bold text-[#0D9488] block mb-1">③ 원인을 단정하지 않는 열린 질문 3개</label>
-              <input type="text" value="${escapeHtml(USER_STATE.s41_questions)}" oninput="USER_STATE.s41_questions=this.value" placeholder="예: 1) 9월에 어떤 변화가 있었나요? 2) 요즘 고객 상담에서 자주 나오는 주제는? 3) 지점에서 어떤 지원이 필요한가요?" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
-            </div>
-            <div>
-              <label class="font-bold text-[#101D35] block mb-1">④ 함께 논의할 행동 1개</label>
-              <input type="text" value="${escapeHtml(USER_STATE.s41_action)}" oninput="USER_STATE.s41_action=this.value" placeholder="예: 다음 달 주력 고객군 상담 일정 및 세미나 지원 협의" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
-            </div>
-            <div>
-              <label class="font-bold text-[#101D35] block mb-1">⑤ 추가 확인 사항</label>
-              <input type="text" value="${escapeHtml(USER_STATE.s41_extra)}" oninput="USER_STATE.s41_extra=this.value" placeholder="예: 상품별 세부 구성 변화 및 애로사항" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
-            </div>
-          </div>
+<div><label class="font-bold block mb-1">① 확인한 사실: 기준월·수치·비교 기준</label><button type="button" onclick="openPopup('example_40', this)" class="px-2 py-1 mb-1 rounded bg-teal-50 text-[#0D9488] font-bold border border-teal-200">작성 틀 보기</button><input type="text" value="${escapeHtml(USER_STATE.s41_fact)}" oninput="USER_STATE.s41_fact=this.value" placeholder="예: 9월 19,181, 제공 평균 17,984 대비 +6.7%" class="w-full px-3 py-2 rounded border border-slate-300"></div>
+<div><label class="font-bold block mb-1">② 데이터로 확인한 강점 또는 변화</label><input type="text" value="${escapeHtml(USER_STATE.s41_praise)}" oninput="USER_STATE.s41_praise=this.value" placeholder="예: 9월 값이 제공 평균보다 높음" class="w-full px-3 py-2 rounded border border-slate-300"></div>
+<div class="md:col-span-2"><label class="font-bold block mb-1">③ 직원에게 물어볼 열린 질문</label><input type="text" value="${escapeHtml(USER_STATE.s41_questions)}" oninput="USER_STATE.s41_questions=this.value" placeholder="어떤 변화가 있었나요? 필요한 지원은 무엇인가요?" class="w-full px-3 py-2 rounded border border-slate-300"></div>
+<div><label class="font-bold block mb-1">④ 함께 논의할 다음 행동</label><input type="text" value="${escapeHtml(USER_STATE.s41_action)}" oninput="USER_STATE.s41_action=this.value" placeholder="직원의 의견을 듣고 구체화할 행동" class="w-full px-3 py-2 rounded border border-slate-300"></div>
+<div><label class="font-bold block mb-1">⑤ 추가로 확인할 사항</label><input type="text" value="${escapeHtml(USER_STATE.s41_extra)}" oninput="USER_STATE.s41_extra=this.value" placeholder="예: 지원 필요 여부와 확인 시점" class="w-full px-3 py-2 rounded border border-slate-300"></div></div>
         `,
-        footerNote: "활동: 먼저 직접 작성해 본 뒤, 다음 장에서 AI 면담 초안 요청 예시와 비교합니다."
+        footerNote: "지금은 면담 전 초안입니다. 행동과 지원은 직원과 이야기한 뒤 합의합니다."
       },
       {
         id: 41,
         type: "normal",
         module: "M5. 직원 면담과 코칭",
         journey: "코칭",
-        badge: "면담 초안 프롬프트 · 복사",
-        title: "AI에게 면담 준비를 도와달라고 요청합니다",
-        body: "데이터에 없는 노력·성격·고객 상황을 추측하지 않도록 제약을 걸어 면담 준비 카드 초안을 요청합니다.",
+        badge: "AI 활용 · 실습",
+        title: "AI 초안과 내 면담 카드를 비교합니다",
+        body: "가상 데이터와 아래 요청문으로 초안을 만든 뒤, 수치와 질문을 직접 확인합니다.",
         renderContent: () => `
-          <div class="bg-slate-900 text-slate-100 rounded-xl p-4 my-auto border border-slate-700 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-2.5">
-              <div class="flex items-center gap-2">
-                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-[#39B8B2] text-[#101D35]">PROMPT 03</span>
-                <span class="text-xs text-slate-300 font-semibold">사실 기반 관찰 · 열린 질문 3개 · 추측 금지</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <button onclick="copyTextDirect(POPUP_DATA.prompt_42.content)" class="px-3 py-1 rounded-lg bg-[#0D9488] hover:bg-[#0f766e] text-white text-xs font-bold flex items-center gap-1.5">
-                  <i class="fa-regular fa-copy"></i><span>전체 복사</span>
-                </button>
-                <button onclick="openPopup('prompt_42', this)" class="px-3 py-1 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold flex items-center gap-1.5">
-                  <i class="fa-solid fa-expand"></i><span>팝업으로 크게 보기</span>
-                </button>
-              </div>
-            </div>
-            <p class="text-xs leading-relaxed font-mono-code text-slate-200 select-all whitespace-pre-wrap">${escapeHtml(POPUP_DATA.prompt_42.content)}</p>
-          </div>
+          <div class="bg-slate-900 text-white rounded-xl p-4 my-auto space-y-3"><div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-700 pb-2"><b class="text-[#39B8B2] text-sm">면담 준비 카드 요청</b><div class="flex gap-2"><button onclick="copyTextDirect(POPUP_DATA.prompt_42.content)" class="px-3 py-1 rounded bg-[#0D9488] text-white text-xs font-bold">프롬프트 복사</button><button onclick="openPopup('prompt_42', this)" class="px-3 py-1 rounded bg-slate-700 text-white text-xs font-bold">팝업 보기</button></div></div><p class="text-xs leading-relaxed whitespace-pre-wrap select-all">${escapeHtml(POPUP_DATA.prompt_42.content)}</p></div><p class="text-xs text-slate-600">검토: ① 원본 수치와 일치하는가 ② 원인을 단정하지 않는가 ③ 직원이 답할 수 있는 질문인가</p>
         `,
-        footerNote: "안내: 가상 데이터만 AI에 제공합니다. 화면에서 정해진 규칙으로 생성된 문구와 AI 대화에서 생성한 문구를 구분합니다."
+        footerNote: "교육 중에는 가상 데이터만 AI에 제공하고, 결과는 지점장이 검토합니다."
       },
       {
         id: 42,
         type: "normal",
         module: "M5. 직원 면담과 코칭",
         journey: "코칭",
-        badge: "메시지 다듬기 · 실습",
-        title: "직원이 대화를 시작할 수 있는 표현으로",
-        body: "고객사 원본의 메신저 문구 또는 AI 초안에서 한 문장을 선택해 네 가지 기준으로 직접 고쳐 봅니다.",
+        badge: "면담 연습 · 참여",
+        title: "짝과 역할을 바꿔 면담을 연습합니다",
+        body: "한 사람은 지점장, 다른 사람은 가상 직원 역할을 맡아 준비 카드로 대화를 시작합니다.",
         renderContent: () => `
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 my-auto">
-            <div class="md:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 text-xs">
-              <h3 class="text-sm font-extrabold text-[#101D35] mb-1">메시지 점검 질문 4가지</h3>
-              <div class="p-2.5 bg-white rounded border border-slate-200"><b>1. 수치가 맞는가?</b> (과장이나 오기 없이 정확한지)</div>
-              <div class="p-2.5 bg-white rounded border border-slate-200"><b>2. 추측을 사실처럼 쓰지 않았는가?</b> (원인 단정 배제)</div>
-              <div class="p-2.5 bg-white rounded border border-slate-200"><b>3. 존중하는 어조인가?</b> (일방적 통보·추궁 지양)</div>
-              <div class="p-2.5 bg-white rounded border border-slate-200"><b>4. 직원이 설명할 여지가 있는가?</b> (열린 대화 초대)</div>
-            </div>
-            <div class="md:col-span-7 bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col">
-              <label class="text-xs font-bold text-[#101D35] mb-1.5">내가 다듬은 면담 사전 안내 메시지 작성</label> <button type="button" onclick="openPopup('example_42', this)" class="px-2 py-1 rounded bg-teal-50 hover:bg-teal-100 text-[#0D9488] text-xs font-bold border border-teal-200">예시·템플릿 보기</button>
-              <textarea rows="5" oninput="USER_STATE.s43_msg=this.value" placeholder="초안 문장을 선택한 뒤, 직원이 부담 없이 자신의 이야기를 준비해 올 수 있는 표현으로 고쳐 적어보세요..." class="w-full flex-1p-3 rounded-lg border border-slate-300 text-xs bg-white">${escapeHtml(USER_STATE.s43_msg)}</textarea>
-            </div>
-          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto"><div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3"><h3 class="font-extrabold">지점장 역할</h3><p class="text-sm">① 화면에서 확인한 사실을 말합니다.</p><p class="text-sm">② 열린 질문을 하고 답을 끝까지 듣습니다.</p><p class="text-sm">③ 직원의 말을 요약해 확인합니다.</p></div><div class="bg-teal-50 border border-teal-200 rounded-xl p-5 space-y-3"><h3 class="font-extrabold">직원 역할</h3><p class="text-sm">① 가상의 상황을 정해 질문에 답합니다.</p><p class="text-sm">② 필요한 지원이나 어려움을 말합니다.</p><p class="text-sm">③ 면담 후 구체적이고 편하게 답할 수 있었는지 피드백합니다.</p></div></div><div class="bg-[#101D35] text-white rounded-xl p-3 text-xs">역할을 바꿔 다시 연습한 뒤, 다음 장에서 행동과 지원을 정리합니다.</div>
         `,
-        footerNote: "활동: AI 초안을 그대로 복사해 보내지 않고 지점장의 언어로 직접 다듬습니다."
+        footerNote: "역할극에서 만든 설명은 가상의 상황이며 데이터에서 확인된 사실과 구분합니다."
       },
       {
         id: 43,
         type: "normal",
         module: "M5. 직원 면담과 코칭",
         journey: "코칭",
-        badge: "코칭 예시와 검토",
-        title: "실적을 평가하는 말에서 대화를 여는 말로",
-        body: "면담 전 직원에게 보내는 메시지는 결론을 통보하는 것이 아니라 대화의 목적과 주제를 공유하는 과정입니다.",
+        badge: "면담 후 실행 · 현업 적용",
+        title: "합의한 행동과 지원을 다음 점검으로 연결합니다",
+        body: "면담 직후 직원과 함께 실행 내용, 담당자, 확인 시점을 한 줄씩 정리합니다.",
         renderContent: () => `
-          <div class="my-auto space-y-4">
-            <div class="bg-teal-50/70 border-l-4 border-[#0D9488] rounded-r-xl p-6 shadow-xs">
-              <span class="text-xs font-extrabold text-[#0D9488]">대화를 여는 메시지 예시</span>
-              <p class="text-lg md:text-xl font-extrabold text-[#101D35] mt-2 leading-relaxed">
-                “최근 실적 흐름을 함께 살펴보면서 잘되고 있는 부분과 필요한 지원을 이야기해 보고 싶습니다. 이번 주에 잠시 시간 괜찮으실까요?”
-              </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
-                <b class="text-[#101D35]">✔ 함께 살펴보기:</b> 대시보드 화면을 평가표가 아닌 공동의 참고자료로 활용
-              </div>
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
-                <b class="text-[#101D35]">✔ 강점과 지원 연결:</b> 잘되고 있는 부분 인정 + 지점 차원의 지원 논의
-              </div>
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
-                <b class="text-[#101D35]">✔ 지점장의 최종 검토:</b> 수치와 최근 지점 상황을 고려해 직접 어조 조정
-              </div>
-            </div>
-          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto"><div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-2 text-sm"><h3 class="font-extrabold text-[#101D35]">면담 후 기록 틀</h3><p><b>직원 행동:</b> [무엇을 할지]</p><p><b>지점장 지원:</b> [무엇을 도울지]</p><p><b>확인 시점:</b> [언제 함께 확인할지]</p><p><b>확인 방법:</b> [진행 여부와 직원 의견]</p></div><div class="bg-teal-50 border border-teal-200 rounded-xl p-5 space-y-2 text-sm"><h3 class="font-extrabold text-[#101D35]">가상 합의 예시</h3><p>직원: 다음 면담 전 상담 준비 과정에서 필요한 자료 정리</p><p>지점장: 필요한 자료와 지원 가능 여부 확인</p><p>다음 정기 면담에서 진행 상황과 추가 지원 논의</p><p class="text-xs text-slate-600">예시는 면담에서 합의한 가상 상황입니다.</p></div></div>
         `,
-        footerNote: "메시지와 면담 내용은 초안입니다. 지점장이 수치와 상황을 확인하고 직접 다듬습니다."
+        footerNote: "현업에서는 필요한 범위만 기록하고, 조직의 데이터·보안 기준에 따라 관리합니다."
       },
-
-
-      // ---------------- M6. 나의 관리 화면과 적용 (46~52) ----------------
       {
         id: 44,
         type: "divider",
