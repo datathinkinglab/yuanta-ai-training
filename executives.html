@@ -2480,141 +2480,12 @@
         question: '외부 비교에서 나온 질문을 내부 확인과 업무 개선으로 연결합니다.',
         activeCoverFlow: 3
       },
-      // 40. 참여: 보드에서 다음 행동으로
-      {
-        page: 37,
-        theme: 'white',
-        moduleCode: 'MODULE 05',
-        moduleName: '부서 실행 과제로 연결',
-        journeyActive: ['t'],
-        title: '이 브리핑을 본 뒤 무엇을 먼저 요청하시겠습니까?',
-        lead: '선택 이유를 한 문장으로 생각해 주세요. 접속이 어려우면 번호로 답할 수 있습니다.',
-        render: () => `
-          <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;">
-            <div style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
-              <div class="poll-option" onclick="this.classList.toggle('selected')">
-                <span>① 수치와 비교 기준 재확인 (정의·범위 일치 여부 점검)</span>
-              </div>
-              <div class="poll-option" onclick="this.classList.toggle('selected')">
-                <span>② 추가 공시·시장 자료 확인 (경쟁사 주석 및 시장 동향 보완)</span>
-              </div>
-              <div class="poll-option" onclick="this.classList.toggle('selected')">
-                <span>③ 관련 부서의 업무 현황 확인 (데이터 취합 및 보고 프로세스 점검)</span>
-              </div>
-              <div class="poll-option" onclick="this.classList.toggle('selected')">
-                <span>④ 개선 가능성과 실행 조건 검토 (구체적 실행 대안 및 필요 자원 파악)</span>
-              </div>
-            </div>
-            <div class="qr-placeholder-box">
-              <div class="qr-frame">설문 링크 확정 후<br>QR 삽입 영역<br><span class="tag-tbd" style="margin-top:8px;">[확정 필요]</span></div>
-              <div style="font-size:17px; font-weight:700; color:var(--navy);">단축 링크: <span class="tag-tbd">[설문 URL 확정 필요]</span></div>
-              <div style="font-size:15px; color:var(--gray-600);">선택하신 번호와 그 이유를 한 문장으로 공유해 주세요.</div>
-            </div>
-          </div>
-        `
-      },
-      // 41. 외부 사실에서 내부 질문으로
-      {
-        page: 38,
-        theme: 'white',
-        moduleCode: 'MODULE 05',
-        moduleName: '부서 실행 과제로 연결',
-        journeyActive: ['t'],
-        title: '외부에서 본 차이는 내부 점검의 출발점입니다',
-        lead: '공개자료에서 발견한 차이를 곧바로 내부의 문제로 단정하지 않고, 4단계의 논리적 점검으로 연결합니다.',
-        bottomMsg: '※ 본 흐름은 교육용 가상 상황이며 특정 회사의 실제 문제를 뜻하지 않습니다.',
-        render: () => `
-          <div class="grid-4">
-            <div class="card">
-              <div>
-                <div class="card-step-num">1단계</div>
-                <div class="card-title">외부 관찰</div>
-                <div class="card-desc" style="margin-top:12px;">공개자료 비교표에서 특정 항목의 수치나 비중 차이가 관찰된다.</div>
-              </div>
-              <div class="tag-virtual">출발: 공시 비교 결과</div>
-            </div>
-            <div class="card">
-              <div>
-                <div class="card-step-num">2단계</div>
-                <div class="card-title">비교 조건 확인</div>
-                <div class="card-desc" style="margin-top:12px;">보고기간, 연결·별도 범위, 사업 구성이 실제로 같은지 먼저 확인한다.</div>
-              </div>
-              <div class="tag-virtual">검증: 기준 차이 여부</div>
-            </div>
-            <div class="card highlight">
-              <div>
-                <div class="card-step-num">3단계</div>
-                <div class="card-title">내부 질문</div>
-                <div class="card-desc" style="margin-top:12px;">관련 경영 정보가 우리 조직 내부에서 어떻게 만들어지고 활용되는가?</div>
-              </div>
-              <div class="tag-virtual" style="background:var(--navy); color:var(--teal);">전환: 현업 확인 질문</div>
-            </div>
-            <div class="card">
-              <div>
-                <div class="card-step-num">4단계</div>
-                <div class="card-title">관련 업무 검토</div>
-                <div class="card-desc" style="margin-top:12px;">본사 팀장과 함께 실제 업무 흐름과 취합·검토 과정의 병목을 살펴본다.</div>
-              </div>
-              <div class="tag-virtual">연결: 팀장 교육 과정</div>
-            </div>
-          </div>
-        `
-      },
-      // 42. 팀장 교육에서 이어지는 과정
-      {
-        page: 39,
-        theme: 'white',
-        moduleCode: 'MODULE 05',
-        moduleName: '부서 실행 과제로 연결',
-        journeyActive: ['t'],
-        title: '본사 팀장은 업무 흐름을 분석하고 개선안을 만듭니다',
-        lead: '임원 교육에서 도출한 질문은 본사 팀장 교육의 5단계 업무 재설계 과정과 직접 맞물려 돌아갑니다.',
-        bottomMsg: '임원의 질문과 팀장의 현장 검토가 연결될 때 개선 과제가 구체화됩니다.',
-        render: () => `
-          <div class="grid-5">
-            <div class="card">
-              <div>
-                <div class="card-step-num">01 · AS-IS</div>
-                <div class="card-title" style="font-size:20px;">현재 업무 파악</div>
-                <div class="card-desc" style="font-size:16px; margin-top:10px;">현재 업무의 세부 단계와 담당자, 소요 시간을 분해하여 파악합니다.</div>
-              </div>
-              <div class="tag-virtual">현행 프로세스 시각화</div>
-            </div>
-            <div class="card">
-              <div>
-                <div class="card-step-num">02 · AI 분석</div>
-                <div class="card-title" style="font-size:20px;">병목 후보 도출</div>
-                <div class="card-desc" style="font-size:16px; margin-top:10px;">AI를 활용해 지연·대기·수작업 반복·재작업 구간 후보를 도출합니다.</div>
-              </div>
-              <div class="tag-virtual">비효율 구간 탐색</div>
-            </div>
-            <div class="card highlight">
-              <div>
-                <div class="card-step-num">03 · 팀장 검토</div>
-                <div class="card-title" style="font-size:20px;">현장과 제약 확인</div>
-                <div class="card-desc" style="font-size:16px; margin-top:10px;">법규·내부통제 제약과 실제 현장 상황을 반영해 실현 가능성을 검토합니다.</div>
-              </div>
-              <div class="tag-virtual" style="background:var(--navy); color:var(--teal);">팀장의 핵심 역할</div>
-            </div>
-            <div class="card">
-              <div>
-                <div class="card-step-num">04 · TO-BE</div>
-                <div class="card-title" style="font-size:20px;">개선 흐름 설계</div>
-                <div class="card-desc" style="font-size:16px; margin-top:10px;">AI 적용 구간과 사람의 검토 지점을 구분한 개선 업무 흐름을 설계합니다.</div>
-              </div>
-              <div class="tag-virtual">개선 프로세스 확정</div>
-            </div>
-            <div class="card">
-              <div>
-                <div class="card-step-num">05 · 점검</div>
-                <div class="card-title" style="font-size:20px;">변화와 후속 조치</div>
-                <div class="card-desc" style="font-size:16px; margin-top:10px;">적용 전후의 변화를 측정하고 임원에게 결과와 후속 조치를 보고합니다.</div>
-              </div>
-              <div class="tag-virtual">성과 확인 및 피드백</div>
-            </div>
-          </div>
-        `
-      },
+      // 37. 브리핑에서 팀장 확인 과제로 연결
+      {page:37, theme:'white', moduleCode:'MODULE 05', moduleName:'부서 실행 과제로 연결', journeyActive:['t'], title:'보드의 ‘확인 필요’를 팀장에게 물을 질문으로 바꿉니다', lead:'비교표의 차이를 발견했다면, 먼저 같은 기준인지 확인하고 우리 회사 안에서 설명할 수 있는 근거를 요청합니다.', bottomMsg:'사례는 교육용 질문 구조입니다. 특정 회사의 실제 수익성 차이나 내부 문제를 전제하지 않습니다.', render: () => `<div class="grid-3"><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:16px;">출발 · 브리핑 보드</span><div class="card-title" style="font-size:24px;">무엇이 확인됐나요?</div><div class="card-desc" style="margin-top:18px;font-size:20px;">보드에서 검증한 사실 하나와 출처를 고릅니다.<br><br><strong>예시 구조:</strong> “상반기 연결 영업이익을 비교했다. 회사별 사업 구성과 일회성 손익의 영향은 아직 확인하지 못했다.”</div></div><div class="tag-virtual">사실과 미확인 사항 구분</div></div><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:16px;">전환 · 내부 질문</span><div class="card-title" style="font-size:24px;">우리 회사에서 더 확인할 것은?</div><div class="card-desc" style="margin-top:18px;font-size:20px;">“우리 회사의 이익 구성과 일회성 요인을 확인하면, 비교 결과를 어떻게 해석해야 하는가?”<br><br>사업 구성·연결 범위의 차이가 있으면 비교의 한계도 함께 확인합니다.</div></div><div class="tag-virtual">외부 차이의 원인을 단정하지 않기</div></div><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:16px;">요청 · 담당 팀장</span><div class="card-title" style="font-size:24px;">어떤 근거를 받아야 하나요?</div><div class="card-desc" style="margin-top:18px;font-size:20px;">관련 기획·재무 담당 팀장과 범위를 정하고 <strong>부문별 손익, 일회성 요인, 산출 기준</strong>을 요청합니다.<br><br>담당 부서와 자료 접근 범위는 실제 조직에 맞게 지정합니다.</div></div><div class="tag-virtual">다음: AI로 확인 요청 초안 작성</div></div></div>`},
+      // 38. 브리핑에서 팀장 확인 과제로 연결
+      {page:38, theme:'white', moduleCode:'MODULE 05', moduleName:'부서 실행 과제로 연결', journeyActive:['t'], title:'AI로 ‘분석 결과’를 ‘팀장 확인 요청’ 초안으로 바꿉니다', lead:'브리핑 보드를 만든 같은 AI 대화창에 요청합니다. 임원은 사실·질문·담당 범위가 적절한지 검토합니다.', bottomMsg:'AI는 요청 초안을 정리합니다. 사실 검증, 담당자 지정, 자료 제공 범위와 일정은 사람이 결정합니다.', render: () => `<div style="display:flex;flex-direction:column;gap:16px;height:100%;"><div class="prompt-container"><div class="prompt-header"><span class="prompt-label">브리핑 보드 → 팀장 확인 요청 초안</span><button class="copy-btn" onclick="copyPromptText(this, this.closest('.prompt-container').querySelector('.prompt-text').textContent)">프롬프트 복사</button></div><div class="prompt-text" style="font-size:18px;line-height:1.6;">방금 만든 경영 브리핑 보드의 확인된 사실·출처·확인 필요 사항을 바탕으로, 담당 팀장에게 전달할 확인 요청 초안을 작성해 주세요. ① 확인된 사실과 비교 조건 ② 아직 알 수 없는 원인·가설 ③ 내부에서 확인할 질문과 필요한 자료 ④ 적합한 담당 부서 후보와 협업 범위 ⑤ 기대 산출물과 임원의 지원·점검 항목 순으로 정리해 주세요. 부서명과 일정은 제안임을 표시하고 실제 지정이 필요하면 확인 필요로 남겨 주세요. 공시 수치 차이를 내부 업무 지연이나 역량 부족의 증거로 단정하지 마세요. 업무 흐름 개선은 자료 취합·검증 과정의 문제가 현장에서 확인된 경우에만 별도 검토 과제로 제안해 주세요. 없는 수치나 내부 상황을 만들지 마세요.</div></div><div class="grid-3" style="height:auto;"><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:16px;">① 입력</span><div class="card-title" style="font-size:24px;">같은 대화에서 요청</div><div class="card-desc" style="margin-top:18px;font-size:20px;">앞서 검토한 보드와 출처를 맥락으로 사용합니다.</div></div><div class="tag-virtual">내부 정보 입력 시 승인된 범위 사용</div></div><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:16px;">② 확인</span><div class="card-title" style="font-size:24px;">AI의 비약 제거</div><div class="card-desc" style="margin-top:18px;font-size:20px;">미확인 원인과 실제 사실이 섞이지 않았는지 검토합니다.</div></div><div class="tag-virtual">부서·일정은 임원이 확정</div></div><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:16px;">③ 산출물</span><div class="card-title" style="font-size:24px;">확인 요청 초안</div><div class="card-desc" style="margin-top:18px;font-size:20px;">질문·필요 자료·담당 범위·기대 결과를 확보합니다.</div></div><div class="tag-virtual">다음: 팀장이 무엇을 확인할까?</div></div></div></div>`},
+      // 39. 브리핑에서 팀장 확인 과제로 연결
+      {page:39, theme:'white', moduleCode:'MODULE 05', moduleName:'부서 실행 과제로 연결', journeyActive:['t'], title:'팀장은 먼저 설명할 근거를 확인하고, 필요한 개선을 제안합니다', lead:'같은 사례를 이어갑니다. 요청은 “이익 차이를 줄여라”가 아니라 “우리 회사의 이익 구성을 근거로 설명해 달라”입니다.', bottomMsg:'업무 개선은 현장 확인 뒤 결정합니다. 분석·해석 과제로 끝날 수도 있으며, 모든 질문을 자동화 과제로 만들 필요는 없습니다.', render: () => `<div class="grid-3"><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:16px;">① 먼저 · 현황 확인</span><div class="card-title" style="font-size:24px;">실적을 설명할 근거 확보</div><div class="card-desc" style="margin-top:18px;font-size:20px;">팀장은 부문별 손익과 일회성 요인, 연결 범위를 확인합니다. AI는 승인된 자료 안에서 비교표·출처 목록 초안을 정리하고, 팀장이 검증합니다.</div></div><div class="tag-virtual">산출: 설명 근거 + 비교의 한계</div></div><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:16px;">② 필요할 때 · 업무 점검</span><div class="card-title" style="font-size:24px;">자료가 늦거나 맞지 않는다면?</div><div class="card-desc" style="margin-top:18px;font-size:20px;">취합 지연이나 기준 불일치가 <strong>실제로 확인된 경우</strong>에만 자료 생성→취합→검증→보고 흐름을 살펴봅니다. AI가 병목 후보를 제시해도 현장 근거로 판단합니다.</div></div><div class="tag-virtual">산출: 현행 흐름 + 확인된 원인</div></div><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:16px;">③ 보고 · 선택과 실행</span><div class="card-title" style="font-size:24px;">개선 대안과 지원 요청</div><div class="card-desc" style="margin-top:18px;font-size:20px;">기준 통일, 양식 개선, AI 보조 등 대안을 검토합니다. 팀장은 검토·실행을 맡고 임원은 우선순위·협업·점검 기준을 정합니다.</div></div><div class="tag-virtual">다음: 공통 5대 질문으로 정리</div></div></div>`},
       // 43. 공통으로 사용하는 다섯 질문
       {
         page: 40,
@@ -2623,13 +2494,14 @@
         moduleName: '부서 실행 과제로 연결',
         journeyActive: ['t', 'e'],
         title: '임원과 팀장이 같은 기준으로 이야기합니다',
-        lead: '임원 과정과 본사 팀장 과정에서 동일한 다섯 가지 질문 프레임워크로 소통의 언어를 맞춥니다.',
+        lead: '앞에서 만든 확인 요청을 다섯 질문으로 점검합니다. 임원은 방향과 지원을, 팀장은 근거 확인과 실행을 구체화합니다.',
+        bottomMsg: '같은 사례: 이익 구성 설명 → 필요한 근거 확인 → 현장 문제가 확인되면 개선 검토 → 담당과 점검 기준 합의',
         popup: {
           type: 'ref',
           label: '참고: 임원-팀장 과정 연계',
           title: '공통 5대 질문의 운영 방식',
           html: `
-            <p>이 다섯 가지 질문은 <strong>유안타증권 본사 팀장 AI 교육 과정에서도 토씨 하나 다르지 않게 동일한 표현으로 사용</strong>합니다.</p>
+            <p>이 다섯 가지 질문은 <strong>본사 팀장 과정과 업무를 연결하는 공통 기준으로 사용</strong>합니다.</p>
             <p style="margin-top:12px;">임원 교육과 팀장 교육의 실시 순서에 관계없이, 두 리더십 계층이 상대 과정의 학습 흐름과 기대 산출물을 명확히 이해하고 동일한 기준으로 업무 개선을 논의하도록 설계되었습니다.</p>
           `
         },
@@ -2680,7 +2552,7 @@
         moduleName: '부서 실행 과제로 연결',
         journeyActive: ['t'],
         title: '팀장에게 전달할 확인·개선 과제를 정리합니다',
-        lead: '① 확인한 사실 → ② 내부 질문 → ③ 검토 업무와 기대 결과 → ④ 임원의 지원과 점검 기준 순으로 작성합니다.',
+        lead: '38페이지의 AI 초안을 검토해 아래 여섯 항목으로 정리합니다. 먼저 근거 확인을 요청하고, 업무 개선은 현장 점검 결과에 따라 포함합니다.',
         popup: {
           type: 'ex',
           label: '예시: 실행 과제 카드',
@@ -2688,12 +2560,12 @@
           html: `
             <div style="padding:20px; background:var(--blue-bg); border-radius:10px; display:flex; flex-direction:column; gap:10px;">
               <div><span class="tag-virtual">교육용 가상 예시</span></div>
-              <p><strong>• 확인된 사실:</strong> 공개자료에서 당사와 비교사 간 특정 보고 항목의 분류 기준 차이를 확인함.</p>
-              <p><strong>• 내부 질문:</strong> 우리 부서의 해당 경영 정보 취합 및 검증 과정은 현재 어떠한가?</p>
-              <p><strong>• 검토할 업무·부서:</strong> 정기 경영브리핑 기초자료 취합 프로세스 (관련 기획/관리팀)</p>
-              <p><strong>• 기대할 결과:</strong> ① 현행 업무 흐름(AS-IS), ② 확인된 병목 구간, ③ AI 활용 개선 대안(TO-BE)</p>
-              <p><strong>• 임원의 지원:</strong> 유관 부서 간 기준 통일 협의 지원 및 시범 적용 기간 부여</p>
-              <p><strong>• 점검 기준:</strong> 2주 뒤 현행 흐름 분석 및 개선 초안 1차 보고</p>
+              <p><strong>• 확인된 사실:</strong> 보드에 상반기 연결 실적 비교를 정리함. 이익 구성과 일회성 요인의 영향은 확인 필요.</p>
+              <p><strong>• 내부 질문:</strong> 우리 회사의 부문별 손익과 일회성 요인으로 비교 결과를 어떻게 설명할 수 있는가?</p>
+              <p><strong>• 검토할 업무·부서:</strong> 관련 기획·재무 담당 팀장과 실적 근거 확인. 취합 문제가 확인되면 해당 보고 업무도 점검.</p>
+              <p><strong>• 기대할 결과:</strong> ① 출처가 있는 설명 자료, ② 미확인 사항. 업무 문제가 확인된 경우 현행 흐름과 개선 대안 추가.</p>
+              <p><strong>• 임원의 지원:</strong> 자료 제공 범위 승인, 유관 부서 협의 지원. 시범 적용은 필요성이 확인된 뒤 결정.</p>
+              <p><strong>• 점검 기준:</strong> 예시: 2주 뒤 근거·비교 한계·미확인 사항 보고. 개선 과제가 생기면 효과 지표와 후속 일정 합의.</p>
             </div>
           `
         },
@@ -2712,11 +2584,11 @@
             <div class="card" style="padding:18px;">
               <div class="input-field-group">
                 <label>③ 검토할 업무 · 부서</label>
-                <textarea class="slide-textarea" rows="3" placeholder="점검 대상이 되는 구체적 업무와 담당 팀"></textarea>
+                <textarea class="slide-textarea" rows="3" placeholder="예: 기획·재무 팀장 / 실적 근거 확인 및 관련 보고 업무"></textarea>
               </div>
               <div class="input-field-group" style="margin-top:10px;">
                 <label>④ 기대할 결과 (산출물)</label>
-                <textarea class="slide-textarea" rows="3" placeholder="예: 현행 흐름, 병목 확인, 개선 대안"></textarea>
+                <textarea class="slide-textarea" rows="3" placeholder="예: 실적 설명 근거·비교 한계·미확인 사항 (필요 시 개선 대안)"></textarea>
               </div>
             </div>
             <div class="card highlight" style="padding:18px;">
@@ -2740,7 +2612,7 @@
         moduleName: '부서 실행 과제로 연결',
         journeyActive: ['t'],
         title: '확인 질문과 실행 요청을 구분했습니까?',
-        lead: '작성한 실행 과제 카드가 팀장의 현장 검토를 이끌어낼 수 있도록 구성되었는지 점검합니다.',
+        lead: '보드에서 출발한 질문이 근거 확인 요청과 조건부 개선 과제로 이어졌는지, AI가 만든 초안에 비약은 없는지 점검합니다.',
         popup: {
           type: 'check',
           label: '실습 확인',
@@ -2756,21 +2628,21 @@
               <input type="checkbox">
               <div>
                 <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 01</div>
-                확인된 사실과 가설을 명확히 구분했는가?
+                보드의 사실·출처와 AI의 가설·미확인 사항을 구분했는가?
               </div>
             </label>
             <label class="check-item" style="font-size:22px; padding:26px;">
               <input type="checkbox">
               <div>
                 <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 02</div>
-                검토할 대상 업무와 범위가 구체적인가?
+                확인할 질문·필요 자료·담당 팀·기대 산출물이 구체적인가?
               </div>
             </label>
             <label class="check-item" style="font-size:22px; padding:26px;">
               <input type="checkbox">
               <div>
                 <div style="color:var(--teal-dark); font-size:15px; margin-bottom:4px;">점검 03</div>
-                현장을 아는 팀장의 판단 여지를 남겼는가?
+                근거 확인을 먼저 요청하고, 개선은 현장 확인 후 판단하게 했는가?
               </div>
             </label>
             <label class="check-item" style="font-size:22px; padding:26px;">
