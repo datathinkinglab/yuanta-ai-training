@@ -1008,11 +1008,11 @@
       <div class="toc-window" onclick="event.stopPropagation()">
         <div class="modal-header" style="background: var(--navy); color: var(--white);">
           <div class="modal-title-group">
-            <span class="module-badge" style="background:var(--teal); color:var(--navy);">전체 48페이지 · 220분</span>
+            <span class="module-badge" style="background:var(--teal); color:var(--navy);">전체 50페이지 · 220분</span>
             <h2 class="modal-title" style="color:var(--white);">유안타증권 임원 AI 교육 — 모듈별 목차 이동</h2>
           </div>
           <div style="display:flex; align-items:center; gap:10px;">
-            <button class="modal-close-btn" style="background:var(--teal); color:var(--navy);" onclick="exportToPDF()">🖨️ PDF 출력 (전체 48p)</button>
+            <button class="modal-close-btn" style="background:var(--teal); color:var(--navy);" onclick="exportToPDF()">🖨️ PDF 출력 (전체 50p)</button>
             <button class="modal-close-btn" onclick="toggleFullscreen()">⛶ 전체화면 전환</button>
             <button class="modal-close-btn" onclick="toggleTOC(false)">닫기 (ESC)</button>
           </div>
@@ -2811,6 +2811,19 @@
         lead:'QR로 두 질문에 답해 주세요. 답변은 한 장의 포스트잇으로 함께 표시되며, 같은 기기에서 다시 제출하면 수정됩니다.',
         bottomMsg:'AI는 정보를 정리하고 질문을 넓혀줍니다. 리더는 판단 기준을 정하고 조직의 실행을 연결합니다.',
         render: () => `<div class="grid-2" style="grid-template-columns:1fr 290px;gap:24px;min-height:0;"><div style="display:flex;flex-direction:column;min-height:0;gap:12px;"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;"><strong style="font-size:23px;">우리 조직의 실행 포스트잇</strong><span data-reflection-status role="status" style="font-size:16px;color:var(--gray-600);">응답을 불러옵니다.</span></div><div data-reflection-wall style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-content:start;gap:16px;overflow:auto;min-height:0;flex:1;padding:8px 12px 16px 4px;"><p style="grid-column:1/-1;color:var(--gray-600);padding:24px;">QR로 답변하면 포스트잇이 나타납니다.</p></div></div><div class="qr-placeholder-box" style="padding:20px;gap:16px;justify-content:center;"><strong style="font-size:22px;">휴대전화로 참여</strong><img src="assets/executive-reflection-qr.png" alt="마무리 포스트잇 답변 QR 코드" width="210" height="210" style="padding:8px;background:white;border-radius:10px;"><a href="executive-reflection.html" target="_blank" rel="noopener" style="font-weight:800;color:var(--teal-dark);font-size:18px;">답변 작성하기 ↗</a><p style="font-size:16px;line-height:1.6;margin:0;">① AI로 우선 확인할 업무<br>② 팀장에게 할 첫 질문</p><button type="button" class="nav-btn" onclick="refreshExecutiveReflections()">포스트잇 새로고침</button><small style="font-size:14px;color:var(--gray-600);line-height:1.6;">답변은 익명으로 공개됩니다.<br>민감한 정보는 적지 마세요.</small></div></div>`
+            },
+      // 49. 전체 강의 정리
+      {page:49,theme:'white',moduleCode:'CLOSING',moduleName:'전체 강의 정리',journeyActive:['q','d','a','b','t','e'],
+        title:'AI로 근거를 읽고, 질문을 만들고, 실행을 연결합니다',
+        lead:'오늘의 흐름은 공시를 요약하는 데서 끝나지 않습니다. 확인한 내용을 경영 판단과 팀장의 다음 업무로 연결합니다.',
+        bottomMsg:'돌아가서 실천할 한 가지: 우선 확인할 업무 하나를 고르고, 팀장에게 근거를 확인할 첫 질문을 요청합니다.',
+        render: () => `<div class="grid-3"><div class="card"><div><div style="background:var(--navy);color:white;border-radius:10px;padding:18px;margin-bottom:22px;"><div style="font-size:15px;color:#76E3DB;font-weight:800;margin-bottom:10px;">모듈 1·2 · 질문과 근거</div><div style="font-size:27px;font-weight:900;">무엇을 확인할지 정합니다</div></div><div class="card-desc" style="font-size:21px;line-height:1.7;">경영 질문을 먼저 세우고, 공시의 <strong>기간·연결 범위·단위·출처</strong>를 맞춥니다.<br><br>확인된 사실과 아직 알 수 없는 원인을 구분합니다.</div></div><div class="tag-virtual">남길 것: 질문 + 비교 기준</div></div><div class="card"><div><div style="background:var(--navy);color:white;border-radius:10px;padding:18px;margin-bottom:22px;"><div style="font-size:15px;color:#76E3DB;font-weight:800;margin-bottom:10px;">모듈 3·4 · 분석과 화면</div><div style="font-size:27px;font-weight:900;">AI 결과를 검증해 보여줍니다</div></div><div class="card-desc" style="font-size:21px;line-height:1.7;">AI로 비교 초안을 만들고, 핵심 수치를 <strong>원문과 대조</strong>합니다.<br><br>브리핑 보드에는 사실·해석·확인 필요·출처를 함께 담습니다.</div></div><div class="tag-virtual">남길 것: 근거가 있는 브리핑 보드</div></div><div class="card highlight"><div><div style="background:var(--navy);color:white;border-radius:10px;padding:18px;margin-bottom:22px;"><div style="font-size:15px;color:#76E3DB;font-weight:800;margin-bottom:10px;">모듈 5·6 · 조직 실행</div><div style="font-size:27px;font-weight:900;">질문을 팀장의 업무로 잇습니다</div></div><div class="card-desc" style="font-size:21px;line-height:1.7;">미확인 사항을 <strong>팀장에게 보낼 확인 요청</strong>으로 바꿉니다.<br><br>임원은 근거에 따라 보완·시범·확대를 판단하고 담당·지원·점검일을 정합니다.</div></div><div class="tag-virtual">남길 것: 다음 행동과 점검 약속</div></div></div>`
+      },
+      // 50. 감사 인사와 만족도 조사
+      {page:50,theme:'white',moduleCode:'THANK YOU',moduleName:'감사 인사 · 만족도 조사',journeyActive:[],
+        title:'함께해 주셔서 감사합니다',
+        lead:'2026년 유안타증권 AIbility Academy STEP-UP · 임원 교육',
+        render: () => `<div style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:28px;height:100%;"><div style="background:var(--navy);border-radius:16px;padding:42px;color:white;display:flex;flex-direction:column;justify-content:center;"><div style="font-size:16px;letter-spacing:2px;color:#76E3DB;font-weight:800;margin-bottom:24px;">AIbility Academy STEP-UP</div><div style="font-size:42px;font-weight:900;line-height:1.5;">좋은 질문이<br>다음 실행을 만듭니다.</div><p style="font-size:23px;line-height:1.8;margin:26px 0 0;color:#e2e8f0;">오늘의 경험이 근거를 확인하는 경영 대화와<br>조직의 작은 실천으로 이어지기를 바랍니다.</p></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:16px;padding:24px;gap:14px;"><div style="font-size:27px;font-weight:900;color:var(--navy);">교육 만족도 조사</div><p style="font-size:20px;line-height:1.6;margin:0;">휴대전화로 QR을 스캔해<br>소중한 의견을 남겨 주세요.</p><a href="https://m.site.naver.com/2k8zv" target="_blank" rel="noopener" aria-label="만족도 조사 참여하기"><img src="assets/executive-satisfaction-qr.jpg" width="285" height="285" alt="유안타증권 임원 교육 만족도 조사 QR 코드" style="display:block;background:white;padding:8px;border-radius:8px;"></a><a href="https://m.site.naver.com/2k8zv" target="_blank" rel="noopener" class="nav-btn" style="background:var(--teal-dark);color:white;font-size:18px;font-weight:800;">만족도 조사 참여하기 ↗</a><a href="downloads/%EC%9E%84%EC%9B%90%EA%B5%90%EC%9C%A1_%EB%A7%8C%EC%A1%B1%EB%8F%84%EC%A1%B0%EC%82%AC_QR.pdf" target="_blank" rel="noopener" style="font-size:16px;color:var(--teal-dark);font-weight:800;">만족도 조사 QR 안내문 열기 ↗</a></div></div>`
       }
     ];
 
@@ -3029,7 +3042,7 @@
             <button class="nav-btn" onclick="toggleTOC(true)" title="전체 목차 및 모듈 이동">
               ☰ 목차 · 모듈 이동
             </button>
-            <button class="nav-btn" onclick="exportToPDF()" title="전체 48페이지 슬라이드를 PDF로 인쇄/저장합니다">
+            <button class="nav-btn" onclick="exportToPDF()" title="전체 50페이지 슬라이드를 PDF로 인쇄/저장합니다">
               🖨️ PDF 출력
             </button>
             <button class="nav-btn fs-toggle-btn" onclick="toggleFullscreen()" title="전체화면 보기 전환 (F)">
@@ -3044,9 +3057,9 @@
               ◀ 이전
             </button>
             <span class="page-indicator">
-              <span class="current">${pageNumStr}</span> / 48
+              <span class="current">${pageNumStr}</span> / 50
             </span>
-            <button class="nav-btn" onclick="nextSlide()" ${slide.page === 48 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+            <button class="nav-btn" onclick="nextSlide()" ${slide.page === 50 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
               다음 ▶
             </button>
           </div>
@@ -3312,7 +3325,7 @@
         { title: '모듈 3. AI 비교 브리핑 초안', time: '40분 (17~25p)', range: [17, 25] },
         { title: '모듈 4. 브리핑 보드 제작', time: '60분 (26~35p)', range: [26, 35] },
         { title: '모듈 5. 부서 실행 과제로 연결', time: '35분 (36~42p)', range: [36, 42] },
-        { title: '모듈 6. AI 리더십과 조직 실행', time: '30분 (43~48p)', range: [43, 48] }
+        { title: '모듈 6. AI 리더십과 조직 실행', time: '30분 (43~50p)', range: [43, 50] }
       ];
 
       const tocContent = document.getElementById('toc-content');
