@@ -2,6 +2,7 @@
   let busy = false;
   let requestId = 0;
   let resetting = false;
+  let resetReady = null;
   window.refreshExecutiveReflections = async () => {
     const wall = document.querySelector('[data-reflection-wall]');
     if (!wall || busy || resetting) return;
@@ -15,7 +16,8 @@
       const data = await response.json();
       if (!data.ok || !Array.isArray(data.items)) throw Error('마무리 설문 서버 업데이트가 필요합니다.');
       if (current !== requestId || !wall.isConnected) return;
-      document.querySelectorAll('[data-reflection-reset]').forEach(button => { button.disabled = data.reflectionResetAvailable !== true; button.title = button.disabled ? 'Apps Script 업데이트 및 강사용 비밀번호 설정 후 사용' : '포스트잇 전체 초기화'; });
+      resetReady = data.reflectionResetAvailable === true;
+      document.querySelectorAll('[data-reflection-reset]').forEach(button => { button.disabled = false; button.textContent = resetReady ? '전체 포스트잇 리셋' : '리셋 비밀번호 설정 안내'; button.title = resetReady ? '포스트잇 전체 초기화' : '클릭하면 강사용 비밀번호 설정 방법을 안내합니다.'; });
       status.textContent = '총 ' + data.total + '개 응답 · 자동 갱신';
       wall.replaceChildren();
       if (!data.items.length) { const empty = document.createElement('p'); empty.textContent = 'QR로 두 질문에 답하면 이곳에 포스트잇이 나타납니다.'; empty.style.cssText = 'grid-column:1/-1;color:var(--gray-600);font-size:20px;padding:24px;'; wall.append(empty); }
@@ -34,6 +36,10 @@
   };
   window.resetExecutiveReflections = async () => {
     if (resetting) return;
+    if (resetReady !== true) {
+      alert('강사용 리셋 비밀번호가 아직 설정되지 않았습니다.\n\nApps Script → 프로젝트 설정 → 스크립트 속성에서\n속성: POLL_RESET_PASSWORD\n값: 사용할 강사용 비밀번호\n를 추가하고 저장해 주세요.\n\n저장 후 포스트잇 새로고침을 누르면 리셋 버튼이 활성화됩니다. 코드 재배포는 필요 없습니다.');
+      return;
+    }
     if (!confirm('48페이지의 포스트잇 응답을 모두 초기화하시겠습니까? 기존 응답은 보관 시트로 이동합니다.')) return;
     const password = prompt('강사용 초기화 비밀번호를 입력해 주세요.');
     if (!password) return;
