@@ -83,7 +83,7 @@
     move(delta) { team ? (delta < 0 ? prevSlide() : nextSlide()) : changeSlide(delta); },
     toc() {
       const groups = new Map();
-      SLIDES.forEach((s,i) => { const key = team ? `${s.module} · ${s.moduleTitle}` : ((s.module.match(/(?:M|MODULE\s*)\d+/i)||[])[0] || s.module); if(!groups.has(key)) groups.set(key,[]); groups.get(key).push({s,i}); });
+      SLIDES.forEach((s,i) => { if (!team && s.type === 'break') return; const match = !team && s.module.match(/(?:MODULE\s*|M)(\d+)/i); const key = team ? `${s.module} · ${s.moduleTitle}` : (match ? `M${Number(match[1])}` : s.module); if(!groups.has(key)) groups.set(key,[]); groups.get(key).push({s,i}); });
       toc.innerHTML = '<div class="unified-toc-head"><h2>전체 목차 · 모듈 이동</h2><button onclick="this.closest(\'dialog\').close()">닫기 (ESC)</button></div><div class="unified-toc-grid">' + [...groups].map(([name,items]) => `<section><h3>${esc(name)}</h3>${items.map(({s,i}) => `<button onclick="lectureFrame.goto(${i})"><b>${String(i+1).padStart(2,'0')}p.</b> ${esc(title(s))}</button>`).join('')}</section>`).join('') + '</div>';
       toc.showModal();
     },
