@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>우리 조직의 첫 AI 과제 · 임원 교육</title><style>*{box-sizing:border-box}body{margin:0;padding:24px;background:#eef4f5;color:#101d35;font-family:system-ui,sans-serif}main{max-width:600px;margin:auto}h1{font-size:28px;line-height:1.4}p{line-height:1.6}form{padding:24px;background:white;border-radius:16px;box-shadow:0 5px 20px #101d3510}label{display:block;font-weight:800;line-height:1.6;margin:0 0 10px}textarea{width:100%;font:inherit;line-height:1.6;min-height:130px;border:1px solid #b1c1c8;border-radius:8px;padding:12px;margin-bottom:22px;resize:vertical}button{width:100%;border:0;border-radius:8px;padding:16px;font:inherit;font-weight:800;background:#288f8a;color:white;cursor:pointer}button:disabled{opacity:.6}#status{padding:14px;background:#fff1ac;border-radius:8px}small{display:block;line-height:1.6;color:#526174}</style></head>
+<body><main><p>유안타증권 · 임원 교육 마무리</p><h1>우리 조직에서 시작할<br>첫 AI 과제를 나눠 주세요</h1><p>답변 두 개가 강의 48페이지에 한 장의 포스트잇으로 공개됩니다. 같은 기기에서 다시 제출하면 기존 답변이 수정됩니다.</p><form id="reflection-form"><label for="work">① 우리 조직에서 AI로 우선 확인할 업무는 무엇입니까?</label><textarea id="work" name="work" maxlength="400" required placeholder="예: 매월 경영 브리핑 자료의 취합·근거 확인 업무"></textarea><label for="question">② 팀장에게 요청할 첫 번째 질문은 무엇입니까?</label><textarea id="question" name="question" maxlength="400" required placeholder="예: 자료가 만들어져 보고되기까지 어느 단계에서 재작업이 발생하나요?"></textarea><small>각 400자 이내 · 이름, 고객정보, 미공개 수치 등 민감한 내용은 적지 말고 업무를 일반화해 주세요. 이름은 수집하지 않으며 중복 응답 구분을 위한 기기별 임의 식별자를 사용합니다.</small><button id="submit" type="submit" style="margin-top:20px">포스트잇 보내기</button></form><p id="status" role="status" aria-live="polite">두 질문에 답변하고 보내기를 눌러 주세요.</p></main><script src="executive-poll-config.js"></script><script>
+(() => {
+  const form=document.getElementById('reflection-form'), work=document.getElementById('work'), question=document.getElementById('question'), status=document.getElementById('status'), button=document.getElementById('submit');
+  let id;
+  try {id=localStorage.getItem('yuanta-reflection-id');if(!id){id=crypto.randomUUID();localStorage.setItem('yuanta-reflection-id',id);}const draft=JSON.parse(localStorage.getItem('yuanta-reflection-draft')||'{}');work.value=draft.work||'';question.value=draft.question||'';}catch(_){id=crypto.randomUUID();}
+  form.addEventListener('input',()=>{try{localStorage.setItem('yuanta-reflection-draft',JSON.stringify({work:work.value,question:question.value}));}catch(_){}});
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();const values={work:work.value.trim(),question:question.value.trim()};if(!values.work||!values.question){status.textContent='두 질문에 모두 답변해 주세요.';return;}
+    const api=(window.YUANTA_EXECUTIVE_POLL?.apiUrl||'').trim();if(!api){status.textContent='설문 연결 준비 중입니다.';return;}button.disabled=true;status.textContent='포스트잇을 보내고 있습니다.';
+    try{
+      const check=await fetch(api+'?action=reflections&t='+Date.now(),{cache:'no-store'});const ready=await check.json();if(!ready.ok||!Array.isArray(ready.items))throw Error('마무리 설문 서버 업데이트가 필요합니다. 강사에게 알려 주세요.');
+      const response=await fetch(api,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'reflection',id,...values})});const data=await response.json();if(!data.ok)throw Error(data.error||'전송 실패');status.textContent='포스트잇을 보냈습니다. 강의 화면에 잠시 후 나타납니다. 수정 후 다시 보내면 기존 답변이 변경됩니다.';button.textContent='수정한 답변 보내기';
+    }catch(error){status.textContent='저장하지 못했습니다. '+error.message;}finally{button.disabled=false;}
+  });
+})();
+</script></body></html>

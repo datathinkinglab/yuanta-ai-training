@@ -2805,35 +2805,12 @@
         bottomMsg:'보고를 듣는 데서 끝내지 않고, 다음 행동·담당 책임·임원의 지원·다음 점검일을 함께 확정합니다.',
         render: () => `<div class="grid-3"><div class="card" style="gap:16px;justify-content:flex-start;"><div style="background:var(--navy);border-radius:10px;padding:18px;"><div style="font-size:16px;font-weight:700;color:#76E3DB;margin-bottom:10px;">01 · 근거가 부족하면</div><div style="font-size:28px;font-weight:900;color:white;line-height:1.3;">보완을 요청합니다</div></div><div style="font-size:18px;color:var(--gray-600);line-height:1.55;"><strong style="color:var(--navy);">판단 조건</strong><br>확인된 사실과 가설이 섞였거나, 비교 기준·현장 자료가 부족한 경우</div><div style="font-size:20px;line-height:1.6;"><strong>임원이 정할 일</strong><br>부족한 자료와 확인할 질문을 지정하고, 팀장이 보완해 다시 보고하도록 합니다.</div><div style="margin-top:auto;padding:14px;background:var(--teal-bg);border-radius:8px;font-size:18px;line-height:1.6;"><strong>팀장에게 이렇게 요청합니다</strong><br>“원인 판단에 필요한 근거와 비교 기준부터 확인해 주세요.”</div></div><div class="card" style="gap:16px;justify-content:flex-start;"><div style="background:var(--navy);border-radius:10px;padding:18px;"><div style="font-size:16px;font-weight:700;color:#76E3DB;margin-bottom:10px;">02 · 작게 검증할 수 있으면</div><div style="font-size:28px;font-weight:900;color:white;line-height:1.3;">시범 적용을 결정합니다</div></div><div style="font-size:18px;color:var(--gray-600);line-height:1.55;"><strong style="color:var(--navy);">판단 조건</strong><br>문제와 자료는 확인됐지만, 개선 효과와 운영 부담은 아직 검증되지 않은 경우</div><div style="font-size:20px;line-height:1.6;"><strong>임원이 정할 일</strong><br>한 부서·한 보고서로 범위를 정합니다. 담당자, 사람의 검토 지점, 지원 사항과 점검일을 합의합니다.</div><div style="margin-top:auto;padding:14px;background:var(--teal-bg);border-radius:8px;font-size:18px;line-height:1.6;"><strong>팀장에게 이렇게 요청합니다</strong><br>“이 보고서 한 건부터 시도하고, 시간·재작업·정확성을 비교해 주세요.”</div></div><div class="card" style="gap:16px;justify-content:flex-start;"><div style="background:var(--navy);border-radius:10px;padding:18px;"><div style="font-size:16px;font-weight:700;color:#76E3DB;margin-bottom:10px;">03 · 효과가 검증됐다면</div><div style="font-size:28px;font-weight:900;color:white;line-height:1.3;">확대 여부를 판단합니다</div></div><div style="font-size:18px;color:var(--gray-600);line-height:1.55;"><strong style="color:var(--navy);">판단 조건</strong><br>시범 적용에서 효과와 제약을 확인했고, 다른 업무에 적용할 조건을 설명할 수 있는 경우</div><div style="font-size:20px;line-height:1.6;"><strong>임원이 정할 일</strong><br>검증한 범위부터 확대합니다. AX 조직과 템플릿·검토 기준·지원 책임을 함께 정합니다.</div><div style="margin-top:auto;padding:14px;background:var(--teal-bg);border-radius:8px;font-size:18px;line-height:1.6;"><strong>팀장에게 이렇게 요청합니다</strong><br>“검증된 범위와 주의사항을 정리해 다음 적용 대상을 제안해 주세요.”</div></div></div>`
       },
-      // 51. 마무리 참여
-      {
-        page: 48,
-        theme: 'white',
-        moduleCode: 'MODULE 06',
-        moduleName: 'AI 리더십과 조직 실행',
-        journeyActive: ['q', 'd', 'a', 'b', 't', 'e'],
-        title: '다음 경영 대화에서 무엇을 다르게 질문하시겠습니까?',
-        lead: '현업에 돌아가 가장 먼저 확인해 볼 업무와 팀장에게 던질 첫 질문을 정리하며 교육을 마무리합니다.',
-        bottomMsg: 'AI는 정보를 정리하고 질문을 넓혀줍니다. 리더는 판단 기준을 정하고 조직의 실행을 연결합니다.',
-        render: () => `
-          <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;">
-            <div class="card" style="justify-content:space-around;">
-              <div class="input-field-group">
-                <label style="font-size:20px;">① 우리 조직에서 우선 확인할 업무는 무엇입니까?</label>
-                <textarea class="slide-textarea" rows="3" placeholder="돌아가서 가장 먼저 살펴볼 브리핑이나 보고·취합 업무를 적어보세요..."></textarea>
-              </div>
-              <div class="input-field-group">
-                <label style="font-size:20px;">② 본사 팀장에게 요청할 첫 번째 질문은 무엇입니까?</label>
-                <textarea class="slide-textarea" rows="3" placeholder="사실·근거 확인 또는 업무 흐름 점검을 위해 팀장에게 던질 질문을 적어보세요..."></textarea>
-              </div>
-            </div>
-            <div class="qr-placeholder-box">
-              <div class="qr-frame">응답 링크 확정 후<br>QR 삽입 영역<br><span class="tag-tbd" style="margin-top:8px;">[확정 필요]</span></div>
-              <div style="font-size:17px; font-weight:700; color:var(--navy);">단축 링크: <span class="tag-tbd">[응답 URL 확정 필요]</span></div>
-              <div style="font-size:15px; color:var(--gray-600);">접속이 어렵거나 링크 확정 전인 경우 좌측 입력란에 개인 메모로 작성해 주세요.</div>
-            </div>
-          </div>
-        `
+      // 48. 마무리 포스트잇
+      {page:48,theme:'white',moduleCode:'MODULE 06',moduleName:'AI 리더십과 조직 실행',journeyActive:['q','d','a','b','t','e'],
+        title:'우리 조직의 첫 AI 과제와 첫 질문을 나눕니다',
+        lead:'QR로 두 질문에 답해 주세요. 답변은 한 장의 포스트잇으로 함께 표시되며, 같은 기기에서 다시 제출하면 수정됩니다.',
+        bottomMsg:'AI는 정보를 정리하고 질문을 넓혀줍니다. 리더는 판단 기준을 정하고 조직의 실행을 연결합니다.',
+        render: () => `<div class="grid-2" style="grid-template-columns:1fr 290px;gap:24px;min-height:0;"><div style="display:flex;flex-direction:column;min-height:0;gap:12px;"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;"><strong style="font-size:23px;">우리 조직의 실행 포스트잇</strong><span data-reflection-status role="status" style="font-size:16px;color:var(--gray-600);">응답을 불러옵니다.</span></div><div data-reflection-wall style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-content:start;gap:16px;overflow:auto;min-height:0;flex:1;padding:8px 12px 16px 4px;"><p style="grid-column:1/-1;color:var(--gray-600);padding:24px;">QR로 답변하면 포스트잇이 나타납니다.</p></div></div><div class="qr-placeholder-box" style="padding:20px;gap:16px;justify-content:center;"><strong style="font-size:22px;">휴대전화로 참여</strong><img src="assets/executive-reflection-qr.png" alt="마무리 포스트잇 답변 QR 코드" width="210" height="210" style="padding:8px;background:white;border-radius:10px;"><a href="executive-reflection.html" target="_blank" rel="noopener" style="font-weight:800;color:var(--teal-dark);font-size:18px;">답변 작성하기 ↗</a><p style="font-size:16px;line-height:1.6;margin:0;">① AI로 우선 확인할 업무<br>② 팀장에게 할 첫 질문</p><button type="button" class="nav-btn" onclick="refreshExecutiveReflections()">포스트잇 새로고침</button><small style="font-size:14px;color:var(--gray-600);line-height:1.6;">답변은 익명으로 공개됩니다.<br>민감한 정보는 적지 마세요.</small></div></div>`
       }
     ];
 
@@ -3404,5 +3381,6 @@
   <script src="executive-poll.js"></script>
   <script src="executive-poll-config.js"></script>
   <script src="executive-poll.js"></script>
+  <script src="executive-reflections.js"></script>
 </body>
 </html>
