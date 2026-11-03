@@ -271,7 +271,7 @@
           ← 이전
         </button>
         <div class="text-xs sm:text-sm font-extrabold text-[#101D35] min-w-[64px] sm:min-w-[72px] text-center" id="page-indicator">
-          01 / 48
+          01 / 46
         </div>
         <button id="btn-next" onclick="nextSlide()" class="px-3 sm:px-3.5 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-white text-xs sm:text-sm font-bold disabled:opacity-40 transition">
           다음 →
@@ -302,7 +302,7 @@
       <div id="toc-dialog" class="bg-white rounded-2xl max-w-5xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden" role="dialog" aria-modal="true" tabindex="-1">
         <div class="px-6 py-4 bg-[#101D35] text-white flex items-center justify-between shrink-0">
           <div>
-            <h3 class="text-lg font-bold">전체 목차 및 페이지 바로가기 (총 48페이지 · 240분)</h3>
+            <h3 class="text-lg font-bold">전체 목차 및 페이지 바로가기 (총 46페이지 · 220분)</h3>
             <p class="text-xs text-slate-300 mt-0.5">유안타증권 본사 팀장 교육 | 11월 4일 1차수, 11월 6일 2차수 | 강사: 이승묵 Ph.D</p>
           </div>
           <button id="toc-close-btn" onclick="closeToc()" class="px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-sm font-semibold text-white transition">
@@ -813,19 +813,19 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     boardPrompts: {
-      title: '보드 생성(26p) 및 부서 기능 추가(29p) 프롬프트 전문',
+      title: '보드 생성(25p) 및 부서 기능 추가(28p) 프롬프트 전문',
       render: () => `
         <div class="space-y-4 text-sm">
           <div>
             <div class="flex items-center justify-between mb-1.5">
-              <span class="font-bold text-[#101D35]">1. 기본 보드 생성 프롬프트 (26페이지 — 가상 데이터 8건과 함께 입력)</span>
+              <span class="font-bold text-[#101D35]">1. 기본 보드 생성 프롬프트 (25페이지 — 가상 데이터 8건과 함께 입력)</span>
               <button onclick="copyText(PROMPT_26, '기본 보드 생성 프롬프트')" class="px-3 py-1 rounded bg-[#101D35] text-white text-xs font-bold">프롬프트 복사</button>
             </div>
             <div class="prompt-box text-xs">${PROMPT_26}</div>
           </div>
           <div>
             <div class="flex items-center justify-between mb-1.5">
-              <span class="font-bold text-[#101D35]">2. 부서 개선 기능 1가지 추가 프롬프트 (29페이지)</span>
+              <span class="font-bold text-[#101D35]">2. 부서 개선 기능 1가지 추가 프롬프트 (28페이지)</span>
               <button onclick="copyText(PROMPT_29, '부서 기능 추가 프롬프트')" class="px-3 py-1 rounded bg-[#39B8B2] text-[#101D35] text-xs font-bold">프롬프트 복사</button>
             </div>
             <div class="prompt-box text-xs">${PROMPT_29}</div>
@@ -835,7 +835,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     saveRunHelp: {
-      title: '코드 저장 및 브라우저 실행 도움말 (27~28p)',
+      title: '코드 저장 및 브라우저 실행 도움말 (26~27p)',
       render: () => `
         <div class="space-y-4 text-sm">
           <div class="grid grid-cols-2 gap-4">
@@ -862,7 +862,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     verificationTable: {
-      title: '실습 검증표 (30~31p 숫자와 상태 변경 대조)',
+      title: '실습 검증표 (29~30p 숫자와 상태 변경 대조)',
       render: () => `
         <div class="space-y-4 text-sm">
           <table class="w-full border-collapse text-left">
@@ -936,7 +936,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     proposalTemplate: {
-      title: '임원 보고용 개선 제안 1장 양식 및 점검 기준 (38, 41p)',
+      title: '임원 보고용 개선 제안 1장 양식 및 점검 기준 (38, 39p)',
       render: () => `
         <div class="space-y-4 text-sm">
           <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
@@ -955,7 +955,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     measurementAx: {
-      title: '측정 기준 설정 및 AX 조직 협의 가이드 (46, 47p)',
+      title: '측정 기준 설정 및 AX 조직 협의 가이드 (46, 45p)',
       render: () => `
         <div class="space-y-4 text-sm">
           <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
@@ -963,7 +963,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             <p class="text-slate-700">업무 난이도, 건수, 측정 기간과 예외를 함께 기록합니다. 처리 시간이 줄었더라도 <strong>누락이나 검토자의 부담이 오히려 늘어나지 않았는지</strong> 같이 살펴봅니다. 모든 효과는 적용 후 측정해 판단합니다.</p>
           </div>
           <div class="p-4 bg-[#E6F7F6] border border-[#39B8B2] rounded-xl">
-            <div class="font-bold text-[#101D35] mb-1">🤝 AX 조직 협의 문구 예시 (38p 지원 요청란에 덧붙임)</div>
+            <div class="font-bold text-[#101D35] mb-1">🤝 AX 조직 협의 문구 예시 (36p 지원 요청란에 덧붙임)</div>
             <p class="text-slate-800 italic">“요청 누락 확인 흐름을 가상 자료로 구현해 필요한 화면 항목과 인계 기준을 정리했습니다. 팀 내 공동 사용을 위해 갱신 책임과 저장 환경을 검토해야 하므로, 사내 승인된 공통 도구 활용 가능성과 협의할 부서를 확인하고 싶습니다.”</p>
             <p class="text-xs text-slate-600 mt-2">※ 2주 시범 기간과 AX 조직 연결은 교육용 제안이며 회사의 확정된 공식 운영 절차가 아닙니다.</p>
           </div>
@@ -1061,7 +1061,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
 
           <!-- Bottom Journey -->
           <div class="pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
-            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">오늘의 여정 (240분)</span>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">오늘의 여정 (220분)</span>
             <div class="flex items-center gap-1 sm:gap-2 flex-wrap">
               ${JOURNEY_STEPS.map((s, i) => `
                 <div class="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-bold ${i === 0 ? 'bg-[#39B8B2] text-[#101D35]' : 'bg-slate-800 text-slate-300'}">${i + 1}. ${s}</div>
@@ -1280,7 +1280,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
                 <li>우리 부서 개선 기능 1가지 추가 반영</li>
               </ul>
             </div>
-            <div class="mt-6 pt-3 border-t border-[#39B8B2]/40 text-xs text-[#101D35] font-bold">23~33페이지 로컬 실습</div>
+            <div class="mt-6 pt-3 border-t border-[#39B8B2]/40 text-xs text-[#101D35] font-bold">22~32페이지 로컬 실습</div>
           </div>
 
           <div class="p-6 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col justify-between">
@@ -1294,7 +1294,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
                 <li>부서 자체 실행과 AX 협의 사항 구분</li>
               </ul>
             </div>
-            <div class="mt-6 pt-3 border-t border-slate-200 text-xs text-slate-500 font-semibold">35~48페이지 마무리</div>
+            <div class="mt-6 pt-3 border-t border-slate-200 text-xs text-slate-500 font-semibold">33~46페이지 마무리</div>
           </div>
         </div>
 
@@ -1652,7 +1652,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             </div>
           </div>
 
-          <div class="col-span-5 p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between text-sm">
+          <div class="col-span-5p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between text-sm">
             <div>
               <div class="font-bold text-[#101D35] mb-2">📌 작성 예시 (요청 접수 단계)</div>
               <ul class="space-y-2 text-xs text-slate-700">
@@ -1782,21 +1782,17 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
       `
     },
 
-    {
-      page: 22, module: '휴식', moduleTitle: '휴식 (10분)', journey: '개선', theme: 'white',
-      render: () => renderBreakSlide('10분 휴식', '다음: 공통 보드를 만들고 우리 부서 개선 요소 추가하기 (모듈 4)')
-    },
 
     // ------------------------------------------------------------------------
     // MODULE 4 (23 ~ 33) + BREAK (34)
     // ------------------------------------------------------------------------
     {
-      page: 23, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'navy',
-      render: () => renderSectionCover('MODULE 04', '팀 운영 관리 보드 만들기', '가상 자료로 화면을 만들고, 우리 부서에 필요한 기능을 더합니다.', '60분 (23~33p) · 산출물: 실행 · 수정 · 검증한 교육용 보드', '제작')
+      page: 22, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'navy',
+      render: () => renderSectionCover('MODULE 04', '팀 운영 관리 보드 만들기', '가상 자료로 화면을 만들고, 우리 부서에 필요한 기능을 더합니다.', '60분 (22~32p) · 산출물: 실행 · 수정 · 검증한 교육용 보드', '제작')
     },
 
     {
-      page: 24, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
+      page: 23, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => `
         <div>
           <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M4 · 완성 화면 미리보기 (모형 도식)</span>
@@ -1837,12 +1833,12 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
           <div class="bg-white rounded-lg border border-slate-200 overflow-x-auto text-xs">
             <div class="min-w-[600px]">
               <div class="grid grid-cols-8 bg-slate-200 font-bold p-2 text-slate-700 text-[11px]">
-                <span>ID</span><span class="col-span-2">과제</span><span>담당</span><span>마감</span><span>상태 변경</span><span>확인사항</span><span class="text-[#2A918C]">+부서 추가(29p)</span>
+                <span>ID</span><span class="col-span-2">과제</span><span>담당</span><span>마감</span><span>상태 변경</span><span>확인사항</span><span class="text-[#2A918C]">+부서 추가(28p)</span>
               </div>
-              <div class="grid grid-cols-8 p-2 border-t border-slate-100 items-center bg-rose-50/40 text-[11px]">
+              <div class="grid grid-cols-8p-2 border-t border-slate-100 items-center bg-rose-50/40 text-[11px]">
                 <span class="font-mono font-bold">T01</span><span class="col-span-2 font-semibold">주간 보고자료 취합</span><span>A</span><span class="text-rose-700 font-bold">2026-11-13 (경과)</span><span>[진행중 ▾]</span><span>일부 미도착</span><span class="font-bold text-amber-800">[미확인]</span>
               </div>
-              <div class="grid grid-cols-8 p-2 border-t border-slate-100 items-center text-[11px]">
+              <div class="grid grid-cols-8p-2 border-t border-slate-100 items-center text-[11px]">
                 <span class="font-mono font-bold">T02</span><span class="col-span-2 font-semibold">요청 양식 정리</span><span>B</span><span class="text-amber-800 font-bold">2026-11-16 (오늘)</span><span>[검토대기 ▾]</span><span>필수 항목 확인</span><span class="font-bold text-amber-800">[미확인]</span>
               </div>
             </div>
@@ -1850,13 +1846,13 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
         </div>
 
         <div class="text-[11px] text-slate-500 text-center">
-          ※ 위 화면은 구조를 설명하기 위한 모형 도식입니다. 25~31페이지 실습을 통해 직접 작동하는 HTML 파일을 생성합니다.
+          ※ 위 화면은 구조를 설명하기 위한 모형 도식입니다. 24~30페이지 실습을 통해 직접 작동하는 HTML 파일을 생성합니다.
         </div>
       `
     },
 
     {
-      page: 25, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
+      page: 24, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
@@ -1903,7 +1899,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
         </div>
 
         <div class="p-4 rounded-xl bg-[#E6F7F6] border border-[#39B8B2] flex items-center justify-between">
-          <span class="text-sm font-bold text-[#101D35]">👇 아래 버튼을 누르면 다음 페이지(26p)에서 AI에 붙여 넣을 가상 데이터 8건 전체가 즉시 복사됩니다.</span>
+          <span class="text-sm font-bold text-[#101D35]">👇 아래 버튼을 누르면 다음 페이지(25p)에서 AI에 붙여 넣을 가상 데이터 8건 전체가 즉시 복사됩니다.</span>
           <button onclick="copyText(COMMON_DATA_TEXT, '가상 과제 8건 및 계산 기준 전체')" class="px-5 py-2.5 rounded-xl bg-[#101D35] hover:bg-slate-800 text-white text-xs font-bold shrink-0 shadow">
             📋 가상 데이터 8건 전체 복사하기
           </button>
@@ -1912,7 +1908,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 26, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
+      page: 25, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
@@ -1925,7 +1921,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
         </div>
 
         <div class="grid grid-cols-4 gap-2.5 text-xs font-semibold text-slate-700">
-          <div class="p-2.5 rounded-lg bg-slate-100">① 25p의 가상 데이터 전체를 복사합니다.</div>
+          <div class="p-2.5 rounded-lg bg-slate-100">① 24p의 가상 데이터 전체를 복사합니다.</div>
           <div class="p-2.5 rounded-lg bg-slate-100">② 사용 가능한 Gemini 또는 GPT에 붙여 넣습니다.</div>
           <div class="p-2.5 rounded-lg bg-slate-100">③ 아래 요청문을 이어서 입력합니다.</div>
           <div class="p-2.5 rounded-lg bg-slate-100">④ 답변에 8건과 계산 규칙이 포함되는지 확인합니다.</div>
@@ -1956,7 +1952,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 27, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
+      page: 26, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
@@ -1975,7 +1971,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
               <h3 class="text-xl font-extrabold text-[#101D35] mt-3">HTML 코드 복사</h3>
               <p class="text-xs text-slate-600 mt-2 leading-relaxed">AI 답변 코드블록 우측 상단의 복사 버튼을 누르거나, 코드 전체를 선택해 복사합니다.</p>
             </div>
-            <div class="mt-4 p-2.5 rounded bg-slate-900 text-slate-200 font-mono text-[11px]">&lt;!DOCTYPE html&gt; ... &lt;/html&gt;</div>
+            <div class="mt-4p-2.5 rounded bg-slate-900 text-slate-200 font-mono text-[11px]">&lt;!DOCTYPE html&gt; ... &lt;/html&gt;</div>
           </div>
 
           <div class="p-5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col justify-between">
@@ -1984,7 +1980,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
               <h3 class="text-xl font-extrabold text-[#101D35] mt-3">텍스트 편집기 붙여넣기</h3>
               <p class="text-xs text-slate-600 mt-2 leading-relaxed">PC의 메모장(Notepad) 또는 텍스트 편집기를 열고 복사한 코드를 붙여 넣습니다.</p>
             </div>
-            <div class="mt-4 p-2.5 rounded bg-white border border-slate-300 text-xs font-semibold text-slate-700">단축키: Ctrl + V</div>
+            <div class="mt-4p-2.5 rounded bg-white border border-slate-300 text-xs font-semibold text-slate-700">단축키: Ctrl + V</div>
           </div>
 
           <div class="p-5 rounded-2xl bg-[#E6F7F6] border-2 border-[#39B8B2] flex flex-col justify-between">
@@ -1993,7 +1989,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
               <h3 class="text-xl font-extrabold text-[#101D35] mt-3">파일 이름 및 형식 지정</h3>
               <p class="text-xs text-slate-800 mt-2 leading-relaxed">교육용 폴더에 아래 이름으로 저장합니다. 파일 형식은 <strong>‘모든 파일’</strong>, 인코딩은 <strong>‘UTF-8’</strong>로 지정합니다.</p>
             </div>
-            <div class="mt-4 p-2.5 rounded bg-white border border-[#39B8B2] font-mono text-xs font-bold text-[#101D35]">team-workflow.html</div>
+            <div class="mt-4p-2.5 rounded bg-white border border-[#39B8B2] font-mono text-xs font-bold text-[#101D35]">team-workflow.html</div>
           </div>
 
           <div class="p-5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col justify-between">
@@ -2002,7 +1998,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
               <h3 class="text-xl font-extrabold text-[#101D35] mt-3">확장자 확인</h3>
               <p class="text-xs text-slate-600 mt-2 leading-relaxed">저장된 파일 아이콘이 브라우저(Chrome/Edge) 모양인지, 이름 끝에 <code>.txt</code>가 붙지 않았는지 확인합니다.</p>
             </div>
-            <div class="mt-4 p-2.5 rounded bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800">✓ .html 확장자 확인 완료</div>
+            <div class="mt-4p-2.5 rounded bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800">✓ .html 확장자 확인 완료</div>
           </div>
         </div>
 
@@ -2013,7 +2009,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 28, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
+      page: 27, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
@@ -2049,19 +2045,19 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
               </div>
             </div>
             <div class="p-3 rounded-xl bg-amber-100/80 text-xs font-bold text-amber-950">
-              💡 해결이 어려우면 강사가 사전에 준비한 중간 예제 파일(<code>team-workflow.html</code>)을 받아 29페이지 부서 기능 추가와 검증을 이어갑니다.
+              💡 해결이 어려우면 강사가 사전에 준비한 중간 예제 파일(<code>team-workflow.html</code>)을 받아 28페이지 부서 기능 추가와 검증을 이어갑니다.
             </div>
           </div>
         </div>
 
         <div class="p-3 rounded-xl bg-slate-100 text-xs text-slate-600 text-center">
-          기본 화면이 정상적으로 열렸다면, 29페이지에서 우리 부서 개선 요소를 반영하거나 단계별 웹앱 실습을 시작합니다.
+          기본 화면이 정상적으로 열렸다면, 28페이지에서 우리 부서 개선 요소를 반영하거나 단계별 웹앱 실습을 시작합니다.
         </div>
       `
     },
 
     {
-      page: 29, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
+      page: 28, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => {
         const dynamicPrompt29 = formatPrompt(`현재 보드에 우리 부서 개선안의 [${userState.boardFeatureChosen ? projectValue(userState.boardFeature) : '미입력 · 확인 필요'}]를 반영해 주세요. 줄이려는 문제는 [${projectValue(userState.taskPain)}], 사용자는 [${projectValue(userState.boardUser)}], 확인 조건은 [${projectValue(userState.boardCondition)}], 확인 후 할 일은 [${projectValue(userState.boardAction)}]입니다. 추가 항목의 초기값은 '미확인' 또는 명시된 교육용 가상 값으로 두세요. 원래 8건·기준일·지표 정의는 유지하세요. 필수정보가 없으면 확인 필요로 표시하고 실제 승인·발송이 이루어진 것처럼 표현하지 마세요. 수정한 전체 HTML과 정상 입력·누락 입력에서 확인할 사항을 알려주세요.`);
         return `
@@ -2096,10 +2092,10 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-[#101D35]">📋 부서 기능 추가 요청 프롬프트 (19p 입력 내용 자동 반영)</span>
               <div class="flex gap-2">
-                <button onclick="copyText(PROMPT_29, '29p 기본 템플릿')" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-xs font-bold text-slate-700">
+                <button onclick="copyText(PROMPT_29, '28p 기본 템플릿')" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-xs font-bold text-slate-700">
                   기본 템플릿 복사
                 </button>
-                <button onclick="copyDisplayedPrompt(this, '29p 우리 부서 기능 반영 프롬프트')" class="px-4 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-[#39B8B2] text-xs font-bold shadow">
+                <button onclick="copyDisplayedPrompt(this, '28p 우리 부서 기능 반영 프롬프트')" class="px-4 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-[#39B8B2] text-xs font-bold shadow">
                   📋 우리 부서 맞춤형 프롬프트 복사
                 </button>
               </div>
@@ -2115,7 +2111,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 30, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
+      page: 29, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
@@ -2177,7 +2173,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 31, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
+      page: 30, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
@@ -2203,7 +2199,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
                 목록 첫 번째 행인 <strong>T01(주간 보고자료 취합, 마감 11/13)</strong>의 상태를 <code>진행중</code>에서 <code>완료</code>로 변경합니다.
               </p>
             </div>
-            <div class="mt-4 p-2.5 rounded bg-white border text-xs font-bold text-center">T01: 진행중 → <span class="text-emerald-700">완료</span></div>
+            <div class="mt-4p-2.5 rounded bg-white border text-xs font-bold text-center">T01: 진행중 → <span class="text-emerald-700">완료</span></div>
           </div>
 
           <div class="p-5 rounded-2xl bg-[#E6F7F6] border-2 border-[#39B8B2] flex flex-col justify-between">
@@ -2219,7 +2215,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
                 <li>• 완료: 2건 → <span class="text-emerald-700">3건</span></li>
               </ul>
             </div>
-            <div class="mt-4 p-2 rounded bg-white/80 text-[11px] font-bold text-center text-[#101D35]">동적 재계산 검증 완료</div>
+            <div class="mt-4p-2 rounded bg-white/80 text-[11px] font-bold text-center text-[#101D35]">동적 재계산 검증 완료</div>
           </div>
 
           <div class="p-5 rounded-2xl bg-amber-50 border-2 border-amber-200 flex flex-col justify-between">
@@ -2230,7 +2226,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
                 브라우저를 새로고침(F5)하면 초기 데이터(미완료 6건, 기한 경과 2건)로 돌아오는지 확인합니다.
               </p>
             </div>
-            <div class="mt-4 p-2.5 rounded bg-white border border-amber-300 text-[11px] font-semibold text-amber-950">
+            <div class="mt-4p-2.5 rounded bg-white border border-amber-300 text-[11px] font-semibold text-amber-950">
               ※ 로컬 임시 화면이므로 실제 공동 저장·실시간 협업용이 아님을 확인합니다.
             </div>
           </div>
@@ -2243,7 +2239,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 32, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
+      page: 31, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => `
         <div>
           <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M4 · 화면과 업무를 연결</span>
@@ -2256,7 +2252,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             <div>
               <div class="text-xs font-bold text-slate-500">LINK 01 · 화면 표시</div>
               <h3 class="text-lg font-extrabold text-[#101D35] mt-1">보드에 표시할 것</h3>
-              <div class="mt-4 p-3 rounded-xl bg-white border border-slate-200 text-xs space-y-1">
+              <div class="mt-4p-3 rounded-xl bg-white border border-slate-200 text-xs space-y-1">
                 <div class="font-bold text-rose-700">예시: [필수자료 미확인]</div>
                 <p class="text-slate-600">또는 기한 경과 미완료, 기한 미정 상태 표시</p>
               </div>
@@ -2268,7 +2264,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             <div>
               <div class="text-xs font-bold text-slate-500">LINK 02 · 담당자 행동</div>
               <h3 class="text-lg font-extrabold text-[#101D35] mt-1">담당자가 확인할 것</h3>
-              <div class="mt-4 p-3 rounded-xl bg-white border border-slate-200 text-xs space-y-1">
+              <div class="mt-4p-3 rounded-xl bg-white border border-slate-200 text-xs space-y-1">
                 <div class="font-bold text-[#101D35]">예시: 접수 담당자가 목록 확인</div>
                 <p class="text-slate-600">빠진 원자료 항목이나 비교표 근거 위치를 체크하고 보완 안내</p>
               </div>
@@ -2280,7 +2276,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             <div>
               <div class="text-xs font-bold text-[#2A918C]">LINK 03 · 인계 조건</div>
               <h3 class="text-lg font-extrabold text-[#101D35] mt-1">다음 단계로 넘길 조건</h3>
-              <div class="mt-4 p-3 rounded-xl bg-white border border-[#39B8B2] text-xs space-y-1">
+              <div class="mt-4p-3 rounded-xl bg-white border border-[#39B8B2] text-xs space-y-1">
                 <div class="font-bold text-[#101D35]">예시: 필수 자료 충족 시 전달</div>
                 <p class="text-slate-700">필요한 자료가 모두 갖춰지면 상태를 ‘검토대기’로 바꾸고 검토자에게 전달</p>
               </div>
@@ -2292,7 +2288,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             <div>
               <div class="text-xs font-bold text-[#39B8B2]">LINK 04 · 팀장 역할</div>
               <h3 class="text-lg font-extrabold text-white mt-1">팀장이 조정할 것</h3>
-              <div class="mt-4 p-3 rounded-xl bg-white/10 border border-white/15 text-xs space-y-1">
+              <div class="mt-4p-3 rounded-xl bg-white/10 border border-white/15 text-xs space-y-1">
                 <div class="font-bold text-[#39B8B2]">예시: 반복 누락 시 요청 기준 조정</div>
                 <p class="text-slate-200">특정 항목에서 지연이 반복되면 요청 양식을 다듬거나 협업 부서와 기한 협의</p>
               </div>
@@ -2308,7 +2304,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 33, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
+      page: 32, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
@@ -2322,29 +2318,29 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
 
         <div class="my-auto grid grid-cols-12 gap-6">
           <div class="col-span-7 space-y-2.5">
-            <label class="flex items-center gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
+            <label class="flex items-center gap-3p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
               <input type="checkbox" checked class="w-5 h-5 accent-[#101D35]">
               <span class="text-sm font-bold text-[#101D35]">1. 저장한 HTML 파일이 브라우저에서 정상적으로 열린다</span>
             </label>
-            <label class="flex items-center gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
+            <label class="flex items-center gap-3p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
               <input type="checkbox" checked class="w-5 h-5 accent-[#101D35]">
               <span class="text-sm font-bold text-[#101D35]">2. 우리 부서 개선 요소를 한 가지 이상 화면에 반영했다 (${escapeHtml(userState.boardFeature)})</span>
             </label>
-            <label class="flex items-center gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
+            <label class="flex items-center gap-3p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
               <input type="checkbox" checked class="w-5 h-5 accent-[#101D35]">
               <span class="text-sm font-bold text-[#101D35]">3. 상단 지표 숫자(8·6·2·1·1·2)를 원자료와 대조해 확인했다</span>
             </label>
-            <label class="flex items-center gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
+            <label class="flex items-center gap-3p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
               <input type="checkbox" checked class="w-5 h-5 accent-[#101D35]">
               <span class="text-sm font-bold text-[#101D35]">4. 새 기능의 정상 입력 상황과 누락/미확인 상황을 모두 확인했다</span>
             </label>
-            <label class="flex items-center gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
+            <label class="flex items-center gap-3p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-[#E6F7F6]/50">
               <input type="checkbox" checked class="w-5 h-5 accent-[#101D35]">
               <span class="text-sm font-bold text-[#101D35]">5. 화면 밖에서의 갱신·확인 책임과 인계 조건을 함께 적었다</span>
             </label>
           </div>
 
-          <div class="col-span-5 p-5 rounded-2xl bg-amber-50 border border-amber-200 flex flex-col justify-between text-sm">
+          <div class="col-span-5p-5 rounded-2xl bg-amber-50 border border-amber-200 flex flex-col justify-between text-sm">
             <div class="space-y-2">
               <div class="font-extrabold text-amber-950 text-base">⚠️ 반드시 구분할 사항</div>
               <p class="text-xs text-amber-900 leading-relaxed">
@@ -2361,29 +2357,25 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
         </div>
 
         <div class="p-3 rounded-xl bg-slate-100 text-xs text-slate-600 text-center">
-          휴식 후 모듈 5에서는 지금까지 설계한 부서 개선안을 임원에게 1장으로 설명하는 방법을 다룹니다.
+          이어서 모듈 5에서는 지금까지 설계한 부서 개선안을 임원에게 1장으로 설명하는 방법을 다룹니다.
         </div>
       `
     },
 
-    {
-      page: 34, module: '휴식', moduleTitle: '휴식 (10분)', journey: '제작', theme: 'white',
-      render: () => renderBreakSlide('10분 휴식', '다음: 선택한 부서 업무의 개선안을 한 장으로 설명하기 (모듈 5)')
-    },
 
     // ------------------------------------------------------------------------
     // MODULE 5 (35 ~ 41)
     // ------------------------------------------------------------------------
     {
-      page: 35, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'navy',
-      render: () => renderSectionCover('MODULE 05', '개선안을 임원에게 보고하기', '도구의 기능과 함께 바꿀 업무와 확인할 근거를 설명합니다.', '35분 (35~41p) · 산출물: 개선 제안 1장', '보고')
+      page: 33, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'navy',
+      render: () => renderSectionCover('MODULE 05', '개선안을 임원에게 보고하기', '도구의 기능과 함께 바꿀 업무와 확인할 근거를 설명합니다.', '35분 (33~39p) · 산출물: 개선 제안 1장', '보고')
     },
 
     {
-      page: 36, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
+      page: 34, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
       render: () => `
         <div>
-          <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M5 · 공통 질문 다시 보기 (임원 과정 43p 동일 기준)</span>
+          <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M5 · 공통 질문 다시 보기 (임원 과정 41p 동일 기준)</span>
           <h2 class="text-3xl font-extrabold text-[#101D35] mt-1">임원과 팀장이 같은 기준으로 이야기합니다</h2>
           <p class="text-sm text-slate-600 mt-1">팀장은 현장의 흐름·근거·개선안을 설명하고, 임원은 우선순위와 지원을 판단합니다. (핵심: 목적 · 근거 · 책임 · 성과)</p>
         </div>
@@ -2434,7 +2426,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 37, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
+      page: 35, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
       render: () => `
         <div>
           <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M5 · 기능 설명에서 개선 제안으로</span>
@@ -2481,7 +2473,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 38, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
+      page: 36, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
       render: () => {
         const dynamicPrompt38 = formatPrompt(`다음 부서 업무 분석과 팀장의 검토 내용을 바탕으로 임원 보고용 1장 초안을 만들어 주세요: [업무명: ${userState.taskName || '본사 지원 자료 취합'}, 병목 단계: ${userState.bottleneckStage || '요청 접수 및 취합'}, 근거 상태: ${userState.bottleneckEvidence}, 채택 개선안: ${userState.reviewAdopt || '필수자료 사전 확인'}, 보드 추가 기능: ${userState.boardFeature}, 화면 밖 기준: ${userState.offScreenRule || '요청 안내문 표준화'}]. 개선 목적, 확인한 근거와 원인 가설, 현재·개선 후 흐름, 보드 기능과 업무 기준, 실행·검토 책임, 측정 계획, 필요한 지원을 포함하세요. 자료에 없는 수치나 절감 효과를 만들지 마세요. 공통 가상 8건은 부서 실적 근거로 사용하지 마세요. 임원이 물을 질문 5개와 추가 확인사항을 제시해 주세요.`);
         return `
@@ -2497,7 +2489,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
               <button onclick="openPopup('proposalTemplate')" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-800 border border-slate-300 text-xs font-bold">
                 📄 예시 팝업
               </button>
-              <button onclick="copyDisplayedPrompt(this, '38p 임원 보고 1장 초안 프롬프트')" class="px-3 py-1.5 rounded-lg bg-[#101D35] text-[#39B8B2] text-xs font-bold shadow">
+              <button onclick="copyDisplayedPrompt(this, '36p 임원 보고 1장 초안 프롬프트')" class="px-3 py-1.5 rounded-lg bg-[#101D35] text-[#39B8B2] text-xs font-bold shadow">
                 📋 AI 프롬프트 복사
               </button>
             </div>
@@ -2536,12 +2528,12 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 39, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
+      page: 37, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
       render: () => `
         <div>
           <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M5 · 임원 관점으로 다시 검토</span>
           <h2 class="text-3xl font-extrabold text-[#101D35] mt-1">이 제안을 받은 임원은 무엇을 물을까요?</h2>
-          <p class="text-sm text-slate-600 mt-1">답할 수 있는 부분과 아직 확인이 필요한 부분을 나누어 38페이지 개선 제안에 표시합니다.</p>
+          <p class="text-sm text-slate-600 mt-1">답할 수 있는 부분과 아직 확인이 필요한 부분을 나누어 36페이지 개선 제안에 표시합니다.</p>
         </div>
 
         <div class="grid grid-cols-3 gap-4 my-auto">
@@ -2589,7 +2581,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 40, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
+      page: 38, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
@@ -2603,10 +2595,10 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
         </div>
 
         <div class="grid grid-cols-12 gap-6 my-auto">
-          <div class="col-span-5 p-6 rounded-2xl bg-rose-50 border-2 border-rose-300 flex flex-col justify-between">
+          <div class="col-span-5p-6 rounded-2xl bg-rose-50 border-2 border-rose-300 flex flex-col justify-between">
             <div>
               <span class="px-2.5 py-1 rounded bg-rose-800 text-white text-xs font-bold">수정 전 문장 (단정적 성과 표현)</span>
-              <div class="mt-4 p-4 rounded-xl bg-white border border-rose-200 text-lg font-extrabold text-rose-900 leading-snug">
+              <div class="mt-4p-4 rounded-xl bg-white border border-rose-200 text-lg font-extrabold text-rose-900 leading-snug">
                 “보드를 만들었으므로 처리시간이 50% 줄었습니다.”
               </div>
               <ul class="mt-4 space-y-1.5 text-xs text-rose-900 list-disc pl-4">
@@ -2617,7 +2609,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             <div class="text-xs font-bold text-rose-800">⚠️ 도구 제작 ≠ 실제 성과 달성</div>
           </div>
 
-          <div class="col-span-7 p-6 rounded-2xl bg-[#E6F7F6] border-2 border-[#39B8B2] flex flex-col justify-between">
+          <div class="col-span-7p-6 rounded-2xl bg-[#E6F7F6] border-2 border-[#39B8B2] flex flex-col justify-between">
             <div class="space-y-3">
               <div class="flex items-center justify-between">
                 <span class="px-2.5 py-1 rounded bg-[#101D35] text-[#39B8B2] text-xs font-bold">측정 계획이 드러나는 문장으로 고쳐 쓰기</span>
@@ -2633,13 +2625,13 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
         </div>
 
         <div class="p-3 rounded-xl bg-slate-100 text-xs text-slate-600 text-center">
-          이제 41페이지에서 우리 부서의 개선 제안 전체를 한 문장으로 깔끔하게 정리합니다.
+          이제 39페이지에서 우리 부서의 개선 제안 전체를 한 문장으로 깔끔하게 정리합니다.
         </div>
       `
     },
 
     {
-      page: 41, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
+      page: 39, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
       render: () => {
         const tTask = userState.oneLineTask || userState.taskName || '주간 현황 자료 취합 업무';
         const tIssue = userState.oneLineIssue || userState.taskPain || '원자료 누락과 재요청 대기 현상';
@@ -2712,12 +2704,12 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     // MODULE 6 (42 ~ 48)
     // ------------------------------------------------------------------------
     {
-      page: 42, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'navy',
-      render: () => renderSectionCover('MODULE 06', '팀의 실행과 성과 점검', '선택한 업무의 작은 범위에서 시도하고 다음 판단을 준비합니다.', '25분 (42~48p) · 산출물: 적용 계획 · 필요 지원', '실행')
+      page: 40, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'navy',
+      render: () => renderSectionCover('MODULE 06', '팀의 실행과 성과 점검', '선택한 업무의 작은 범위에서 시도하고 다음 판단을 준비합니다.', '25분 (40~46p) · 산출물: 적용 계획 · 필요 지원', '실행')
     },
 
     {
-      page: 43, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
+      page: 41, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
@@ -2756,7 +2748,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 44, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
+      page: 42, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
       render: () => `
         <div>
           <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M6 · 시범 적용 계획 (타임라인 예시)</span>
@@ -2825,7 +2817,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 45, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
+      page: 43, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
       render: () => `
         <div>
           <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M6 · 역할과 인계 정하기</span>
@@ -2882,7 +2874,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 46, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
+      page: 44, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
@@ -2936,13 +2928,13 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 47, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
+      page: 45, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
       render: () => `
         <div class="flex items-start justify-between">
           <div>
             <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M6 · AX 조직과 가볍게 연결</span>
             <h2 class="text-3xl font-extrabold text-[#101D35] mt-1">부서에서 할 일과 함께 협의할 일을 구분합니다</h2>
-            <p class="text-sm text-slate-600 mt-1">별도 문서를 새로 만들지 않고, 38페이지 개선 제안의 지원 요청란에 덧붙일 내용을 정리합니다. (실제 AX 접수·승인 절차는 확인 후 적용)</p>
+            <p class="text-sm text-slate-600 mt-1">별도 문서를 새로 만들지 않고, 36페이지 개선 제안의 지원 요청란에 덧붙일 내용을 정리합니다. (실제 AX 접수·승인 절차는 확인 후 적용)</p>
           </div>
           <button onclick="openPopup('measurementAx')" class="px-3.5 py-2 rounded-lg bg-[#E6F7F6] text-[#101D35] border border-[#39B8B2] text-xs font-bold">
             🤝 AX 협의 문구 예시 팝업
@@ -2973,7 +2965,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             <input type="text" class="input-field text-xs" placeholder="예: 로컬 HTML은 새로고침 시 초기화되어 팀 공동 저장·공유 불가" value="${escapeHtml(userState.axLimit)}" oninput="updateField('axLimit', this.value)">
           </div>
           <div class="card-box p-3 space-y-1">
-            <label class="text-xs font-bold text-[#101D35]">3. 필요한 지원 (38p 지원 요청란에 연결)</label>
+            <label class="text-xs font-bold text-[#101D35]">3. 필요한 지원 (36p 지원 요청란에 연결)</label>
             <input type="text" class="input-field text-xs" placeholder="예: 사내 승인된 공통 협업 도구 활용 가능성 및 담당 부서 확인" value="${escapeHtml(userState.axSupport || userState.propSupport)}" oninput="updateField('axSupport', this.value)">
           </div>
         </div>
@@ -2985,7 +2977,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     },
 
     {
-      page: 48, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
+      page: 46, module: 'M6', moduleTitle: '팀의 실행과 성과 점검', journey: '실행', theme: 'white',
       render: () => {
         const summaryReport = `[유안타증권 본사 팀장 교육 — 부서 업무 개선 및 첫 실행 요약]
 1. 대상 부서 업무: ${userState.taskName || '(미입력)'} (${userState.taskStart || '시작'} ~ ${userState.taskEnd || '종료'})
@@ -3085,22 +3077,6 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     `;
   }
 
-  function renderBreakSlide(title, nextDesc) {
-    return `
-      <div class="h-full flex flex-col items-center justify-center text-center space-y-6">
-        <div class="w-16 h-16 rounded-2xl bg-[#E6F7F6] border-2 border-[#39B8B2] flex items-center justify-center text-3xl">☕</div>
-        <div class="space-y-2">
-          <span class="px-3 py-1 rounded-full bg-[#101D35] text-[#39B8B2] text-xs font-bold uppercase tracking-widest">BREAK TIME</span>
-          <h2 class="text-5xl font-extrabold text-[#101D35] pt-2">${title}</h2>
-          <p class="text-xl text-slate-600 font-semibold pt-2">${nextDesc}</p>
-        </div>
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-3 text-sm">
-          <span class="font-bold text-[#101D35]">⏰ 휴식 종료 시각 안내:</span>
-          <input type="text" class="px-3 py-1.5 rounded border border-slate-300 text-sm font-bold text-[#2A918C] w-48 text-center" placeholder="[휴식 종료 시각 입력]">
-        </div>
-      </div>
-    `;
-  }
 
   function projectValue(value) {
     return String(value == null ? '' : value).trim() || '미입력 · 확인 필요';
@@ -3144,12 +3120,12 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
       ['12페이지 · 부서 업무 분석', buildPrompt12()],
       ['13페이지 · AI 분석 근거 확인', PROMPT_13],
       ['18페이지 · 강사 시연과 선택 실습', PROMPT_18],
-      ['25~26페이지 · 교육용 가상 자료와 기본 보드', `${COMMON_DATA_TEXT}\n\n${PROMPT_26}`],
-      ['29페이지 · 부서 기능 간단 추가', `${PROMPT_29}\n\n※ 요청 전 대괄호에 문제·기능·사용자·확인 조건·다음 조치를 입력하세요.`],
-      ['29페이지 확장 실습 1 · 기획서 작성', buildProjectPrompt(1)],
-      ['29페이지 확장 실습 2 · PRD 작성', planPrompt],
-      ['29페이지 확장 실습 3 · 웹앱 개발과 검증', prdPrompt],
-      ['38페이지 · 임원 보고용 개선 제안', reportPrompt]
+      ['24~25페이지 · 교육용 가상 자료와 기본 보드', `${COMMON_DATA_TEXT}\n\n${PROMPT_26}`],
+      ['28페이지 · 부서 기능 간단 추가', `${PROMPT_29}\n\n※ 요청 전 대괄호에 문제·기능·사용자·확인 조건·다음 조치를 입력하세요.`],
+      ['28페이지 확장 실습 1 · 기획서 작성', buildProjectPrompt(1)],
+      ['28페이지 확장 실습 2 · PRD 작성', planPrompt],
+      ['28페이지 확장 실습 3 · 웹앱 개발과 검증', prdPrompt],
+      ['36페이지 · 임원 보고용 개선 제안', reportPrompt]
     ];
     return `# 유안타증권 본사 팀장 교육 · 전체 실습 프롬프트\n\n이 파일은 내려받은 시점의 입력을 반영한 사본입니다. 9·10페이지에서 입력한 내용을 확인하고, 이후 14·19페이지에서 정하는 내용과 기획서·PRD는 각 단계의 표시된 곳에 직접 추가하세요. 슬라이드에서 나중에 입력한 내용은 이 파일에 자동 반영되지 않으므로 필요하면 다시 내려받으세요.\n\nAI에 보내기 전에 실명·고객정보·내부 문서·미공개 수치를 제거하고 일반화·가상화하세요. 미입력 항목은 임의로 사실로 확정하지 마세요. 13페이지는 12페이지의 분석이 있는 같은 대화에서 사용합니다.\n\n${sections.map(([title, body]) => `## ${title}\n\n${body}`).join('\n\n---\n\n')}\n`;
   }
@@ -3319,7 +3295,7 @@ ${steps}
 
     // Update footer indicator & buttons
     const pageNumStr = String(slide.page).padStart(2, '0');
-    pageIndicator.textContent = `${pageNumStr} / 48`;
+    pageIndicator.textContent = `${pageNumStr} / 46`;
     btnPrev.disabled = currentIndex === 0;
     btnNext.disabled = currentIndex === SLIDES.length - 1;
   }
@@ -3389,10 +3365,10 @@ ${steps}
     const modules = [
       { code: 'M1', name: 'M1. 임원의 질문과 팀장의 역할 (25분)', range: [1, 6] },
       { code: 'M2', name: 'M2. 업무 흐름과 병목 분석 (40분)', range: [7, 14] },
-      { code: 'M3', name: 'M3. 개선 예시와 실습 유형 선택', range: [15, 22] },
-      { code: 'M4', name: 'M4. 팀 운영 관리 보드 제작 (60분 + 휴식)', range: [23, 34] },
-      { code: 'M5', name: 'M5. 개선안을 임원에게 보고하기 (35분)', range: [35, 41] },
-      { code: 'M6', name: 'M6. 팀의 실행과 성과 점검 (25분)', range: [42, 48] }
+      { code: 'M3', name: 'M3. 개선 예시와 실습 유형 선택', range: [15, 21] },
+      { code: 'M4', name: 'M4. 팀 운영 관리 보드 제작 (60분)', range: [22, 32] },
+      { code: 'M5', name: 'M5. 개선안을 임원에게 보고하기 (35분)', range: [33, 39] },
+      { code: 'M6', name: 'M6. 팀의 실행과 성과 점검 (25분)', range: [40, 46] }
     ];
 
     tocContent.innerHTML = modules.map(m => {
@@ -3459,33 +3435,31 @@ ${steps}
       19: '실습 유형 하나 선택',
       20: '보드 숫자와 다음 확인',
       21: '함께 보기: 정상·누락 요청',
-      22: '휴식 (10분)',
-      23: '모듈 4 간지',
-      24: '완성 화면 미리보기 (모형)',
-      25: '실습 1: 자료 확인 (2026-11-16)',
-      26: '실습 2: 보드 생성 요청 (프롬프트)',
-      27: '실습 3: 코드 복사와 저장',
-      28: '실습 4: 브라우저에서 열기',
-      29: '부서 기능 추가 · 기획서→PRD→웹앱 실습',
-      30: '실습 6: 숫자와 기능 검증',
-      31: '실습 7: 상태 변경 확인 (T01 완료)',
-      32: '화면과 업무를 연결',
-      33: '제작 결과 점검 체크리스트',
-      34: '휴식 (10분)',
-      35: '모듈 5 간지',
-      36: '공통 질문 다시 보기 (5대 질문)',
-      37: '기능 설명에서 개선 제안으로',
-      38: '개선 제안 1장 작성 (프롬프트)',
-      39: '임원 관점으로 다시 검토 (6가지 질문)',
-      40: '참여: 보고 문장 고치기',
-      41: '한 문장으로 제안 완성',
-      42: '모듈 6 간지',
-      43: '첫 적용 범위 정하기',
-      44: '시범 적용 계획 (2주 예시)',
-      45: '역할과 인계 정하기',
-      46: '측정 기준 세우기 (시간·품질)',
-      47: 'AX 조직과 가볍게 연결',
-      48: '마무리: 첫 행동 및 전체 요약 복사'
+      22: '모듈 4 간지',
+      23: '완성 화면 미리보기 (모형)',
+      24: '실습 1: 자료 확인 (2026-11-16)',
+      25: '실습 2: 보드 생성 요청 (프롬프트)',
+      26: '실습 3: 코드 복사와 저장',
+      27: '실습 4: 브라우저에서 열기',
+      28: '부서 기능 추가 · 기획서→PRD→웹앱 실습',
+      29: '실습 6: 숫자와 기능 검증',
+      30: '실습 7: 상태 변경 확인 (T01 완료)',
+      31: '화면과 업무를 연결',
+      32: '제작 결과 점검 체크리스트',
+      33: '모듈 5 간지',
+      34: '공통 질문 다시 보기 (5대 질문)',
+      35: '기능 설명에서 개선 제안으로',
+      36: '개선 제안 1장 작성 (프롬프트)',
+      37: '임원 관점으로 다시 검토 (6가지 질문)',
+      38: '참여: 보고 문장 고치기',
+      39: '한 문장으로 제안 완성',
+      40: '모듈 6 간지',
+      41: '첫 적용 범위 정하기',
+      42: '시범 적용 계획 (2주 예시)',
+      43: '역할과 인계 정하기',
+      44: '측정 기준 세우기 (시간·품질)',
+      45: 'AX 조직과 가볍게 연결',
+      46: '마무리: 첫 행동 및 전체 요약 복사'
     };
     return titles[page] || `슬라이드 ${page}`;
   }
@@ -3572,7 +3546,7 @@ ${steps}
   });
 </script>
 
-<script src="lecture-frame.js?v=20261103-zoom"></script>
+<script src="lecture-frame.js?v=20261103-nobreak"></script>
 <script src="participation-config.js"></script>
 <script src="participation.js?v=20261103-pollchart"></script>
 </body>

@@ -49,7 +49,7 @@
       const temp = document.createElement('div'); temp.innerHTML = originalBuild(s);
       const root = temp.firstElementChild;
       // Keep the course-specific labels, journey and notices; only remove repeated page counters.
-      root.querySelectorAll('.font-mono-code').forEach(el => { if (/^\d+\s*\/\s*52$/.test(el.textContent.trim())) el.remove(); });
+      root.querySelectorAll('.font-mono-code').forEach(el => { if (/^\d+\s*\/\s*\d+$/.test(el.textContent.trim())) el.remove(); });
       root.style.height = '100%';
       return root.outerHTML;
     }
