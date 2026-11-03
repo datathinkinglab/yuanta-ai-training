@@ -1,4 +1,4 @@
-# 유안타증권 AI 교육 허브
+# 유안타증권 AIbility Academy STEP-UP · Leader
 
 **경영 질문에서 현장 실행까지, AI로 혁신하는 유안타증권 업무 패러다임**
 
@@ -10,6 +10,12 @@
 
 - 사이트 주소: https://datathinkinglab.github.io/yuanta-ai-training/
 - GitHub 저장소: https://github.com/datathinkinglab/yuanta-ai-training
+
+## 과정 체계
+
+- **Leader:** 임원·본사 팀장·지점장 대상 리더 교육 (현재 사이트의 과정)
+- **Advanced:** 직원 교육
+- **Master:** AI강사양성
 
 ## 교육의 방향
 

@@ -39,7 +39,7 @@
       const root = temp.firstElementChild;
       const meta = team ? root.firstElementChild.innerHTML : '';
       const journey = root.lastElementChild.innerHTML;
-      return `<div class="unified-cover-layout"><div>${logos}${left.innerHTML}<div class="unified-cover-meta">${meta}</div></div><aside class="unified-cover-aside">${right.innerHTML}</aside></div><div class="unified-cover-journey">${journey}</div>`;
+      return `<div class="unified-cover-layout"><div>${logos}<div class="unified-academy">AIbility Academy STEP-UP <b>Leader 과정</b></div>${left.innerHTML}<div class="unified-cover-meta">${meta}</div></div><aside class="unified-cover-aside">${right.innerHTML}</aside></div><div class="unified-cover-journey">${journey}</div>`;
     }
     if (!team && s.type === 'divider') {
       return `<div class="unified-divider-layout"><div><div class="unified-module-number">${esc(s.module)}</div><h1>${esc(s.title)}</h1><p>${esc(s.subtitle)}</p></div><div class="unified-divider-flow"><b>전체 교육 여정에서의 위치</b>${renderJourneyBar(s.journey, true)}</div><div class="unified-divider-steps">${(s.visualFlow || []).map((step,i) => `<span>${i+1}. ${esc(step)}</span>`).join('<i>➔</i>')}</div></div>`;
@@ -64,6 +64,7 @@
     foot.innerHTML = `<div class="unified-left"><button onclick="lectureFrame.toc()">☰ 목차 · 모듈 이동</button><button onclick="lectureFrame.print()">🖨️ PDF 출력</button><button class="unified-fullscreen" onclick="lectureFrame.fullscreen()">${document.fullscreenElement ? '🗗 전체화면 종료' : '⛶ 전체화면 보기'}</button><button onclick="lectureFrame.read()">전체 읽기</button></div><div class="unified-copyright">© 2026 Data Thinking Lab. All rights reserved</div><div class="unified-right"><button id="btn-prev" onclick="lectureFrame.move(-1)" ${index() === 0 ? 'disabled' : ''}>◀ 이전</button><span id="page-indicator"><strong>${String(index()+1).padStart(2,'0')}</strong> / ${SLIDES.length}</span><button id="btn-next" onclick="lectureFrame.move(1)" ${index() === SLIDES.length-1 ? 'disabled' : ''}>다음 ▶</button></div>`;
     if (team) foot.querySelector('.unified-left').insertAdjacentHTML('beforeend','<button onclick="openPopup(\'commonData\')">공통 자료</button>');
     foot.querySelector('.unified-left').insertAdjacentHTML('afterbegin','<a href="index.html">⌂ 메인 화면</a>');
+    foot.querySelector('.unified-copyright').innerHTML = '<strong>AIbility Academy STEP-UP · Leader</strong><small>© 2026 Data Thinking Lab. All rights reserved</small>';
   }
   function scale() {
     stage.style.setProperty('--stage-scale', Math.min(innerWidth / 1600, innerHeight / 900) * .98);

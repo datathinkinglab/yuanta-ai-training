@@ -63,6 +63,10 @@ body .unified-stage { position:fixed; left:50%; top:50%; transform:translate(-50
 .unified-left { gap:8px; }
 .unified-footer button { padding:7px 10px; }
 .unified-copyright { font-size:12px; }
+.unified-copyright strong { display:block; font-size:12px; }
+.unified-copyright small { display:block; font-size:10px; }
+.unified-academy { color:#39B8B2; font-size:20px; font-weight:800; margin-bottom:16px; }
+.unified-academy b { display:inline-block; font-size:14px; color:#101D35; background:#39B8B2; border-radius:6px; padding:4px 10px; margin-left:10px; }
 .unified-cover .unified-body { padding:80px 80px 20px; gap:24px; }
 .unified-cover-layout { flex:1; display:grid; grid-template-columns:1.35fr 1fr; align-items:center; gap:50px; min-height:0; }
 .unified-logos { display:flex; align-items:center; gap:16px; margin-bottom:24px; flex-wrap:wrap; }
