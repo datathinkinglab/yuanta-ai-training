@@ -982,7 +982,7 @@
       }
     }
   </style>
-  <script src="executive-board.js"></script>
+  <script src="executive-board.js?v=20261103-example"></script>
 </head>
 <body>
 
@@ -2190,7 +2190,7 @@
               <p><strong>• 핵심 질문:</strong> 특정 영업 부문의 당사·비교사 차이는 무엇이며, 산출 기준은 동일한가?</p>
               <p><strong>• 꼭 보여줄 사실:</strong> 원자료에서 직접 확인한 두 회사의 당기 수치 및 단위</p>
               <p><strong>• 추가 확인:</strong> 양사 부문 분류 시 포함되는 세부 항목 정의 차이 (확인 필요)</p>
-              <p><strong>• 출처:</strong> 각 사 정기보고서 문서명, 기준일, 원문 목차 번호</p>
+              <p><strong>• 출처:</strong> 각 사 정기보고서 문서명, 기준일, 원문 목차 번호</p><div><button type="button" class="nav-btn" onclick="applyBoardExample(1)" style="background:var(--teal);color:var(--navy);font-weight:800;">작성예시 적용</button></div><p data-board-example-status role="status">예시를 입력칸에 적용한 뒤 실제 검토 내용으로 수정하세요.</p>
             </div>
           `
         },
@@ -2198,7 +2198,7 @@
           <div class="grid-2" style="grid-template-columns: 0.9fr 1.3fr;">
             <div class="card">
               <div>
-                <div class="card-title">진행 순서</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;"><div class="card-title">진행 순서</div><button type="button" class="nav-btn" onclick="applyBoardExample(1)" style="background:var(--teal);color:var(--navy);font-weight:800;">작성예시 적용</button></div><p data-board-example-status role="status" style="font-size:15px;color:var(--gray-600);margin-top:12px;">작성예시는 구조를 채웁니다. 실제 수치와 출처는 확인 후 수정하세요.</p>
                 <div style="display:flex; flex-direction:column; gap:16px; margin-top:16px; font-size:18px;">
                   <div><strong>① 비교표 확인:</strong> 모듈 3에서 검토한 비교표를 다시 확인합니다.</div>
                   <div><strong>② 핵심 사실 선택:</strong> 가장 중요한 사실 1~2개만 고릅니다.</div>
@@ -2255,7 +2255,7 @@
         },
         render: () => `
           <div class="card" style="height:100%; justify-content:space-around;">
-            <div class="card-title">🛠️ 브리핑 보드 화면 요구사항 (입력한 내용은 3단계 프롬프트에 반영됩니다)</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;"><div class="card-title">🛠️ 브리핑 보드 화면 요구사항</div><button type="button" class="nav-btn" onclick="applyBoardExample(2)" style="background:var(--teal);color:var(--navy);font-weight:800;">작성예시 적용</button></div><p data-board-example-status role="status" style="font-size:17px;color:var(--gray-600);">작성예시를 적용하거나 직접 입력하세요. 3단계 프롬프트에 자동 반영됩니다.</p>
             <div class="grid-5" style="height:auto; gap:14px;">
               <div class="req-box">
                 <div style="font-size:15px; font-weight:800; color:var(--teal-dark);">01. 사용자</div>
