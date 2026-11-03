@@ -259,10 +259,18 @@
         content: `1. 전체 복사 기능: 선택한 직원의 요약 수치와 코칭 스크립트 초안을 클립보드로 일괄 복사합니다.\n2. 텍스트(.txt) 저장: 면담 준비 내용을 메모장 파일로 내려받습니다.\n3. 인쇄(Print) 지원: 브라우저 인쇄 기능을 통해 A4 규격 면담 시트로 출력합니다.\n\n※ 주의사항: 원본 HTML은 CSV·TXT 불러오기와 엑셀 표 붙여넣기를 지원하며, .xlsx(엑셀 원본) 파일을 직접 파싱하지는 않습니다.`,
         hideCopy: true
       },
+      example_16: { title: "화면 목적 작성 예시", desc: "먼저 작성한 뒤 참고하여 내 질문에 맞게 바꿔 보세요.", content: "먼저 볼 것: 직원 목록과 직무 필터\n직원 선택 후: 기준월 약정과 6개월 평균, 12개월 추이\n화면을 보고 할 행동: 관찰 사실을 확인하고 열린 질문을 준비합니다." },
+      example_19: { title: "첫 요청문 작성 템플릿", desc: "대괄호를 채우고, 먼저 직접 쓴 요청문과 비교해 보세요.", content: "[사용자]가 [상황]에 활용할 대시보드를 만들어 주세요.\n[가상 데이터]를 불러오고 [먼저 볼 내용]을 보여주세요.\n직원을 선택하면 [상세 정보]를 보여주세요.\n값이 없으면 [표시 방법]으로 안내해 주세요.\n[저장·실행 방식]과 확인 방법도 알려주세요." },
+      example_25: { title: "수정 요청 작성 예시", desc: "본인의 화면에서 확인한 현상으로 바꿔 쓰세요.", content: "직원을 선택해도 이전 직원의 그래프가 남습니다.\n직원을 변경하면 선택한 직원의 12개월 그래프가 표시되도록 수정해 주세요.\n기존 CSV 불러오기와 필터 기능은 유지해 주세요.\n수정된 전체 HTML과 확인 방법을 알려주세요." },
+      example_32: { title: "화면 안내 문장 예시", desc: "실제 화면의 계산 기준을 확인한 뒤 선택해 사용하세요.", content: "값이 없는 경우: 기준월 값이 없으면 ‘데이터 없음’으로 표시합니다.\n비교 기간: 6개월 평균의 산출 기간과 사용한 월 수를 함께 표시합니다.\n단위: 약정 값 옆에 실습에서 정한 단위를 표시합니다." },
+      example_40: { title: "면담 준비 카드 작성 틀", desc: "가상 직원의 데이터로 직접 작성한 뒤 참고하세요.", content: "관찰: [기준월]의 [지표]는 [수치]이며 [비교 기준] 대비 [변화]입니다.\n인정할 점: 데이터에서 확인되는 [사실]을 이야기합니다.\n열린 질문: 어떤 변화가 있었나요? 어떤 맥락을 살펴보면 좋을까요? 어떤 지원이 필요할까요?\n함께 논의할 행동: [직원과 협의할 다음 행동]\n추가 확인: [데이터에 없는 확인 사항]" },
+      example_42: { title: "면담 안내 메시지 틀", desc: "초안을 본인의 말로 고쳐 쓰세요.", content: "[직원 이름]님, [시점]에 최근 업무 흐름과 필요한 지원을 함께 이야기하고 싶습니다.\n편하신 범위에서 공유하고 싶은 점을 생각해 와 주세요.\n대화에서 함께 다음 행동을 정하면 좋겠습니다." },
+      example_48: { title: "추가 기능 요청 예시", desc: "질문과 필요한 데이터, 유지할 기능을 자신의 상황에 맞게 바꾸세요.", content: "확인할 질문: 평균 대비 변화가 큰 직원은 누구인가요?\n사용할 데이터: 가상 직원 실적 CSV의 기준월과 제공된 6개월 평균\n추가 기능: 평균 대비 변화율을 기준으로 정렬\n표시 기준: 비교 기간·단위를 표시하고 평균이 없거나 0이면 비교 불가\n유지 기능: CSV 불러오기, 직원 선택과 12개월 추이" },
+      example_50: { title: "현업 적용 계획 작성 틀", desc: "실제 업무 적용 전 데이터 사용 기준과 승인 여부를 확인하세요.", content: "확인할 질문: [면담이나 지점 운영에서 확인할 질문]\n필요한 데이터·확인할 사람: [자료의 출처·기준과 확인 담당자]\n먼저 해볼 행동: [담당자와 함께 작게 시도할 행동]" },
       prompt_20: {
         title: "공통 생성 프롬프트 전문 (20페이지)",
         desc: "아래 프롬프트를 복사하여 생성형 AI 대화창에 가상 CSV 파일과 함께 전달하세요.",
-        content: `당신은 지점장이 직원 면담을 준비하도록 돕는 대시보드 제작 도우미입니다. 첨부한 CSV는 가상 영업직원 실적입니다. CSV를 불러와 브라우저에서 실행하는 단일 HTML 파일을 만들어 주세요. 직원 목록과 직위·직무 필터를 제공하고, 직원을 선택하면 기준월 약정, 제공된 6개월평균약정, 2025.10~2026.09 월별 약정 추이, 제공된 기준월 순위를 보여주세요. 기준월은 인식된 월 중 최신 월로 표시하세요. (기준월 약정−제공된 6개월 평균)÷제공된 6개월 평균의 변화율을 보여주되, 값이 없거나 분모가 0이면 ‘비교 불가’라고 표시하세요. 수치의 출처·기준월·단위를 표시하고, 교육용 가상 데이터라는 안내를 넣으세요. 실행에 필요한 외부 라이브러리 여부를 명시하고 가능하면 외부 연결 없이 동작하게 해 주세요. 파일 저장과 실행 방법도 설명해 주세요.`
+        content: `당신은 지점장이 직원 면담을 준비하도록 돕는 대시보드 제작 도우미입니다.\n첨부한 CSV는 가상 영업직원 실적입니다.\nCSV를 불러와 브라우저에서 실행하는 단일 HTML 파일을 만들어 주세요.\n직원 목록과 직위·직무 필터를 제공하고, 직원을 선택하면 기준월 약정, 제공된 6개월평균약정, 2025.10~2026.09 월별 약정 추이, 제공된 기준월 순위를 보여주세요.\n기준월은 인식된 월 중 최신 월로 표시하세요.\n(기준월 약정−제공된 6개월 평균)÷제공된 6개월 평균의 변화율을 보여주되, 값이 없거나 분모가 0이면 ‘비교 불가’라고 표시하세요.\n수치의 출처·기준월·단위를 표시하고, 교육용 가상 데이터라는 안내를 넣으세요.\n실행에 필요한 외부 라이브러리 여부를 명시하고 가능하면 외부 연결 없이 동작하게 해 주세요.\n파일 저장과 실행 방법도 설명해 주세요.`
       },
       sample_csv_21: {
         title: "대체용 가상 CSV 샘플 데이터 (파일 첨부 불가 시 복사)",
@@ -272,22 +280,22 @@
       prompt_25: {
         title: "화면 오류 및 개선 수정 요청 프롬프트 (25페이지)",
         desc: "대괄호 [ ] 부분을 내 화면에서 발견한 현상으로 바꾸어 AI에게 전달하세요.",
-        content: `현재 [현상]이 발생합니다. [행동]을 했을 때 [기대 결과]가 나오도록 수정해 주세요. 기존 [유지할 기능]은 유지하고 전체 HTML과 확인 방법을 제공해 주세요.`
+        content: `현재 [현상]이 발생합니다.\n[행동]을 했을 때 [기대 결과]가 나오도록 수정해 주세요.\n기존 [유지할 기능]은 유지하고 전체 HTML과 확인 방법을 제공해 주세요.`
       },
       prompt_34: {
         title: "검증을 위한 계산 기준 및 예외 처리 프롬프트 (33페이지)",
         desc: "결측치 0 처리 방지 및 평균 산출 기간 명시를 위한 검증 프롬프트 전문입니다.",
-        content: `대시보드의 계산을 검토해 주세요. 기준월 값이 없으면 0이 아니라 ‘데이터 없음’, 제공된 6개월 평균이 없거나 0이면 변화율은 ‘비교 불가’로 표시해 주세요. 6개월 평균의 제공값과 월별 값으로 계산한 평균을 구분하고 사용 기간과 월 수를 표시해 주세요. 회기 시작 기준을 알 수 없다면 누계나 회기 평균을 임의로 새로 계산하지 말고 제공된 값만 표시하세요. 수정 후 확인할 사례도 알려주세요.`
+        content: `대시보드의 계산을 검토해 주세요.\n기준월 값이 없으면 0이 아니라 ‘데이터 없음’, 제공된 6개월 평균이 없거나 0이면 변화율은 ‘비교 불가’로 표시해 주세요.\n6개월 평균의 제공값과 월별 값으로 계산한 평균을 구분하고 사용 기간과 월 수를 표시해 주세요.\n회기 시작 기준을 알 수 없다면 누계나 회기 평균을 임의로 새로 계산하지 말고 제공된 값만 표시하세요.\n수정 후 확인할 사례도 알려주세요.`
       },
       prompt_42: {
         title: "직원 면담 준비 카드 생성 프롬프트 (41페이지)",
         desc: "선택한 가상 직원의 수치 데이터만을 기반으로 열린 질문과 면담 초안을 요청합니다.",
-        content: `선택한 가상 직원의 실적 데이터만을 바탕으로 지점장의 면담 준비 카드를 작성해 주세요. ① 기준월·수치·비교 기준을 포함한 관찰 사실, ② 데이터가 뒷받침하는 인정할 점, ③ 원인을 단정하지 않는 열린 질문 세 가지, ④ 직원과 함께 논의할 다음 행동 한 가지, ⑤ 추가 확인할 사항을 제시해 주세요. 데이터에 없는 직원의 노력·성격·역량·고객 상황은 추측하지 말고, 지점장이 검토할 초안이라는 안내를 넣어 주세요.`
+        content: `선택한 가상 직원의 실적 데이터만을 바탕으로 지점장의 면담 준비 카드를 작성해 주세요.\n① 기준월·수치·비교 기준을 포함한 관찰 사실,\n② 데이터가 뒷받침하는 인정할 점,\n③ 원인을 단정하지 않는 열린 질문 세 가지,\n④ 직원과 함께 논의할 다음 행동 한 가지,\n⑤ 추가 확인할 사항을 제시해 주세요.\n데이터에 없는 직원의 노력·성격·역량·고객 상황은 추측하지 말고, 지점장이 검토할 초안이라는 안내를 넣어 주세요.`
       },
       prompt_50: {
         title: "나의 관리 관점 최종 확장 프롬프트 틀 (48페이지)",
         desc: "내가 선택한 기능이나 추가 가상 데이터를 반영할 때 사용하는 요청 틀입니다.",
-        content: `제가 확인할 질문은 [ ]입니다. 사용할 가상 데이터는 [ ]입니다. 화면에 [ ]를 추가해 주세요. 비교 기준·단위와 데이터가 없을 때의 표시를 알려주고 기존 [ ] 기능은 유지해 주세요.`
+        content: `제가 확인할 질문은 [ ]입니다.\n사용할 가상 데이터는 [ ]입니다.\n화면에 [ ]를 추가해 주세요.\n비교 기준·단위와 데이터가 없을 때의 표시를 알려주고 기존 [ ] 기능은 유지해 주세요.`
       }
     };
 
@@ -931,7 +939,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div>
-                <label class="block text-xs font-bold text-[#101D35] mb-1">1. 화면을 열었을 때 먼저 볼 것</label>
+                <label class="block text-xs font-bold text-[#101D35] mb-1">1. 화면을 열었을 때 먼저 볼 것</label> <button type="button" onclick="openPopup('example_16', this)" class="px-2 py-1 rounded bg-teal-50 hover:bg-teal-100 text-[#0D9488] text-xs font-bold border border-teal-200">예시·템플릿 보기</button>
                 <input type="text" value="${escapeHtml(USER_STATE.s16_first)}" oninput="USER_STATE.s16_first=this.value" placeholder="예: 직무·직위 필터와 전체 직원 목록" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs bg-white">
               </div>
               <div>
@@ -1015,7 +1023,7 @@
               <div class="p-2.5 bg-white rounded border border-slate-200"><b>4. 데이터가 없으면 어떻게 표시하나요?</b> (0이 아니라 ‘비교 불가’ 표시)</div>
             </div>
             <div class="lg:col-span-7 bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col">
-              <label class="text-xs font-bold text-[#101D35] mb-1.5">나의 첫 AI 요청문 초안 작성해보기</label>
+              <label class="text-xs font-bold text-[#101D35] mb-1.5">나의 첫 AI 요청문 초안 작성해보기</label> <button type="button" onclick="openPopup('example_19', this)" class="px-2 py-1 rounded bg-teal-50 hover:bg-teal-100 text-[#0D9488] text-xs font-bold border border-teal-200">예시·템플릿 보기</button>
               <textarea rows="5" oninput="USER_STATE.s19_prompt=this.value" placeholder="예: 지점장이 직원 면담을 준비할 때 보는 단일 HTML 대시보드를 만들어 주세요. 첨부한 CSV 파일을 불러와서 직원 목록과 직무·직위 필터를 보여주고..." class="w-full flex-1p-3 rounded-lg border border-slate-300 text-xs bg-white focus:outline-none focus:border-[#0D9488]">${escapeHtml(USER_STATE.s19_prompt)}</textarea>
             </div>
           </div>
@@ -1046,7 +1054,7 @@
                 </button>
               </div>
             </div>
-            <p class="text-xs leading-relaxed font-mono-code text-slate-200 select-all">${escapeHtml(POPUP_DATA.prompt_20.content)}</p>
+            <p class="text-xs leading-relaxed font-mono-code text-slate-200 select-all whitespace-pre-wrap">${escapeHtml(POPUP_DATA.prompt_20.content)}</p>
           </div>
         `,
         footerNote: "주의: 생성한 파일의 독립 실행·외부 연결 여부는 브라우저 실행 및 코드 확인을 통해 직접 검증합니다."
@@ -1205,7 +1213,7 @@
         renderContent: () => `
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 my-auto">
             <div class="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 text-xs">
-              <h3 class="text-sm font-extrabold text-[#101D35] mb-1">실습 4단계</h3>
+              <h3 class="text-sm font-extrabold text-[#101D35] mb-1">실습 4단계</h3> <button type="button" onclick="openPopup('example_25', this)" class="px-2 py-1 rounded bg-teal-50 hover:bg-teal-100 text-[#0D9488] text-xs font-bold border border-teal-200">예시·템플릿 보기</button>
               <div class="p-2.5 bg-white rounded border border-slate-200"><b>① 문제 기록:</b> 화면에서 발견한 문제 한 가지 선택</div>
               <div class="p-2.5 bg-white rounded border border-slate-200"><b>② 수정 요청:</b> 우측 템플릿에 현상·행동·기대 결과를 넣어 AI에 전달</div>
               <div class="p-2.5 bg-white rounded border border-slate-200"><b>③ 수정 파일 저장:</b> 새로 생성된 전체 HTML 저장</div>
@@ -1219,7 +1227,7 @@
                   <button onclick="openPopup('prompt_25', this)" class="px-2.5 py-1 rounded bg-slate-700 text-white text-xs font-bold">팝업 보기</button>
                 </div>
               </div>
-              <p class="font-mono-code text-xs leading-relaxed text-slate-200 select-all my-auto">${escapeHtml(POPUP_DATA.prompt_25.content)}</p>
+              <p class="font-mono-code text-xs leading-relaxed text-slate-200 select-all my-auto whitespace-pre-wrap">${escapeHtml(POPUP_DATA.prompt_25.content)}</p>
               <div class="text-[11px] text-slate-400 mt-2">* 오류가 없다면 직무 필터 색상이나 글자 크기 등 개선하고 싶은 한 가지를 요청해 보세요.</div>
             </div>
           </div>
@@ -1434,7 +1442,7 @@
               <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
                 <label class="block text-xs font-bold text-[#101D35] mb-1.5">
                   화면에 표시할 안내 문장 작성 (질문: 이 안내가 없으면 면담에서 어떤 오해가 생길까요?)
-                </label>
+                </label> <button type="button" onclick="openPopup('example_32', this)" class="px-2 py-1 rounded bg-teal-50 hover:bg-teal-100 text-[#0D9488] text-xs font-bold border border-teal-200">예시·템플릿 보기</button>
                 <input type="text" value="${escapeHtml(USER_STATE.s33_sentence)}" oninput="USER_STATE.s33_sentence=this.value" placeholder="예: 6개월 평균은 2026.04~2026.09(6개 월) 기준이며, 값이 없는 달은 0원이 아니라 집계 제외입니다." class="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs bg-white">
               </div>
             </div>
@@ -1466,7 +1474,7 @@
                 </button>
               </div>
             </div>
-            <p class="text-xs leading-relaxed font-mono-code text-slate-200 select-all">${escapeHtml(POPUP_DATA.prompt_34.content)}</p>
+            <p class="text-xs leading-relaxed font-mono-code text-slate-200 select-all whitespace-pre-wrap">${escapeHtml(POPUP_DATA.prompt_34.content)}</p>
           </div>
         `,
         footerNote: "프롬프트를 전달한 뒤 수정된 HTML을 저장하고 브라우저에서 다시 확인합니다."
@@ -1660,7 +1668,7 @@
         renderContent: () => `
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-auto bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs">
             <div>
-              <label class="font-bold text-[#101D35] block mb-1">① 확인한 사실 1개 (기간·수치·비교 기준 포함)</label>
+              <label class="font-bold text-[#101D35] block mb-1">① 확인한 사실 1개 (기간·수치·비교 기준 포함)</label> <button type="button" onclick="openPopup('example_40', this)" class="px-2 py-1 rounded bg-teal-50 hover:bg-teal-100 text-[#0D9488] text-xs font-bold border border-teal-200">예시·템플릿 보기</button>
               <input type="text" value="${escapeHtml(USER_STATE.s41_fact)}" oninput="USER_STATE.s41_fact=this.value" placeholder="예: 2026.09 약정 19,181로 제공 6개월 평균(17,984) 대비 +6.7% 상승" class="w-full px-3 py-1.5 rounded border border-slate-300 bg-white">
             </div>
             <div>
@@ -1707,7 +1715,7 @@
                 </button>
               </div>
             </div>
-            <p class="text-xs leading-relaxed font-mono-code text-slate-200 select-all">${escapeHtml(POPUP_DATA.prompt_42.content)}</p>
+            <p class="text-xs leading-relaxed font-mono-code text-slate-200 select-all whitespace-pre-wrap">${escapeHtml(POPUP_DATA.prompt_42.content)}</p>
           </div>
         `,
         footerNote: "안내: 가상 데이터만 AI에 제공합니다. 화면에서 정해진 규칙으로 생성된 문구와 AI 대화에서 생성한 문구를 구분합니다."
@@ -1730,7 +1738,7 @@
               <div class="p-2.5 bg-white rounded border border-slate-200"><b>4. 직원이 설명할 여지가 있는가?</b> (열린 대화 초대)</div>
             </div>
             <div class="md:col-span-7 bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col">
-              <label class="text-xs font-bold text-[#101D35] mb-1.5">내가 다듬은 면담 사전 안내 메시지 작성</label>
+              <label class="text-xs font-bold text-[#101D35] mb-1.5">내가 다듬은 면담 사전 안내 메시지 작성</label> <button type="button" onclick="openPopup('example_42', this)" class="px-2 py-1 rounded bg-teal-50 hover:bg-teal-100 text-[#0D9488] text-xs font-bold border border-teal-200">예시·템플릿 보기</button>
               <textarea rows="5" oninput="USER_STATE.s43_msg=this.value" placeholder="초안 문장을 선택한 뒤, 직원이 부담 없이 자신의 이야기를 준비해 올 수 있는 표현으로 고쳐 적어보세요..." class="w-full flex-1p-3 rounded-lg border border-slate-300 text-xs bg-white">${escapeHtml(USER_STATE.s43_msg)}</textarea>
             </div>
           </div>
@@ -1894,13 +1902,13 @@
         title: "내가 선택한 기능을 직접 추가합니다",
         body: "① 질문 작성 → ② 데이터 확인 → ③ AI 수정 요청 → ④ 저장·실행 → ⑤ 새 기능과 기존 기능 점검 순으로 완성합니다.",
         renderContent: () => {
-          const builtPrompt = `제가 확인할 질문은 [${USER_STATE.s50_q}]입니다. 사용할 가상 데이터는 [${USER_STATE.s50_data}]입니다. 화면에 [${USER_STATE.s50_ui}]를 추가해 주세요. 비교 기준·단위와 데이터가 없을 때의 표시를 알려주고 기존 [${USER_STATE.s50_keep}] 기능은 유지해 주세요.`;
+          const builtPrompt = `제가 확인할 질문은 [${USER_STATE.s50_q}]입니다.\n사용할 가상 데이터는 [${USER_STATE.s50_data}]입니다.\n화면에 [${USER_STATE.s50_ui}]를 추가해 주세요.\n비교 기준·단위와 데이터가 없을 때의 표시를 알려주고 기존 [${USER_STATE.s50_keep}] 기능은 유지해 주세요.`;
           return `
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 my-auto">
               <div class="lg:col-span-6 bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2 text-xs">
                 <div class="grid grid-cols-2 gap-2">
                   <div>
-                    <label class="font-bold text-[#101D35] block mb-1">1. 확인할 질문</label>
+                    <label class="font-bold text-[#101D35] block mb-1">1. 확인할 질문</label> <button type="button" onclick="openPopup('example_48', this)" class="px-2 py-1 rounded bg-teal-50 hover:bg-teal-100 text-[#0D9488] text-xs font-bold border border-teal-200">예시·템플릿 보기</button>
                     <input type="text" value="${escapeHtml(USER_STATE.s50_q)}" oninput="USER_STATE.s50_q=this.value; renderCurrentSlide();" class="w-full px-2.5 py-1.5 rounded border border-slate-300 bg-white">
                   </div>
                   <div>
@@ -1925,7 +1933,7 @@
                     <button onclick="openPopup('prompt_50', this)" class="px-2.5 py-1 rounded bg-slate-700 text-white text-xs font-bold">기본 틀 팝업</button>
                   </div>
                 </div>
-                <p class="font-mono-code text-xs leading-relaxed text-slate-200 my-auto select-all">${escapeHtml(builtPrompt)}</p>
+                <p class="font-mono-code text-xs leading-relaxed text-slate-200 my-auto select-all whitespace-pre-wrap">${escapeHtml(builtPrompt)}</p>
               </div>
             </div>
           `;
@@ -1980,7 +1988,7 @@
         renderContent: () => `
           <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 my-auto space-y-3">
             <div>
-              <label class="block text-xs font-extrabold text-[#101D35] mb-1">1. 내 업무에서 확인하고 싶은 질문</label>
+              <label class="block text-xs font-extrabold text-[#101D35] mb-1">1. 내 업무에서 확인하고 싶은 질문</label> <button type="button" onclick="openPopup('example_50', this)" class="px-2 py-1 rounded bg-teal-50 hover:bg-teal-100 text-[#0D9488] text-xs font-bold border border-teal-200">예시·템플릿 보기</button>
               <input type="text" value="${escapeHtml(USER_STATE.s52_q)}" oninput="USER_STATE.s52_q=this.value" placeholder="예: 우리 지점 직원들의 최근 6개월 추세 변화와 면담에서 우선 지원할 포인트는 무엇인가?" class="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs bg-white">
             </div>
             <div>
@@ -2021,7 +2029,7 @@
 
     function escapeJs(str) {
       if (!str) return "";
-      return String(str).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+      return String(str).replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/\r/g, "\\r").replace(/\n/g, "\\n");
     }
 
     // 여정 표시 바 생성
