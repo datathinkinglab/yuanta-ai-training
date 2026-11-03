@@ -42,6 +42,24 @@ function doPost(e) {
     const body = JSON.parse(e.postData.contents);
     lock.waitLock(30000);
     try {
+      if (body.action === 'resetReflections') {
+        const password = PropertiesService.getScriptProperties().getProperty('POLL_RESET_PASSWORD');
+        if (!password) throw new Error('강사용 초기화 비밀번호가 설정되지 않았습니다.');
+        if (String(body.password || '') !== password) throw new Error('비밀번호가 맞지 않습니다.');
+        const notes = sheet_('임원마무리응답', ['참여ID','수정시각','우선 확인할 업무','팀장에게 할 첫 질문']);
+        const last = notes.getLastRow();
+        if (last > 1) {
+          const rows = notes.getRange(2,1,last-1,4).getValues().filter(r => r[0]);
+          if (rows.length) {
+            const archive = sheet_('임원마무리응답_보관', ['초기화 시각','참여ID','수정시각','우선 확인할 업무','팀장에게 할 첫 질문']);
+            const now = new Date();
+            archive.getRange(archive.getLastRow()+1,1,rows.length,5).setValues(rows.map(row => [now].concat(row)));
+            SpreadsheetApp.flush();
+          }
+          notes.getRange(2,1,last-1,4).clearContent();
+        }
+        return result_({ok:true});
+      }
       if (body.action === 'resetPoll') {
         const password = PropertiesService.getScriptProperties().getProperty('POLL_RESET_PASSWORD');
         if (!password) throw new Error('강사용 초기화 비밀번호가 설정되지 않았습니다.');
@@ -87,7 +105,7 @@ function doGet(e) {
         const lastNote = notes.getLastRow();
         const rows = lastNote > 1 ? notes.getRange(2,1,lastNote-1,4).getValues().filter(r => r[2] && r[3]) : [];
         rows.sort((a,b) => new Date(b[1]).getTime() - new Date(a[1]).getTime());
-        return result_({ok:true, items:rows.map(r => ({work:String(r[2]),question:String(r[3])})), total:rows.length});
+        return result_({ok:true, items:rows.map(r => ({work:String(r[2]),question:String(r[3])})), total:rows.length,reflectionResetAvailable:Boolean(PropertiesService.getScriptProperties().getProperty('POLL_RESET_PASSWORD'))});
       }
       const sheet = sheet_(VOTES, ['참여ID','수정시각','선택번호']);
       const counts = [0,0,0,0], last = sheet.getLastRow();
