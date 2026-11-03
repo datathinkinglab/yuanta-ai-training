@@ -1008,11 +1008,11 @@
       <div class="toc-window" onclick="event.stopPropagation()">
         <div class="modal-header" style="background: var(--navy); color: var(--white);">
           <div class="modal-title-group">
-            <span class="module-badge" style="background:var(--teal); color:var(--navy);">전체 51페이지 · 220분</span>
+            <span class="module-badge" style="background:var(--teal); color:var(--navy);">전체 49페이지 · 220분</span>
             <h2 class="modal-title" style="color:var(--white);">유안타증권 임원 AI 교육 — 모듈별 목차 이동</h2>
           </div>
           <div style="display:flex; align-items:center; gap:10px;">
-            <button class="modal-close-btn" style="background:var(--teal); color:var(--navy);" onclick="exportToPDF()">🖨️ PDF 출력 (전체 51p)</button>
+            <button class="modal-close-btn" style="background:var(--teal); color:var(--navy);" onclick="exportToPDF()">🖨️ PDF 출력 (전체 49p)</button>
             <button class="modal-close-btn" onclick="toggleFullscreen()">⛶ 전체화면 전환</button>
             <button class="modal-close-btn" onclick="toggleTOC(false)">닫기 (ESC)</button>
           </div>
@@ -2333,150 +2333,18 @@
           </div>
         `
       },
-      // 33. 4단계: 코드 복사
+      // 32. 코드 복사·저장·실행
       {
-        page: 32,
-        theme: 'white',
-        moduleCode: 'MODULE 04',
-        moduleName: '브리핑 보드 제작',
-        journeyActive: ['b'],
-        title: '4단계: 생성된 HTML 코드를 복사합니다',
-        lead: '코드 블록 우측 상단의 복사 버튼을 클릭하거나 코드 영역 전체를 선택해 복사합니다.',
-        popup: {
-          type: 'check',
-          label: '실습 확인',
-          title: '코드 복사 시 주의사항',
-          html: `
-            <p><strong>코드 블록 바깥에 AI가 덧붙인 인사말이나 설명 문장은 제외</strong>하고 순수 HTML 코드만 복사합니다.</p>
-            <p style="margin-top:12px;">첫 줄의 <code>&lt;!DOCTYPE html&gt;</code>부터 마지막 줄의 <code>&lt;/html&gt;</code>까지 빠짐없이 복사되었는지 확인합니다.</p>
-          `
-        },
-        render: () => `
-          <div class="grid-2">
-            <div class="card">
-              <div>
-                <div class="card-title">화면 지시 (3단계)</div>
-                <div style="display:flex; flex-direction:column; gap:18px; margin-top:20px; font-size:20px;">
-                  <div><strong>① 코드 영역 찾기:</strong> AI 답변 중 어두운 배경의 코드 상자(<code>html</code>)를 찾습니다.</div>
-                  <div><strong>② 코드 복사 버튼 클릭:</strong> 코드 상자 우측 상단에 있는 <strong>[복사(Copy)]</strong> 아이콘을 클릭합니다.</div>
-                  <div><strong>③ 수동 선택 대안:</strong> 복사 버튼이 보이지 않으면 코드 시작부터 끝까지 마우스로 드래그하여 <code>Ctrl + C</code>를 누릅니다.</div>
-                </div>
-              </div>
-              <div class="tag-virtual">설명 문장은 빼고 코드만 복사합니다</div>
-            </div>
-            <div class="qr-placeholder-box" style="background:#0F172A; color:var(--white); border-color:var(--teal); align-items:stretch; text-align:left; justify-content:space-between;">
-              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:12px;">
-                <span style="color:var(--teal); font-family:monospace; font-weight:700;">html</span>
-                <span style="background:var(--teal); color:var(--navy); padding:6px 14px; border-radius:6px; font-weight:800; font-size:15px;">📋 코드 복사 버튼 위치</span>
-              </div>
-              <div style="font-family:monospace; font-size:16px; color:#CBD5E1; line-height:1.6;">
-                &lt;!DOCTYPE html&gt;<br>
-                &lt;html lang="ko"&gt;<br>
-                &lt;head&gt;<br>
-                &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
-                &nbsp;&nbsp;&lt;title&gt;경영 브리핑 보드&lt;/title&gt;<br>
-                &nbsp;&nbsp;... (중략) ...<br>
-                &lt;/html&gt;
-              </div>
-              <div style="text-align:center;">
-                <span class="tag-tbd">[실제 교육용 AI 도구 확정 후 코드 영역 캡처 삽입 예정]</span>
-              </div>
-            </div>
-          </div>
-        `
-      },
-      // 34. 5단계: 파일 저장
-      {
-        page: 33,
-        theme: 'white',
-        moduleCode: 'MODULE 04',
-        moduleName: '브리핑 보드 제작',
-        journeyActive: ['b'],
-        title: '5단계: 복사한 내용을 HTML 파일로 저장합니다',
-        lead: '교육용 텍스트 편집기(메모장 등)에 코드를 붙여넣고 확장자를 .html로 저장합니다.',
-        popup: {
-          type: 'ref',
-          label: '참고: 편집기 저장 설정',
-          title: '교육 PC 환경별 저장 방법 안내',
-          html: `
-            <p>메모장(Notepad) 저장 시 <strong>[파일 형식]을 ‘모든 파일(*.*)’로 변경</strong>한 뒤 파일명을 <code>브리핑보드.html</code>로 입력해야 텍스트 문서(.txt)가 아닌 웹 문서(.html)로 저장됩니다.</p>
-            <p style="margin-top:12px; color:var(--amber); font-weight:700;">* 실제 저장 화면과 파일 형식 선택 방법은 교육장 PC에서 사전 확인한 캡처로 교체합니다.</p>
-          `
-        },
-        render: () => `
-          <div class="grid-4">
-            <div class="card">
-              <div class="card-step-num">① 열기</div>
-              <div class="card-title">텍스트 편집기 열기</div>
-              <div class="card-desc">바탕화면 또는 안내된 교육용 텍스트 편집기(메모장)를 엽니다.</div>
-            </div>
-            <div class="card">
-              <div class="card-step-num">② 붙여넣기</div>
-              <div class="card-title">코드 붙여넣기</div>
-              <div class="card-desc">빈 화면에 복사한 HTML 코드를 붙여넣습니다 (<code>Ctrl + V</code>).</div>
-            </div>
-            <div class="card highlight">
-              <div class="card-step-num">③ 저장하기</div>
-              <div class="card-title">'브리핑보드.html' 저장</div>
-              <div class="card-desc">안내된 교육 폴더에 파일 이름을 <strong>브리핑보드.html</strong>로 입력해 저장합니다.</div>
-            </div>
-            <div class="card">
-              <div class="card-step-num">④ 확장자 확인</div>
-              <div class="card-title">.html 끝자리 확인</div>
-              <div class="card-desc">파일 이름 끝이 <code>.html.txt</code>가 아닌 <strong><code>.html</code></strong>인지 확인합니다.</div>
-            </div>
-          </div>
-        `
-      },
-      // 35. 6단계: 브라우저에서 열기
-      {
-        page: 34,
-        theme: 'white',
-        moduleCode: 'MODULE 04',
-        moduleName: '브리핑 보드 제작',
-        journeyActive: ['b'],
-        title: '6단계: 내가 요청한 브리핑 화면을 확인합니다',
-        lead: '저장한 파일을 브라우저로 열어 질문, 비교표, 출처가 한눈에 들어오는지 확인합니다.',
-        popup: {
-          type: 'check',
-          label: '실습 확인 및 예비 자료 안내',
-          title: '화면이 정상적으로 보이지 않을 때의 해결책',
-          html: `
-            <ul style="margin-left:24px; display:flex; flex-direction:column; gap:12px;">
-              <li><strong>화면이 외계어 같은 코드로 그대로 보이면:</strong> 파일 확장자가 <code>.txt</code>로 저장된 것입니다. 이름 바꾸기로 끝을 <code>.html</code>로 변경합니다.</li>
-              <li><strong>빈 화면이거나 표가 깨져 보이면:</strong> 코드가 끝까지 복사·저장되었는지 확인합니다.</li>
-              <li><strong>즉시 해결이 어려우면:</strong> 지체하지 말고 교육 폴더에 사전 준비된 <strong>‘중간 결과물(예비 HTML 파일)’</strong>을 열어 다음 수정·검증 단계를 이어갑니다.</li>
-            </ul>
-          `
-        },
-        render: () => `
-          <div class="grid-4">
-            <div class="card">
-              <div class="card-step-num">① 파일 찾기</div>
-              <div class="card-title">저장한 파일 찾기</div>
-              <div class="card-desc">교육 폴더에 저장된 <code>브리핑보드.html</code> 아이콘(크롬/엣지 모양)을 찾습니다.</div>
-            </div>
-            <div class="card highlight">
-              <div class="card-step-num">② 열기</div>
-              <div class="card-title">브라우저로 열기</div>
-              <div class="card-desc">파일을 더블클릭하여 웹 브라우저 화면으로 엽니다.</div>
-            </div>
-            <div class="card">
-              <div class="card-step-num">③ 구성 확인</div>
-              <div class="card-title">질문·비교표·출처 확인</div>
-              <div class="card-desc">요청한 분석 질문, 비교표, 사실/해석, 출처가 모두 표시되는지 봅니다.</div>
-            </div>
-            <div class="card">
-              <div class="card-step-num">④ 오류 피드백</div>
-              <div class="card-title">문제 발생 시 전달</div>
-              <div class="card-desc">화면이 깨지거나 누락된 부분이 있으면 그 증상을 AI에게 말합니다.</div>
-            </div>
-          </div>
-        `
+        page: 32, theme: 'white', moduleCode: 'MODULE 04', moduleName: '브리핑 보드 제작', journeyActive: ['b'],
+        title: '4~6단계: 코드를 복사하고, 저장한 뒤 화면을 엽니다',
+        lead: 'AI가 작성한 HTML 코드 전체를 하나의 파일로 저장해 브라우저에서 확인합니다.',
+        bottomMsg: '확인: 코드의 처음과 끝이 모두 있는가? · 파일명이 브리핑보드.html인가? · 질문·비교표·출처가 표시되는가?',
+        popup: {type:'check', label:'참고: 저장·실행 문제 해결', title:'파일이 정상적으로 열리지 않을 때', html: `<ul style="margin-left:24px;display:flex;flex-direction:column;gap:16px;"><li><strong>복사 범위:</strong> AI 설명 문장을 제외하고 <code>&lt;!DOCTYPE html&gt;</code>부터 <code>&lt;/html&gt;</code>까지 복사합니다. 복사 버튼이 없으면 코드 전체를 선택해 Ctrl+C를 누릅니다.</li><li><strong>메모장 저장:</strong> ‘다른 이름으로 저장’에서 파일 형식을 ‘모든 파일(*.*)’, 인코딩을 UTF-8로 지정하고 <code>브리핑보드.html</code>로 저장합니다.</li><li><strong>코드가 그대로 보이면:</strong> 파일명이 <code>.html.txt</code>로 끝나는지 확인하고 <code>.html</code>로 수정합니다. 필요하면 ‘연결 프로그램 → Chrome/Edge’를 선택합니다.</li><li><strong>빈 화면·깨진 표:</strong> 코드가 끝까지 복사됐는지 확인합니다. 해결이 어려우면 준비된 예비 HTML 파일로 다음 실습을 이어갑니다.</li></ul>`},
+        render: () => `<div class="grid-3"><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:20px;">4단계 · 복사</span><div class="card-title">HTML 코드 전체 복사</div><div class="card-desc" style="margin-top:20px;font-size:21px;">AI 답변의 <strong>코드 복사</strong> 버튼을 누릅니다.<br><br><code>&lt;!DOCTYPE html&gt;</code>부터 <code>&lt;/html&gt;</code>까지 포함하고, 코드 밖의 설명은 제외합니다.</div></div><div class="tag-virtual">코드의 시작과 끝 확인</div></div><div class="card highlight"><div><span class="module-badge" style="display:inline-block;margin-bottom:20px;">5단계 · 저장</span><div class="card-title">브리핑보드.html로 저장</div><div class="card-desc" style="margin-top:20px;font-size:21px;">메모장을 열고 <strong>Ctrl+V</strong>로 붙여넣습니다.<br><br>‘다른 이름으로 저장’에서 <strong>모든 파일 · UTF-8</strong>을 선택하고 <strong>브리핑보드.html</strong>로 저장합니다.</div></div><div class="tag-virtual">.html.txt가 아닌 .html</div></div><div class="card"><div><span class="module-badge" style="display:inline-block;margin-bottom:20px;">6단계 · 실행</span><div class="card-title">브라우저에서 화면 확인</div><div class="card-desc" style="margin-top:20px;font-size:21px;">저장한 파일을 <strong>더블클릭</strong>해 Chrome/Edge에서 엽니다.<br><br><strong>질문·비교표·사실/해석·출처</strong>를 확인하고, 누락이나 오류는 AI에게 구체적으로 전달합니다.</div></div><div class="tag-virtual">다음: 자연어로 화면 수정</div></div></div>`
       },
       // 36. 7단계: 자연어로 수정
       {
-        page: 35,
+        page: 33,
         theme: 'white',
         moduleCode: 'MODULE 04',
         moduleName: '브리핑 보드 제작',
@@ -2528,7 +2396,7 @@
       },
       // 37. 8단계: 보드 검증
       {
-        page: 36,
+        page: 34,
         theme: 'white',
         moduleCode: 'MODULE 04',
         moduleName: '브리핑 보드 제작',
@@ -2556,7 +2424,7 @@
       },
       // 38. 실습 결과와 다음 질문
       {
-        page: 37,
+        page: 35,
         theme: 'white',
         moduleCode: 'MODULE 04',
         moduleName: '브리핑 보드 제작',
@@ -2603,7 +2471,7 @@
       },
       // 39. 모듈 5 간지
       {
-        page: 38,
+        page: 36,
         theme: 'navy',
         type: 'divider',
         moduleCode: 'MODULE 05',
@@ -2614,7 +2482,7 @@
       },
       // 40. 참여: 보드에서 다음 행동으로
       {
-        page: 39,
+        page: 37,
         theme: 'white',
         moduleCode: 'MODULE 05',
         moduleName: '부서 실행 과제로 연결',
@@ -2647,7 +2515,7 @@
       },
       // 41. 외부 사실에서 내부 질문으로
       {
-        page: 40,
+        page: 38,
         theme: 'white',
         moduleCode: 'MODULE 05',
         moduleName: '부서 실행 과제로 연결',
@@ -2694,7 +2562,7 @@
       },
       // 42. 팀장 교육에서 이어지는 과정
       {
-        page: 41,
+        page: 39,
         theme: 'white',
         moduleCode: 'MODULE 05',
         moduleName: '부서 실행 과제로 연결',
@@ -2749,7 +2617,7 @@
       },
       // 43. 공통으로 사용하는 다섯 질문
       {
-        page: 42,
+        page: 40,
         theme: 'white',
         moduleCode: 'MODULE 05',
         moduleName: '부서 실행 과제로 연결',
@@ -2806,7 +2674,7 @@
       },
       // 44. 실행 과제 카드 작성
       {
-        page: 43,
+        page: 41,
         theme: 'white',
         moduleCode: 'MODULE 05',
         moduleName: '부서 실행 과제로 연결',
@@ -2866,7 +2734,7 @@
       },
       // 45. 과제 카드 점검
       {
-        page: 44,
+        page: 42,
         theme: 'white',
         moduleCode: 'MODULE 05',
         moduleName: '부서 실행 과제로 연결',
@@ -2918,7 +2786,7 @@
 
       // 47. 모듈 6 간지
       {
-        page: 45,
+        page: 43,
         theme: 'navy',
         type: 'divider',
         moduleCode: 'MODULE 06',
@@ -2929,7 +2797,7 @@
       },
       // 48. 역할 연결
       {
-        page: 46,
+        page: 44,
         theme: 'white',
         moduleCode: 'MODULE 06',
         moduleName: 'AI 리더십과 조직 실행',
@@ -2992,7 +2860,7 @@
       },
       // 49. AX 추진 흐름
       {
-        page: 47,
+        page: 45,
         theme: 'white',
         moduleCode: 'MODULE 06',
         moduleName: 'AI 리더십과 조직 실행',
@@ -3045,7 +2913,7 @@
       },
       // 50. 첫 과제 선택 기준
       {
-        page: 48,
+        page: 46,
         theme: 'white',
         moduleCode: 'MODULE 06',
         moduleName: 'AI 리더십과 조직 실행',
@@ -3087,7 +2955,7 @@
       },
       // 51. 성과 점검
       {
-        page: 49,
+        page: 47,
         theme: 'white',
         moduleCode: 'MODULE 06',
         moduleName: 'AI 리더십과 조직 실행',
@@ -3142,7 +3010,7 @@
       },
       // 52. 임원의 실행 질문
       {
-        page: 50,
+        page: 48,
         theme: 'white',
         moduleCode: 'MODULE 06',
         moduleName: 'AI 리더십과 조직 실행',
@@ -3196,7 +3064,7 @@
       },
       // 51. 마무리 참여
       {
-        page: 51,
+        page: 49,
         theme: 'white',
         moduleCode: 'MODULE 06',
         moduleName: 'AI 리더십과 조직 실행',
@@ -3441,7 +3309,7 @@
             <button class="nav-btn" onclick="toggleTOC(true)" title="전체 목차 및 모듈 이동">
               ☰ 목차 · 모듈 이동
             </button>
-            <button class="nav-btn" onclick="exportToPDF()" title="전체 51페이지 슬라이드를 PDF로 인쇄/저장합니다">
+            <button class="nav-btn" onclick="exportToPDF()" title="전체 49페이지 슬라이드를 PDF로 인쇄/저장합니다">
               🖨️ PDF 출력
             </button>
             <button class="nav-btn fs-toggle-btn" onclick="toggleFullscreen()" title="전체화면 보기 전환 (F)">
@@ -3456,9 +3324,9 @@
               ◀ 이전
             </button>
             <span class="page-indicator">
-              <span class="current">${pageNumStr}</span> / 51
+              <span class="current">${pageNumStr}</span> / 49
             </span>
-            <button class="nav-btn" onclick="nextSlide()" ${slide.page === 51 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+            <button class="nav-btn" onclick="nextSlide()" ${slide.page === 49 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
               다음 ▶
             </button>
           </div>
@@ -3722,9 +3590,9 @@
         { title: '오프닝 및 모듈 1. AI 시대의 임원 업무', time: '30분 (01~09p)', range: [1, 9] },
         { title: '모듈 2. 공시자료와 경영 질문', time: '25분 (10~16p)', range: [10, 16] },
         { title: '모듈 3. AI 비교 브리핑 초안', time: '40분 (17~25p)', range: [17, 25] },
-        { title: '모듈 4. 브리핑 보드 제작', time: '60분 (26~37p)', range: [26, 37] },
-        { title: '모듈 5. 부서 실행 과제로 연결', time: '35분 (38~44p)', range: [38, 44] },
-        { title: '모듈 6. AI 리더십과 조직 실행', time: '30분 (45~51p)', range: [45, 51] }
+        { title: '모듈 4. 브리핑 보드 제작', time: '60분 (26~35p)', range: [26, 35] },
+        { title: '모듈 5. 부서 실행 과제로 연결', time: '35분 (36~42p)', range: [36, 42] },
+        { title: '모듈 6. AI 리더십과 조직 실행', time: '30분 (43~49p)', range: [43, 49] }
       ];
 
       const tocContent = document.getElementById('toc-content');
