@@ -1612,116 +1612,22 @@
           </div>
         `
       },
-      // 15. 참여: 경영 질문 선정
+      // 15. 경영 질문과 설명
       {
-        page: 15,
-        theme: 'white',
-        moduleCode: 'MODULE 02',
-        moduleName: '공시자료와 경영 질문',
-        journeyActive: ['q', 'd'],
-        title: '오늘 어떤 질문을 가장 먼저 확인하시겠습니까?',
-        lead: '최종 실습 질문은 준비된 공시자료에서 답할 수 있는 범위로 선정합니다.',
-        bottomMsg: '접속이 어려우면 번호를 선택하거나 직접 질문을 적어주세요.',
-        render: () => `
-          <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;">
-            <div style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
-              <div class="poll-option" onclick="this.classList.toggle('selected')">
-                <span>① 주요 항목은 기간에 따라 어떻게 변했는가?</span>
-              </div>
-              <div class="poll-option" onclick="this.classList.toggle('selected')">
-                <span>② 같은 기준에서 회사별 차이는 무엇인가?</span>
-              </div>
-              <div class="poll-option" onclick="this.classList.toggle('selected')">
-                <span>③ 이 차이를 이해하기 위해 무엇을 더 확인해야 하는가?</span>
-              </div>
-              <div class="input-field-group" style="margin-top:4px;">
-                <label>직접 질문 적어보기 (선택사항)</label>
-                <input type="text" class="slide-input" placeholder="여기에 확인하고 싶은 경영 질문을 직접 입력해 보세요...">
-              </div>
-            </div>
-            <div class="qr-placeholder-box">
-              <div class="qr-frame">설문 링크 확정 후<br>QR 삽입 영역<br><span class="tag-tbd" style="margin-top:8px;">[확정 필요]</span></div>
-              <div style="font-size:17px; font-weight:700; color:var(--navy);">단축 링크: <span class="tag-tbd">[응답 URL 확정 필요]</span></div>
-              <div style="font-size:15px; color:var(--gray-600);">시간 및 운영 환경에 따라 구두 응답 또는 화면 직접 입력으로 진행할 수 있습니다.</div>
-            </div>
-          </div>
-        `
+        page: 15, theme: 'white', moduleCode: 'MODULE 02', moduleName: '공시자료와 경영 질문', journeyActive: ['q', 'd'],
+        title: '세 가지 질문으로 경쟁환경을 읽습니다',
+        lead: '먼저 실적을 확인하고, 같은 기준으로 비교한 뒤, 경영진이 추가로 확인할 질문으로 연결합니다.',
+        bottomMsg: '질문 → 확인할 수치와 근거 → 추가 확인 사항의 순서로 브리핑을 구성합니다.',
+        render: () => `<div class="grid-3"><div class="card"><div><div class="card-step-num">01 · 현황</div><div class="card-title" style="font-size:26px;">2026년 상반기 실적은 어떠한가?</div><div class="card-desc" style="margin-top:20px; font-size:21px;">영업수익·영업이익·당기순이익을 확인합니다. 전년 동기 누적 수치가 있을 때만 증감을 비교합니다.</div></div><div class="tag-virtual">확인: 기간·수치·출처</div></div><div class="card"><div><div class="card-step-num">02 · 비교</div><div class="card-title" style="font-size:26px;">같은 기준에서 세 회사의 차이는 무엇인가?</div><div class="card-desc" style="margin-top:20px; font-size:21px;">연결 기준과 금액 단위를 맞춰 비교합니다. 총액의 크기와 수익 구조의 차이를 구분해서 읽습니다.</div></div><div class="tag-virtual">점검: 연결·기간·단위</div></div><div class="card"><div><div class="card-step-num">03 · 추가 확인</div><div class="card-title" style="font-size:26px;">차이를 설명하려면 무엇을 더 물어야 하는가?</div><div class="card-desc" style="margin-top:20px; font-size:21px;">공시에 적힌 사실과 가능한 해석을 나눕니다. 원인이 확인되지 않으면 필요한 자료와 내부 질문으로 남깁니다.</div></div><div class="tag-virtual">구분: 사실·해석·미확인</div></div></div>`
       },
-      // 16. 실습 질문과 자료 묶음
+      // 16. 실습 질문과 발췌본
       {
-        page: 16,
-        theme: 'white',
-        moduleCode: 'MODULE 02',
-        moduleName: '공시자료와 경영 질문',
-        journeyActive: ['q', 'd'],
-        title: '하나의 질문과 필요한 자료를 준비합니다',
-        lead: '모듈 3에서 AI에게 전달할 공통 실습 질문과 검증된 자료 묶음을 최종 확인합니다.',
-        bottomMsg: '완료: 질문과 자료를 확인했다면 AI에게 정보 정리를 요청합니다.',
-        popup: {
-          type: 'ref',
-          label: '참고: 원문 자료 목록 및 위치',
-          title: '실습용 공개 공시 자료명 · 원문 위치 참고표',
-          html: `
-            <table class="slide-table" style="font-size:16px;">
-              <thead>
-                <tr>
-                  <th>구분</th>
-                  <th>문서명</th>
-                  <th>항목 위치</th>
-                  <th>원문 URL</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>유안타증권</td>
-                  <td><span class="tag-tbd">[보고서명 확정 필요]</span></td>
-                  <td><span class="tag-tbd">[목차·페이지 확정 필요]</span></td>
-                  <td><button class="nav-btn" disabled style="opacity:0.5; cursor:not-allowed;">링크 비활성 (사전 확정 전)</button></td>
-                </tr>
-                <tr>
-                  <td>비교 증권사</td>
-                  <td><span class="tag-tbd">[보고서명 확정 필요]</span></td>
-                  <td><span class="tag-tbd">[목차·페이지 확정 필요]</span></td>
-                  <td><button class="nav-btn" disabled style="opacity:0.5; cursor:not-allowed;">링크 비활성 (사전 확정 전)</button></td>
-                </tr>
-              </tbody>
-            </table>
-            <p style="margin-top:14px; font-size:16px; color:var(--gray-600);">* 실제 원문 링크가 확정되기 전에는 링크 버튼을 비활성 상태로 유지하며, 교육 시 검증된 로컬 발췌본 파일을 사용합니다.</p>
-          `
-        },
-        render: () => `
-          <div class="grid-2">
-            <div class="card navy-card">
-              <div>
-                <span class="module-badge" style="background:var(--teal); color:var(--navy);">공통 실습 질문</span>
-                <div class="card-title" style="font-size:28px; margin-top:18px; color:var(--white);">
-                  실습 질문: <span class="tag-tbd">[자료 확인 후 확정]</span>
-                </div>
-                <div class="card-desc" style="margin-top:16px;">
-                  두 회사의 공개 공시자료에서 동일 기준으로 확인되는 핵심 차이는 무엇이며, 경영진이 내부에 추가로 물어봐야 할 질문은 무엇인가?
-                </div>
-              </div>
-              <div style="font-size:16px; color:var(--teal);">✓ 준비된 공시 발췌본 내에서 사실 확인이 가능한 질문</div>
-            </div>
-            <div class="card">
-              <div>
-                <div class="card-title">📦 실습 자료 묶음 및 비교 기준</div>
-                <div style="display:flex; flex-direction:column; gap:14px; margin-top:16px; font-size:18px;">
-                  <div style="padding:14px; background:var(--gray-50); border-radius:8px;">
-                    <strong>제공 자료:</strong> <span class="tag-tbd">[회사별 보고서·발췌본 확정 필요]</span>
-                  </div>
-                  <div style="padding:14px; background:var(--gray-50); border-radius:8px;">
-                    <strong>비교 기준:</strong> <span class="tag-tbd">[기간·범위·단위 확정 필요]</span>
-                  </div>
-                </div>
-              </div>
-              <label class="check-item" style="margin-top:14px;">
-                <input type="checkbox">
-                <span>질문과 자료 범위를 확인했습니다 (모듈 3 준비 완료)</span>
-              </label>
-            </div>
-          </div>
-        `
+        page: 16, theme: 'white', moduleCode: 'MODULE 02', moduleName: '공시자료와 경영 질문', journeyActive: ['q', 'd'],
+        title: '세 발췌본으로 상반기 실적 비교표를 만듭니다',
+        lead: '아래 PDF 세 개를 내려받아 AI 대화창에 함께 첨부합니다. 11페이지의 전체 보고서는 원문을 더 확인할 때 사용합니다.',
+        bottomMsg: '손익: 2026.01~06 누적 · 재무상태: 2026.06.30 · 연결 기준 · 단위 통일 · PDF 쪽수와 원문 페이지 함께 표기',
+        popup: {type:'ref', label:'참고: 자료와 비교 기준', title:'발췌본에서 어디를 확인하나요?', html: `<p>세 자료는 2026년 6월 반기보고서의 핵심발췌본입니다. 아래 쪽수는 발췌 PDF의 순서이며, 문서 하단의 DART 원문 페이지와 다릅니다.</p><table class="slide-table" style="margin-top:16px;"><thead><tr><th>회사</th><th>요약재무정보 시작</th><th>연결 재무제표 시작</th></tr></thead><tbody><tr><td>유안타증권</td><td>PDF 19쪽 · 원문 50쪽</td><td>PDF 22쪽 · 원문 56쪽</td></tr><tr><td>한화투자증권</td><td>PDF 23쪽 · 원문 80쪽</td><td>PDF 27쪽 · 원문 84쪽</td></tr><tr><td>대신증권</td><td>PDF 26쪽 · 원문 113쪽</td><td>PDF 29쪽 · 원문 116쪽</td></tr></tbody></table><p style="margin-top:16px;">손익은 반기 누적 열을 사용합니다. 요약재무정보의 전년도 연간 실적을 전년 동기 실적으로 오인하지 않습니다. 같은 기간의 수치가 발췌본에 없으면 ‘확인 필요’로 남깁니다.</p>`},
+        render: () => `<div class="grid-2" style="grid-template-columns:1fr 1.1fr;"><div class="card"><div class="card-title">① 실습 자료 준비</div><div style="display:flex; flex-direction:column; gap:10px; margin-top:12px; font-size:19px;"><a href="downloads/%EC%9C%A0%EC%95%88%ED%83%80%EC%A6%9D%EA%B6%8C_%EB%B0%98%EA%B8%B0%EB%B3%B4%EA%B3%A0%EC%84%9C_%ED%95%B5%EC%8B%AC%EB%B0%9C%EC%B7%8C%EB%B3%B8(2026.06).pdf" target="_blank" rel="noopener" style="display:block; padding:12px 16px; background:var(--gray-50); border-radius:8px; text-decoration:none; color:var(--navy);"><strong>유안타증권 · 핵심발췌본 PDF ↗</strong><div style="font-size:15px; color:var(--gray-600); margin-top:4px;">30쪽 · 재무 확인: PDF 19~26쪽</div></a><a href="downloads/%ED%95%9C%ED%99%94%ED%88%AC%EC%9E%90%EC%A6%9D%EA%B6%8C_%EB%B0%98%EA%B8%B0%EB%B3%B4%EA%B3%A0%EC%84%9C_%ED%95%B5%EC%8B%AC%EB%B0%9C%EC%B7%8C%EB%B3%B8(2026.06).pdf" target="_blank" rel="noopener" style="display:block; padding:12px 16px; background:var(--gray-50); border-radius:8px; text-decoration:none; color:var(--navy);"><strong>한화투자증권 · 핵심발췌본 PDF ↗</strong><div style="font-size:15px; color:var(--gray-600); margin-top:4px;">31쪽 · 재무 확인: PDF 23~30쪽</div></a><a href="downloads/%EB%8C%80%EC%8B%A0%EC%A6%9D%EA%B6%8C_%EB%B0%98%EA%B8%B0%EB%B3%B4%EA%B3%A0%EC%84%9C_%ED%95%B5%EC%8B%AC%EB%B0%9C%EC%B7%8C%EB%B3%B8(2026.06).pdf" target="_blank" rel="noopener" style="display:block; padding:12px 16px; background:var(--gray-50); border-radius:8px; text-decoration:none; color:var(--navy);"><strong>대신증권 · 핵심발췌본 PDF ↗</strong><div style="font-size:15px; color:var(--gray-600); margin-top:4px;">31쪽 · 재무 확인: PDF 26~31쪽</div></a></div><div style="font-size:17px; color:var(--gray-600); margin-top:12px;">파일 세 개를 AI에 첨부한 뒤 오른쪽 질문을 전달합니다.</div></div><div class="card navy-card"><div><div class="card-title" style="color:var(--white);">② AI에게 요청할 내용</div><div class="card-desc" style="font-size:21px; margin-top:18px;">“세 회사의 2026년 상반기 <strong>연결 영업수익·영업이익·당기순이익</strong>과 6월 말 <strong>자산·자본</strong>을 비교해 주세요. 금액 단위를 통일하고 각 수치의 출처를 적어 주세요.”</div><div class="card-desc" style="font-size:19px; margin-top:20px;">이어 <strong>확인된 차이 3개</strong>와 <strong>경영진의 추가 확인 질문 3개</strong>를 정리합니다. 확인할 수 없는 수치는 추정하지 않고 ‘확인 필요’로 표시합니다.</div></div><div class="tag-virtual">산출물: 근거가 붙은 3사 비교표 + 추가 질문</div></div></div>`
       },
       // 17. 모듈 3 간지
       {
