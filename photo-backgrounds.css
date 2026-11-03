@@ -10,3 +10,9 @@ body[data-photo-course] .unified-dark .unified-cover-aside {background:rgba(10,1
 body[data-photo-course] .unified-dark .unified-divider-flow {background:rgba(10,18,32,.62);}
 body[data-photo-course] .unified-dark h1,body[data-photo-course] .unified-dark h2 {text-shadow:0 2px 20px rgba(0,0,0,.4);}
 @media print {.photo-portal-hero,body[data-photo-course] .unified-dark{print-color-adjust:exact;-webkit-print-color-adjust:exact;}}
+
+/* Executive deck retains its original presentation renderer. */
+body[data-photo-course="executives"] .slide.theme-navy{background-image:linear-gradient(90deg,rgba(10,18,32,.94) 0%,rgba(10,18,32,.80) 48%,rgba(10,18,32,.38) 100%),var(--lecture-photo)!important;background-size:cover!important;background-position:center!important;}
+body[data-photo-course="executives"] .theme-navy .slide-footer{background:rgba(10,18,32,.85);}
+body[data-photo-course="executives"] .theme-navy .executive-workflow{background:rgba(10,18,32,.7);}
+@media print{body[data-photo-course="executives"] .slide.theme-navy{print-color-adjust:exact;-webkit-print-color-adjust:exact;}}
