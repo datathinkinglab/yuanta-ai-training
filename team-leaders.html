@@ -409,6 +409,25 @@
     showToast('작성한 모든 입력 메모가 초기화되었습니다.', true);
   }
 
+  function resetWorkshop09to14() {
+    if (!confirm('이 화면에서 작성한 9~14페이지의 실습 입력을 초기화하시겠습니까?\n9~13페이지에서 자동 저장된 내용도 빈 내용으로 갱신됩니다.')) return;
+    const fields = ['taskName', 'taskPain', 'taskStart', 'taskEnd', 'asIsStep1', 'asIsStep2', 'asIsStep3', 'asIsStep4', 'review13', 'bottleneckStage', 'bottleneckCause', 'bottleneckCheck'];
+    fields.forEach(key => { userState[key] = ''; });
+    userState.bottleneckEvidence = '경험에 따른 추정 (기록 확인 필요)';
+    if (document.body.classList.contains('unified-read')) {
+      document.querySelectorAll('input[oninput], textarea[oninput], select[onchange]').forEach(el => {
+        const handler = el.getAttribute('oninput') || el.getAttribute('onchange') || '';
+        const match = handler.match(/updateField\('([^']+)'/);
+        if (match && (fields.includes(match[1]) || match[1] === 'bottleneckEvidence')) el.value = userState[match[1]];
+      });
+      document.querySelectorAll('[data-prompt12-preview]').forEach(el => { el.textContent = buildPrompt12(); });
+    } else {
+      renderSlide();
+    }
+    if (window.scheduleWorkshopSave) window.scheduleWorkshopSave('taskName');
+    showToast('9~14페이지 입력을 초기화했습니다. 저장 내용을 갱신하고 있습니다.', true);
+  }
+
   // ============================================================================
   // 2. COMMON DATA & TEXT CONSTANTS
   // ============================================================================
@@ -1305,6 +1324,9 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             <h2 class="text-2xl sm:text-3xl font-extrabold text-[#101D35] mt-0.5">오늘 개선할 우리 부서 업무 하나를 고릅니다</h2>
           </div>
           <div class="flex flex-wrap gap-2">
+            <button onclick="resetWorkshop09to14()" class="px-3 py-1.5 rounded-lg bg-white hover:bg-red-50 text-red-700 border border-red-300 text-xs font-bold">
+              ↺ 9~14페이지 입력 초기화
+            </button>
             <button onclick="fillSampleTask()" class="px-3 py-1.5 rounded-lg bg-[#E6F7F6] hover:bg-[#d0f0ee] text-[#101D35] border border-[#39B8B2] text-xs font-bold">
               ✨ 가상 예시로 자동 채우기
             </button>
