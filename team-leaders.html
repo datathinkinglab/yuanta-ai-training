@@ -179,7 +179,10 @@
       user-select: text;
       white-space: pre-wrap;
       word-break: break-all;
+      max-height: 16rem;
+      overflow-y: auto;
     }
+    @media print { .prompt-box { max-height: none !important; overflow: visible !important; } }
     @media (min-width: 768px) {
       .prompt-box {
         padding: 12px 16px;
@@ -332,6 +335,7 @@
     asIsStep2: '',
     asIsStep3: '',
     asIsStep4: '',
+    review13: '',
     bottleneckStage: '',
     bottleneckEvidence: '경험에 따른 추정 (기록 확인 필요)',
     bottleneckCause: '',
@@ -374,6 +378,22 @@
 
   function updateField(key, value) {
     userState[key] = value;
+    document.querySelectorAll('[data-prompt12-preview]').forEach(el => {
+      el.textContent = buildPrompt12();
+    });
+  }
+
+  function formatPrompt(value) {
+    return value.replace(/\.\s+(?=\S)/g, '.\n\n');
+  }
+
+  function copyDisplayedPrompt(button, label) {
+    const prompt = button.closest('.unified-body').querySelector('[data-copy-prompt]');
+    if (prompt) copyText(prompt.textContent, label);
+  }
+
+  function copyBoardWithData() {
+    copyText(COMMON_DATA_TEXT + '\n\n' + formatPrompt(PROMPT_26), '가상 데이터 8건 + 보드 생성 요청문 통합본');
   }
 
   function clearAllUserInputs() {
@@ -416,15 +436,26 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
 - 오늘 마감 미완료: 1건(T02) → 마감일 = 기준일 이고 상태가 완료가 아닌 경우
 - 기한 확인 필요: 1건(T07) → 마감일이 '미정'인 경우`;
 
-  const PROMPT_12 = `아래는 부서 업무를 일반화하고 세부 내용을 가상화한 설명입니다. 업무명: [입력], 시작·종료: [입력], 현재 단계: [입력], 반복되는 어려움: [입력], 근거 상태: [기록 확인/경험에 따른 추정/확인 필요]. 현재 흐름을 단계·입력·담당 역할·처리 및 대기·완료 조건·다음 전달정보로 정리해 주세요. 제공하지 않은 시간과 원인은 만들지 마세요. 병목 후보와 추가 확인 질문을 제시하고 사실·가설을 구분하세요. 부서에서 검토할 개선 후보 2개를 제안하되 효과를 단정하지 마세요.`;
+  const PROMPT_12 = `아래는 부서 업무를 일반화하고 세부 내용을 가상화한 설명입니다.
 
-  const PROMPT_18 = `다음은 AI 제안에 대한 팀장의 판단입니다: [제안별 채택·수정·보류와 이유]. 현재 흐름과 개선 후 흐름을 비교해 바뀌는 단계, 줄이려는 대기·재작업, 입력 기준, 사람의 검토 책임, 예외, 측정 지표를 정리해 주세요. 필수자료가 빠진 가상 요청 한 건을 어떻게 처리할지도 확인하고, 보드에 추가할 기능 한 가지와 화면 밖에서 바꿀 기준 한 가지를 제시해 주세요.`;
+업무명: [입력]
+시작·종료: [입력]
+현재 단계: [입력]
+반복되는 어려움: [입력]
+근거 상태: [기록 확인 / 경험에 따른 추정 / 확인 필요]
 
-  const PROMPT_26 = `앞서 제공한 교육용 가상 과제 8건으로 본사 팀장용 팀 운영 관리 보드를 단일 HTML 파일로 만들어주세요. 외부 라이브러리·서버·API 없이 동작하고 CSS와 JavaScript를 파일 안에 포함하세요. '교육용 가상 자료', 기준일 2026-11-16, '변경사항은 새로고침 시 초기화됩니다'를 표시하세요. 전체 과제·미완료·기한 경과 미완료·오늘 마감 미완료·기한 확인 필요를 표시하세요. 기한 경과는 마감일이 기준일보다 빠르고 미완료인 경우이며 마감 미정은 별도 표시하세요. 상태는 대기·진행중·검토대기·완료입니다. 담당자와 상태 필터, 초기화 버튼, 조회 결과 건수, 과제별 상태 변경을 넣으세요. 상단 지표는 전체 데이터 기준을 유지하고 상태 변경 때 갱신하세요. 표에 ID·과제·담당·마감·상태·중요도·확인사항을 포함하세요. 색상과 글자를 함께 사용하고 없는 정보나 실제 사내 규정은 만들지 마세요. 전체 HTML 코드를 제공하세요.`;
+다음을 요청합니다.
+1. 현재 흐름을 단계·입력·담당 역할·처리 및 대기·완료 조건·다음 전달정보로 정리해 주세요.
+2. 제공하지 않은 시간과 원인은 만들지 말고, 병목 후보와 추가 확인 질문을 제시하며 사실과 가설을 구분해 주세요.
+3. 부서에서 검토할 개선 후보 2개를 제안하되 효과를 단정하지 마세요.`;
 
-  const PROMPT_29 = `현재 보드에 우리 부서 개선안의 [추가할 항목 또는 기능 한 가지]를 반영해 주세요. 줄이려는 문제는 [문제], 사용자는 [담당 역할], 확인 조건은 [조건], 확인 후 할 일은 [다음 조치]입니다. 추가 항목의 초기값은 '미확인' 또는 명시된 교육용 가상 값으로 두세요. 원래 8건·기준일·지표 정의는 유지하세요. 필수정보가 없으면 확인 필요로 표시하고 실제 승인·발송이 이루어진 것처럼 표현하지 마세요. 수정한 전체 HTML과 정상 입력·누락 입력에서 확인할 사항을 알려주세요.`;
+  const PROMPT_18 = formatPrompt(`다음은 AI 제안에 대한 팀장의 판단입니다: [제안별 채택·수정·보류와 이유]. 현재 흐름과 개선 후 흐름을 비교해 바뀌는 단계, 줄이려는 대기·재작업, 입력 기준, 사람의 검토 책임, 예외, 측정 지표를 정리해 주세요. 필수자료가 빠진 가상 요청 한 건을 어떻게 처리할지도 확인하고, 보드에 추가할 기능 한 가지와 화면 밖에서 바꿀 기준 한 가지를 제시해 주세요.`);
 
-  const PROMPT_38 = `다음 부서 업무 분석과 팀장의 검토 내용을 바탕으로 임원 보고용 1장 초안을 만들어 주세요: [일반화·가상화한 분석과 채택·수정 판단]. 개선 목적, 확인한 근거와 원인 가설, 현재·개선 후 흐름, 보드 기능과 업무 기준, 실행·검토 책임, 측정 계획, 필요한 지원을 포함하세요. 자료에 없는 수치나 절감 효과를 만들지 마세요. 공통 가상 8건은 부서 실적 근거로 사용하지 마세요. 임원이 물을 질문 5개와 추가 확인사항을 제시해 주세요.`;
+  const PROMPT_26 = formatPrompt(`앞서 제공한 교육용 가상 과제 8건으로 본사 팀장용 팀 운영 관리 보드를 단일 HTML 파일로 만들어주세요. 외부 라이브러리·서버·API 없이 동작하고 CSS와 JavaScript를 파일 안에 포함하세요. '교육용 가상 자료', 기준일 2026-11-16, '변경사항은 새로고침 시 초기화됩니다'를 표시하세요. 전체 과제·미완료·기한 경과 미완료·오늘 마감 미완료·기한 확인 필요를 표시하세요. 기한 경과는 마감일이 기준일보다 빠르고 미완료인 경우이며 마감 미정은 별도 표시하세요. 상태는 대기·진행중·검토대기·완료입니다. 담당자와 상태 필터, 초기화 버튼, 조회 결과 건수, 과제별 상태 변경을 넣으세요. 상단 지표는 전체 데이터 기준을 유지하고 상태 변경 때 갱신하세요. 표에 ID·과제·담당·마감·상태·중요도·확인사항을 포함하세요. 색상과 글자를 함께 사용하고 없는 정보나 실제 사내 규정은 만들지 마세요. 전체 HTML 코드를 제공하세요.`);
+
+  const PROMPT_29 = formatPrompt(`현재 보드에 우리 부서 개선안의 [추가할 항목 또는 기능 한 가지]를 반영해 주세요. 줄이려는 문제는 [문제], 사용자는 [담당 역할], 확인 조건은 [조건], 확인 후 할 일은 [다음 조치]입니다. 추가 항목의 초기값은 '미확인' 또는 명시된 교육용 가상 값으로 두세요. 원래 8건·기준일·지표 정의는 유지하세요. 필수정보가 없으면 확인 필요로 표시하고 실제 승인·발송이 이루어진 것처럼 표현하지 마세요. 수정한 전체 HTML과 정상 입력·누락 입력에서 확인할 사항을 알려주세요.`);
+
+  const PROMPT_38 = formatPrompt(`다음 부서 업무 분석과 팀장의 검토 내용을 바탕으로 임원 보고용 1장 초안을 만들어 주세요: [일반화·가상화한 분석과 채택·수정 판단]. 개선 목적, 확인한 근거와 원인 가설, 현재·개선 후 흐름, 보드 기능과 업무 기준, 실행·검토 책임, 측정 계획, 필요한 지원을 포함하세요. 자료에 없는 수치나 절감 효과를 만들지 마세요. 공통 가상 8건은 부서 실적 근거로 사용하지 마세요. 임원이 물을 질문 5개와 추가 확인사항을 제시해 주세요.`);
 
   // ============================================================================
   // 3. POPUP DEFINITIONS (Section 6 + Slide Specific Popups)
@@ -946,54 +977,54 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
         <div>
           <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
             <div>
-              <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M1 · 맥락 연결</span>
-              <h2 class="text-2xl sm:text-3xl font-extrabold text-[#101D35] mt-1">경영 질문은 부서의 확인 과제로 이어집니다</h2>
+              <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M1 · 팀장 과정의 방향</span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-[#101D35] mt-1">경영 질문을 우리 팀의 업무 개선으로 연결합니다</h2>
             </div>
             <button onclick="openPopup('ref03')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold border border-slate-300 self-start">
               💡 참고: 공시와 내부 업무의 관계
             </button>
           </div>
           <p class="text-sm sm:text-base text-slate-700 mt-2 leading-relaxed">
-            임원 과정에서는 공개 공시를 확인하고, 비교 브리핑을 만든 뒤 내부에서 더 살펴볼 질문을 정리합니다.<br class="hidden sm:inline">
-            팀장은 그 질문과 연결된 <strong>실제 업무의 흐름과 확인할 근거</strong>를 살펴봅니다.
+            <strong>임원 과정:</strong> 공개 공시를 비교해 경영 브리핑을 만들고 내부에서 확인할 질문을 정리합니다.<br class="hidden sm:inline">
+            <strong>오늘 팀장 과정:</strong> AI와 함께 우리 부서의 업무를 살펴보고 실행 가능한 개선안으로 구체화합니다.
           </p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 my-auto">
-          <div class="card-box border-t-4 border-t-slate-400">
+          <div class="card-box border-t-4 border-t-[#39B8B2]">
             <div>
-              <div class="text-[11px] font-bold text-slate-500">STEP 01 · 임원 과정</div>
-              <div class="text-lg sm:text-xl font-extrabold text-[#101D35] mt-0.5">공개 공시 확인</div>
-              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">공시 원문과 기준 시점을 대조하며 외부에서 확인 가능한 지표를 점검합니다.</p>
+              <div class="text-[11px] font-bold text-[#2A918C]">팀장 활동 01</div>
+              <div class="text-lg sm:text-xl font-extrabold text-[#101D35] mt-0.5">업무 흐름 분석</div>
+              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">업무 단계와 인계 지점을 정리하고, 대기·재작업의 근거와 병목 가설을 구분합니다.</p>
             </div>
-            <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] text-slate-500">출발점: 객관적 공시 수치</div>
+            <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] text-slate-500">현재 업무와 확인할 근거</div>
           </div>
 
-          <div class="card-box border-t-4 border-t-slate-400">
+          <div class="card-box border-t-4 border-t-[#39B8B2]">
             <div>
-              <div class="text-[11px] font-bold text-slate-500">STEP 02 · 임원 과정</div>
-              <div class="text-lg sm:text-xl font-extrabold text-[#101D35] mt-0.5">비교 브리핑</div>
-              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">경쟁사·기간별 차이를 한눈에 보고, 해석에 주의할 지점을 구분합니다.</p>
+              <div class="text-[11px] font-bold text-[#2A918C]">팀장 활동 02</div>
+              <div class="text-lg sm:text-xl font-extrabold text-[#101D35] mt-0.5">개선 흐름 설계</div>
+              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">AI의 제안을 검토해 바꿀 절차와 확인 기준, 담당자와 인계 방식을 정합니다.</p>
             </div>
-            <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] text-slate-500">도구: 경영 브리핑 보드</div>
+            <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] text-slate-500">개선 절차와 운영 기준</div>
           </div>
 
-          <div class="card-box border-t-4 border-t-slate-600">
+          <div class="card-box border-t-4 border-t-[#39B8B2]">
             <div>
-              <div class="text-[11px] font-bold text-slate-600">STEP 03 · 연결 고리</div>
-              <div class="text-lg sm:text-xl font-extrabold text-[#101D35] mt-0.5">내부 확인 질문</div>
-              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">“우리 부서에서는 어떤 기준으로 집계하며, 어디서 대기나 재작업이 생기는가?”</p>
+              <div class="text-[11px] font-bold text-[#2A918C]">팀장 활동 03</div>
+              <div class="text-lg sm:text-xl font-extrabold text-[#101D35] mt-0.5">운영 보드 제작</div>
+              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">가상 자료로 HTML 보드를 만들고, 우리 부서에 필요한 기능을 반영해 검증합니다.</p>
             </div>
-            <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] text-slate-600 font-semibold">임원 → 팀장 질문 전달</div>
+            <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] text-slate-600 font-semibold">부서 기능을 반영한 보드</div>
           </div>
 
           <div class="card-box border-2 border-[#39B8B2] bg-[#E6F7F6] shadow-sm">
             <div>
-              <div class="text-[11px] font-extrabold text-[#2A918C]">STEP 04 · 팀장 과정 (오늘)</div>
-              <div class="text-lg sm:text-xl font-extrabold text-[#101D35] mt-0.5">부서 업무 분석</div>
-              <p class="text-xs sm:text-sm text-slate-800 mt-2 leading-relaxed font-medium">부서의 실제 업무 단계(AS-IS)를 쪼개고, 확인된 사실과 가설을 분리해 개선 흐름을 설계합니다.</p>
+              <div class="text-[11px] font-extrabold text-[#2A918C]">팀장 활동 04</div>
+              <div class="text-lg sm:text-xl font-extrabold text-[#101D35] mt-0.5">제안과 실행 계획</div>
+              <p class="text-xs sm:text-sm text-slate-800 mt-2 leading-relaxed font-medium">개선안을 임원 보고용 1장으로 정리하고, 시범 적용과 성과 점검 계획을 세웁니다.</p>
             </div>
-            <div class="mt-3 pt-2 border-t border-[#39B8B2]/40 text-[11px] font-bold text-[#101D35]">결과: 보드 & 제안 1장</div>
+            <div class="mt-3 pt-2 border-t border-[#39B8B2]/40 text-[11px] font-bold text-[#101D35]">개선 제안과 적용 계획</div>
           </div>
         </div>
 
@@ -1073,32 +1104,30 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
 
           <div class="grid grid-cols-12 gap-6 my-auto">
             <div class="col-span-8 space-y-2.5">
-              ${opts.map(o => `
-                <button onclick="updateField('poll05', '${o}'); renderSlide();" class="w-full text-left p-4 rounded-xl border-2 transition flex items-center justify-between ${userState.poll05 === o ? 'bg-[#E6F7F6] border-[#39B8B2] font-bold text-[#101D35]' : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-800'}">
+              ${opts.map((o,i) => `
+                <button onclick="submitPoll(${i+1})" class="w-full text-left p-3 rounded-xl border-2 transition flex items-center justify-between ${userState.poll05 === o ? 'bg-[#E6F7F6] border-[#39B8B2] font-bold text-[#101D35]' : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-800'}">
                   <span class="text-base">${o}</span>
-                  <span class="px-2.5 py-1 rounded text-xs ${userState.poll05 === o ? 'bg-[#101D35] text-[#39B8B2]' : 'bg-slate-200 text-slate-600'}">${userState.poll05 === o ? '✓ 선택됨' : '선택'}</span>
+                  <span class="px-2.5 py-1 rounded text-xs bg-slate-200 text-slate-600" data-poll-count="${i+1}">—</span>
                 </button>
               `).join('')}
             </div>
 
             <div class="col-span-4 card-box flex flex-col justify-between bg-slate-50 border-dashed border-2 border-slate-300 text-center p-6">
-              <div class="text-xs font-bold text-slate-500 uppercase">현장 참여 안내</div>
-              <div class="my-auto py-6 px-4 bg-white rounded-xl border border-slate-200 space-y-2">
-                <div class="text-3xl">🙋‍♂️ 📝</div>
-                <div class="font-bold text-[#101D35] text-base">설문 링크 확정 후 QR 삽입</div>
-                <p class="text-xs text-slate-500 leading-relaxed">
-                  설문 도구를 사용하지 않는 경우 화면 왼쪽의 번호를 클릭해 개인 메모로 남기거나, 거수·구두로 공유해 주세요.
-                </p>
+              <div class="text-xs font-bold text-slate-500 uppercase">휴대전화로 참여</div>
+              <div class="my-auto py-2 px-4 bg-white rounded-xl border border-slate-200 space-y-2">
+                <img class="mx-auto w-36 h-36" src="https://quickchart.io/qr?size=220&text=https%3A%2F%2Fdatathinkinglab.github.io%2Fyuanta-ai-training%2Fvote.html" alt="설문 참여 QR 코드">
+                <a href="vote.html" target="_blank" rel="noopener" class="font-bold text-[#101D35] text-sm underline">설문 참여 화면 열기</a>
+                <p class="text-xs text-slate-500">휴대전화와 이 화면의 선택은 별도로 기록됩니다.</p>
               </div>
               <div class="text-xs text-slate-600 bg-amber-50 border border-amber-200 p-2.5 rounded-lg">
-                ※ 응답을 별도 제출하지 않아도 다음 활동을 그대로 진행할 수 있습니다.
+                <span data-poll-status>설문 연결 상태를 확인합니다.</span><br><button type="button" onclick="refreshPoll()" class="underline">집계 새로고침</button>
               </div>
             </div>
           </div>
 
           <div class="p-3.5 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-between text-sm">
             <span><strong>현재 내 선택:</strong> <span class="text-[#2A918C] font-bold">${userState.poll05 || '아직 선택하지 않음 (접속이 어려우면 번호를 선택하거나 개인 메모에 적어 주세요)'}</span></span>
-            <span class="text-xs text-slate-500">09페이지 부서 업무 선택에 자동 표시됩니다</span>
+            <span class="text-xs text-slate-500">이 화면에서 선택한 내용만 09페이지에 표시됩니다.</span>
           </div>
         `;
       }
@@ -1300,7 +1329,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
 
         <div class="p-2.5 sm:p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1">
           <span>💡 선택이 어려우면 우측 상단 <strong>[가상 예시로 자동 채우기]</strong>를 눌러 실습을 진행하세요. (09~48p 자동 연동)</span>
-          <span class="font-bold shrink-0 text-[11px]">개인 메모장 병행 가능</span>
+          <button onclick="saveWorkshop()" class="font-bold shrink-0 text-[11px] underline">현재 입력 구글에 저장</button>
         </div>
       `
     },
@@ -1345,52 +1374,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">경험 추정</span>
             <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 font-bold">확인 필요</span>
           </div>
-          <span class="text-slate-500 text-[11px]">※ 실제 회사의 공식 절차라고 가정하지 않음</span>
-        </div>
-      `
-    },
-
-    {
-      page: 10, module: 'M2', moduleTitle: '업무 흐름과 병목 분석', journey: '현황', theme: 'white',
-      render: () => `
-        <div class="flex items-start justify-between">
-          <div>
-            <span class="text-xs font-bold text-[#2A918C] uppercase tracking-wider">M2 · AS-IS 작성 (${escapeHtml(userState.taskName || '선택한 부서 업무')})</span>
-            <h2 class="text-3xl font-extrabold text-[#101D35] mt-1">지금은 어떤 순서로 일이 진행됩니까?</h2>
-            <p class="text-sm text-slate-600 mt-1">선택한 업무를 4~6단계로 나누고 각 단계의 입력·담당·전달 조건을 적습니다. <strong>모르는 소요시간은 빈칸 또는 '확인 필요'</strong>로 남깁니다.</p>
-          </div>
-          <button onclick="openPopup('deptExample')" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold border border-slate-300 shrink-0">
-            📋 AS-IS 작성 예시 및 근거 상태 안내
-          </button>
-        </div>
-
-        <div class="grid grid-cols-4 gap-3 my-auto">
-          <div class="card-box space-y-2 border-t-4 border-t-[#101D35]">
-            <div class="flex justify-between items-center"><span class="font-extrabold text-sm text-[#101D35]">STEP 1</span><span class="text-xs px-2 py-0.5 rounded bg-slate-200">요청/접수</span></div>
-            <textarea rows="4" class="input-field text-xs" placeholder="단계명 / 입력 / 담당 역할 / 완료 조건 / 근거 상태(기록 확인·경험 추정·확인 필요)" oninput="updateField('asIsStep1', this.value)">${escapeHtml(userState.asIsStep1)}</textarea>
-          </div>
-          <div class="card-box space-y-2 border-t-4 border-t-[#101D35]">
-            <div class="flex justify-between items-center"><span class="font-extrabold text-sm text-[#101D35]">STEP 2</span><span class="text-xs px-2 py-0.5 rounded bg-slate-200">수집/작성</span></div>
-            <textarea rows="4" class="input-field text-xs" placeholder="단계명 / 입력 / 담당 역할 / 대기·재작업 / 근거 상태" oninput="updateField('asIsStep2', this.value)">${escapeHtml(userState.asIsStep2)}</textarea>
-          </div>
-          <div class="card-box space-y-2 border-t-4 border-t-[#39B8B2]">
-            <div class="flex justify-between items-center"><span class="font-extrabold text-sm text-[#101D35]">STEP 3</span><span class="text-xs px-2 py-0.5 rounded bg-[#E6F7F6] text-[#101D35] font-bold">취합/검토</span></div>
-            <textarea rows="4" class="input-field text-xs" placeholder="단계명 / 입력 / 담당 역할 / 대기·재작업 / 근거 상태" oninput="updateField('asIsStep3', this.value)">${escapeHtml(userState.asIsStep3)}</textarea>
-          </div>
-          <div class="card-box space-y-2 border-t-4 border-t-[#101D35]">
-            <div class="flex justify-between items-center"><span class="font-extrabold text-sm text-[#101D35]">STEP 4~5</span><span class="text-xs px-2 py-0.5 rounded bg-slate-200">보고/후속조치</span></div>
-            <textarea rows="4" class="input-field text-xs" placeholder="단계명 / 입력 / 담당 역할 / 다음 전달정보 / 근거 상태" oninput="updateField('asIsStep4', this.value)">${escapeHtml(userState.asIsStep4)}</textarea>
-          </div>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs text-slate-700">
-          <div>
-            <strong>📌 근거 상태 3분류:</strong>
-            <span class="ml-2 px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">① 기록 확인</span> (이력·문서 존재)
-            <span class="ml-2 px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">② 경험에 따른 추정</span> (체감 현상)
-            <span class="ml-2 px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 font-bold">③ 확인 필요</span> (소요시간·원인 미상)
-          </div>
-          <span class="text-slate-500">※ 작성한 단계가 회사의 공식 절차라고 가정하지 않습니다</span>
+          <span class="text-slate-500 text-[11px]">각자 입력 후 저장하세요. 저장 전 새로고침하면 내용이 사라집니다. <button onclick="saveWorkshop()" class="font-bold underline">현재 입력 구글에 저장</button></span>
         </div>
       `
     },
@@ -1448,7 +1432,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     {
       page: 12, module: 'M2', moduleTitle: '업무 흐름과 병목 분석', journey: '현황', theme: 'white',
       render: () => {
-        const dynamicPrompt12 = `아래는 부서 업무를 일반화하고 세부 내용을 가상화한 설명입니다. 업무명: [${userState.taskName || '입력'}], 시작·종료: [${userState.taskStart || '시작'} ~ ${userState.taskEnd || '종료'}], 현재 단계: [${userState.asIsStep1 ? `${userState.asIsStep1} -> ${userState.asIsStep2} -> ${userState.asIsStep3} -> ${userState.asIsStep4}` : '입력'}], 반복되는 어려움: [${userState.taskPain || '입력'}], 근거 상태: [기록 확인/경험에 따른 추정/확인 필요]. 현재 흐름을 단계·입력·담당 역할·처리 및 대기·완료 조건·다음 전달정보로 정리해 주세요. 제공하지 않은 시간과 원인은 만들지 마세요. 병목 후보와 추가 확인 질문을 제시하고 사실·가설을 구분하세요. 부서에서 검토할 개선 후보 2개를 제안하되 효과를 단정하지 마세요.`;
+        const dynamicPrompt12 = buildPrompt12();
         return `
           <div class="flex items-start justify-between">
             <div>
@@ -1474,16 +1458,17 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
                 <button onclick="copyText(PROMPT_12, '12p 기본 프롬프트 원문')" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-xs font-bold text-slate-700">
                   기본 템플릿 복사
                 </button>
-                <button onclick="copyText(${JSON.stringify(dynamicPrompt12)}, '12p 내 부서 업무 반영 프롬프트')" class="px-4 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-[#39B8B2] text-xs font-bold shadow">
+                <button onclick="copyText(buildPrompt12(), '12p 내 부서 업무 반영 프롬프트')" class="px-4 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-[#39B8B2] text-xs font-bold shadow">
                   📋 내 입력값 포함 프롬프트 복사
                 </button>
               </div>
             </div>
-            <div class="prompt-box">${escapeHtml(dynamicPrompt12)}</div>
+            <div class="prompt-box" data-prompt12-preview style="max-height: 18rem; overflow-y: auto;">${escapeHtml(dynamicPrompt12)}</div>
           </div>
 
           <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 font-semibold">
-            🔒 주의: 외부 AI에는 실명·고객정보·내부 문서·미공개 수치를 절대 입력하지 마세요.
+            🔒 입력값은 자동 익명화되지 않습니다. 복사 전 실명·고객정보·내부 문서·미공개 수치를 직접 제거하거나 가상화하세요.
+            <button onclick="saveWorkshop()" class="underline ml-2">현재 입력 구글에 저장</button>
           </div>
         `;
       }
@@ -1549,8 +1534,11 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
           </div>
         </div>
 
-        <div class="p-3 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-700 text-center font-semibold">
-          경험을 적었다는 사실과 실제 업무 기록으로 확인했다는 사실은 다릅니다. 확인되지 않은 설명은 검토 가설로 남깁니다.
+        <div class="p-3 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-700 font-semibold">
+          <label for="review13">AI 결과에서 확인할 사항 (일반화·가상화하여 입력)</label>
+          <textarea id="review13" rows="2" class="input-field mt-1" placeholder="예: 누락된 업무 단계, 확인이 필요한 원인 가설" oninput="updateField('review13', this.value)">${escapeHtml(userState.review13)}</textarea>
+          <button onclick="saveWorkshop()" class="underline mt-1">9~13페이지 실습 내용 구글에 저장</button>
+          <span data-save-status role="status" class="ml-2"></span>
         </div>
       `
     },
@@ -1742,7 +1730,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     {
       page: 18, module: 'M3', moduleTitle: '개선 흐름과 운영 기준 설계', journey: '개선', theme: 'white',
       render: () => {
-        const dynamicPrompt18 = `다음은 AI 제안에 대한 팀장의 판단입니다: [채택/수정: ${userState.reviewAdopt || '필수자료 사전 확인'}, 보류: ${userState.reviewHold || '자동 승인 보류'}]. 현재 흐름과 개선 후 흐름을 비교해 바뀌는 단계, 줄이려는 대기·재작업, 입력 기준, 사람의 검토 책임, 예외, 측정 지표를 정리해 주세요. 필수자료가 빠진 가상 요청 한 건을 어떻게 처리할지도 확인하고, 보드에 추가할 기능 한 가지와 화면 밖에서 바꿀 기준 한 가지를 제시해 주세요.`;
+        const dynamicPrompt18 = formatPrompt(`다음은 AI 제안에 대한 팀장의 판단입니다: [채택/수정: ${userState.reviewAdopt || '필수자료 사전 확인'}, 보류: ${userState.reviewHold || '자동 승인 보류'}]. 현재 흐름과 개선 후 흐름을 비교해 바뀌는 단계, 줄이려는 대기·재작업, 입력 기준, 사람의 검토 책임, 예외, 측정 지표를 정리해 주세요. 필수자료가 빠진 가상 요청 한 건을 어떻게 처리할지도 확인하고, 보드에 추가할 기능 한 가지와 화면 밖에서 바꿀 기준 한 가지를 제시해 주세요.`);
         return `
           <div class="flex items-start justify-between">
             <div>
@@ -1775,11 +1763,11 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
           <div class="space-y-1.5">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-[#101D35]">📋 TO-BE 설계 및 예외 처리 확인 프롬프트</span>
-              <button onclick="copyText(${JSON.stringify(dynamicPrompt18)}, '18p AS-IS/TO-BE 비교 프롬프트')" class="px-4 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-[#39B8B2] text-xs font-bold">
+              <button onclick="copyDisplayedPrompt(this, '18p AS-IS/TO-BE 비교 프롬프트')" class="px-4 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-[#39B8B2] text-xs font-bold">
                 📋 프롬프트 복사하기
               </button>
             </div>
-            <div class="prompt-box text-xs">${escapeHtml(dynamicPrompt18)}</div>
+            <div class="prompt-box text-xs" data-copy-prompt>${escapeHtml(dynamicPrompt18)}</div>
           </div>
         `;
       }
@@ -2117,7 +2105,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
               <button onclick="copyText(PROMPT_26, '2단계: 보드 생성 프롬프트')" class="px-3 py-1.5 rounded-lg bg-[#39B8B2] hover:bg-[#2A918C] text-[#101D35] text-xs font-bold">
                 ② 생성 요청문만 복사
               </button>
-              <button onclick="copyText(COMMON_DATA_TEXT + '\n\n' + PROMPT_26, '가상 데이터 8건 + 보드 생성 요청문 통합본')" class="px-4 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-white text-xs font-bold shadow">
+              <button onclick="copyBoardWithData()" class="px-4 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-white text-xs font-bold shadow">
                 📋 ①+② 한 번에 통합 복사 (권장)
               </button>
             </div>
@@ -2239,7 +2227,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     {
       page: 29, module: 'M4', moduleTitle: '팀 운영 관리 보드 제작', journey: '제작', theme: 'white',
       render: () => {
-        const dynamicPrompt29 = `현재 보드에 우리 부서 개선안의 [${userState.boardFeature || '필수자료 확인 체크'}]를 반영해 주세요. 줄이려는 문제는 [${userState.taskPain || '접수 후 자료 재요청 대기'}], 사용자는 [${userState.boardUser || '접수 담당 및 검토자'}], 확인 조건은 [필수자료 포함 여부 확인], 확인 후 할 일은 [${userState.boardAction || '누락 확인 후 검토자에게 인계'}]입니다. 추가 항목의 초기값은 '미확인' 또는 명시된 교육용 가상 값으로 두세요. 원래 8건·기준일·지표 정의는 유지하세요. 필수정보가 없으면 확인 필요로 표시하고 실제 승인·발송이 이루어진 것처럼 표현하지 마세요. 수정한 전체 HTML과 정상 입력·누락 입력에서 확인할 사항을 알려주세요.`;
+        const dynamicPrompt29 = formatPrompt(`현재 보드에 우리 부서 개선안의 [${userState.boardFeature || '필수자료 확인 체크'}]를 반영해 주세요. 줄이려는 문제는 [${userState.taskPain || '접수 후 자료 재요청 대기'}], 사용자는 [${userState.boardUser || '접수 담당 및 검토자'}], 확인 조건은 [필수자료 포함 여부 확인], 확인 후 할 일은 [${userState.boardAction || '누락 확인 후 검토자에게 인계'}]입니다. 추가 항목의 초기값은 '미확인' 또는 명시된 교육용 가상 값으로 두세요. 원래 8건·기준일·지표 정의는 유지하세요. 필수정보가 없으면 확인 필요로 표시하고 실제 승인·발송이 이루어진 것처럼 표현하지 마세요. 수정한 전체 HTML과 정상 입력·누락 입력에서 확인할 사항을 알려주세요.`);
         return `
           <div class="flex items-start justify-between">
             <div>
@@ -2274,12 +2262,12 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
                 <button onclick="copyText(PROMPT_29, '29p 기본 템플릿')" class="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-xs font-bold text-slate-700">
                   기본 템플릿 복사
                 </button>
-                <button onclick="copyText(${JSON.stringify(dynamicPrompt29)}, '29p 우리 부서 기능 반영 프롬프트')" class="px-4 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-[#39B8B2] text-xs font-bold shadow">
+                <button onclick="copyDisplayedPrompt(this, '29p 우리 부서 기능 반영 프롬프트')" class="px-4 py-1.5 rounded-lg bg-[#101D35] hover:bg-slate-800 text-[#39B8B2] text-xs font-bold shadow">
                   📋 우리 부서 맞춤형 프롬프트 복사
                 </button>
               </div>
             </div>
-            <div class="prompt-box text-xs">${escapeHtml(dynamicPrompt29)}</div>
+            <div class="prompt-box text-xs" data-copy-prompt>${escapeHtml(dynamicPrompt29)}</div>
           </div>
 
           <div class="p-3 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-700">
@@ -2658,7 +2646,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     {
       page: 38, module: 'M5', moduleTitle: '개선안을 임원에게 보고하기', journey: '보고', theme: 'white',
       render: () => {
-        const dynamicPrompt38 = `다음 부서 업무 분석과 팀장의 검토 내용을 바탕으로 임원 보고용 1장 초안을 만들어 주세요: [업무명: ${userState.taskName || '본사 지원 자료 취합'}, 병목 단계: ${userState.bottleneckStage || '요청 접수 및 취합'}, 근거 상태: ${userState.bottleneckEvidence}, 채택 개선안: ${userState.reviewAdopt || '필수자료 사전 확인'}, 보드 추가 기능: ${userState.boardFeature}, 화면 밖 기준: ${userState.offScreenRule || '요청 안내문 표준화'}]. 개선 목적, 확인한 근거와 원인 가설, 현재·개선 후 흐름, 보드 기능과 업무 기준, 실행·검토 책임, 측정 계획, 필요한 지원을 포함하세요. 자료에 없는 수치나 절감 효과를 만들지 마세요. 공통 가상 8건은 부서 실적 근거로 사용하지 마세요. 임원이 물을 질문 5개와 추가 확인사항을 제시해 주세요.`;
+        const dynamicPrompt38 = formatPrompt(`다음 부서 업무 분석과 팀장의 검토 내용을 바탕으로 임원 보고용 1장 초안을 만들어 주세요: [업무명: ${userState.taskName || '본사 지원 자료 취합'}, 병목 단계: ${userState.bottleneckStage || '요청 접수 및 취합'}, 근거 상태: ${userState.bottleneckEvidence}, 채택 개선안: ${userState.reviewAdopt || '필수자료 사전 확인'}, 보드 추가 기능: ${userState.boardFeature}, 화면 밖 기준: ${userState.offScreenRule || '요청 안내문 표준화'}]. 개선 목적, 확인한 근거와 원인 가설, 현재·개선 후 흐름, 보드 기능과 업무 기준, 실행·검토 책임, 측정 계획, 필요한 지원을 포함하세요. 자료에 없는 수치나 절감 효과를 만들지 마세요. 공통 가상 8건은 부서 실적 근거로 사용하지 마세요. 임원이 물을 질문 5개와 추가 확인사항을 제시해 주세요.`);
         return `
           <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
             <div>
@@ -2672,7 +2660,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
               <button onclick="openPopup('proposalTemplate')" class="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-800 border border-slate-300 text-xs font-bold">
                 📄 예시 팝업
               </button>
-              <button onclick="copyText(${JSON.stringify(dynamicPrompt38)}, '38p 임원 보고 1장 초안 프롬프트')" class="px-3 py-1.5 rounded-lg bg-[#101D35] text-[#39B8B2] text-xs font-bold shadow">
+              <button onclick="copyDisplayedPrompt(this, '38p 임원 보고 1장 초안 프롬프트')" class="px-3 py-1.5 rounded-lg bg-[#101D35] text-[#39B8B2] text-xs font-bold shadow">
                 📋 AI 프롬프트 복사
               </button>
             </div>
@@ -2705,7 +2693,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
             </div>
           </div>
 
-          <div class="prompt-box py-2 px-3 text-[11px] leading-snug">${escapeHtml(dynamicPrompt38)}</div>
+          <div class="prompt-box py-2 px-3 text-[11px] leading-snug" data-copy-prompt>${escapeHtml(dynamicPrompt38)}</div>
         `;
       }
     },
@@ -3277,6 +3265,26 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     `;
   }
 
+  function buildPrompt12() {
+    const steps = [userState.asIsStep1, userState.asIsStep2, userState.asIsStep3, userState.asIsStep4]
+      .map((step, index) => `${index + 1}단계: ${step.trim() || '미입력'}`).join('\n');
+    return `아래는 부서 업무를 일반화하고 세부 내용을 가상화한 설명입니다.
+
+업무명: ${userState.taskName || '미입력'}
+시작: ${userState.taskStart || '미입력'}
+종료: ${userState.taskEnd || '미입력'}
+반복되는 어려움: ${userState.taskPain || '미입력'}
+
+현재 업무 단계:
+${steps}
+
+다음을 요청합니다.
+1. 각 단계에 적힌 근거 상태를 반영하고, 없는 내용은 확인 필요로 표시해 주세요.
+2. 현재 흐름을 단계·입력·담당 역할·처리 및 대기·완료 조건·다음 전달정보로 정리해 주세요.
+3. 제공하지 않은 시간과 원인은 만들지 말고, 병목 후보와 추가 확인 질문을 제시하며 사실과 가설을 구분해 주세요.
+4. 부서에서 검토할 개선 후보 2개를 제안하되 효과를 단정하지 마세요.`;
+  }
+
   function fillSampleTask() {
     userState.taskName = '주간 협업 부서 현황 자료 요청 및 취합 보고';
     userState.taskPain = '제출 자료 내 필수 항목이나 비교표 근거 위치가 빠져 재요청 및 검토 대기가 반복됨';
@@ -3506,14 +3514,14 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     const titles = {
       1: '표지: 경영 질문을 팀의 실행으로',
       2: '모듈 1 간지',
-      3: '임원 과정에서 다룬 내용',
+      3: '경영 질문에서 팀의 업무 개선으로',
       4: '같은 질문, 다른 책임',
       5: '참여: 우리 팀의 어려움',
       6: '오늘의 세 가지 결과물',
       7: '모듈 2 간지',
       8: '공통 사례 살펴보기 (8건)',
       9: '부서 업무 선택 (워크시트)',
-      10: 'AS-IS 작성 (4~6단계)',
+      10: '현재 업무 흐름 작성 (4단계)',
       11: '현상과 원인 구분 (T01)',
       12: '부서 업무를 AI로 분석 (프롬프트)',
       13: 'AI 분석 결과 검토 (근거 4분류)',
@@ -3639,5 +3647,8 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
 </script>
 
 <script src="lecture-frame.js?v=20261103-academy"></script>
+<script src="participation-config.js"></script>
+<script src="participation.js"></script>
 </body>
 </html>
+
