@@ -31,9 +31,22 @@
       const res = await fetch(api + '?action=counts&t=' + Date.now(), { cache: 'no-store' });
       const data = await res.json();
       if (!data.ok) throw new Error(data.error || '집계 오류');
-      document.querySelectorAll('[data-poll-count]').forEach(e => { const n = data.counts[Number(e.dataset.pollCount) - 1] || 0; e.textContent = n + '명'; });
+      document.querySelectorAll('[data-poll-count]').forEach(e => { const n = data.counts[Number(e.dataset.pollCount) - 1] || 0; const pct = data.total ? Math.round(n / data.total * 100) : 0; e.textContent = n + '명 · ' + pct + '%'; });
+      document.querySelectorAll('[data-poll-bar]').forEach(e => { const n = data.counts[Number(e.dataset.pollBar) - 1] || 0; e.style.width = (data.total ? n / data.total * 100 : 0) + '%'; });
+      document.querySelectorAll('[data-poll-reset]').forEach(e => { e.disabled = data.resetAvailable !== true; e.title = e.disabled ? '강사 초기화 설정 후 사용' : '강사용 비밀번호로 집계 초기화'; });
       nodes.forEach(e => e.textContent = '총 ' + data.total + '명 참여 · 집계 갱신');
-    } catch (_) { nodes.forEach(e => e.textContent = '집계 연결 실패 · 다시 시도해 주세요'); }
+    } catch (_) { document.querySelectorAll('[data-poll-reset]').forEach(e => e.disabled = true); nodes.forEach(e => e.textContent = '집계 연결 실패 · 다시 시도해 주세요'); }
+  };
+  window.resetPoll = async function () {
+    if (!confirm('설문 집계를 초기화하시겠습니까? 기존 응답은 보관 시트로 옮겨지고 집계는 0명부터 다시 시작합니다.')) return;
+    const password = prompt('강사용 초기화 비밀번호를 입력해 주세요.');
+    if (!password) return;
+    try {
+      await post({action:'resetPoll', password});
+      updateField('poll05', '');
+      await refreshPoll();
+      message('설문 집계를 초기화했습니다.');
+    } catch (e) { message('집계 초기화 실패: ' + e.message); }
   };
   const fields = ['taskName','taskPain','taskStart','taskEnd','asIsStep1','asIsStep2','asIsStep3','asIsStep4','review13'];
   let timer, dirty = false, saving = false;
