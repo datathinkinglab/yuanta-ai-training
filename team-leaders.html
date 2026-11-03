@@ -539,7 +539,32 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
   // ============================================================================
   // 3. POPUP DEFINITIONS (Section 6 + Slide Specific Popups)
   // ============================================================================
+  const HTML_REPORT_REFERENCE_PROMPT = `첨부한 대시보드 HTML 파일과 검증 메모를 바탕으로 임원 보고자료 1장을 작성해 주세요.
+
+HTML에서 확인되는 기능, 직접 검증한 결과, 아직 확인하지 않은 사항을 구분해 주세요.
+측정하지 않은 시간 절감이나 업무 개선 효과는 추정하지 말고 ‘추가 검증 필요’로 표시해 주세요.
+HTML 코드를 읽은 것만으로 기능을 실제 실행하거나 검증했다고 표현하지 마세요.
+첨부한 화면 캡처가 있다면 화면 구성 설명에 함께 활용해 주세요.
+
+[함께 제공할 자료]
+1. 최종 대시보드 HTML 파일
+2. 32페이지 검증 메모: 직접 확인한 결과·미검증 사항·제약
+3. 대시보드 화면 캡처: 필요한 경우 첨부
+
+[보고자료 구성]
+1. 대시보드를 만든 목적과 사용 대상
+2. 주요 지표와 화면에서 확인할 내용
+3. 직접 검증한 결과와 아직 확인하지 않은 사항
+4. 다음 행동과 임원에게 요청할 결정·지원
+
+자료가 부족하면 내용을 지어내지 말고 먼저 확인 질문을 제시해 주세요.
+교육용 가상 데이터는 실제 부서 실적과 구분해 주세요.`;
+
   const POPUPS = {
+    htmlReportReference: {
+      title: '36페이지 참고 · HTML 파일로 임원 보고자료 만들기',
+      render: () => `<div class="space-y-5 text-sm leading-relaxed"><div class="p-4 rounded-xl bg-[#E6F7F6] border border-[#39B8B2]"><strong>입력 자료로 만든 대시보드 HTML 파일을 사용할 수 있습니다.</strong><p class="mt-2">최종 HTML과 32페이지 검증 메모를 AI 대화에 함께 첨부하세요. 화면 구성도 설명하려면 캡처를 추가합니다. 파일 첨부가 어려우면 HTML 코드 전체를 붙여 넣습니다.</p></div><div class="grid grid-cols-3 gap-3"><div class="p-3 rounded-lg bg-slate-100"><strong>① 자료 준비</strong><p class="mt-1">최종 HTML + 검증 메모<br>필요하면 화면 캡처</p></div><div class="p-3 rounded-lg bg-slate-100"><strong>② AI에 요청</strong><p class="mt-1">자료와 아래 프롬프트를 같은 AI 대화에 전달</p></div><div class="p-3 rounded-lg bg-slate-100"><strong>③ 초안 확인</strong><p class="mt-1">기능·검증 결과·미확인 사항이 구분됐는지 확인</p></div></div><section class="space-y-2"><div class="flex justify-between items-center gap-3"><h3 class="text-lg font-bold">HTML 활용 보고자료 작성 프롬프트</h3><button onclick="copyText(HTML_REPORT_REFERENCE_PROMPT, 'HTML 활용 보고자료 프롬프트')" class="px-3 py-2 rounded-lg bg-[#101D35] text-white font-bold shrink-0">📋 프롬프트 복사</button></div><div class="prompt-box text-sm">${escapeHtml(HTML_REPORT_REFERENCE_PROMPT)}</div></section><p class="p-3 rounded-lg bg-amber-50 border border-amber-200">HTML만으로 실제 작동 여부나 업무 개선 효과를 확인할 수는 없습니다. AI에 전달할 자료는 개인·고객정보와 내부 자료를 일반화·가상화하세요.</p></div>`
+    },
     dashboardReport: {
       title: '대시보드 보고자료 · 예상 Q&A · 레드팀 프롬프트',
       render: () => `<div class="space-y-5 text-sm leading-relaxed"><div class="p-4 rounded-xl bg-[#E6F7F6] border border-[#39B8B2]">만든 대시보드의 화면 또는 코드와 직접 확인한 검증 메모를 준비합니다. AI에 전달하기 전에 개인·고객정보와 내부 자료를 일반화·가상화하세요. 이 팝업은 AI에게 내용을 자동 전송하지 않습니다.</div>${[['36페이지 · 보고자료 1장',0,'대시보드 자료를 첨부하고 검증 메모를 채워 사용합니다.'],['37페이지 · 예상 질문과 답변',1,'보고자료를 만든 같은 AI 대화에서 이어서 요청합니다.'],['37페이지 · 레드팀 검토',2,'새 AI 대화에 보고자료와 Q&A를 붙여 넣어 반대 관점의 점검을 요청합니다.'],['37~38페이지 · 보고자료 보완',3,'원래 보고 대화로 돌아가 레드팀 의견을 붙여 넣고 수정합니다.'],['39페이지 · 최종 보고 묶음',4,'보완한 자료를 확인한 후 요청합니다.']].map(([title,step,note])=>`<section class="p-4 rounded-xl border border-slate-200 space-y-2"><div class="flex items-center justify-between gap-3"><h3 class="font-bold text-lg">${title}</h3><button onclick="copyText(buildDashboardReportPrompt(${step}), '대시보드 임원 보고 프롬프트')" class="px-3 py-2 rounded-lg bg-[#101D35] text-white font-bold shrink-0">프롬프트 복사</button></div><p>${note}</p><div class="prompt-box text-xs">${escapeHtml(buildDashboardReportPrompt(step))}</div></section>`).join('')}</div>`
@@ -2375,7 +2400,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
     {
       page: 36, module: 'M5', moduleTitle: '대시보드로 임원 보고 준비하기', journey: '보고', theme: 'white',
       render: () => `
-        <div class="flex justify-between items-start gap-3"><div><span class="text-xs font-bold text-[#2A918C]">M5 · AI로 임원 보고자료 작성</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">대시보드와 검증 메모로 보고자료 1장을 만듭니다</h2><p class="text-sm text-slate-600 mt-2">대괄호를 채우고 만든 화면 또는 코드를 첨부합니다. 선택한 기능은 실습 초안이며 실제 구현 여부를 직접 확인해야 합니다.</p></div><button onclick="openPopup('dashboardReport')" class="px-3 py-2 rounded-lg bg-slate-100 text-xs font-bold shrink-0">보고 준비 전체 안내</button></div>
+        <div class="flex justify-between items-start gap-3"><div><span class="text-xs font-bold text-[#2A918C]">M5 · AI로 임원 보고자료 작성</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">대시보드와 검증 메모로 보고자료 1장을 만듭니다</h2><p class="text-sm text-slate-600 mt-2">대괄호를 채우고 만든 화면 또는 코드를 첨부합니다. 선택한 기능은 실습 초안이며 실제 구현 여부를 직접 확인해야 합니다.</p></div><div class="flex flex-col gap-2 shrink-0"><button onclick="openPopup('htmlReportReference')" class="px-3 py-2 rounded-lg bg-[#E6F7F6] text-[#2A918C] text-xs font-bold">HTML 활용 참고</button><button onclick="openPopup('dashboardReport')" class="px-3 py-2 rounded-lg bg-slate-100 text-xs font-bold">보고 준비 전체 안내</button></div></div>
         <div class="grid grid-cols-3 gap-3 text-sm"><div class="p-3 rounded-lg bg-slate-100">① 대시보드 화면·코드 준비</div><div class="p-3 rounded-lg bg-slate-100">② 직접 확인한 결과·한계 입력</div><div class="p-3 rounded-lg bg-slate-100">③ AI 보고 초안 검토</div></div>
         <div class="my-auto space-y-2"><div class="flex justify-between items-center"><strong class="text-sm">대시보드 보고자료 작성 프롬프트</strong><button onclick="copyText(buildDashboardReportPrompt(0), '36p 대시보드 보고자료')" class="px-4 py-2 rounded-lg bg-[#101D35] text-white text-xs font-bold">📋 프롬프트 복사</button></div><div class="prompt-box text-xs">${escapeHtml(buildDashboardReportPrompt(0))}</div></div>
         <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-sm">AI가 화면만 보고 기능을 실제로 실행·검증한 것처럼 쓰지 않았는지 확인합니다. 효과나 절감률은 측정 근거가 있을 때만 보고합니다.</div>`
@@ -3273,4 +3298,3 @@ ${steps}
 <script src="participation.js?v=20261103-pollchart"></script>
 </body>
 </html>
-
