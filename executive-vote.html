@@ -1,0 +1,10 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>유안타증권 임원 교육 설문</title>
+<style>body{font-family:system-ui,sans-serif;background:#101d35;color:#fff;margin:0;padding:24px}main{max-width:560px;margin:auto}h1{font-size:1.5rem}p{line-height:1.5}button{display:block;width:100%;text-align:left;margin:12px 0;padding:16px;border:2px solid #94a3b8;border-radius:12px;background:#fff;color:#101d35;font-size:1rem;cursor:pointer}button:disabled{opacity:.6}#status{padding:14px;background:#1e304c;border-radius:8px}</style></head>
+<body><main><p>유안타증권 · 본사 임원 교육</p><h1>어떤 과정에서 가장 많은 시간이 들고 있습니까?</h1><p>가장 자주 겪는 어려움 하나를 선택해 주세요. 같은 기기에서 다시 선택하면 응답이 변경됩니다.</p><div id="choices"></div><p id="status" role="status">보기를 선택해 주세요.</p><p>이름을 수집하지 않으며, 기기별 임의 식별자로 중복 응답을 구분합니다.</p></main>
+<script src="executive-poll-config.js"></script><script>
+const opts=['필요한 자료 찾기 (흩어진 문서 탐색)','자료 간 비교 (기간·범위·단위 기준 맞추기)','보고 내용의 근거 확인 (원문 대조 및 팩트 체크)','회의 후 진행 상황 점검 (부서별 후속 과제 연결)'];
+let id; try { id=localStorage.getItem('yuanta-executive-vote-id'); if(!id){id=crypto.randomUUID();localStorage.setItem('yuanta-executive-vote-id',id);} } catch(e){id=crypto.randomUUID();}
+const status=document.getElementById('status'), choices=document.getElementById('choices');
+opts.forEach((label,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+label;b.onclick=async()=>{const api=(window.YUANTA_EXECUTIVE_POLL.apiUrl||'').trim();if(!api){status.textContent='설문 연결이 아직 설정되지 않았습니다. 강사에게 알려 주세요.';return;}b.disabled=true;status.textContent='전송 중입니다.';try{const r=await fetch(api,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'vote',id,choice:i+1})});const data=await r.json();if(!data.ok)throw Error(data.error);status.textContent='응답이 저장되었습니다. 다른 보기를 눌러 변경할 수 있습니다.';}catch(e){status.textContent='전송하지 못했습니다. 다시 시도해 주세요.';}finally{b.disabled=false;}};choices.appendChild(b);});
+</script></body></html>
+
