@@ -1117,9 +1117,9 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
           <div class="grid grid-cols-12 gap-6 my-auto">
             <div class="col-span-8 space-y-2.5">
               ${opts.map((o,i) => `
-                <button onclick="submitPoll(${i+1})" class="w-full text-left p-3 rounded-xl border-2 transition flex items-center justify-between ${userState.poll05 === o ? 'bg-[#E6F7F6] border-[#39B8B2] font-bold text-[#101D35]' : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-800'}">
-                  <span class="text-base">${o}</span>
-                  <span class="px-2.5 py-1 rounded text-xs bg-slate-200 text-slate-600" data-poll-count="${i+1}">—</span>
+                <button onclick="submitPoll(${i+1})" class="w-full text-left p-3 rounded-xl border-2 transition ${userState.poll05 === o ? 'bg-[#E6F7F6] border-[#39B8B2] font-bold text-[#101D35]' : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-800'}">
+                  <span class="flex items-center justify-between gap-3"><span class="text-base">${o}</span><span class="text-sm font-bold text-[#101D35] whitespace-nowrap" data-poll-count="${i+1}">—</span></span>
+                  <span class="block mt-2 h-2 rounded-full bg-slate-200 overflow-hidden"><span class="block h-full rounded-full bg-[#39B8B2]" data-poll-bar="${i+1}" style="width:0%; transition:width .3s ease"></span></span>
                 </button>
               `).join('')}
             </div>
@@ -1132,7 +1132,7 @@ T08 | 자료 목록 갱신 | B | 2026-11-16 | 완료 | 하 | 완료 기록 있�
                 <p class="text-xs text-slate-500">휴대전화와 이 화면의 선택은 별도로 기록됩니다.</p>
               </div>
               <div class="text-xs text-slate-600 bg-amber-50 border border-amber-200 p-2.5 rounded-lg">
-                <span data-poll-status>설문 연결 상태를 확인합니다.</span><br><button type="button" onclick="refreshPoll()" class="underline">집계 새로고침</button>
+                <span data-poll-status>설문 연결 상태를 확인합니다.</span><br><button type="button" onclick="refreshPoll()" class="underline">집계 새로고침</button> <span aria-hidden="true"> · </span> <button type="button" onclick="resetPoll()" data-poll-reset disabled title="강사 초기화 설정 후 사용" class="underline text-red-700 disabled:opacity-50">집계 초기화</button>
               </div>
             </div>
           </div>
@@ -3620,7 +3620,7 @@ ${steps}
 
 <script src="lecture-frame.js?v=20261103-zoom"></script>
 <script src="participation-config.js"></script>
-<script src="participation.js?v=20261103-autosave"></script>
+<script src="participation.js?v=20261103-pollchart"></script>
 </body>
 </html>
 
