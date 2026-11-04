@@ -2530,14 +2530,11 @@ HTML 코드를 읽은 것만으로 기능을 실제 실행하거나 검증했다
     {
       page: 47, module: 'M6', moduleTitle: '팀으로 돌아가 시작할 AI 업무', journey: '실행', theme: 'white',
       render: () => {
-        const survey = SATISFACTION_SURVEYS.find(item => item.id === surveyCohort);
         return `
           <div><span class="text-xs font-bold text-[#2A918C]">AIbility Academy STEP-UP · 본사 팀장 교육</span><h2 class="text-3xl font-extrabold text-[#101D35] mt-1">함께해 주셔서 감사합니다</h2><p class="text-base text-slate-600 mt-2">오늘의 배움이 우리 팀의 작은 실행으로 이어지기를 바랍니다.</p></div>
           <div class="grid grid-cols-2 gap-10 items-center my-auto">
-            <div class="space-y-6"><div class="space-y-3"><span class="px-3 py-1 rounded-full bg-[#E6F7F6] text-[#2A918C] text-sm font-bold">만족도 조사</span><h3 class="text-3xl font-extrabold text-[#101D35] leading-snug">여러분의 의견을<br>들려주세요.</h3><p class="text-lg text-slate-600 leading-relaxed">교육에 대한 의견과 제안을 남겨주시면<br>더 나은 교육을 준비하는 데 도움이 됩니다.</p></div><div class="p-5 rounded-xl bg-slate-100 text-base leading-relaxed"><strong>참여 방법</strong><p class="mt-2">① 참석한 차수 탭을 선택합니다.<br>② 휴대전화 카메라로 QR을 스캔합니다.<br>③ 연결된 만족도 조사에 참여합니다.</p></div><p class="text-sm text-slate-500">현재 기기에서 참여하려면 ‘만족도 조사 열기’를 누르세요.</p></div>
-            <div class="space-y-3 text-center"><div role="tablist" aria-label="만족도 조사 교육 차수" class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-xl">
-              ${SATISFACTION_SURVEYS.map(item => `<button type="button" id="survey-tab-${item.id}" role="tab" aria-selected="${item.id === surveyCohort}" aria-controls="survey-panel" tabindex="${item.id === surveyCohort ? '0' : '-1'}" onclick="selectSurveyCohort(${item.id})" onkeydown="handleSurveyTabKey(event, ${item.id})" class="px-3 py-3 rounded-lg text-base font-bold ${item.id === surveyCohort ? 'bg-[#101D35] text-white shadow' : 'text-slate-600'}">${item.id}차수 · ${item.date}</button>`).join('')}
-            </div><div id="survey-panel" role="tabpanel" aria-labelledby="survey-tab-${survey.id}" class="p-4 rounded-2xl border border-slate-200 bg-white space-y-3"><p class="text-lg font-extrabold text-[#101D35]">본사 팀장 ${survey.id}차수 만족도 조사</p><img src="${survey.qr}" alt="본사 팀장 ${survey.id}차수 · ${survey.date} 만족도 조사 QR" width="357" height="357" class="mx-auto bg-white p-5" style="width:310px;height:310px;object-fit:contain;image-rendering:pixelated"><a href="${survey.url}" target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-3 rounded-lg bg-[#2A918C] text-white font-bold">만족도 조사 열기 ↗</a></div></div>
+            <div class="space-y-6"><div class="space-y-3"><span class="px-3 py-1 rounded-full bg-[#E6F7F6] text-[#2A918C] text-sm font-bold">만족도 조사</span><h3 class="text-3xl font-extrabold text-[#101D35] leading-snug">여러분의 의견을<br>들려주세요.</h3><p class="text-lg text-slate-600 leading-relaxed">교육에 대한 의견과 제안을 남겨주시면<br>더 나은 교육을 준비하는 데 도움이 됩니다.</p></div><div class="p-5 rounded-xl bg-slate-100 text-base leading-relaxed"><strong>참여 방법</strong><p class="mt-2">① 휴대전화 카메라로 QR을 스캔합니다.<br>② 연결된 만족도 조사에 참여합니다.</p></div></div>
+            <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-3 text-center"><p class="text-lg font-extrabold text-[#101D35]">교육 만족도 조사</p><img src="assets/satisfaction-survey-2026.jpg" alt="교육 만족도 조사 QR 코드" width="310" height="310" class="mx-auto bg-white p-5" style="width:310px;height:310px;object-fit:contain;max-width:100%"></div>
           </div>
           <div class="p-3 rounded-xl bg-[#101D35] text-center text-white text-sm">AI는 분석과 초안을 돕고, 팀장은 근거를 확인하고 실행을 연결합니다. 감사합니다.</div>
         `;
@@ -3010,7 +3007,7 @@ M6 실행: 반복 업무 하나에 적용하고 시간·품질·부담으로 계
       44: '계속 사용할지 판단하는 기준',
       45: '우리 팀 AI 적용 계획 한 장',
       46: '전체 강의 정리 · 질문에서 실행까지',
-      47: '감사 인사 · 만족도 조사 (1차수·2차수)'
+      47: '감사 인사 · 만족도 조사'
     };
     return titles[page] || `슬라이드 ${page}`;
   }
