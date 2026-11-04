@@ -120,6 +120,8 @@
 #modal-popup.radar-rules-modal>div{max-width:1050px}#radar-rules-panel{font-size:18px;line-height:1.7;color:#101d35}.radar-rule-section{margin-bottom:24px}.radar-rule-section h3{font-size:21px;font-weight:800;color:#0f766e;margin-bottom:12px}.radar-rule-section table{width:100%;border-collapse:collapse;font-size:17px}.radar-rule-section th,.radar-rule-section td{padding:12px;text-align:left;border-bottom:1px solid #cbd5e1;vertical-align:top}.radar-rule-section thead{background:#edf6f5}.radar-rule-section p{margin-top:12px}.radar-rule-example{padding:14px;background:#edf6f5;border-left:4px solid #0f766e;border-radius:4px}.radar-rule-section ul{list-style:disc;padding-left:24px}.radar-rule-section li{margin:8px 0}#modal-popup-content[hidden]{display:none!important}@media(max-width:600px){#radar-rules-panel{font-size:16px}.radar-rule-section table{font-size:14px}.radar-rule-section th,.radar-rule-section td{padding:7px}}
 </style><style>
 .radar-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:14px;flex-shrink:0}.radar-actions .radar-download-button{display:inline-flex;align-items:center;gap:10px;background:#0f766e;color:#fff!important;border:2px solid #0f766e;border-radius:9px;padding:12px 22px;text-decoration:none;font-size:20px;font-weight:800;box-shadow:0 3px 7px #101d3520;line-height:1.4}.radar-download-button small{font-size:16px}.radar-actions .radar-rules-button{background:white;color:#101d35;border:2px solid #94a3b8;border-radius:9px;padding:12px 20px;font-size:18px;font-weight:700;line-height:1.55}.radar-actions a:hover{background:#115e59;border-color:#115e59}.radar-actions :focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+</style><style>
+#modal-popup.product-sample-modal>div{max-width:1050px;background:#fff}#modal-popup.product-sample-modal #modal-popup-content{background:#fff;color:#101d35;border:1px solid #cbd5e1;font-family:inherit;font-size:20px;line-height:1.85;padding:24px;white-space:pre-wrap}#modal-popup.product-sample-modal #modal-popup-desc{font-size:17px;color:#475569}#modal-popup.product-sample-modal #product-sample-downloads{padding:16px;background:#f1f5f9;border-radius:10px}
 </style></head>
 <body data-photo-course="branch" class="min-h-screen flex flex-col justify-between select-text" data-course="branch">
 
@@ -352,7 +354,7 @@
   },
   "product_sample": {
     "title": "직원별 영업구성·상품·종목 샘플 다운로드",
-    "desc": "공개 상품 유형을 참고한 가상 데이터 · 실제 상품 추천이나 직원 실적이 아닙니다.",
+    "desc": "교육용 가상 데이터입니다. CSV는 Excel에서 한글을 인식하도록 UTF-8 BOM 형식으로 제공합니다.",
     "content": "유안타증권 공개 안내의 국내·해외주식, ETF, 펀드, 채권/RP, CMA 유형을 참고한 교육용 샘플입니다. 실제 직원·고객 데이터와 실제 판매 상품명이 아닙니다.\n\n12명 × 8항목 = 96행 / 기준월 2026.09 / 기준일 2026-09-30\n지표: 평가잔액(백만원). 해외주식도 가상 원화환산값입니다.\n공통 실적 CSV와 사번+기준월로 연결합니다. 기존 약정과는 다른 지표이며 합산하지 않습니다.\n\n상품명·코드에 가상_, SIM을 표시했습니다. 주식·ETF·펀드·채권·RP·CMA-RP를 포함합니다. RP와 CMA-RP는 별도 잔액으로 만들었으며 CMA 내부 RP를 재합산하지 않습니다.\n\n김도윤 검산: 합계 1,000 / 주식 640(64%) / 금융상품 360(36%) / Top5 860(86%) / 기타 140.\n비중 분모는 선택 직원의 전체 평가잔액입니다.\n\nCSV는 AI/대시보드 입력용, Excel은 표와 사용안내 확인용입니다. 아래 다운로드 버튼으로 저장하세요.\n\n공개 출처(2026-11-04 확인):\nhttps://www.myasset.com/extern/tM_new_guide/html/TM_0300000_T1.jsp\nhttps://account.myasset.com/myasset/static/mall/wcma/MA_0501002_T1.jsp\n\n개별 상품의 현재 판매 여부·가격·수익률을 나타내지 않습니다.",
     "hideCopy": true
   },
@@ -1864,6 +1866,7 @@
     }
 
     function openPopup(key, triggerEl) {
+      document.getElementById("modal-popup").classList.toggle("product-sample-modal", key === "product_sample");
       document.getElementById("modal-popup").classList.toggle("simple-prompt-modal", ["audit_new_chat","audit_gemini","prompt_34","interview_card","interview_add","product_extend","branch_prepare","branch_review","branch_action","branch_followup","prompt_42","prompt_50","followup_ai_43"].includes(key));
       let rulesPanel = document.getElementById('radar-rules-panel');
       if (!rulesPanel) { rulesPanel = document.createElement('div'); rulesPanel.id='radar-rules-panel'; document.getElementById('modal-popup-content').after(rulesPanel); }
@@ -1884,7 +1887,7 @@
       }
       let downloads = document.getElementById('product-sample-downloads');
       if (!downloads) { downloads = document.createElement('div'); downloads.id='product-sample-downloads'; downloads.className='flex flex-wrap gap-3 mt-4'; document.getElementById('modal-popup-content').parentElement.append(downloads); }
-      downloads.innerHTML = key === 'product_sample' ? '<a class="px-4 py-3 bg-teal-700 text-white rounded-lg font-bold" download href="downloads/직원별_영업구성_상품종목_가상샘플.csv">CSV 다운로드</a><a class="px-4 py-3 bg-slate-800 text-white rounded-lg font-bold" download href="downloads/직원별_영업구성_상품종목_가상샘플.xlsx">Excel 다운로드</a><a class="px-3 py-3 underline" target="_blank" rel="noopener" href="https://www.myasset.com/extern/tM_new_guide/html/TM_0300000_T1.jsp">유안타증권 공식 상품유형 안내 ↗</a>' : '';
+      downloads.innerHTML = key === 'product_sample' ? '<a class="px-4 py-3 bg-teal-700 text-white rounded-lg font-bold" download href="downloads/직원별_영업구성_상품종목_가상샘플.csv?v=utf8bom">CSV 다운로드</a><a class="px-4 py-3 bg-slate-800 text-white rounded-lg font-bold" download href="downloads/직원별_영업구성_상품종목_가상샘플.xlsx">Excel 다운로드</a><a class="px-3 py-3 underline" target="_blank" rel="noopener" href="https://www.myasset.com/extern/tM_new_guide/html/TM_0300000_T1.jsp">유안타증권 공식 상품유형 안내 ↗</a>' : '';
       openModal("modal-popup", triggerEl);
     }
 
