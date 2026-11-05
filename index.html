@@ -76,11 +76,11 @@
     .resource-card h2 { margin:4px 0; font-size:18px; line-height:1.4; font-weight:800; word-break:keep-all; }
     .resource-description { display:block; color:#64748b; font-size:12px; line-height:1.5; word-break:keep-all; }
     .resource-arrow { margin-left:auto; color:#288580; flex-shrink:0; font-weight:700; }
-    .resource-thumbnail { width:88px; height:auto; flex:0 0 88px; border-radius:6px; border:1px solid #dce5ec; }
+    .resource-thumbnail { width:88px; height:72px; object-fit:contain; background:#101d35; flex:0 0 88px; border-radius:6px; border:1px solid #dce5ec; }
     .resource-sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
-    .workflow-dialog { width:min(1440px,96vw); max-width:96vw; max-height:94vh; margin:auto; padding:16px; border:0; border-radius:16px; background:#101d35; color:#fff; }
+    .workflow-dialog { width:min(920px,96vw); max-width:96vw; max-height:94vh; overflow-y:auto; margin:auto; padding:16px; border:0; border-radius:16px; background:#101d35; color:#fff; }
     .workflow-dialog::backdrop { background:rgba(5,12,23,.82); }
-    .workflow-dialog-header { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:12px; }
+    .workflow-dialog-header { position:sticky; top:-16px; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:12px; padding:8px 0; background:#101d35; }
     .workflow-dialog-header h2 { font-size:16px; font-weight:700; }
     .workflow-dialog-close { padding:8px 16px; border:1px solid #64748b; border-radius:8px; background:#20324b; color:white; cursor:pointer; }
     .workflow-dialog-close:focus-visible { outline:3px solid #39b8b2; outline-offset:2px; }
@@ -185,16 +185,16 @@
     <span class="resource-copy"><span class="resource-label">공통 강의 · 모든 교육 대상</span><h2>프롬프트 작성법</h2><span class="resource-description">업무 요청 작성부터 결과 확인까지</span></span>
     <span class="resource-arrow" aria-hidden="true">→</span>
   </a>
-  <a class="resource-card resource-image-card" id="workflow-preview" href="assets/yuanta-offline-ai-workflow-v2.png" target="_blank" rel="noopener noreferrer" aria-haspopup="dialog">
-    <img class="resource-thumbnail" src="assets/yuanta-offline-ai-workflow-v2.png" alt="내부데이터를 올리지 않는 AI 업무도구 개발 4단계 인포그래픽" width="1672" height="941">
-    <span class="resource-copy"><span class="resource-label">망분리 환경 활용 안내</span><h2>AI 업무도구 개발</h2><span class="resource-description">4단계 안내 이미지 크게 보기</span></span>
+  <a class="resource-card resource-image-card" id="workflow-preview" href="assets/yuanta-offline-ai-learning-comic.png" target="_blank" rel="noopener noreferrer" aria-haspopup="dialog">
+    <img class="resource-thumbnail" src="assets/yuanta-offline-ai-learning-comic.png" alt="올라타이거와 배우는 망분리 환경 AI 업무도구 개발 6컷 학습 만화" width="1024" height="1536">
+    <span class="resource-copy"><span class="resource-label">망분리 환경 활용 안내</span><h2>AI 업무도구 개발</h2><span class="resource-description">올라타이거 학습 만화 크게 보기</span></span>
     <span class="resource-arrow" aria-hidden="true">↗</span>
   </a>
 </section>
 <div class="grid md:grid-cols-3 gap-6"><article class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm flex flex-col"><span class="text-yuanta-teal font-bold text-sm">Leader · 임원</span><h2 class="text-2xl font-extrabold text-yuanta-navy mt-4">임원 교육</h2><p class="text-slate-500 text-sm leading-relaxed mt-3 mb-8 flex-1">AI로 읽는 경쟁환경, 경영 브리핑과 실행 리더십</p><a class="bg-yuanta-navy hover:bg-yuanta-tealDark text-white rounded-xl px-5 py-3 font-bold text-sm flex items-center justify-between focus:outline focus:outline-2 focus:outline-offset-4 focus:outline-teal-600" href="executives.html?v=20261103-academy">강의 슬라이드 보기 <span aria-hidden="true">→</span></a></article><article class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm flex flex-col"><span class="text-yuanta-teal font-bold text-sm">Leader · 본사 팀장</span><h2 class="text-2xl font-extrabold text-yuanta-navy mt-4">본사 팀장 교육</h2><p class="text-slate-500 text-sm leading-relaxed mt-3 mb-8 flex-1">경영 질문을 팀의 실행으로</p><a class="bg-yuanta-navy hover:bg-yuanta-tealDark text-white rounded-xl px-5 py-3 font-bold text-sm flex items-center justify-between focus:outline focus:outline-2 focus:outline-offset-4 focus:outline-teal-600" href="team-leaders.html?v=20261103-academy">강의 슬라이드 보기 <span aria-hidden="true">→</span></a></article><article class="bg-white rounded-2xl p-7 border border-slate-200 shadow-sm flex flex-col"><span class="text-yuanta-teal font-bold text-sm">Leader · 지점장</span><h2 class="text-2xl font-extrabold text-yuanta-navy mt-4">지점장 교육</h2><p class="text-slate-500 text-sm leading-relaxed mt-3 mb-8 flex-1">AI와 함께 만드는 영업직원 코칭 대시보드</p><a class="bg-yuanta-navy hover:bg-yuanta-tealDark text-white rounded-xl px-5 py-3 font-bold text-sm flex items-center justify-between focus:outline focus:outline-2 focus:outline-offset-4 focus:outline-teal-600" href="branch-managers.html?v=20261103-academy">강의 슬라이드 보기 <span aria-hidden="true">→</span></a></article></div><p class="text-center text-slate-500 text-sm mt-8">교육 대상에 맞는 강의를 선택해 주세요.</p></main><footer class="border-t border-slate-200 py-6 text-center text-xs text-slate-500">유안타증권 AI 교육 · Data Thinking Lab</footer>
 <dialog class="workflow-dialog" id="workflow-dialog" aria-labelledby="workflow-dialog-title">
-  <div class="workflow-dialog-header"><h2 id="workflow-dialog-title">망분리 환경에서 AI 업무도구 만들기</h2><button class="workflow-dialog-close" type="button" autofocus>닫기 ×</button></div>
-  <img src="assets/yuanta-offline-ai-workflow-v2.png" alt="1. 업무PC의 열 이름만 인터넷PC에 입력 2. 인터넷PC에서 가상 데이터로 웹앱 개발 3. HTML을 사내 허용 절차로 업무PC에 전달 4. 업무PC에서 실제 데이터를 불러와 오프라인 활용" width="1672" height="941">
+  <div class="workflow-dialog-header"><h2 id="workflow-dialog-title">올라타이거와 배우는 AI 업무도구 개발</h2><button class="workflow-dialog-close" type="button" autofocus>닫기 ×</button></div>
+  <img src="assets/yuanta-offline-ai-learning-comic.png" alt="올라타이거 학습 만화. 망분리 환경에서 1. 업무PC의 열 이름만 인터넷PC에 입력 2. 인터넷PC에서 가상 데이터로 웹앱 개발 3. HTML을 사내 허용 절차로 업무PC에 전달 4. 업무PC에서 실제 데이터를 불러와 오프라인 활용. 필요한 코드와 라이브러리를 포함하며 외부 서버·API·온라인 AI 호출 없이 실행하는 도구로 제작합니다." width="1024" height="1536">
 </dialog>
 <script>
   (() => {
@@ -204,6 +204,7 @@
       if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || typeof dialog.showModal !== 'function') return;
       event.preventDefault();
       dialog.showModal();
+      dialog.scrollTop = 0;
       document.body.classList.add('workflow-open');
     });
     dialog.querySelector('button').addEventListener('click', () => dialog.close());
